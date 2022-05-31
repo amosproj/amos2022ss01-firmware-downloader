@@ -10,7 +10,7 @@ def main():
         if file.endswith(".py"):
             #creating thread
             process = threading.Thread(target = exec(open("./" + vendors_path + "/" + file).read()))
-            #starting threa
+            #starting thread
             process.start()
             #appending thread to a list
             threads.append(process)
