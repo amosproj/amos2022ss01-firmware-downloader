@@ -1,0 +1,81 @@
+var A = [
+{
+ "Foscam": {        // 1  vendor 1 that is Foscam
+	"interval": 3   // here 3 represent 3 seconds
+ },
+ "Ubiquiti": {     //2   vendor 1 that is Ubiquiti
+	"interval": 3
+ },
+"DD-WRT": {         //3
+	"interval": 3
+ },
+ "Swisscom": {      // 4
+	"interval": 3
+ },
+"TP-Link": {       //5
+	"interval": 3
+ },
+ "OpenWRT": {
+	"interval": 3
+ },
+"Gigaset": {
+	"interval": 3
+ },
+ "Belkin": {
+	"interval": 3
+ },
+"Engenius": {
+	"interval": 3
+ },
+ "Netgear": {
+	"interval": 3
+ },
+"Asus": {
+	"interval": 3
+ },
+ "Dlink": {
+	"interval": 3
+ },
+ "Zyxel": {
+	"interval": 3
+ },"
+Synology": {
+	"interval": 3
+ },
+ "Trendnet": {
+	"interval": 3
+ },
+"QNAP": {
+	"interval": 3
+ },
+ "Linksys": {
+	"interval": 3
+ },
+"Cisco": {
+	"interval": 3
+ },
+ "Rockwell": {
+	"interval": 3
+ },
+"Honeywell" : {
+	"interval": 3
+ },
+ "GE": {
+	"interval": 3
+ },
+"ABB": {
+	"interval": 3
+ },
+ "Schneider Electric": {
+	"interval": 3
+ },
+"Siemens": {
+	"interval": 3
+ }
+
+}
+],
+[
+//define else 
+"interval" : 0
+];
