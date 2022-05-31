@@ -27,10 +27,13 @@ def filter_list(data):
     else:
         return False
 
+#check duplicate data for firmware web scrapping
 def check_duplicates():
     db_name = 'firmwaredatabase.db'
+    #db connection
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
+    #data selection query from db
     cursor.execute("select * from FWDB")
     data_list = cursor.fetchall()
     filtered_list = []
