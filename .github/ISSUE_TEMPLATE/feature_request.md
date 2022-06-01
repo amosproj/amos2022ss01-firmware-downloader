@@ -18,9 +18,14 @@ assignees: ''
 * ...
 
 ## Definition of done (DoD)
-* Added only after week 5
-* The same for all features
-* Here goes the project specific part
+* Code is complete
+* Code is uploaded in GitHub
+* Fulfills the acceptance criteria in the User Story
+* Documentation has been updated
+* Functionality has been reviewed
+* Only MIT-Licensed Libraries are used
+* Create tests necessary to ensure feature is working
+* Bill of Materials updated
 
 ## DoD general criteria
 * Feature has been fully implemented
