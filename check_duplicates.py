@@ -8,7 +8,7 @@ def check_duplicates(firmware_data):
     cursor = conn.cursor()
     print(firmware_data["Manufacturer"])
     if(len(firmware_data["Version"]) > 0):
-        #data selection query from db
+        #data selection query from
         try:
             cursor.execute("select * from FWDB WHERE Manufacturer='" + firmware_data["Manufacturer"] + "' AND Modelname='" + firmware_data["Modelname"] + "' AND Version = '" + firmware_data["Version"] + "'")
         except sqlite3.Error as er:
