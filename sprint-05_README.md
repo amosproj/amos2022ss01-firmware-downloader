@@ -1,4 +1,4 @@
-# _**sprint-05 development deliverables Tejesh**_
+sprint-05 development deliverables Tejesh
 
 ** download the database.py into your system and make into a python project repository along with test_database.py.
 
