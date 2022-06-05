@@ -1,6 +1,6 @@
 import os
 import threading
-import sqlite3
+from check_duplicates import check_duplicates
 
 #creating list of threads
 threads = []
@@ -20,32 +20,8 @@ temp_data = [
         'some long sentence'
 ]
 
-def filter_list(data):
-    print(data)
-    if(data[2] != temp_data[2] and data[3] != temp_data[3]):
-        return True
-    else:
-        return False
-
-#check duplicate data for firmware web scrapping
-def check_duplicates():
-    db_name = 'firmwaredatabase.db'
-    #db connection
-    conn = sqlite3.connect(db_name)
-    cursor = conn.cursor()
-    #data selection query from db
-    cursor.execute("select * from FWDB")
-    data_list = cursor.fetchall()
-    filtered_list = []
-    for x in data_list:
-        if(filter_list(x)):
-            filtered_list.append(x)
-
-    print(filtered_list)
-    cursor.close()
-
 def main():
-    check_duplicates()
+    check_duplicates(temp_data)
     vendors_path = './vendors'
     for file in os.listdir(vendors_path):
         if file.endswith(".py"):
