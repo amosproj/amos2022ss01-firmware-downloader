@@ -1,25 +1,31 @@
 import sqlite3
 
-def filter_list(data, firmware_data):
-    print(data)
-    if(data[2] == firmware_data[2] and data[3] != firmware_data[3]):
-        return True
-    else:
-        return False
-
 #check duplicate data for firmware web scrapping
 def check_duplicates(firmware_data):
     db_name = 'firmwaredatabase.db'
     #db connection
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
-    #data selection query from db
-    cursor.execute("select * from FWDB")
-    data_list = cursor.fetchall()
-    filtered_list = []
-    for x in data_list:
-        if(filter_list(x, firmware_data)):
-            filtered_list.append(x)
+    print(firmware_data["Manufacturer"])
+    if(len(firmware_data["Version"]) > 0):
+        #data selection query from db
+        try:
+            cursor.execute("select * from FWDB WHERE Manufacturer='" + firmware_data["Manufacturer"] + "' AND Modelname='" + firmware_data["Modelname"] + "' AND Version = '" + firmware_data["Version"] + "'")
+        except sqlite3.Error as er:
+            print('SQLite error: %s' % (' '.join(er.args)))
+    else:
+        try:
+            cursor.execute("select * from FWDB WHERE Manufacturer='" + firmware_data["Manufacturer"] + "' AND Modelname='" + firmware_data["Modelname"] + "'")
+        except sqlite3.Error as er:
+            print('SQLite error: %s' % (' '.join(er.args)))
 
-    print(filtered_list)
-    cursor.close()
+
+    data_list = cursor.fetchall()
+
+    print(data_list)
+    conn.close()
+    if(len(data_list) > 0):
+        return True
+    else:
+        return False
+ 

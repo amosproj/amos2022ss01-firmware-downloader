@@ -4,40 +4,40 @@ from check_duplicates import check_duplicates
 
 #creating list of threads
 threads = []
-temp_data = [
-        'FILE',
-        'Siemens',
-        'SZ-100',
-        '1.2.3',
-        'Router',
-        '2022-05-24',
-        'None',
-        'Yes',
-        'None',
-        'https://xyz.com',
-        'https://google.com',
-        './xyz/abc.tar',
-        'some long sentence'
-]
+temp_data = {
+    'Fwfileid': 'FILE',
+    'Manufacturer': 'GE',
+    'Modelname': 'orbit-bkrc-9_2_2.mpk',
+    'Version': '',
+    'Type': '',
+    'Releasedate': '2022-05-31',
+    'Checksum': 'None',
+    'Embatested': 'Yes',
+    'Embalinktoreport': 'None',
+    'Embarklinktoreport': 'https://xyz.com',
+    'Fwdownlink': 'https://google.com',
+    'Fwfilelinktolocal': './xyz/abc.tar',
+    'Fwadddata': 'some long sentence'
+}
 
 def main():
-    check_duplicates(temp_data)
+    print(check_duplicates(temp_data))
     vendors_path = './vendors'
-    for file in os.listdir(vendors_path):
-        if file.endswith(".py"):
-            #creating thread
-            process = threading.Thread(target = exec(open("./" + vendors_path + "/" + file).read()))
-            #starting thread
-            process.start()
-            #appending thread to a list
-            threads.append(process)
-            continue
-        else:
-            continue
+    # for file in os.listdir(vendors_path):
+    #     if file.endswith(".py"):
+    #         #creating thread
+    #         process = threading.Thread(target = exec(open("./" + vendors_path + "/" + file).read()))
+    #         #starting thread
+    #         process.start()
+    #         #appending thread to a list
+    #         threads.append(process)
+    #         continue
+    #     else:
+    #         continue
     
-    #waiting until thread n completely executed
-    for process in threads:
-        process.join()
+    # #waiting until thread n completely executed
+    # for process in threads:
+    #     process.join()
 
 
 main()
