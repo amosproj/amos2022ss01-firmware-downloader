@@ -19,3 +19,102 @@
 2022-06-07 20:32:28,279:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
 									VALUES('FILE_138','GE','TransNET_144.S28','','','2009-11-27','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/TransNET_144.S28','').
 2022-06-07 20:32:28,295:INFO:database: The db commited is with data {'Fwfileid': 'FILE_138', 'Manufacturer': 'GE', 'Modelname': 'TransNET_144.S28', 'Version': '', 'Type': '', 'Releasedate': '2009-11-27', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/TransNET_144.S28', 'Fwadddata': ''}.
+2022-06-07 21:57:00,819:INFO:database: As the ../firmwaredatabase.db is found, a new connection will be established.
+2022-06-07 21:57:00,821:INFO:database: Connection details: <sqlite3.Connection object at 0x000001BAD6335E30>
+2022-06-07 21:57:00,821:INFO:database: A cursor is established on ../firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x000001BAD63622D0>.
+2022-06-07 21:58:00,594:INFO:database: As the ../firmwaredatabase.db is found, a new connection will be established.
+2022-06-07 21:58:00,595:INFO:database: Connection details: <sqlite3.Connection object at 0x000001181C0E5E30>
+2022-06-07 21:58:00,596:INFO:database: A cursor is established on ../firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x000001181C1122D0>.
+2022-06-07 21:58:19,909:INFO:database: As the ../firmwaredatabase.db is found, a new connection will be established.
+2022-06-07 21:58:19,910:INFO:database: Connection details: <sqlite3.Connection object at 0x000002100B4B5E30>
+2022-06-07 21:58:19,911:INFO:database: A cursor is established on ../firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x000002100B4E32D0>.
+2022-06-07 21:59:31,487:INFO:database: As the ../firmwaredatabase.db is found, a new connection will be established.
+2022-06-07 21:59:31,488:INFO:database: Connection details: <sqlite3.Connection object at 0x000001ABBCE05E30>
+2022-06-07 21:59:31,488:INFO:database: A cursor is established on ../firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x000001ABBCE332D0>.
+2022-06-07 22:05:34,749:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-07 22:05:34,772:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-07 22:05:34,773:INFO:database: As the ../firmwaredatabase.db is found, a new connection will be established.
+2022-06-07 22:05:34,778:INFO:database: Connection details: <sqlite3.Connection object at 0x000001A1491B5E30>
+2022-06-07 22:05:34,778:INFO:database: A cursor is established on ../firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x000001A1491E7340>.
+2022-06-07 22:05:34,779:INFO:database: The table FWDB is selected in the ../firmwaredatabase.db with the command: select * from FWDB.
+2022-06-07 22:05:34,779:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-07 22:05:34,779:INFO:database: The ../firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-07 22:05:34,779:INFO:database: The ../firmwaredatabase.db is updated with the Key: Modelname and Value: orbit-mib-9_2_2.zip.
+2022-06-07 22:05:34,779:INFO:database: The ../firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-07 22:05:34,779:INFO:database: The ../firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-07 22:05:34,779:INFO:database: The ../firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-05-12.
+2022-06-07 22:05:34,780:INFO:database: The ../firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-07 22:05:34,780:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-07 22:05:34,780:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-07 22:05:34,780:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-07 22:05:34,780:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip.
+2022-06-07 22:05:34,780:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/orbit-mib-9_2_2.zip.
+2022-06-07 22:05:34,780:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-07 22:05:34,780:INFO:database: The db is updated with the Fwfiledid.
+2022-06-07 22:05:34,781:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_1','GE','orbit-mib-9_2_2.zip','','','2022-05-12','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip','./File_system/orbit-mib-9_2_2.zip','').
+2022-06-07 22:05:34,792:INFO:database: The db commited is with data {'Fwfileid': 'FILE_1', 'Manufacturer': 'GE', 'Modelname': 'orbit-mib-9_2_2.zip', 'Version': '', 'Type': '', 'Releasedate': '2022-05-12', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip', 'Fwfilelinktolocal': './File_system/orbit-mib-9_2_2.zip', 'Fwadddata': ''}.
+2022-06-07 22:08:26,748:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-07 22:08:26,749:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-07 22:08:34,360:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-07 22:08:34,361:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-07 22:08:34,361:INFO:database: As the ../firmwaredatabase.db is found, a new connection will be established.
+2022-06-07 22:08:34,361:INFO:database: Connection details: <sqlite3.Connection object at 0x000001AA47215E30>
+2022-06-07 22:08:34,361:INFO:database: A cursor is established on ../firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x000001AA472447A0>.
+2022-06-07 22:08:34,362:INFO:database: The table FWDB is selected in the ../firmwaredatabase.db with the command: select * from FWDB.
+2022-06-07 22:08:34,362:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-07 22:08:34,362:INFO:database: The ../firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-07 22:08:34,362:INFO:database: The ../firmwaredatabase.db is updated with the Key: Modelname and Value: orbit-mib-9_2_2.zip.
+2022-06-07 22:08:34,362:INFO:database: The ../firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-07 22:08:34,362:INFO:database: The ../firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-07 22:08:34,362:INFO:database: The ../firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-05-12.
+2022-06-07 22:08:34,362:INFO:database: The ../firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-07 22:08:34,362:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-07 22:08:34,362:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-07 22:08:34,362:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-07 22:08:34,362:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip.
+2022-06-07 22:08:34,362:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/orbit-mib-9_2_2.zip.
+2022-06-07 22:08:34,362:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-07 22:08:34,363:INFO:database: The db is updated with the Fwfiledid.
+2022-06-07 22:08:34,366:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_1','GE','orbit-mib-9_2_2.zip','','','2022-05-12','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip','./File_system/orbit-mib-9_2_2.zip','').
+2022-06-07 22:08:34,377:INFO:database: The db commited is with data {'Fwfileid': 'FILE_1', 'Manufacturer': 'GE', 'Modelname': 'orbit-mib-9_2_2.zip', 'Version': '', 'Type': '', 'Releasedate': '2022-05-12', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip', 'Fwfilelinktolocal': './File_system/orbit-mib-9_2_2.zip', 'Fwadddata': ''}.

@@ -20,20 +20,21 @@ passw = 'Cs!-56478'
 #inserting meta data into database
 def insert_into_db(data):
     db = Database(dbname=db_name)
-    print(data)
+    if db_name not in os.listdir('.'):
+        db.create_table()
     db.insert_data(dbdictcarrier=data)
     print("data inserted")
 
 #download firmware image
-def download_file(url, file_path_to_save, data, folder, filename, link, main_url, click):
+def download_file(url, file_path_to_save, data0, data1, folder, filename, link, main_url, click):
     local_uri = "./" + folder + "/" + filename
     req_data = {
 		'Fwfileid': 'FILE',
 		'Manufacturer': 'GE',
-		'Modelname': data[0].get_text(),
+		'Modelname': data0,
 		'Version': '',
 		'Type': '',
-		'Releasedate': data[1].get_text(),
+		'Releasedate': data1,
 		'Checksum': 'None',
 		'Embatested': '',
 		'Embalinktoreport': '',
@@ -103,7 +104,7 @@ def scraper_parse(url, folder, base_url):
                             click = item_temp.findChild("a").get("onclick")
                             print(click)
                         file_path = os.path.join(dest, item_temp.get_text())
-                        download_file(base_url + link, file_path, items_temp, folder, item_temp.get_text(), link, url, click)
+                        download_file(base_url + link, file_path, items_temp[0].get_text(), items_temp[1].get_text(), folder, item_temp.get_text(), link, url, click)
                     sub_data.append(item_temp.get_text())
                 data.append(sub_data)
 

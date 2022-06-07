@@ -7,7 +7,7 @@ def test_if_download_working_correctly():
     os.mkdir(dest)
     gt_file = "PM5560_PM5563_V2.7.4_Release.zip"
     gt_file_path = os.path.join(dest, gt_file)
-    download_file(gt_url, gt_file_path)
+    download_file(gt_url, gt_file_path, "File_system")
     assert os.path.exists(gt_file_path)
     print("Image Download Test Passed")
 

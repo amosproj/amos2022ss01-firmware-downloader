@@ -19,3 +19,18 @@
 2022-06-05 20:01:55,327:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
 									VALUES('FILE_5','Siemens','SZ-100','','','2022-05-31','None','Yes','None','https://xyz.com','https://google.com','./xyz/abc.tar','some long sentence').
 2022-06-05 20:01:55,338:INFO:database: The db commited is with data {'Fwfileid': 'FILE_5', 'Manufacturer': 'Siemens', 'Modelname': 'SZ-100', 'Version': '', 'Type': '', 'Releasedate': '2022-05-31', 'Checksum': 'None', 'Embatested': 'Yes', 'Embalinktoreport': 'None', 'Embarklinktoreport': 'https://xyz.com', 'Fwdownlink': 'https://google.com', 'Fwfilelinktolocal': './xyz/abc.tar', 'Fwadddata': 'some long sentence'}.
+2022-06-07 22:08:06,778:INFO:database: As there is no db local file, a new firmwaredatabase.db will be created in the file directory.
+2022-06-07 22:08:06,796:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
