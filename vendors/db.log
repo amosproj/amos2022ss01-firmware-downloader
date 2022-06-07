@@ -118,3 +118,63 @@
 2022-06-07 22:08:34,366:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
 									VALUES('FILE_1','GE','orbit-mib-9_2_2.zip','','','2022-05-12','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip','./File_system/orbit-mib-9_2_2.zip','').
 2022-06-07 22:08:34,377:INFO:database: The db commited is with data {'Fwfileid': 'FILE_1', 'Manufacturer': 'GE', 'Modelname': 'orbit-mib-9_2_2.zip', 'Version': '', 'Type': '', 'Releasedate': '2022-05-12', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip', 'Fwfilelinktolocal': './File_system/orbit-mib-9_2_2.zip', 'Fwadddata': ''}.
+2022-06-07 22:15:24,178:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-07 22:15:24,179:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-07 22:16:13,897:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-07 22:16:13,898:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-07 22:16:29,669:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-07 22:16:29,670:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-07 22:16:29,673:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-07 22:16:29,673:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
