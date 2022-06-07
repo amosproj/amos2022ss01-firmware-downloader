@@ -17,7 +17,8 @@ temp_data = {
 }
 
 if __name__ == "__main__":
-    if(check_duplicates(temp_data)):
+    db_name = 'firmwaredatabase.db'
+    if(check_duplicates(temp_data, db_name)):
         print("Data already exist!")
     else:
         print("Data not exist!")

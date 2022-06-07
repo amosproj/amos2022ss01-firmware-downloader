@@ -2,14 +2,28 @@ import requests
 from bs4 import BeautifulSoup
 import os
 import sys
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 sys.path.append(os.path.abspath(os.path.join('..', '')))  
 from database import Database
+from check_duplicates import check_duplicates
+# import requests
+from webdriver_manager.chrome import ChromeDriverManager
+# import threading
 
-def insert_into_db(data, url, local_uri):
-    db_name = '../firmwaredatabase.db'
+db_name = '../firmwaredatabase.db'
+user = 'tariqmagsi125@gmail.com'
+passw = 'Cs!-56478'
+
+def insert_into_db(data):
     db = Database(dbname=db_name)
     print(data)
-    db.insert_data(dbdictcarrier={
+    db.insert_data(dbdictcarrier=data)
+    print("data inserted")
+
+def download_file(url, file_path_to_save, data, folder, filename, link, main_url, click):
+    local_uri = "./" + folder + "/" + filename
+    req_data = {
 		'Fwfileid': 'FILE',
 		'Manufacturer': 'GE',
 		'Modelname': data[0].get_text(),
@@ -23,19 +37,50 @@ def insert_into_db(data, url, local_uri):
 		'Fwdownlink': url,
 		'Fwfilelinktolocal': local_uri,
 		'Fwadddata': ''
-	})
-    print("inserted")
+	}
 
-def download_file(url, file_path_to_save, data, folder, filename):
-    # print(f"Downloading {url} and saving as {file_path_to_save}")
-    # resp = requests.get(url, allow_redirects=True)
-    # if resp.status_code != 200:
-    #     raise ValueError("Invalid Url or file not found")
-    # with open(file_path_to_save, "wb") as f:
-    #     f.write(resp.content)
-    local_uri = "./" + folder + "/" + filename
-    print(local_uri)
-    insert_into_db(data, url, local_uri)
+    if(check_duplicates(req_data, db_name) == False):
+        if(link != "javascript:;"):
+            print(f"Downloading {url} and saving as {file_path_to_save}")
+            resp = requests.get(url, allow_redirects=True)
+            if resp.status_code != 200:
+                raise ValueError("Invalid Url or file not found")
+            with open(file_path_to_save, "wb") as f:
+                f.write(resp.content)
+            insert_into_db(req_data)
+        else:
+            options = webdriver.ChromeOptions()
+            prefs = {"download.default_directory" : file_path_to_save}
+            # options.add_argument("headless")
+            options.add_experimental_option("prefs",prefs)
+            driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
+            print(click)
+            # driver = webdriver.Chrome()
+            # Go to your page url
+            try:
+                URL = "https://www.gegridsolutions.com/Passport/Login.aspx"
+                driver.get(URL)
+                driver.find_element(By.ID, "ctl00_BodyContent_Login1_UserName").send_keys(user)
+                driver.find_element(By.ID, "ctl00_BodyContent_Login1_Password").send_keys(passw)
+                driver.find_element(By.ID, "ctl00_BodyContent_Login1_LoginButton").click()
+                # Get button you are going to click by its id ( also you could us find_element_by_css_selector to get element by css selector)
+                driver.get(main_url)
+                # def download_():
+                #     driver.execute_script(click)
+                # def after_download():
+                #     download_thread.join()
+
+                # download_thread = threading.Thread(target=download_)
+                # download_thread.start()
+
+                # after_download_thread = threading.Thread(target=after_download)
+                # after_download_thread.start()
+                driver.close()
+            except:
+                print("Error in downloading")
+
+    else:
+        print("Data already exist!")
 
 def scraper_parse(url, folder, base_url):
     dest = os.path.join(os.getcwd(), folder)
@@ -56,11 +101,11 @@ def scraper_parse(url, folder, base_url):
                 for item_temp in items_temp:
                     if(items_temp.index(item_temp) == 0):
                         link = item_temp.findChild("a").get("href")
-                        # links.append(link)
-                        # p_url = parse_qs(urlparse(url).query, keep_blank_values=True)
-                        # file_name = p_url["p_File_Name"][0]
+                        if(link == "javascript:;"):
+                            click = item_temp.findChild("a").get("onclick")
+                            print(click)
                         file_path = os.path.join(dest, item_temp.get_text())
-                        download_file(base_url + link, file_path, items_temp, folder, item_temp.get_text())
+                        download_file(base_url + link, file_path, items_temp, folder, item_temp.get_text(), link, url, click)
                     sub_data.append(item_temp.get_text())
                 data.append(sub_data)
 
@@ -85,8 +130,10 @@ def directories_link(url, base_url, folder):
         scraper_parse(link, folder, base_url)
 
 if __name__ == "__main__":
-    path = "/communications/mds/software.asp"
+    path = "/communications/mds/software.asp?directory=TransNET/Previous"
     base_url = "https://www.gegridsolutions.com"
     url = base_url + path
     folder = 'File_system'
-    directories_link(url, base_url, folder)
+    # login()
+    # scraper_parse(url, folder, base_url)
+    driver = webdriver.Chrome(ChromeDriverManager().install())
