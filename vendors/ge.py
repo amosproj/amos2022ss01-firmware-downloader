@@ -7,20 +7,24 @@ from selenium.webdriver.common.by import By
 sys.path.append(os.path.abspath(os.path.join('..', '')))  
 from database import Database
 from check_duplicates import check_duplicates
-# import requests
+import requests
 from webdriver_manager.chrome import ChromeDriverManager
-# import threading
+import time
+
+directories_link = ["/communications/mds/software.asp?directory=Orbit_MCR", "/communications/mds/software.asp?directory=Master_Station", "/communications/mds/software.asp?directory=TD-Series", "/communications/mds/software.asp?directory=TD-Series/Support+Items", "/communications/mds/software.asp?directory=SD_Series", "/communications/mds/software.asp?directory=TransNET/Previous", "/communications/mds/software.asp?directory=SD_Series", "/communications/mds/software.asp?directory=entraNET"]
 
 db_name = '../firmwaredatabase.db'
 user = 'tariqmagsi125@gmail.com'
 passw = 'Cs!-56478'
 
+#inserting meta data into database
 def insert_into_db(data):
     db = Database(dbname=db_name)
     print(data)
     db.insert_data(dbdictcarrier=data)
     print("data inserted")
 
+#download firmware image
 def download_file(url, file_path_to_save, data, folder, filename, link, main_url, click):
     local_uri = "./" + folder + "/" + filename
     req_data = {
@@ -51,11 +55,10 @@ def download_file(url, file_path_to_save, data, folder, filename, link, main_url
         else:
             options = webdriver.ChromeOptions()
             prefs = {"download.default_directory" : file_path_to_save}
-            # options.add_argument("headless")
+            options.add_argument("headless")
             options.add_experimental_option("prefs",prefs)
             driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
             print(click)
-            # driver = webdriver.Chrome()
             # Go to your page url
             try:
                 URL = "https://www.gegridsolutions.com/Passport/Login.aspx"
@@ -65,23 +68,17 @@ def download_file(url, file_path_to_save, data, folder, filename, link, main_url
                 driver.find_element(By.ID, "ctl00_BodyContent_Login1_LoginButton").click()
                 # Get button you are going to click by its id ( also you could us find_element_by_css_selector to get element by css selector)
                 driver.get(main_url)
-                # def download_():
-                #     driver.execute_script(click)
-                # def after_download():
-                #     download_thread.join()
-
-                # download_thread = threading.Thread(target=download_)
-                # download_thread.start()
-
-                # after_download_thread = threading.Thread(target=after_download)
-                # after_download_thread.start()
+                driver.execute_script(click)
+                time.sleep(60)
                 driver.close()
+                insert_into_db(req_data)
             except:
                 print("Error in downloading")
 
     else:
         print("Data already exist!")
 
+#parse html and start clean according to our need
 def scraper_parse(url, folder, base_url):
     dest = os.path.join(os.getcwd(), folder)
     try:
@@ -93,6 +90,7 @@ def scraper_parse(url, folder, base_url):
     soup = BeautifulSoup(cont.text, 'html.parser')
     items = soup.find_all("tr", valign="top")
     data = []
+    click = ""
     for item in items:
         sub_data = []
         items_temp = item.find_all("td")
@@ -109,31 +107,12 @@ def scraper_parse(url, folder, base_url):
                     sub_data.append(item_temp.get_text())
                 data.append(sub_data)
 
-def directories_link(url, base_url, folder):
-    cont = requests.get(url)
-    soup = BeautifulSoup(cont.text, 'html.parser')
-    items = soup.find_all("p", style="MARGIN-TOP: 0px; PADDING-LEFT: 15px")
-    links=[]
-    for item in items:
-        items_temp = item.find_all("a")
-        for item_temp in items_temp:
-            link = item_temp.get("href")
-            if(str(link).find("software.asp?directory=") != -1):
-                links.append(base_url + "/communications/mds/" + link)
-            elif(str(link).find("/Communications/MDS/PulseNET_Download.aspx")):
-                links.append(base_url + "/Communications/MDS/PulseNET_Download.aspx")
-            elif(str(link).find("/app/resources.aspx?prod=vistanet&type=7")):
-                links.append(base_url + "/app/resources.aspx?prod=vistanet&type=7")
-    
-    for link in links:
-        # print(links)
-        scraper_parse(link, folder, base_url)
-
 if __name__ == "__main__":
-    path = "/communications/mds/software.asp?directory=TransNET/Previous"
+    paths = directories_link
     base_url = "https://www.gegridsolutions.com"
-    url = base_url + path
+
     folder = 'File_system'
-    # login()
-    # scraper_parse(url, folder, base_url)
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+
+    for path in paths:
+        url = base_url + path
+        scraper_parse(url, folder, base_url)

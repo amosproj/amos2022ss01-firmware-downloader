@@ -1,0 +1,21 @@
+2022-06-07 20:32:28,266:INFO:database: As the ../firmwaredatabase.db is found, a new connection will be established.
+2022-06-07 20:32:28,267:INFO:database: Connection details: <sqlite3.Connection object at 0x000001CA4CEE1570>
+2022-06-07 20:32:28,267:INFO:database: A cursor is established on ../firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x000001CA4D00CC70>.
+2022-06-07 20:32:28,268:INFO:database: The table FWDB is selected in the ../firmwaredatabase.db with the command: select * from FWDB.
+2022-06-07 20:32:28,270:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-07 20:32:28,270:INFO:database: The ../firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-07 20:32:28,271:INFO:database: The ../firmwaredatabase.db is updated with the Key: Modelname and Value: TransNET_144.S28.
+2022-06-07 20:32:28,271:INFO:database: The ../firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-07 20:32:28,271:INFO:database: The ../firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-07 20:32:28,272:INFO:database: The ../firmwaredatabase.db is updated with the Key: Releasedate and Value: 2009-11-27.
+2022-06-07 20:32:28,272:INFO:database: The ../firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-07 20:32:28,272:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-07 20:32:28,272:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-07 20:32:28,273:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-07 20:32:28,273:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-07 20:32:28,273:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/TransNET_144.S28.
+2022-06-07 20:32:28,273:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-07 20:32:28,273:INFO:database: The db is updated with the Fwfiledid.
+2022-06-07 20:32:28,279:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_138','GE','TransNET_144.S28','','','2009-11-27','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/TransNET_144.S28','').
+2022-06-07 20:32:28,295:INFO:database: The db commited is with data {'Fwfileid': 'FILE_138', 'Manufacturer': 'GE', 'Modelname': 'TransNET_144.S28', 'Version': '', 'Type': '', 'Releasedate': '2009-11-27', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/TransNET_144.S28', 'Fwadddata': ''}.
