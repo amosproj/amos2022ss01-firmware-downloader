@@ -1,5 +1,7 @@
+import os
 import math
 import re
+import uuid
 
 import requests
 from bs4 import BeautifulSoup
@@ -7,13 +9,21 @@ import os
 from urllib.parse import parse_qs, urlparse
 
 
-def download_file(url, file_path_to_save):
+def download_single_file(url, file_path_to_save):
     print(f"Donwloading {url} and saving as {file_path_to_save}")
     resp = requests.get(url, allow_redirects=True)
     if resp.status_code != 200:
         raise ValueError("Invalid Url or file not found")
     with open(file_path_to_save, "wb") as f:
         f.write(resp.content)
+
+def download_list_files(metadata, max_files=-1): #max_files -1 means download all files
+    if max_files == -1:
+        max_files = len(metadata)
+    if max_files > len(metadata):
+        max_files = len(metadata)
+    for file_ in range(max_files):
+        download_single_file(metadata[file_]["Fwdownlink"], metadata[file_]["Fwfilelinktolocal"])
 
 def se_get_total_firmware_count(url):
     r = requests.get(url)
@@ -48,8 +58,27 @@ def get_firmware_data_using_api(url, fw_count, fw_per_page):
     return fw_list
 
 def transform_metadata_format_ours(raw_data, local_storage_dir="."):
-    pass
+    fw_mod_list = list()
+    for fw in raw_data:
+        fw_mod = {
+	    'Fwfileid': fw.get("reference", None),
+	    'Manufacturer': 'schneider_electric',
+	    'Modelname': fw.get("title", None),
+	    'Version': fw.get("version", None),
+	    'Type': fw.get("documentTypeEnglishLabel", None),
+	    'Releasedate': fw.get("docDate", None),
+	    'Checksum': '',
+	    'Embatested': '',
+	    'Embalinktoreport': '',
+	    'Embarklinktoreport': '',
+            'Fwdownlink': "https:" + fw.get("downloadUrl", ""),
+	    'Fwfilelinktolocal': os.path.join(local_storage_dir, parse_qs(urlparse(fw.get("downloadUrl")).query, keep_blank_values=True).get("p_File_Name", list(str(uuid.uuid4())))[0]),
+	    'Fwadddata': ''
+	}
+        fw_mod_list.append(fw_mod)
+    return fw_mod_list
 
+# This method is outdated as of now.
 def se_firmaware_parser(url, folder):
     dest = os.path.join(os.getcwd(), folder)
     try:
@@ -76,6 +105,7 @@ if __name__ == "__main__":
     total_fw = se_get_total_firmware_count(url)
     api_url = "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/resultViewCahnge/resultListAjax"
     raw_fw_list = get_firmware_data_using_api(api_url, total_fw, 50) #50 is max fw_per_page
-    print(raw_fw_list[0])
+    metadata = transform_metadata_format_ours(raw_fw_list, local_storage_dir=os.path.abspath(folder))
+    download_list_files(metadata, 10) # download max 10 files
     
     #se_firmaware_parser(url, folder)
