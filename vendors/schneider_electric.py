@@ -1,12 +1,15 @@
 import os
 import math
 import re
+import sqlite3
 import uuid
 
 import requests
 from bs4 import BeautifulSoup
 import os
 from urllib.parse import parse_qs, urlparse
+
+from database import Database
 
 
 def download_single_file(url, file_path_to_save):
@@ -25,6 +28,15 @@ def download_list_files(metadata, max_files=-1): #max_files -1 means download al
     for file_ in range(max_files):
         download_single_file(metadata[file_]["Fwdownlink"], metadata[file_]["Fwfilelinktolocal"])
 
+def write_metadata_to_db(metadata):
+    print("Going to write metadata in db")
+    db_name = 'firmwaredatabase.db'
+    db = Database(dbname=db_name)
+    if db_name not in os.listdir('../'):
+        db.create_table()
+    for fw in metadata:
+        db.insert_data(dbdictcarrier=fw)
+
 def se_get_total_firmware_count(url):
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'html.parser')
@@ -38,6 +50,8 @@ def se_get_total_firmware_count(url):
             return count
 
 def get_firmware_data_using_api(url, fw_count, fw_per_page):
+    if fw_count < fw_per_page:
+        fw_pr_page = fw_count
     headers = {'Content-Type': 'application/x-www-form-urlencoded'}
     total_pages = math.ceil(fw_count/fw_per_page)
     fw_list = list()
@@ -61,12 +75,12 @@ def transform_metadata_format_ours(raw_data, local_storage_dir="."):
     fw_mod_list = list()
     for fw in raw_data:
         fw_mod = {
-	    'Fwfileid': fw.get("reference", None),
+	    'Fwfileid': fw.get("reference", str(uuid.uuid4())),
 	    'Manufacturer': 'schneider_electric',
-	    'Modelname': fw.get("title", None),
-	    'Version': fw.get("version", None),
-	    'Type': fw.get("documentTypeEnglishLabel", None),
-	    'Releasedate': fw.get("docDate", None),
+	    'Modelname': fw.get("title", "").replace("'", ""),
+	    'Version': fw.get("version", ""),
+	    'Type': fw.get("documentTypeEnglishLabel", ""),
+	    'Releasedate': fw.get("docDate", ""),
 	    'Checksum': '',
 	    'Embatested': '',
 	    'Embalinktoreport': '',
@@ -106,6 +120,5 @@ if __name__ == "__main__":
     api_url = "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/resultViewCahnge/resultListAjax"
     raw_fw_list = get_firmware_data_using_api(api_url, total_fw, 50) #50 is max fw_per_page
     metadata = transform_metadata_format_ours(raw_fw_list, local_storage_dir=os.path.abspath(folder))
+    write_metadata_to_db(metadata)
     download_list_files(metadata, 10) # download max 10 files
-    
-    #se_firmaware_parser(url, folder)
