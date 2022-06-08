@@ -178,3 +178,18 @@
 						Fwdownlink TEXT NOT NULL,
 						Fwfilelinktolocal TEXT NOT NULL,
 						Fwadddata BLOB).
+2022-06-08 11:51:32,007:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-08 11:51:32,027:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).

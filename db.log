@@ -34,3 +34,282 @@
 						Fwdownlink TEXT NOT NULL,
 						Fwfilelinktolocal TEXT NOT NULL,
 						Fwadddata BLOB).
+2022-06-08 00:41:35,876:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-08 00:41:35,905:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-08 00:41:37,394:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-08 00:41:37,395:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-08 00:41:37,396:INFO:database: As the ../firmwaredatabase.db is found, a new connection will be established.
+2022-06-08 00:41:37,396:INFO:database: Connection details: <sqlite3.Connection object at 0x00000214E19CDF10>
+2022-06-08 00:41:37,397:INFO:database: A cursor is established on ../firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x00000214E19F2A40>.
+2022-06-08 00:41:37,398:INFO:database: The table FWDB is selected in the ../firmwaredatabase.db with the command: select * from FWDB.
+2022-06-08 00:41:37,398:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-08 00:41:37,398:INFO:database: The ../firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-08 00:41:37,399:INFO:database: The ../firmwaredatabase.db is updated with the Key: Modelname and Value: orbit-mib-9_2_2.zip.
+2022-06-08 00:41:37,399:INFO:database: The ../firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-08 00:41:37,399:INFO:database: The ../firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-08 00:41:37,399:INFO:database: The ../firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-05-12.
+2022-06-08 00:41:37,399:INFO:database: The ../firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-08 00:41:37,399:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-08 00:41:37,399:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-08 00:41:37,400:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-08 00:41:37,400:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip.
+2022-06-08 00:41:37,400:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/orbit-mib-9_2_2.zip.
+2022-06-08 00:41:37,400:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-08 00:41:37,400:INFO:database: The db is updated with the Fwfiledid.
+2022-06-08 00:41:37,403:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_1','GE','orbit-mib-9_2_2.zip','','','2022-05-12','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip','./File_system/orbit-mib-9_2_2.zip','').
+2022-06-08 00:41:37,412:INFO:database: The db commited is with data {'Fwfileid': 'FILE_1', 'Manufacturer': 'GE', 'Modelname': 'orbit-mib-9_2_2.zip', 'Version': '', 'Type': '', 'Releasedate': '2022-05-12', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip', 'Fwfilelinktolocal': './File_system/orbit-mib-9_2_2.zip', 'Fwadddata': ''}.
+2022-06-08 00:41:37,458:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-08 00:41:37,462:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-08 00:43:14,576:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-08 00:43:14,577:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-08 00:43:14,577:INFO:database: As the ../firmwaredatabase.db is found, a new connection will be established.
+2022-06-08 00:43:14,578:INFO:database: Connection details: <sqlite3.Connection object at 0x00000214E1A04570>
+2022-06-08 00:43:14,578:INFO:database: A cursor is established on ../firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x00000214E19F2810>.
+2022-06-08 00:43:14,579:INFO:database: The table FWDB is selected in the ../firmwaredatabase.db with the command: select * from FWDB.
+2022-06-08 00:43:14,579:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-08 00:43:14,580:INFO:database: The ../firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-08 00:43:14,580:INFO:database: The ../firmwaredatabase.db is updated with the Key: Modelname and Value: SDx-6_4_8.mpk.
+2022-06-08 00:43:14,580:INFO:database: The ../firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-08 00:43:14,580:INFO:database: The ../firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-08 00:43:14,580:INFO:database: The ../firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-03-29.
+2022-06-08 00:43:14,580:INFO:database: The ../firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-08 00:43:14,580:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-08 00:43:14,581:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-08 00:43:14,581:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-08 00:43:14,581:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.com/communications/mds/software.asp?directory=SD_Series.
+2022-06-08 00:43:14,581:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/SDx-6_4_8.mpk.
+2022-06-08 00:43:14,581:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-08 00:43:14,581:INFO:database: The db is updated with the Fwfiledid.
+2022-06-08 00:43:14,583:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_2','GE','SDx-6_4_8.mpk','','','2022-03-29','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=SD_Series','./File_system/SDx-6_4_8.mpk','').
+2022-06-08 00:43:14,594:INFO:database: The db commited is with data {'Fwfileid': 'FILE_2', 'Manufacturer': 'GE', 'Modelname': 'SDx-6_4_8.mpk', 'Version': '', 'Type': '', 'Releasedate': '2022-03-29', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=SD_Series', 'Fwfilelinktolocal': './File_system/SDx-6_4_8.mpk', 'Fwadddata': ''}.
+2022-06-08 00:47:55,546:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-08 00:47:55,547:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-08 00:47:55,551:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-08 00:47:55,552:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-08 11:43:09,906:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-08 11:43:09,912:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-08 11:45:01,968:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-08 11:45:01,969:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-08 11:46:32,139:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-08 11:46:32,140:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-08 11:46:32,140:INFO:database: As the ../firmwaredatabase.db is found, a new connection will be established.
+2022-06-08 11:46:32,140:INFO:database: Connection details: <sqlite3.Connection object at 0x0000025982A533B0>
+2022-06-08 11:46:32,141:INFO:database: A cursor is established on ../firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000025982AB8EA0>.
+2022-06-08 11:46:32,143:INFO:database: The table FWDB is selected in the ../firmwaredatabase.db with the command: select * from FWDB.
+2022-06-08 11:46:32,144:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-08 11:46:32,144:INFO:database: The ../firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-08 11:46:32,144:INFO:database: The ../firmwaredatabase.db is updated with the Key: Modelname and Value: orbit-bkrc-9_2_2.mpk.
+2022-06-08 11:46:32,144:INFO:database: The ../firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-08 11:46:32,145:INFO:database: The ../firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-08 11:46:32,145:INFO:database: The ../firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-05-12.
+2022-06-08 11:46:32,145:INFO:database: The ../firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-08 11:46:32,146:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-08 11:46:32,146:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-08 11:46:32,146:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-08 11:46:32,146:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dbkrc%2D9%5F2%5F2%2Empk.
+2022-06-08 11:46:32,146:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/orbit-bkrc-9_2_2.mpk.
+2022-06-08 11:46:32,146:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-08 11:46:32,146:INFO:database: The db is updated with the Fwfiledid.
+2022-06-08 11:46:32,150:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_3','GE','orbit-bkrc-9_2_2.mpk','','','2022-05-12','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dbkrc%2D9%5F2%5F2%2Empk','./File_system/orbit-bkrc-9_2_2.mpk','').
+2022-06-08 11:46:32,162:INFO:database: The db commited is with data {'Fwfileid': 'FILE_3', 'Manufacturer': 'GE', 'Modelname': 'orbit-bkrc-9_2_2.mpk', 'Version': '', 'Type': '', 'Releasedate': '2022-05-12', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dbkrc%2D9%5F2%5F2%2Empk', 'Fwfilelinktolocal': './File_system/orbit-bkrc-9_2_2.mpk', 'Fwadddata': ''}.
+2022-06-08 11:46:32,185:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-08 11:46:32,186:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-08 11:46:32,189:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-08 11:46:32,190:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-08 11:46:36,778:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-08 11:46:36,779:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-08 11:46:36,779:INFO:database: As the ../firmwaredatabase.db is found, a new connection will be established.
+2022-06-08 11:46:36,780:INFO:database: Connection details: <sqlite3.Connection object at 0x0000025982A53490>
+2022-06-08 11:46:36,780:INFO:database: A cursor is established on ../firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000025982AB8CE0>.
+2022-06-08 11:46:36,781:INFO:database: The table FWDB is selected in the ../firmwaredatabase.db with the command: select * from FWDB.
+2022-06-08 11:46:36,781:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-08 11:46:36,782:INFO:database: The ../firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-08 11:46:36,782:INFO:database: The ../firmwaredatabase.db is updated with the Key: Modelname and Value: orbit-yang-9_2_2.zip.
+2022-06-08 11:46:36,782:INFO:database: The ../firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-08 11:46:36,782:INFO:database: The ../firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-08 11:46:36,782:INFO:database: The ../firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-05-12.
+2022-06-08 11:46:36,782:INFO:database: The ../firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-08 11:46:36,782:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-08 11:46:36,783:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-08 11:46:36,783:INFO:database: The ../firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-08 11:46:36,783:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dyang%2D9%5F2%5F2%2Ezip.
+2022-06-08 11:46:36,783:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/orbit-yang-9_2_2.zip.
+2022-06-08 11:46:36,783:INFO:database: The ../firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-08 11:46:36,783:INFO:database: The db is updated with the Fwfiledid.
+2022-06-08 11:46:36,785:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_4','GE','orbit-yang-9_2_2.zip','','','2022-05-12','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dyang%2D9%5F2%5F2%2Ezip','./File_system/orbit-yang-9_2_2.zip','').
+2022-06-08 11:46:36,797:INFO:database: The db commited is with data {'Fwfileid': 'FILE_4', 'Manufacturer': 'GE', 'Modelname': 'orbit-yang-9_2_2.zip', 'Version': '', 'Type': '', 'Releasedate': '2022-05-12', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dyang%2D9%5F2%5F2%2Ezip', 'Fwfilelinktolocal': './File_system/orbit-yang-9_2_2.zip', 'Fwadddata': ''}.
+2022-06-08 11:46:50,462:INFO:database: As there is no db local file, a new ../firmwaredatabase.db will be created in the file directory.
+2022-06-08 11:46:50,462:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
