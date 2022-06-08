@@ -27,3 +27,11 @@ Downloads
 The software will only be applied to websites that do not object to automated downloading.
 
 **Note**: Please go through the Project Description folder for detailed overview about the Project
+
+**Program Running Steps**
+**Requirements:**
+  Python
+  
+**Steps:**
+  Run following command in root folder
+> python main.py
