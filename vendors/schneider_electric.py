@@ -1,3 +1,4 @@
+import json
 import os
 import math
 import re
@@ -29,13 +30,14 @@ def download_list_files(metadata, max_files=-1): #max_files -1 means download al
         download_single_file(metadata[file_]["Fwdownlink"], metadata[file_]["Fwfilelinktolocal"])
 
 def write_metadata_to_db(metadata):
-    print("Going to write metadata in db")
+    print("Going to write metadata in DB")
     db_name = 'firmwaredatabase.db'
     db = Database(dbname=db_name)
     if db_name not in os.listdir('../'):
         db.create_table()
     for fw in metadata:
         db.insert_data(dbdictcarrier=fw)
+    print("Metadata inserted in DB")
 
 def se_get_total_firmware_count(url):
     r = requests.get(url)
@@ -120,5 +122,7 @@ if __name__ == "__main__":
     api_url = "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/resultViewCahnge/resultListAjax"
     raw_fw_list = get_firmware_data_using_api(api_url, total_fw, 50) #50 is max fw_per_page
     metadata = transform_metadata_format_ours(raw_fw_list, local_storage_dir=os.path.abspath(folder))
+    print("Printing First 10 FW metadata")
+    print(json.dumps(metadata[0:10], indent=4))
     write_metadata_to_db(metadata)
-    download_list_files(metadata, 10) # download max 10 files
+    download_list_files(metadata) # download all files
