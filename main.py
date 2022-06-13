@@ -1,26 +1,20 @@
 import os
-import threading
+from scheduler import *
+from vendors.ge import *
+from vendors.honeywell import *
+from vendors.schneider_electric import *
+from vendors.abb import *
+from vendors.asus import *
+from vendors.avm import *
 
 #creating list of threads
 threads = []
+vendors_path = './vendors'
 
-def main():
-    vendors_path = './vendors'
+def job():
     for file in os.listdir(vendors_path):
-        if file.endswith(".py"):
-            #creating thread
-            process = threading.Thread(target = exec(open("./" + vendors_path + "/" + file).read()))
-            #starting thread
-            process.start()
-            #appending thread to a list
-            threads.append(process)
-            continue
-        else:
-            continue
-    
-    #waiting until thread n completely executed
-    for process in threads:
-        process.join()
+        if file.endswith(".py") and "test" not in file:
+            scheduler(exec(open("./" + vendors_path + "/" + file).read()), 0.1)
 
-
-main()
+if __name__ == "__main__":
+    job()

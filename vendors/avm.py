@@ -1,5 +1,6 @@
 
-def main():
+def avm_main():
     print("avm py")
 
-main()
+if __name__ == "__main__":
+    avm_main()

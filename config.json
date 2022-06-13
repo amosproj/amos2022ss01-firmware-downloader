@@ -1,0 +1,80 @@
+{
+    "foscam": {
+      "interval": 0.1
+    },
+    "ubiquiti": {
+      "interval": 0.1
+    },
+    "dd_wrt": {
+      "interval": 0.1
+    },
+    "Swisscom": {
+      "interval": 0.1
+    },
+    "tp_link": {
+      "interval": 0.1
+    },
+    "openwrt": {
+      "interval": 0.1
+    },
+    "gigaset": {
+      "interval": 0.1
+    },
+    "belkin": {
+      "interval": 0.1
+    },
+    "engenius": {
+      "interval": 0.1
+    },
+    "netgear": {
+      "interval": 0.1
+    },
+    "asus": {
+      "interval": 0.1
+    },
+    "dlink": {
+      "interval": 0.1
+    },
+    "zyxel": {
+      "interval": 0.1
+    },
+    "synology": {
+      "interval": 0.1
+    },
+    "trendnet": {
+      "interval": 0.1
+    },
+    "qnap": {
+      "interval": 0.1
+    },
+    "linksys": {
+      "interval": 0.1
+    },
+    "cisco": {
+      "interval": 0.1
+    },
+    "rockwell": {
+      "interval": 0.1
+    },
+    "honeywell": {
+      "interval": 0.1
+    },
+    "ge": {
+      "interval": 0.1,
+      "user": "tariqmagsi125@gmail.com",
+      "password": "Cs!-56478"
+    },
+    "abb": {
+      "interval": 0.1
+    },
+    "schneider_electric": {
+      "interval": 0.1
+    },
+    "siemens": {
+      "interval": 0.1
+    },
+    "avm": {
+      "interval": 0.1
+    }
+  }
+  
