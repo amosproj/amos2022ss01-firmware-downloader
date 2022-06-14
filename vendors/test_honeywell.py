@@ -1,3 +1,4 @@
+import os
 from honeywell import Honeywell
 
 if __name__ == '__main__':
