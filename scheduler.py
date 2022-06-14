@@ -21,9 +21,9 @@ def scheduler():
     os.system("python vendors/" + file)
 
   for file in os.listdir(vendors_path):
-    if file.endswith(".py") and "test":
+    if file.endswith(".py") and "test" not in file:
       schedule.every(data[file.split('.')[0]]['interval']).minutes.do(job, file)
 
   while True:
-      schedule.run_pending()
-      time.sleep(1)
+    schedule.run_pending()
+    time.sleep(1)
