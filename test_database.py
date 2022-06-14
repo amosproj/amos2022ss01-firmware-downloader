@@ -8,6 +8,7 @@ if db_name not in os.listdir('.'):
 # Create a function for selenium output in dict format and return the dict. Pass it in the next line to insert the data
 db.insert_data(dbdictcarrier={
 		'Fwfileid': 'FILE',
+		'Fwfilename': 'Siemens ABC firmware',
 		'Manufacturer': 'Siemens',
 		'Modelname': 'SZ-100',
 		'Version': '',
