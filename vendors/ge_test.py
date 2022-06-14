@@ -17,15 +17,9 @@ def fetch_data(modelname):
     except sqlite3.Error as er:
         print('SQLite error: %s' % (' '.join(er.args)))
 
-    def test_case_without_authentication(self):
-        data = ["orbit-mib-9_2_2.zip", "2022-05-12"]
-        folder = 'File_system'
-        file_name = 'orbit-mib-9_2_2.zip'
-        gt_url = "https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip"
-        dest = os.path.join(os.getcwd(), folder)
-        try:
-            if not os.path.isdir(dest):
-                os.mkdir(dest)
+    data_list = cursor.fetchall()
+    print(data_list)
+    conn.close()
 
 class Unit_Case_Test(unittest.TestCase):
     def test_case_without_authentication(self):
@@ -33,7 +27,7 @@ class Unit_Case_Test(unittest.TestCase):
         folder = 'File_system'
         file_name = 'orbit-mib-9_2_2.zip'
         gt_url = "https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip"
-        dest = os.path.join(os.getcwd() ,folder)
+        dest = os.path.join(os.getcwd() ,"test_files")
         try:
             if not os.path.isdir(dest):
                 os.mkdir(dest)
@@ -71,7 +65,7 @@ class Unit_Case_Test(unittest.TestCase):
 	    }
         
         self.assertTrue(check_duplicates(data, 'firmwaredatabase.db'), msg="Image didn't downloaded")
-        fetch_data(file_name)
+        
 
 if __name__=="__main__":
     unittest.main()

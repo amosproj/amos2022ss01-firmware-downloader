@@ -1,4 +1,8 @@
-from scheduler import scheduler
+import schedule
+import os
+
+def test_job():
+    os.system("python vendors/ge.py")
 
 if __name__ == "__main__":
-    scheduler()
+    schedule.every(data['ge']['interval']).minutes.do(test_job)
