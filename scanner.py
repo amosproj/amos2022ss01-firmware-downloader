@@ -2,7 +2,7 @@ import schedule
 import time
 import os
 import json
-from scheduler import *
+from scanner import *
 from vendors.ge import *
 from vendors.honeywell import *
 from vendors.schneider_electric import *
@@ -10,7 +10,7 @@ from vendors.abb import *
 from vendors.asus import *
 from vendors.avm import *
 
-def scheduler():
+def scanner():
   data = {}
   with open('config.json', 'r') as f:
     data = json.load(f)
