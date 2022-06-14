@@ -16,6 +16,7 @@ class Database:
 		self.dbname = dbname
 		self.dbdict = {
 			'Fwfileid': '',
+			'Fwfilename': '',
 			'Manufacturer': '',
 			'Modelname': '',
 			'Version': '',
@@ -41,6 +42,7 @@ class Database:
 			'As there is no db local file, a new {} will be created in the file directory.'.format(self.dbname))
 		create_command = """CREATE TABLE IF NOT EXISTS FWDB(
 						Fwfileid VARCHAR PRIMARY KEY,
+						Fwfilename VARCHAR NOT NULL,
 						Manufacturer TEXT NOT NULL,
 						Modelname VARCHAR NOT NULL,
 						Version TEXT NOT NULL,
@@ -60,33 +62,30 @@ class Database:
 		curs.close()
 
 	def insert_data(self, dbdictcarrier):
-            try:
-                # The insert_data function is used to update the new data in the db with dbdictcarrier as an dictionary input
-                logger.info('As the {} is found, a new connection will be established.'.format(self.dbname))
-                conn = sqlite3.connect(self.dbname)
-                logger.info('Connection details: {}'.format(conn))
-                curs = conn.cursor()
-                logger.info('A cursor is established on {}, with the details {}.'.format(self.dbname, curs))
-                select_command = "select * from FWDB"
-                curs.execute(select_command)
-                logger.info('The table FWDB is selected in the {} with the command: {}.'.format(self.dbname, select_command))
-                records = len(curs.fetchall())
-                dbdict = self.dbdict
-                for key in dbdict:
-                    dbdict[key] = dbdictcarrier[key]
-                    logger.info('The {} is updated with the Key: {} and Value: {}.'.format(self.dbname, key, dbdict[key]))
-                dbdict['Fwfileid'] = f'FILE_{records + 1}'
-                logger.info('The db is updated with the Fwfiledid.')
-                # Currently, the local firmware id is represented as file extended by _ in increase by 1
-                insert_command = f'''INSERT INTO FWDB('{"','".join(map(str, dbdict.keys()))}') 
+		# The insert_data function is used to update the new data in the db with dbdictcarrier as an dictionary input
+		logger.info('As the {} is found, a new connection will be established.'.format(self.dbname))
+		conn = sqlite3.connect(self.dbname)
+		logger.info('Connection details: {}'.format(conn))
+		curs = conn.cursor()
+		logger.info('A cursor is established on {}, with the details {}.'.format(self.dbname, curs))
+		select_command = "select * from FWDB"
+		curs.execute(select_command)
+		logger.info('The table FWDB is selected in the {} with the command: {}.'.format(self.dbname, select_command))
+		records = len(curs.fetchall())
+		dbdict = self.dbdict
+		for key in dbdict:
+			dbdict[key] = dbdictcarrier[key]
+			logger.info('The {} is updated with the Key: {} and Value: {}.'.format(self.dbname, key, dbdict[key]))
+		dbdict['Fwfileid'] = f'FILE_{records + 1}'
+		logger.info('The db is updated with the Fwfiledid.')
+		# Currently, the local firmware id is represented as file extended by _ in increase by 1
+		insert_command = f'''INSERT INTO FWDB('{"','".join(map(str, dbdict.keys()))}') 
 									VALUES('{"','".join(map(str, dbdict.values()))}')'''
-                curs.execute(insert_command)
-                logger.info('The db is inserted with the command {}.'.format(insert_command))
-                conn.commit()
-                logger.info('The db commited is with data {}.'.format(dbdict))
-                # Prints the data in db
-                curs.execute('SELECT * FROM FWDB')
-                #print(curs.fetchall())
-                curs.close()
-            except Exception as e:
-                logger.error(f"Error writing to db {dbdictcarrier}")
+		curs.execute(insert_command)
+		logger.info('The db is inserted with the command {}.'.format(insert_command))
+		conn.commit()
+		logger.info('The db commited is with data {}.'.format(dbdict))
+		# Prints the data in db
+		curs.execute('SELECT * FROM FWDB')
+		print(curs.fetchall())
+		curs.close()
