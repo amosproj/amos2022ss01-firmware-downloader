@@ -25,5 +25,5 @@ def scheduler():
       schedule.every(data[file.split('.')[0]]['interval']).minutes.do(job, file)
 
   while True:
-      schedule.run_pending()
-      time.sleep(1)
+    schedule.run_pending()
+    time.sleep(1)
