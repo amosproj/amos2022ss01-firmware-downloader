@@ -16,7 +16,6 @@ class Database:
 		self.dbname = dbname
 		self.dbdict = {
 			'Fwfileid': '',
-			'Fwfilename': '',
 			'Manufacturer': '',
 			'Modelname': '',
 			'Version': '',
@@ -42,7 +41,6 @@ class Database:
 			'As there is no db local file, a new {} will be created in the file directory.'.format(self.dbname))
 		create_command = """CREATE TABLE IF NOT EXISTS FWDB(
 						Fwfileid VARCHAR PRIMARY KEY,
-						Fwfilename VARCHAR NOT NULL,
 						Manufacturer TEXT NOT NULL,
 						Modelname VARCHAR NOT NULL,
 						Version TEXT NOT NULL,
