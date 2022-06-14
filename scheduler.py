@@ -10,22 +10,20 @@ from vendors.abb import *
 from vendors.asus import *
 from vendors.avm import *
 
-data = {}
-with open('config.json', 'r') as f:
-  data = json.load(f)
+def scheduler():
+  data = {}
+  with open('config.json', 'r') as f:
+    data = json.load(f)
 
-vendors_path = './vendors'
+  vendors_path = 'vendors'
 
-def asus():
-  exec(open("./" + vendors_path + "/asus.py").read())
+  def job(file):  
+    os.system("python vendors/" + file)
 
-def avm():
-  exec(open("./" + vendors_path + "/avm.py").read())
+  for file in os.listdir(vendors_path):
+    if file.endswith(".py") and "test":
+      schedule.every(data[file.split('.')[0]]['interval']).minutes.do(job, file)
 
-
-schedule.every(data['asus']['interval']).minutes.do(asus)
-schedule.every(data['avm']['interval']).minutes.do(avm)
-
-while True:
-  schedule.run_pending()
-  time.sleep(1)
+  while True:
+      schedule.run_pending()
+      time.sleep(1)

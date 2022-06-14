@@ -1,7 +1,9 @@
 import os
+import sqlite3
 from ge import *
+from database import Database
 
-def test_if_download_working_correctly():
+def test_case_with_authentication():
     data = ["orbit-mib-9_2_2.zip", "2022-05-12"]
     folder = 'File_system'
     file_name = 'orbit-mib-9_2_2.zip'
@@ -14,9 +16,9 @@ def test_if_download_working_correctly():
         raise ValueError(f"{e}")
     gt_file_path = os.path.join(dest, file_name)
     download_file(gt_url, gt_file_path, data[0], data[1], folder, file_name, '', '', '')
-    print("Firmware Image Download Test Passed")
+    print("Test Passed")
 
-def test_if_download_working_correctly_selenium():
+def test_case_without_authentication():
     data = ["SDx-6_4_8.mpk", "2022-03-29"]
     folder = 'File_system'
     file_name = 'SDx-6_4_8.mpk'
@@ -29,8 +31,25 @@ def test_if_download_working_correctly_selenium():
         raise ValueError(f"{e}")
     gt_file_path = os.path.join(dest, file_name)
     download_file(gt_url, gt_file_path, data[0], data[1], folder, file_name, 'javascript:;', gt_url, "Passport_DownloadFile('SDSeries',7,70);return false")
-    print("Firmware Image Download Test Passed")
+    print("Test Passed")
+    
+def fetch_data():
+    db = Database(dbname=db_name)
+    if db_name not in os.listdir('.'):
+        db.create_table()
+    #db connection
+    conn = sqlite3.connect(db_name)
+    cursor = conn.cursor()
+    try:
+        cursor.execute("select * from FWDB WHERE Manufacturer='GE'")
+    except sqlite3.Error as er:
+        print('SQLite error: %s' % (' '.join(er.args)))
+
+    data_list = cursor.fetchall()
+    print(data_list)
+    conn.close()
 
 if __name__=="__main__":
-    test_if_download_working_correctly()
-    test_if_download_working_correctly_selenium()
+    test_case_without_authentication()
+    test_case_with_authentication()
+    fetch_data()

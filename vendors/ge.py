@@ -5,13 +5,15 @@ import os
 import sys
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-sys.path.append(os.path.abspath(os.path.join('..', '')))  
+sys.path.append(os.path.abspath(os.path.join('.', '')))  
 from database import Database
 from check_duplicates import check_duplicates
 import requests
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 import json
+
+
 
 directories_link = ["/communications/mds/software.asp?directory=Orbit_MCR", "/communications/mds/software.asp?directory=Master_Station", "/communications/mds/software.asp?directory=TD-Series", "/communications/mds/software.asp?directory=TD-Series/Support+Items", "/communications/mds/software.asp?directory=SD_Series", "/communications/mds/software.asp?directory=TransNET/Previous", "/communications/mds/software.asp?directory=SD_Series", "/communications/mds/software.asp?directory=entraNET"]
 
@@ -126,4 +128,4 @@ def ge_main():
         scraper_parse(url, folder, base_url)
 
 if __name__ == "__main__":
-    main()
+    ge_main()
