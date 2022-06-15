@@ -11,6 +11,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from database import Database
+from chromium_downloader import ChromiumDownloader
 
 
 class Honeywell:
@@ -90,7 +91,7 @@ class Honeywell:
             db = Database(dbname=self.db_name)
             for key in self.dbdict.keys():
                 if key == "Manufacturer": dbdict_carrier[key] = "Honeywell"
-                if key == "Fwfilename": dbdict_carrier[key] = web_file_name
+                if key == "Fwfilename": dbdict_carrier[key] = r'{}'.format(web_file_name)
                 if key == "Releasedate": dbdict_carrier[key] = last_updated
                 if key == "Fwdownlink": dbdict_carrier[key] = download_link
                 if key == "Fwfilelinktolocal": dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
@@ -113,8 +114,6 @@ class Honeywell:
         select = Select(driver.find_element(By.XPATH, '//select[@data-filter-label="Type"]'))
         select.select_by_visible_text("Firmware")
         time.sleep(5)
-        # Next_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//a[text()='Next']")))
-
         while driver.find_element(By.XPATH, "//div[@class='table__row']"):
             rows = driver.find_elements(By.XPATH, "//div[@class='table__row']")
             for row in rows:
@@ -130,7 +129,7 @@ class Honeywell:
                 dbdict_carrier = dict()
                 db = Database(dbname=self.db_name)
                 for key in self.dbdict.keys():
-                    if key == "Fwfilename": dbdict_carrier[key] = web_file_name
+                    if key == "Fwfilename": dbdict_carrier[key] = r'{}'.format(web_file_name)
                     if key == "Manufacturer": dbdict_carrier[key] = "Honeywell"
                     if key == "Fwdownlink": dbdict_carrier[key] = download_link
                     if key == "Fwfilelinktolocal": dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
@@ -149,9 +148,11 @@ class Honeywell:
         time.sleep(10)
         driver.quit()
 
-# if __name__ == '__main__':
-#     hw = Honeywell()
-#     hw.homepage()
-#     hw.Advanced_Sensing_Tech()
-#     hw.Gas()
-#     hw.Close_browser()
+
+if __name__ == '__main__':
+    ChromiumDownloader().executor()
+    hw = Honeywell()
+    hw.homepage()
+    hw.Advanced_Sensing_Tech()
+    hw.Gas()
+    hw.Close_browser()
