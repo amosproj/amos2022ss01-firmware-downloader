@@ -37,3 +37,6 @@ bin/
 
 # all logs file 
 **/*.log
+
+# db logs 
+.db

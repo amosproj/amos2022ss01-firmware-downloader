@@ -1,0 +1,177 @@
+{
+ "Foscam": {        
+   "interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+ "Ubiquiti": {     
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+"DD-WRT": {        
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+ "Swisscom": {      
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+"TP-Link": {       
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+ "OpenWRT": {
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+"Gigaset": {
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+ "Belkin": {
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+"Engenius": {
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+ "Netgear": {
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+"Asus": {
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+ "Dlink": {
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+ "Zyxel": {
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+"Synology": {
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+ "Trendnet": {
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+"QNAP": {
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+ "Linksys": {
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+"Cisco": {
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+ "Rockwell": {
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+"Honeywell" : {
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+ "GE": {
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+"ABB": {
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ },
+ "Schneider Electric": {
+	"interval": 3,
+   "ignore": "false",
+   "url": "\"https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/?docType=1555893-Firmware&language=en_GB-English&sortByField=Popularityy",
+   "user": "",
+   "password": ""
+ },
+"Siemens": {
+	"interval": 3,
+   "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+},
+"Default": {
+	"interval": 1,
+  "ignore": "false",
+   "url": "",
+   "user": "",
+   "password": ""
+ } 
+}
