@@ -1,4 +1,4 @@
-from check_duplicates import check_duplicates
+from utils.check_duplicates import check_duplicates
 
 temp_data = {
     'Fwfileid': 'FILE',

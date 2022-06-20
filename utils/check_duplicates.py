@@ -1,5 +1,5 @@
 import sqlite3
-from database import Database
+from utils.database import Database
 import os
 
 #check duplicate data for firmware web scrapping

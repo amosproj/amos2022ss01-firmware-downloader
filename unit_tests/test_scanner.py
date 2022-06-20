@@ -5,7 +5,7 @@ import time
 import unittest
 
 data = {}
-with open('config.json', 'r') as f:
+with open('config/config.json', 'r') as f:
     data = json.load(f)
 
 def test_job(self, is_true, file):
