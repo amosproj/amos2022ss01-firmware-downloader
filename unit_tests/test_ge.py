@@ -19,7 +19,7 @@ def fetch_data():
     try:
         cursor.execute("select * from FWDB WHERE Manufacturer='GE'")
     except sqlite3.Error as er:
-        print('SQLite error: %s' % (' '.join(er.args)))
+        print('SQLite error:%s' % (' '.join(er.args)))
 
     data_list = cursor.fetchall()
     print(data_list)
