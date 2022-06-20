@@ -1,3 +1,7 @@
+import sys, os, time, inspect
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -6,8 +10,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time,os
 from database import Database
+from chromium_downloader import ChromiumDownloader
 
 
 class Honeywell:
@@ -23,7 +27,7 @@ class Honeywell:
     def __init__(self, email="firmwaredownloader1@gmail.com", password="Firmware@123"):
         self.email = email
         self.password = password
-        self.path=os.getcwd()
+        self.path = os.getcwd()
         self.db_name = 'firmwaredatabase.db'
         opt = Options()
         opt.add_experimental_option("prefs", {
@@ -35,6 +39,7 @@ class Honeywell:
         self.driver = webdriver.Chrome(options=opt)
         self.dbdict = {
             'Fwfileid': '',
+            'Fwfilename': '',
             'Manufacturer': '',
             'Modelname': '',
             'Version': '',
@@ -56,8 +61,14 @@ class Honeywell:
         driver.implicitly_wait(10)  # seconds
         driver.maximize_window()
 
+    def down_ele_click(self, loc_loc,  element):
+        # A fn for duplication Check for not to download the files if files exist in local machine
+        if not os.path.isfile(loc_loc.replace("\\", "/")):
+            time.sleep(10)
+            element.click()
+
     def Advanced_Sensing_Tech(self):
-        # the function responsible to drive Advanced Sensing Technologies
+        # 1. the function responsible to drive Advanced Sensing Technologies
         driver = self.driver
         click_here_options = driver.find_element(By.XPATH, "(//a[contains(text(),'CLICK HERE')])[1]")
         click_here_options.click()
@@ -69,18 +80,18 @@ class Honeywell:
             download_link = rows[rows.index(row)].find_element(By.XPATH, "//div[@class='table__cell table__cell--icons ml-md-auto']//*[contains(@data-analytics-asset-name, '{}')]".format(str(web_file_name))).get_attribute('href')
             download_element = row.find_element(By.XPATH, "//div[@class='table__cell table__cell--icons ml-md-auto']//*[contains(@data-analytics-asset-name, '{}')]".format(str(web_file_name)))
             file_name = row.find_element(By.XPATH, "//div[@class='table__cell table__cell--icons ml-md-auto']//*[contains(@data-analytics-asset-name, '{}')]".format(str(web_file_name))).get_attribute('download')
-            print(data,download_link,file_name)
+            print(data, download_link, file_name)
             actions = ActionChains(driver)
             actions.move_to_element(download_element).perform()
             local_file_location = r"{}\downloads\honeywell\{}".format(self.path, file_name)
-            if not os.path.isfile(local_file_location.replace("\\", "/")):
-                time.sleep(10)
-                download_element.click()
+            # Duplication Check for not to download the files if files exist in local machine
+            self.down_ele_click(local_file_location, download_element)
             print(local_file_location)
             dbdict_carrier = dict()
             db = Database(dbname=self.db_name)
             for key in self.dbdict.keys():
                 if key == "Manufacturer": dbdict_carrier[key] = "Honeywell"
+                if key == "Fwfilename": dbdict_carrier[key] = r'{}'.format(web_file_name)
                 if key == "Releasedate": dbdict_carrier[key] = last_updated
                 if key == "Fwdownlink": dbdict_carrier[key] = download_link
                 if key == "Fwfilelinktolocal": dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
@@ -92,8 +103,10 @@ class Honeywell:
         driver.back()
 
     def Gas(self):
-        # The function responsible to run the Safety
+        # 3. The function responsible to run the Safety
         driver = self.driver
+        driver.refresh()
+        time.sleep(10)
         click_here_options = driver.find_element(By.XPATH, "(//a[contains(text(),'CLICK HERE')])[3]")
         actions = ActionChains(driver)
         actions.move_to_element(click_here_options).perform()
@@ -101,27 +114,45 @@ class Honeywell:
         select = Select(driver.find_element(By.XPATH, '//select[@data-filter-label="Type"]'))
         select.select_by_visible_text("Firmware")
         time.sleep(5)
-        # Next_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//a[text()='Next']")))
-
-        while driver.find_element(By.XPATH, "//*[text()='Next']").tag_name == "a":
-            download_buttons = driver.find_elements(By.XPATH, "//span[text()='Download File']/ancestor::a")
-            for download_button in download_buttons:
+        while driver.find_element(By.XPATH, "//div[@class='table__row']"):
+            rows = driver.find_elements(By.XPATH, "//div[@class='table__row']")
+            for row in rows:
+                web_file_name, temp_add_web_data = "", ""
+                data = rows[rows.index(row)].text
+                web_file_name, temp_add_web_data = data.split("\n")
+                download_link = rows[rows.index(row)].find_element(By.XPATH, "//div[@class='table__row'][{}]//div[@class='table__cell table__cell--icons ml-md-auto']//a[@class='table__link table__link--download js-download-trigger  document-download']".format(rows.index(row)+1)).get_attribute('href')
+                download_element = rows[rows.index(row)].find_element(By.XPATH, "//div[@class='table__row'][{}]//div[@class='table__cell table__cell--icons ml-md-auto']//a[@class='table__link table__link--download js-download-trigger  document-download']".format(rows.index(row)+1))
                 actions = ActionChains(driver)
-                actions.move_to_element(download_button).perform()
-                download_button.click()
+                actions.move_to_element(download_element).perform()
+                local_file_location = r"{}\downloads\honeywell\{}".format(self.path, download_link.split('/')[-1])
+                self.down_ele_click(local_file_location, download_element)
+                dbdict_carrier = dict()
+                db = Database(dbname=self.db_name)
+                for key in self.dbdict.keys():
+                    if key == "Fwfilename": dbdict_carrier[key] = r'{}'.format(web_file_name)
+                    if key == "Manufacturer": dbdict_carrier[key] = "Honeywell"
+                    if key == "Fwdownlink": dbdict_carrier[key] = download_link
+                    if key == "Fwfilelinktolocal": dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
+                    if key not in dbdict_carrier.keys(): dbdict_carrier[key] = ''
+                    if self.db_name not in os.listdir('.'):
+                        db.create_table()
+                db.insert_data(dbdict_carrier)
+            time.sleep(10)
+            if driver.find_element(By.XPATH, "//*[text()='Next']").tag_name == "span": break
             driver.find_element(By.XPATH, "//a[text()='Next']").click()
-            time.sleep(5)
         driver.back()
 
     def Close_browser(self):
         # At the end of the program, the function will close the Chrome browser
         driver = self.driver
-        time.sleep(5)
+        time.sleep(10)
         driver.quit()
 
-# if __name__ == '__main__':
-#     hw = Honeywell()
-#     hw.homepage()
-#     hw.Advanced_Sensing_Tech()
-#     hw.Gas()
-#     hw.Close_browser()
+
+if __name__ == '__main__':
+    ChromiumDownloader().executor()
+    hw = Honeywell()
+    hw.homepage()
+    hw.Advanced_Sensing_Tech()
+    hw.Gas()
+    hw.Close_browser()

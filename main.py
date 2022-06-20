@@ -1,26 +1,10 @@
-import os
-import threading
+from scanner import *
+from vendors.ge import *
+from vendors.honeywell import *
+from vendors.schneider_electric import *
+from vendors.abb import *
+from vendors.asus import *
+from vendors.avm import *
 
-#creating list of threads
-threads = []
-
-def main():
-    vendors_path = './vendors'
-    for file in os.listdir(vendors_path):
-        if file.endswith(".py"):
-            #creating thread
-            process = threading.Thread(target = exec(open("./" + vendors_path + "/" + file).read()))
-            #starting thread
-            process.start()
-            #appending thread to a list
-            threads.append(process)
-            continue
-        else:
-            continue
-    
-    #waiting until thread n completely executed
-    for process in threads:
-        process.join()
-
-
-main()
+if __name__ == "__main__":
+    scanner()

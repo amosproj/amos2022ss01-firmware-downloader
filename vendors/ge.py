@@ -1,21 +1,30 @@
+from tkinter.filedialog import Open
 import requests
 from bs4 import BeautifulSoup
 import os
 import sys
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-sys.path.append(os.path.abspath(os.path.join('..', '')))  
+sys.path.append(os.path.abspath(os.path.join('.', '')))  
 from database import Database
 from check_duplicates import check_duplicates
 import requests
 from webdriver_manager.chrome import ChromeDriverManager
 import time
+import json
+
+
 
 directories_link = ["/communications/mds/software.asp?directory=Orbit_MCR", "/communications/mds/software.asp?directory=Master_Station", "/communications/mds/software.asp?directory=TD-Series", "/communications/mds/software.asp?directory=TD-Series/Support+Items", "/communications/mds/software.asp?directory=SD_Series", "/communications/mds/software.asp?directory=TransNET/Previous", "/communications/mds/software.asp?directory=SD_Series", "/communications/mds/software.asp?directory=entraNET"]
 
-db_name = '../firmwaredatabase.db'
-user = 'tariqmagsi125@gmail.com'
-passw = 'Cs!-56478'
+db_name = 'firmwaredatabase.db'
+user = ''
+passw = ''
+
+with open('config.json', 'r') as f:
+    data = json.load(f)
+    user = data['ge']['user']
+    passw = data['ge']['password']
 
 #inserting meta data into database
 def insert_into_db(data):
@@ -108,7 +117,7 @@ def scraper_parse(url, folder, base_url):
                     sub_data.append(item_temp.get_text())
                 data.append(sub_data)
 
-if __name__ == "__main__":
+def ge_main():
     paths = directories_link
     base_url = "https://www.gegridsolutions.com"
 
@@ -117,3 +126,6 @@ if __name__ == "__main__":
     for path in paths:
         url = base_url + path
         scraper_parse(url, folder, base_url)
+
+if __name__ == "__main__":
+    ge_main()

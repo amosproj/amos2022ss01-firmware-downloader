@@ -1,5 +1,6 @@
 
-def main():
+def asus_main():
     print("asus py")
 
-main()
+if __name__ == "__main__":
+    asus_main()
