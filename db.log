@@ -2554,3 +2554,997 @@
 2022-06-14 17:28:48,557:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
 									VALUES('FILE_2','GE','orbit-mib-9_2_2.zip','','','2022-05-12','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip','./File_system/orbit-mib-9_2_2.zip','').
 2022-06-14 17:28:48,571:INFO:database: The db commited is with data {'Fwfileid': 'FILE_2', 'Manufacturer': 'GE', 'Modelname': 'orbit-mib-9_2_2.zip', 'Version': '', 'Type': '', 'Releasedate': '2022-05-12', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip', 'Fwfilelinktolocal': './File_system/orbit-mib-9_2_2.zip', 'Fwadddata': ''}.
+2022-06-15 13:25:21,184:INFO:database: As there is no db local file, a new firmwaredatabase.db will be created in the file directory.
+2022-06-15 13:25:21,205:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Fwfilename VARCHAR NOT NULL,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-15 13:25:21,205:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 13:25:21,212:INFO:database: Connection details: <sqlite3.Connection object at 0x000001481E6AC9D0>
+2022-06-15 13:25:21,213:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x000001481E6DA420>.
+2022-06-15 13:25:21,213:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 13:25:21,213:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 13:25:21,213:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: Siemens ABC firmware.
+2022-06-15 13:25:21,213:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: Siemens.
+2022-06-15 13:25:21,214:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: SZ-100.
+2022-06-15 13:25:21,214:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: 1.2.3.
+2022-06-15 13:25:21,214:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: Router.
+2022-06-15 13:25:21,214:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-05-31.
+2022-06-15 13:25:21,214:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 13:25:21,214:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: Yes.
+2022-06-15 13:25:21,214:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: None.
+2022-06-15 13:25:21,214:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: https://xyz.com.
+2022-06-15 13:25:21,214:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://google.com.
+2022-06-15 13:25:21,214:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./xyz/abc.tar.
+2022-06-15 13:25:21,214:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: some long sentence.
+2022-06-15 13:25:21,214:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 13:25:21,216:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_1','Siemens ABC firmware','Siemens','SZ-100','1.2.3','Router','2022-05-31','None','Yes','None','https://xyz.com','https://google.com','./xyz/abc.tar','some long sentence').
+2022-06-15 13:25:21,227:INFO:database: The db commited is with data {'Fwfileid': 'FILE_1', 'Fwfilename': 'Siemens ABC firmware', 'Manufacturer': 'Siemens', 'Modelname': 'SZ-100', 'Version': '1.2.3', 'Type': 'Router', 'Releasedate': '2022-05-31', 'Checksum': 'None', 'Embatested': 'Yes', 'Embalinktoreport': 'None', 'Embarklinktoreport': 'https://xyz.com', 'Fwdownlink': 'https://google.com', 'Fwfilelinktolocal': './xyz/abc.tar', 'Fwadddata': 'some long sentence'}.
+2022-06-15 13:27:58,584:INFO:database: As there is no db local file, a new firmwaredatabase.db will be created in the file directory.
+2022-06-15 13:27:58,783:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Fwfilename VARCHAR NOT NULL,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-15 13:28:48,399:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 13:28:48,400:INFO:database: Connection details: <sqlite3.Connection object at 0x00000146A85D3490>
+2022-06-15 13:28:48,401:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x00000146A8667CE0>.
+2022-06-15 13:28:48,402:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 13:28:48,402:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 13:28:48,402:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: orbit-bkrc-9_2_2.mpk.
+2022-06-15 13:28:48,403:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 13:28:48,403:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: orbit-bkrc-9_2_2.mpk.
+2022-06-15 13:28:48,403:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 13:28:48,404:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 13:28:48,404:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-05-12.
+2022-06-15 13:28:48,405:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 13:28:48,405:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 13:28:48,405:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 13:28:48,406:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 13:28:48,406:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dbkrc%2D9%5F2%5F2%2Empk.
+2022-06-15 13:28:48,406:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/orbit-bkrc-9_2_2.mpk.
+2022-06-15 13:28:48,406:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 13:28:48,406:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 13:28:48,409:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_1','orbit-bkrc-9_2_2.mpk','GE','orbit-bkrc-9_2_2.mpk','','','2022-05-12','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dbkrc%2D9%5F2%5F2%2Empk','./File_system/orbit-bkrc-9_2_2.mpk','').
+2022-06-15 13:28:48,421:INFO:database: The db commited is with data {'Fwfileid': 'FILE_1', 'Fwfilename': 'orbit-bkrc-9_2_2.mpk', 'Manufacturer': 'GE', 'Modelname': 'orbit-bkrc-9_2_2.mpk', 'Version': '', 'Type': '', 'Releasedate': '2022-05-12', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dbkrc%2D9%5F2%5F2%2Empk', 'Fwfilelinktolocal': './File_system/orbit-bkrc-9_2_2.mpk', 'Fwadddata': ''}.
+2022-06-15 13:28:49,872:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 13:28:49,873:INFO:database: Connection details: <sqlite3.Connection object at 0x00000146A85D3570>
+2022-06-15 13:28:49,873:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x00000146A8667B20>.
+2022-06-15 13:28:49,874:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 13:28:49,874:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 13:28:49,874:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: orbit-mib-9_2_2.zip.
+2022-06-15 13:28:49,874:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 13:28:49,874:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: orbit-mib-9_2_2.zip.
+2022-06-15 13:28:49,875:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 13:28:49,875:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 13:28:49,875:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-05-12.
+2022-06-15 13:28:49,875:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 13:28:49,875:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 13:28:49,875:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 13:28:49,875:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 13:28:49,875:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip.
+2022-06-15 13:28:49,876:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/orbit-mib-9_2_2.zip.
+2022-06-15 13:28:49,876:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 13:28:49,876:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 13:28:49,878:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_2','orbit-mib-9_2_2.zip','GE','orbit-mib-9_2_2.zip','','','2022-05-12','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip','./File_system/orbit-mib-9_2_2.zip','').
+2022-06-15 13:28:49,891:INFO:database: The db commited is with data {'Fwfileid': 'FILE_2', 'Fwfilename': 'orbit-mib-9_2_2.zip', 'Manufacturer': 'GE', 'Modelname': 'orbit-mib-9_2_2.zip', 'Version': '', 'Type': '', 'Releasedate': '2022-05-12', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip', 'Fwfilelinktolocal': './File_system/orbit-mib-9_2_2.zip', 'Fwadddata': ''}.
+2022-06-15 13:28:51,662:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 13:28:51,662:INFO:database: Connection details: <sqlite3.Connection object at 0x00000146A85D3490>
+2022-06-15 13:28:51,663:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x00000146A8667C00>.
+2022-06-15 13:28:51,664:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 13:28:51,664:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 13:28:51,665:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: orbit-yang-9_2_2.zip.
+2022-06-15 13:28:51,665:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 13:28:51,665:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: orbit-yang-9_2_2.zip.
+2022-06-15 13:28:51,665:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 13:28:51,665:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 13:28:51,665:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-05-12.
+2022-06-15 13:28:51,665:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 13:28:51,666:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 13:28:51,666:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 13:28:51,666:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 13:28:51,666:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dyang%2D9%5F2%5F2%2Ezip.
+2022-06-15 13:28:51,666:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/orbit-yang-9_2_2.zip.
+2022-06-15 13:28:51,666:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 13:28:51,666:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 13:28:51,668:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_3','orbit-yang-9_2_2.zip','GE','orbit-yang-9_2_2.zip','','','2022-05-12','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dyang%2D9%5F2%5F2%2Ezip','./File_system/orbit-yang-9_2_2.zip','').
+2022-06-15 13:28:51,679:INFO:database: The db commited is with data {'Fwfileid': 'FILE_3', 'Fwfilename': 'orbit-yang-9_2_2.zip', 'Manufacturer': 'GE', 'Modelname': 'orbit-yang-9_2_2.zip', 'Version': '', 'Type': '', 'Releasedate': '2022-05-12', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dyang%2D9%5F2%5F2%2Ezip', 'Fwfilelinktolocal': './File_system/orbit-yang-9_2_2.zip', 'Fwadddata': ''}.
+2022-06-15 13:31:05,263:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 13:31:05,264:INFO:database: Connection details: <sqlite3.Connection object at 0x00000146A85D3490>
+2022-06-15 13:31:05,264:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x00000146A8667260>.
+2022-06-15 13:31:05,264:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 13:31:05,265:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 13:31:05,265:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: mpr-bkrc-9_2_2.mpk.
+2022-06-15 13:31:05,265:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 13:31:05,265:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: mpr-bkrc-9_2_2.mpk.
+2022-06-15 13:31:05,265:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 13:31:05,265:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 13:31:05,265:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-05-12.
+2022-06-15 13:31:05,265:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 13:31:05,265:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 13:31:05,265:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 13:31:05,265:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 13:31:05,265:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.com/communications/mds/software.asp?directory=Master_Station&file=mpr%2Dbkrc%2D9%5F2%5F2%2Empk.
+2022-06-15 13:31:05,265:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/mpr-bkrc-9_2_2.mpk.
+2022-06-15 13:31:05,266:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 13:31:05,266:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 13:31:05,267:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_4','mpr-bkrc-9_2_2.mpk','GE','mpr-bkrc-9_2_2.mpk','','','2022-05-12','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=Master_Station&file=mpr%2Dbkrc%2D9%5F2%5F2%2Empk','./File_system/mpr-bkrc-9_2_2.mpk','').
+2022-06-15 13:31:05,295:INFO:database: The db commited is with data {'Fwfileid': 'FILE_4', 'Fwfilename': 'mpr-bkrc-9_2_2.mpk', 'Manufacturer': 'GE', 'Modelname': 'mpr-bkrc-9_2_2.mpk', 'Version': '', 'Type': '', 'Releasedate': '2022-05-12', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=Master_Station&file=mpr%2Dbkrc%2D9%5F2%5F2%2Empk', 'Fwfilelinktolocal': './File_system/mpr-bkrc-9_2_2.mpk', 'Fwadddata': ''}.
+2022-06-15 13:31:07,514:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 13:31:07,515:INFO:database: Connection details: <sqlite3.Connection object at 0x00000146A85D3570>
+2022-06-15 13:31:07,515:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x00000146A8667490>.
+2022-06-15 13:31:07,516:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 13:31:07,516:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 13:31:07,516:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: mpr-mib-9_2_2.zip.
+2022-06-15 13:31:07,516:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 13:31:07,516:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: mpr-mib-9_2_2.zip.
+2022-06-15 13:31:07,517:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 13:31:07,517:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 13:31:07,517:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-05-12.
+2022-06-15 13:31:07,517:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 13:31:07,517:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 13:31:07,517:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 13:31:07,517:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 13:31:07,517:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.com/communications/mds/software.asp?directory=Master_Station&file=mpr%2Dmib%2D9%5F2%5F2%2Ezip.
+2022-06-15 13:31:07,517:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/mpr-mib-9_2_2.zip.
+2022-06-15 13:31:07,517:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 13:31:07,517:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 13:31:07,520:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_5','mpr-mib-9_2_2.zip','GE','mpr-mib-9_2_2.zip','','','2022-05-12','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=Master_Station&file=mpr%2Dmib%2D9%5F2%5F2%2Ezip','./File_system/mpr-mib-9_2_2.zip','').
+2022-06-15 13:31:07,531:INFO:database: The db commited is with data {'Fwfileid': 'FILE_5', 'Fwfilename': 'mpr-mib-9_2_2.zip', 'Manufacturer': 'GE', 'Modelname': 'mpr-mib-9_2_2.zip', 'Version': '', 'Type': '', 'Releasedate': '2022-05-12', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=Master_Station&file=mpr%2Dmib%2D9%5F2%5F2%2Ezip', 'Fwfilelinktolocal': './File_system/mpr-mib-9_2_2.zip', 'Fwadddata': ''}.
+2022-06-15 13:31:09,404:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 13:31:09,405:INFO:database: Connection details: <sqlite3.Connection object at 0x00000146A85D3490>
+2022-06-15 13:31:09,405:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x00000146A8667110>.
+2022-06-15 13:31:09,406:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 13:31:09,406:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 13:31:09,406:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: mpr-yang-9_2_2.zip.
+2022-06-15 13:31:09,406:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 13:31:09,406:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: mpr-yang-9_2_2.zip.
+2022-06-15 13:31:09,406:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 13:31:09,406:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 13:31:09,406:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-05-12.
+2022-06-15 13:31:09,406:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 13:31:09,406:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 13:31:09,406:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 13:31:09,407:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 13:31:09,407:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.com/communications/mds/software.asp?directory=Master_Station&file=mpr%2Dyang%2D9%5F2%5F2%2Ezip.
+2022-06-15 13:31:09,407:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/mpr-yang-9_2_2.zip.
+2022-06-15 13:31:09,407:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 13:31:09,407:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 13:31:09,408:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_6','mpr-yang-9_2_2.zip','GE','mpr-yang-9_2_2.zip','','','2022-05-12','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=Master_Station&file=mpr%2Dyang%2D9%5F2%5F2%2Ezip','./File_system/mpr-yang-9_2_2.zip','').
+2022-06-15 13:31:09,421:INFO:database: The db commited is with data {'Fwfileid': 'FILE_6', 'Fwfilename': 'mpr-yang-9_2_2.zip', 'Manufacturer': 'GE', 'Modelname': 'mpr-yang-9_2_2.zip', 'Version': '', 'Type': '', 'Releasedate': '2022-05-12', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=Master_Station&file=mpr%2Dyang%2D9%5F2%5F2%2Ezip', 'Fwfilelinktolocal': './File_system/mpr-yang-9_2_2.zip', 'Fwadddata': ''}.
+2022-06-15 13:32:32,009:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 13:32:32,009:INFO:database: Connection details: <sqlite3.Connection object at 0x00000146A85D39D0>
+2022-06-15 13:32:32,009:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x00000146A8667570>.
+2022-06-15 13:32:32,011:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 13:32:32,011:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 13:32:32,011:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: TDM-krmd-1_2_28.mpk.
+2022-06-15 13:32:32,012:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 13:32:32,012:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: TDM-krmd-1_2_28.mpk.
+2022-06-15 13:32:32,012:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 13:32:32,012:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 13:32:32,012:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2021-12-23.
+2022-06-15 13:32:32,012:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 13:32:32,012:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 13:32:32,013:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 13:32:32,013:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 13:32:32,013:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 13:32:32,013:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/TDM-krmd-1_2_28.mpk.
+2022-06-15 13:32:32,013:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 13:32:32,013:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 13:32:32,016:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_7','TDM-krmd-1_2_28.mpk','GE','TDM-krmd-1_2_28.mpk','','','2021-12-23','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/TDM-krmd-1_2_28.mpk','').
+2022-06-15 13:32:32,029:INFO:database: The db commited is with data {'Fwfileid': 'FILE_7', 'Fwfilename': 'TDM-krmd-1_2_28.mpk', 'Manufacturer': 'GE', 'Modelname': 'TDM-krmd-1_2_28.mpk', 'Version': '', 'Type': '', 'Releasedate': '2021-12-23', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/TDM-krmd-1_2_28.mpk', 'Fwadddata': ''}.
+2022-06-15 13:33:55,539:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 13:33:55,540:INFO:database: Connection details: <sqlite3.Connection object at 0x00000146A85D38F0>
+2022-06-15 13:33:55,540:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x00000146A8667B20>.
+2022-06-15 13:33:55,541:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 13:33:55,541:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 13:33:55,541:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: TDM-mibs-1_2_28.zip.
+2022-06-15 13:33:55,541:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 13:33:55,542:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: TDM-mibs-1_2_28.zip.
+2022-06-15 13:33:55,542:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 13:33:55,542:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 13:33:55,542:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2021-12-23.
+2022-06-15 13:33:55,542:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 13:33:55,543:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 13:33:55,543:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 13:33:55,543:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 13:33:55,543:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 13:33:55,543:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/TDM-mibs-1_2_28.zip.
+2022-06-15 13:33:55,543:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 13:33:55,543:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 13:33:55,547:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_8','TDM-mibs-1_2_28.zip','GE','TDM-mibs-1_2_28.zip','','','2021-12-23','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/TDM-mibs-1_2_28.zip','').
+2022-06-15 13:33:55,564:INFO:database: The db commited is with data {'Fwfileid': 'FILE_8', 'Fwfilename': 'TDM-mibs-1_2_28.zip', 'Manufacturer': 'GE', 'Modelname': 'TDM-mibs-1_2_28.zip', 'Version': '', 'Type': '', 'Releasedate': '2021-12-23', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/TDM-mibs-1_2_28.zip', 'Fwadddata': ''}.
+2022-06-15 13:35:22,388:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 13:35:22,388:INFO:database: Connection details: <sqlite3.Connection object at 0x00000146A85D39D0>
+2022-06-15 13:35:22,389:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x00000146A8667030>.
+2022-06-15 13:35:22,390:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 13:35:22,390:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 13:35:22,390:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: tdx-krmd-2_1_0.mpk.
+2022-06-15 13:35:22,390:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 13:35:22,390:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: tdx-krmd-2_1_0.mpk.
+2022-06-15 13:35:22,391:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 13:35:22,391:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 13:35:22,391:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2021-06-15.
+2022-06-15 13:35:22,391:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 13:35:22,391:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 13:35:22,391:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 13:35:22,392:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 13:35:22,392:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 13:35:22,392:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/tdx-krmd-2_1_0.mpk.
+2022-06-15 13:35:22,392:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 13:35:22,392:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 13:35:22,395:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_9','tdx-krmd-2_1_0.mpk','GE','tdx-krmd-2_1_0.mpk','','','2021-06-15','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/tdx-krmd-2_1_0.mpk','').
+2022-06-15 13:35:22,407:INFO:database: The db commited is with data {'Fwfileid': 'FILE_9', 'Fwfilename': 'tdx-krmd-2_1_0.mpk', 'Manufacturer': 'GE', 'Modelname': 'tdx-krmd-2_1_0.mpk', 'Version': '', 'Type': '', 'Releasedate': '2021-06-15', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/tdx-krmd-2_1_0.mpk', 'Fwadddata': ''}.
+2022-06-15 13:36:43,676:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 13:36:43,677:INFO:database: Connection details: <sqlite3.Connection object at 0x00000146A85D38F0>
+2022-06-15 13:36:43,677:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x00000146A8667500>.
+2022-06-15 13:36:43,678:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 13:36:43,679:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 13:36:43,679:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: tdx-krmd-2_1_6.mpk.
+2022-06-15 13:36:43,679:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 13:36:43,679:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: tdx-krmd-2_1_6.mpk.
+2022-06-15 13:36:43,679:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 13:36:43,679:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 13:36:43,680:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2021-12-02.
+2022-06-15 13:36:43,680:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 13:36:43,680:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 13:36:43,680:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 13:36:43,680:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 13:36:43,680:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 13:36:43,681:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/tdx-krmd-2_1_6.mpk.
+2022-06-15 13:36:43,681:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 13:36:43,681:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 13:36:43,684:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_10','tdx-krmd-2_1_6.mpk','GE','tdx-krmd-2_1_6.mpk','','','2021-12-02','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/tdx-krmd-2_1_6.mpk','').
+2022-06-15 13:36:43,698:INFO:database: The db commited is with data {'Fwfileid': 'FILE_10', 'Fwfilename': 'tdx-krmd-2_1_6.mpk', 'Manufacturer': 'GE', 'Modelname': 'tdx-krmd-2_1_6.mpk', 'Version': '', 'Type': '', 'Releasedate': '2021-12-02', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/tdx-krmd-2_1_6.mpk', 'Fwadddata': ''}.
+2022-06-15 13:38:10,636:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 13:38:10,637:INFO:database: Connection details: <sqlite3.Connection object at 0x00000146A85D39D0>
+2022-06-15 13:38:10,637:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x00000146A8667B20>.
+2022-06-15 13:38:10,639:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 13:38:10,639:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 13:38:10,640:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: tdx-krmd-2_1_9.mpk.
+2022-06-15 13:38:10,640:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 13:38:10,640:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: tdx-krmd-2_1_9.mpk.
+2022-06-15 13:38:10,640:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 13:38:10,640:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 13:38:10,641:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-01-11.
+2022-06-15 13:38:10,641:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 13:38:10,641:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 13:38:10,641:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 13:38:10,641:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 13:38:10,641:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 13:38:10,641:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/tdx-krmd-2_1_9.mpk.
+2022-06-15 13:38:10,641:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 13:38:10,642:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 13:38:10,643:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_11','tdx-krmd-2_1_9.mpk','GE','tdx-krmd-2_1_9.mpk','','','2022-01-11','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/tdx-krmd-2_1_9.mpk','').
+2022-06-15 13:38:10,656:INFO:database: The db commited is with data {'Fwfileid': 'FILE_11', 'Fwfilename': 'tdx-krmd-2_1_9.mpk', 'Manufacturer': 'GE', 'Modelname': 'tdx-krmd-2_1_9.mpk', 'Version': '', 'Type': '', 'Releasedate': '2022-01-11', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/tdx-krmd-2_1_9.mpk', 'Fwadddata': ''}.
+2022-06-15 13:48:13,204:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 13:48:13,205:INFO:database: Connection details: <sqlite3.Connection object at 0x00000160B89F39D0>
+2022-06-15 13:48:13,205:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x00000160B93BC6C0>.
+2022-06-15 13:48:13,206:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 13:48:13,206:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 13:48:13,207:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: tdx-mibs-2_1_0.zip.
+2022-06-15 13:48:13,207:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 13:48:13,207:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: tdx-mibs-2_1_0.zip.
+2022-06-15 13:48:13,207:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 13:48:13,207:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 13:48:13,207:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2021-06-15.
+2022-06-15 13:48:13,207:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 13:48:13,207:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 13:48:13,208:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 13:48:13,208:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 13:48:13,208:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 13:48:13,208:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/tdx-mibs-2_1_0.zip.
+2022-06-15 13:48:13,208:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 13:48:13,208:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 13:48:13,210:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_12','tdx-mibs-2_1_0.zip','GE','tdx-mibs-2_1_0.zip','','','2021-06-15','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/tdx-mibs-2_1_0.zip','').
+2022-06-15 13:48:13,221:INFO:database: The db commited is with data {'Fwfileid': 'FILE_12', 'Fwfilename': 'tdx-mibs-2_1_0.zip', 'Manufacturer': 'GE', 'Modelname': 'tdx-mibs-2_1_0.zip', 'Version': '', 'Type': '', 'Releasedate': '2021-06-15', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/tdx-mibs-2_1_0.zip', 'Fwadddata': ''}.
+2022-06-15 13:49:41,140:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 13:49:41,142:INFO:database: Connection details: <sqlite3.Connection object at 0x00000160B89F38F0>
+2022-06-15 13:49:41,142:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x00000160B93BC880>.
+2022-06-15 13:49:41,143:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 13:49:41,143:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 13:49:41,143:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: tdx-mibs-2_1_6.zip.
+2022-06-15 13:49:41,143:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 13:49:41,144:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: tdx-mibs-2_1_6.zip.
+2022-06-15 13:49:41,144:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 13:49:41,144:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 13:49:41,144:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2021-12-02.
+2022-06-15 13:49:41,144:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 13:49:41,144:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 13:49:41,144:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 13:49:41,144:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 13:49:41,145:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 13:49:41,145:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/tdx-mibs-2_1_6.zip.
+2022-06-15 13:49:41,145:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 13:49:41,145:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 13:49:41,146:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_13','tdx-mibs-2_1_6.zip','GE','tdx-mibs-2_1_6.zip','','','2021-12-02','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/tdx-mibs-2_1_6.zip','').
+2022-06-15 13:49:41,158:INFO:database: The db commited is with data {'Fwfileid': 'FILE_13', 'Fwfilename': 'tdx-mibs-2_1_6.zip', 'Manufacturer': 'GE', 'Modelname': 'tdx-mibs-2_1_6.zip', 'Version': '', 'Type': '', 'Releasedate': '2021-12-02', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/tdx-mibs-2_1_6.zip', 'Fwadddata': ''}.
+2022-06-15 13:51:02,496:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 13:51:02,497:INFO:database: Connection details: <sqlite3.Connection object at 0x00000160B89F39D0>
+2022-06-15 13:51:02,497:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x00000160B93BC5E0>.
+2022-06-15 13:51:02,498:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 13:51:02,498:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 13:51:02,498:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: tdx-mibs-2_1_9.zip.
+2022-06-15 13:51:02,498:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 13:51:02,498:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: tdx-mibs-2_1_9.zip.
+2022-06-15 13:51:02,498:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 13:51:02,499:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 13:51:02,499:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-01-11.
+2022-06-15 13:51:02,499:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 13:51:02,499:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 13:51:02,499:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 13:51:02,499:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 13:51:02,499:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 13:51:02,499:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/tdx-mibs-2_1_9.zip.
+2022-06-15 13:51:02,500:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 13:51:02,500:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 13:51:02,502:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_14','tdx-mibs-2_1_9.zip','GE','tdx-mibs-2_1_9.zip','','','2022-01-11','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/tdx-mibs-2_1_9.zip','').
+2022-06-15 13:51:02,513:INFO:database: The db commited is with data {'Fwfileid': 'FILE_14', 'Fwfilename': 'tdx-mibs-2_1_9.zip', 'Manufacturer': 'GE', 'Modelname': 'tdx-mibs-2_1_9.zip', 'Version': '', 'Type': '', 'Releasedate': '2022-01-11', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/tdx-mibs-2_1_9.zip', 'Fwadddata': ''}.
+2022-06-15 16:03:54,611:INFO:database: As there is no db local file, a new firmwaredatabase.db will be created in the file directory.
+2022-06-15 16:03:54,722:INFO:database: The database is created successfully in the code repository with the command CREATE TABLE IF NOT EXISTS FWDB(
+						Fwfileid VARCHAR PRIMARY KEY,
+						Fwfilename VARCHAR NOT NULL,
+						Manufacturer TEXT NOT NULL,
+						Modelname VARCHAR NOT NULL,
+						Version TEXT NOT NULL,
+						Type TEXT NOT NULL,
+						Releasedate TEXT,
+						Checksum TEXT,
+						Embatested TEXT NOT NULL,
+						Embalinktoreport TEXT,
+						Embarklinktoreport TEXT,
+						Fwdownlink TEXT NOT NULL,
+						Fwfilelinktolocal TEXT NOT NULL,
+						Fwadddata BLOB).
+2022-06-15 16:04:37,547:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:04:37,548:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C61902490>
+2022-06-15 16:04:37,548:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C619D7CE0>.
+2022-06-15 16:04:37,549:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:04:37,549:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:04:37,550:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: orbit-bkrc-9_2_2.mpk.
+2022-06-15 16:04:37,550:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:04:37,550:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: orbit-bkrc-9_2_2.mpk.
+2022-06-15 16:04:37,550:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:04:37,550:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:04:37,550:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-05-12.
+2022-06-15 16:04:37,550:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:04:37,551:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:04:37,551:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:04:37,551:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:04:37,551:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dbkrc%2D9%5F2%5F2%2Empk.
+2022-06-15 16:04:37,551:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/orbit-bkrc-9_2_2.mpk.
+2022-06-15 16:04:37,551:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:04:37,551:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:04:37,554:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_1','orbit-bkrc-9_2_2.mpk','GE','orbit-bkrc-9_2_2.mpk','','','2022-05-12','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dbkrc%2D9%5F2%5F2%2Empk','./File_system/orbit-bkrc-9_2_2.mpk','').
+2022-06-15 16:04:37,577:INFO:database: The db commited is with data {'Fwfileid': 'FILE_1', 'Fwfilename': 'orbit-bkrc-9_2_2.mpk', 'Manufacturer': 'GE', 'Modelname': 'orbit-bkrc-9_2_2.mpk', 'Version': '', 'Type': '', 'Releasedate': '2022-05-12', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dbkrc%2D9%5F2%5F2%2Empk', 'Fwfilelinktolocal': './File_system/orbit-bkrc-9_2_2.mpk', 'Fwadddata': ''}.
+2022-06-15 16:04:38,914:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:04:38,915:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C61902570>
+2022-06-15 16:04:38,915:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C619D7B20>.
+2022-06-15 16:04:38,916:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:04:38,916:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:04:38,917:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: orbit-mib-9_2_2.zip.
+2022-06-15 16:04:38,917:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:04:38,917:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: orbit-mib-9_2_2.zip.
+2022-06-15 16:04:38,917:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:04:38,917:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:04:38,917:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-05-12.
+2022-06-15 16:04:38,917:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:04:38,917:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:04:38,918:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:04:38,918:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:04:38,918:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip.
+2022-06-15 16:04:38,918:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/orbit-mib-9_2_2.zip.
+2022-06-15 16:04:38,918:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:04:38,918:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:04:38,922:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_2','orbit-mib-9_2_2.zip','GE','orbit-mib-9_2_2.zip','','','2022-05-12','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip','./File_system/orbit-mib-9_2_2.zip','').
+2022-06-15 16:04:38,934:INFO:database: The db commited is with data {'Fwfileid': 'FILE_2', 'Fwfilename': 'orbit-mib-9_2_2.zip', 'Manufacturer': 'GE', 'Modelname': 'orbit-mib-9_2_2.zip', 'Version': '', 'Type': '', 'Releasedate': '2022-05-12', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip', 'Fwfilelinktolocal': './File_system/orbit-mib-9_2_2.zip', 'Fwadddata': ''}.
+2022-06-15 16:04:40,719:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:04:40,719:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C61902490>
+2022-06-15 16:04:40,720:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C619D7C00>.
+2022-06-15 16:04:40,721:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:04:40,721:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:04:40,721:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: orbit-yang-9_2_2.zip.
+2022-06-15 16:04:40,721:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:04:40,721:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: orbit-yang-9_2_2.zip.
+2022-06-15 16:04:40,721:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:04:40,722:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:04:40,722:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-05-12.
+2022-06-15 16:04:40,722:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:04:40,722:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:04:40,722:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:04:40,723:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:04:40,723:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dyang%2D9%5F2%5F2%2Ezip.
+2022-06-15 16:04:40,723:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/orbit-yang-9_2_2.zip.
+2022-06-15 16:04:40,723:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:04:40,723:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:04:40,726:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_3','orbit-yang-9_2_2.zip','GE','orbit-yang-9_2_2.zip','','','2022-05-12','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dyang%2D9%5F2%5F2%2Ezip','./File_system/orbit-yang-9_2_2.zip','').
+2022-06-15 16:04:40,740:INFO:database: The db commited is with data {'Fwfileid': 'FILE_3', 'Fwfilename': 'orbit-yang-9_2_2.zip', 'Manufacturer': 'GE', 'Modelname': 'orbit-yang-9_2_2.zip', 'Version': '', 'Type': '', 'Releasedate': '2022-05-12', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dyang%2D9%5F2%5F2%2Ezip', 'Fwfilelinktolocal': './File_system/orbit-yang-9_2_2.zip', 'Fwadddata': ''}.
+2022-06-15 16:05:22,123:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:05:22,124:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C61902490>
+2022-06-15 16:05:22,124:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C619D7260>.
+2022-06-15 16:05:22,125:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:05:22,125:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:05:22,125:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: mpr-bkrc-9_2_2.mpk.
+2022-06-15 16:05:22,125:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:05:22,125:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: mpr-bkrc-9_2_2.mpk.
+2022-06-15 16:05:22,125:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:05:22,126:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:05:22,126:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-05-12.
+2022-06-15 16:05:22,126:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:05:22,126:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:05:22,126:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:05:22,127:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:05:22,127:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.com/communications/mds/software.asp?directory=Master_Station&file=mpr%2Dbkrc%2D9%5F2%5F2%2Empk.
+2022-06-15 16:05:22,127:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/mpr-bkrc-9_2_2.mpk.
+2022-06-15 16:05:22,127:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:05:22,127:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:05:22,132:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_4','mpr-bkrc-9_2_2.mpk','GE','mpr-bkrc-9_2_2.mpk','','','2022-05-12','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=Master_Station&file=mpr%2Dbkrc%2D9%5F2%5F2%2Empk','./File_system/mpr-bkrc-9_2_2.mpk','').
+2022-06-15 16:05:22,144:INFO:database: The db commited is with data {'Fwfileid': 'FILE_4', 'Fwfilename': 'mpr-bkrc-9_2_2.mpk', 'Manufacturer': 'GE', 'Modelname': 'mpr-bkrc-9_2_2.mpk', 'Version': '', 'Type': '', 'Releasedate': '2022-05-12', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=Master_Station&file=mpr%2Dbkrc%2D9%5F2%5F2%2Empk', 'Fwfilelinktolocal': './File_system/mpr-bkrc-9_2_2.mpk', 'Fwadddata': ''}.
+2022-06-15 16:05:23,665:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:05:23,666:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C61902570>
+2022-06-15 16:05:23,666:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C619D7490>.
+2022-06-15 16:05:23,667:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:05:23,667:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:05:23,668:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: mpr-mib-9_2_2.zip.
+2022-06-15 16:05:23,668:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:05:23,668:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: mpr-mib-9_2_2.zip.
+2022-06-15 16:05:23,668:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:05:23,668:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:05:23,668:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-05-12.
+2022-06-15 16:05:23,669:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:05:23,669:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:05:23,669:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:05:23,669:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:05:23,669:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.com/communications/mds/software.asp?directory=Master_Station&file=mpr%2Dmib%2D9%5F2%5F2%2Ezip.
+2022-06-15 16:05:23,670:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/mpr-mib-9_2_2.zip.
+2022-06-15 16:05:23,671:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:05:23,671:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:05:23,705:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_5','mpr-mib-9_2_2.zip','GE','mpr-mib-9_2_2.zip','','','2022-05-12','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=Master_Station&file=mpr%2Dmib%2D9%5F2%5F2%2Ezip','./File_system/mpr-mib-9_2_2.zip','').
+2022-06-15 16:05:23,753:INFO:database: The db commited is with data {'Fwfileid': 'FILE_5', 'Fwfilename': 'mpr-mib-9_2_2.zip', 'Manufacturer': 'GE', 'Modelname': 'mpr-mib-9_2_2.zip', 'Version': '', 'Type': '', 'Releasedate': '2022-05-12', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=Master_Station&file=mpr%2Dmib%2D9%5F2%5F2%2Ezip', 'Fwfilelinktolocal': './File_system/mpr-mib-9_2_2.zip', 'Fwadddata': ''}.
+2022-06-15 16:05:25,707:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:05:25,707:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C61902490>
+2022-06-15 16:05:25,708:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C619D7110>.
+2022-06-15 16:05:25,709:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:05:25,709:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:05:25,709:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: mpr-yang-9_2_2.zip.
+2022-06-15 16:05:25,709:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:05:25,709:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: mpr-yang-9_2_2.zip.
+2022-06-15 16:05:25,710:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:05:25,710:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:05:25,710:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-05-12.
+2022-06-15 16:05:25,710:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:05:25,710:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:05:25,710:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:05:25,710:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:05:25,710:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.com/communications/mds/software.asp?directory=Master_Station&file=mpr%2Dyang%2D9%5F2%5F2%2Ezip.
+2022-06-15 16:05:25,710:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/mpr-yang-9_2_2.zip.
+2022-06-15 16:05:25,711:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:05:25,711:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:05:25,721:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_6','mpr-yang-9_2_2.zip','GE','mpr-yang-9_2_2.zip','','','2022-05-12','None','','','','https://www.gegridsolutions.com/communications/mds/software.asp?directory=Master_Station&file=mpr%2Dyang%2D9%5F2%5F2%2Ezip','./File_system/mpr-yang-9_2_2.zip','').
+2022-06-15 16:05:25,734:INFO:database: The db commited is with data {'Fwfileid': 'FILE_6', 'Fwfilename': 'mpr-yang-9_2_2.zip', 'Manufacturer': 'GE', 'Modelname': 'mpr-yang-9_2_2.zip', 'Version': '', 'Type': '', 'Releasedate': '2022-05-12', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.com/communications/mds/software.asp?directory=Master_Station&file=mpr%2Dyang%2D9%5F2%5F2%2Ezip', 'Fwfilelinktolocal': './File_system/mpr-yang-9_2_2.zip', 'Fwadddata': ''}.
+2022-06-15 16:07:01,966:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:07:01,966:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619029D0>
+2022-06-15 16:07:01,967:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C619D7570>.
+2022-06-15 16:07:01,968:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:07:01,968:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:07:01,968:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: TDM-krmd-1_2_28.mpk.
+2022-06-15 16:07:01,969:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:07:01,969:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: TDM-krmd-1_2_28.mpk.
+2022-06-15 16:07:01,969:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:07:01,969:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:07:01,969:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2021-12-23.
+2022-06-15 16:07:01,970:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:07:01,970:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:07:01,970:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:07:01,970:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:07:01,970:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:07:01,971:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/TDM-krmd-1_2_28.mpk.
+2022-06-15 16:07:01,971:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:07:01,971:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:07:01,975:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_7','TDM-krmd-1_2_28.mpk','GE','TDM-krmd-1_2_28.mpk','','','2021-12-23','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/TDM-krmd-1_2_28.mpk','').
+2022-06-15 16:07:01,990:INFO:database: The db commited is with data {'Fwfileid': 'FILE_7', 'Fwfilename': 'TDM-krmd-1_2_28.mpk', 'Manufacturer': 'GE', 'Modelname': 'TDM-krmd-1_2_28.mpk', 'Version': '', 'Type': '', 'Releasedate': '2021-12-23', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/TDM-krmd-1_2_28.mpk', 'Fwadddata': ''}.
+2022-06-15 16:08:26,078:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:08:26,079:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619028F0>
+2022-06-15 16:08:26,079:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C619D7B20>.
+2022-06-15 16:08:26,081:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:08:26,081:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:08:26,081:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: TDM-mibs-1_2_28.zip.
+2022-06-15 16:08:26,082:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:08:26,082:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: TDM-mibs-1_2_28.zip.
+2022-06-15 16:08:26,082:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:08:26,083:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:08:26,083:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2021-12-23.
+2022-06-15 16:08:26,083:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:08:26,083:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:08:26,083:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:08:26,083:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:08:26,084:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:08:26,084:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/TDM-mibs-1_2_28.zip.
+2022-06-15 16:08:26,084:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:08:26,084:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:08:26,088:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_8','TDM-mibs-1_2_28.zip','GE','TDM-mibs-1_2_28.zip','','','2021-12-23','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/TDM-mibs-1_2_28.zip','').
+2022-06-15 16:08:26,101:INFO:database: The db commited is with data {'Fwfileid': 'FILE_8', 'Fwfilename': 'TDM-mibs-1_2_28.zip', 'Manufacturer': 'GE', 'Modelname': 'TDM-mibs-1_2_28.zip', 'Version': '', 'Type': '', 'Releasedate': '2021-12-23', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/TDM-mibs-1_2_28.zip', 'Fwadddata': ''}.
+2022-06-15 16:10:02,795:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:10:02,795:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619029D0>
+2022-06-15 16:10:02,796:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C619D7030>.
+2022-06-15 16:10:02,797:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:10:02,797:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:10:02,797:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: tdx-krmd-2_1_0.mpk.
+2022-06-15 16:10:02,797:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:10:02,797:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: tdx-krmd-2_1_0.mpk.
+2022-06-15 16:10:02,798:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:10:02,798:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:10:02,798:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2021-06-15.
+2022-06-15 16:10:02,798:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:10:02,799:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:10:02,799:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:10:02,799:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:10:02,799:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:10:02,799:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/tdx-krmd-2_1_0.mpk.
+2022-06-15 16:10:02,799:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:10:02,799:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:10:02,801:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_9','tdx-krmd-2_1_0.mpk','GE','tdx-krmd-2_1_0.mpk','','','2021-06-15','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/tdx-krmd-2_1_0.mpk','').
+2022-06-15 16:10:02,812:INFO:database: The db commited is with data {'Fwfileid': 'FILE_9', 'Fwfilename': 'tdx-krmd-2_1_0.mpk', 'Manufacturer': 'GE', 'Modelname': 'tdx-krmd-2_1_0.mpk', 'Version': '', 'Type': '', 'Releasedate': '2021-06-15', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/tdx-krmd-2_1_0.mpk', 'Fwadddata': ''}.
+2022-06-15 16:11:38,279:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:11:38,280:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619028F0>
+2022-06-15 16:11:38,280:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C619D7500>.
+2022-06-15 16:11:38,281:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:11:38,282:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:11:38,282:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: tdx-krmd-2_1_6.mpk.
+2022-06-15 16:11:38,282:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:11:38,282:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: tdx-krmd-2_1_6.mpk.
+2022-06-15 16:11:38,283:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:11:38,283:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:11:38,283:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2021-12-02.
+2022-06-15 16:11:38,283:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:11:38,283:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:11:38,283:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:11:38,283:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:11:38,284:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:11:38,284:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/tdx-krmd-2_1_6.mpk.
+2022-06-15 16:11:38,284:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:11:38,284:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:11:38,286:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_10','tdx-krmd-2_1_6.mpk','GE','tdx-krmd-2_1_6.mpk','','','2021-12-02','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/tdx-krmd-2_1_6.mpk','').
+2022-06-15 16:11:38,304:INFO:database: The db commited is with data {'Fwfileid': 'FILE_10', 'Fwfilename': 'tdx-krmd-2_1_6.mpk', 'Manufacturer': 'GE', 'Modelname': 'tdx-krmd-2_1_6.mpk', 'Version': '', 'Type': '', 'Releasedate': '2021-12-02', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/tdx-krmd-2_1_6.mpk', 'Fwadddata': ''}.
+2022-06-15 16:13:39,167:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:13:39,168:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619029D0>
+2022-06-15 16:13:39,168:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C619D7B20>.
+2022-06-15 16:13:39,169:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:13:39,170:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:13:39,171:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: tdx-krmd-2_1_9.mpk.
+2022-06-15 16:13:39,171:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:13:39,171:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: tdx-krmd-2_1_9.mpk.
+2022-06-15 16:13:39,171:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:13:39,171:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:13:39,171:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-01-11.
+2022-06-15 16:13:39,173:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:13:39,174:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:13:39,174:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:13:39,175:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:13:39,175:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:13:39,175:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/tdx-krmd-2_1_9.mpk.
+2022-06-15 16:13:39,175:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:13:39,175:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:13:39,177:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_11','tdx-krmd-2_1_9.mpk','GE','tdx-krmd-2_1_9.mpk','','','2022-01-11','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/tdx-krmd-2_1_9.mpk','').
+2022-06-15 16:13:39,189:INFO:database: The db commited is with data {'Fwfileid': 'FILE_11', 'Fwfilename': 'tdx-krmd-2_1_9.mpk', 'Manufacturer': 'GE', 'Modelname': 'tdx-krmd-2_1_9.mpk', 'Version': '', 'Type': '', 'Releasedate': '2022-01-11', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/tdx-krmd-2_1_9.mpk', 'Fwadddata': ''}.
+2022-06-15 16:15:01,774:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:15:01,776:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619028F0>
+2022-06-15 16:15:01,776:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C619D7030>.
+2022-06-15 16:15:01,777:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:15:01,777:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:15:01,777:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: tdx-mibs-2_1_0.zip.
+2022-06-15 16:15:01,778:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:15:01,778:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: tdx-mibs-2_1_0.zip.
+2022-06-15 16:15:01,778:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:15:01,778:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:15:01,778:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2021-06-15.
+2022-06-15 16:15:01,778:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:15:01,778:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:15:01,778:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:15:01,779:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:15:01,779:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:15:01,779:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/tdx-mibs-2_1_0.zip.
+2022-06-15 16:15:01,779:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:15:01,779:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:15:01,781:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_12','tdx-mibs-2_1_0.zip','GE','tdx-mibs-2_1_0.zip','','','2021-06-15','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/tdx-mibs-2_1_0.zip','').
+2022-06-15 16:15:01,793:INFO:database: The db commited is with data {'Fwfileid': 'FILE_12', 'Fwfilename': 'tdx-mibs-2_1_0.zip', 'Manufacturer': 'GE', 'Modelname': 'tdx-mibs-2_1_0.zip', 'Version': '', 'Type': '', 'Releasedate': '2021-06-15', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/tdx-mibs-2_1_0.zip', 'Fwadddata': ''}.
+2022-06-15 16:16:30,449:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:16:30,450:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619029D0>
+2022-06-15 16:16:30,450:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C619D7500>.
+2022-06-15 16:16:30,451:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:16:30,452:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:16:30,452:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: tdx-mibs-2_1_6.zip.
+2022-06-15 16:16:30,452:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:16:30,452:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: tdx-mibs-2_1_6.zip.
+2022-06-15 16:16:30,452:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:16:30,453:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:16:30,453:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2021-12-02.
+2022-06-15 16:16:30,453:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:16:30,453:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:16:30,453:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:16:30,453:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:16:30,453:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:16:30,454:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/tdx-mibs-2_1_6.zip.
+2022-06-15 16:16:30,454:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:16:30,454:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:16:30,456:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_13','tdx-mibs-2_1_6.zip','GE','tdx-mibs-2_1_6.zip','','','2021-12-02','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/tdx-mibs-2_1_6.zip','').
+2022-06-15 16:16:30,468:INFO:database: The db commited is with data {'Fwfileid': 'FILE_13', 'Fwfilename': 'tdx-mibs-2_1_6.zip', 'Manufacturer': 'GE', 'Modelname': 'tdx-mibs-2_1_6.zip', 'Version': '', 'Type': '', 'Releasedate': '2021-12-02', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/tdx-mibs-2_1_6.zip', 'Fwadddata': ''}.
+2022-06-15 16:17:56,168:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:17:56,169:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619028F0>
+2022-06-15 16:17:56,169:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C619D7B20>.
+2022-06-15 16:17:56,171:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:17:56,171:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:17:56,171:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: tdx-mibs-2_1_9.zip.
+2022-06-15 16:17:56,171:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:17:56,172:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: tdx-mibs-2_1_9.zip.
+2022-06-15 16:17:56,172:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:17:56,172:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:17:56,172:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-01-11.
+2022-06-15 16:17:56,172:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:17:56,172:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:17:56,172:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:17:56,172:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:17:56,173:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:17:56,173:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/tdx-mibs-2_1_9.zip.
+2022-06-15 16:17:56,173:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:17:56,173:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:17:56,181:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_14','tdx-mibs-2_1_9.zip','GE','tdx-mibs-2_1_9.zip','','','2022-01-11','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/tdx-mibs-2_1_9.zip','').
+2022-06-15 16:17:56,193:INFO:database: The db commited is with data {'Fwfileid': 'FILE_14', 'Fwfilename': 'tdx-mibs-2_1_9.zip', 'Manufacturer': 'GE', 'Modelname': 'tdx-mibs-2_1_9.zip', 'Version': '', 'Type': '', 'Releasedate': '2022-01-11', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/tdx-mibs-2_1_9.zip', 'Fwadddata': ''}.
+2022-06-15 16:19:24,095:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:19:24,096:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619028F0>
+2022-06-15 16:19:24,096:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C65255A40>.
+2022-06-15 16:19:24,097:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:19:24,098:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:19:24,098:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: TD220X_Poller-20170413.zip.
+2022-06-15 16:19:24,098:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:19:24,098:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: TD220X_Poller-20170413.zip.
+2022-06-15 16:19:24,098:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:19:24,098:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:19:24,098:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2017-04-18.
+2022-06-15 16:19:24,099:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:19:24,099:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:19:24,099:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:19:24,099:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:19:24,099:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:19:24,099:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/TD220X_Poller-20170413.zip.
+2022-06-15 16:19:24,099:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:19:24,100:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:19:24,102:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_15','TD220X_Poller-20170413.zip','GE','TD220X_Poller-20170413.zip','','','2017-04-18','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/TD220X_Poller-20170413.zip','').
+2022-06-15 16:19:24,114:INFO:database: The db commited is with data {'Fwfileid': 'FILE_15', 'Fwfilename': 'TD220X_Poller-20170413.zip', 'Manufacturer': 'GE', 'Modelname': 'TD220X_Poller-20170413.zip', 'Version': '', 'Type': '', 'Releasedate': '2017-04-18', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/TD220X_Poller-20170413.zip', 'Fwadddata': ''}.
+2022-06-15 16:20:46,725:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:20:46,725:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619028F0>
+2022-06-15 16:20:46,725:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C652555E0>.
+2022-06-15 16:20:46,726:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:20:46,727:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:20:46,727:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: SDx-6_4_8.mpk.
+2022-06-15 16:20:46,728:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:20:46,728:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: SDx-6_4_8.mpk.
+2022-06-15 16:20:46,728:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:20:46,728:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:20:46,728:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2022-03-29.
+2022-06-15 16:20:46,728:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:20:46,728:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:20:46,728:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:20:46,729:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:20:46,729:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:20:46,729:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/SDx-6_4_8.mpk.
+2022-06-15 16:20:46,729:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:20:46,729:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:20:46,731:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_16','SDx-6_4_8.mpk','GE','SDx-6_4_8.mpk','','','2022-03-29','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/SDx-6_4_8.mpk','').
+2022-06-15 16:20:46,741:INFO:database: The db commited is with data {'Fwfileid': 'FILE_16', 'Fwfilename': 'SDx-6_4_8.mpk', 'Manufacturer': 'GE', 'Modelname': 'SDx-6_4_8.mpk', 'Version': '', 'Type': '', 'Releasedate': '2022-03-29', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/SDx-6_4_8.mpk', 'Fwadddata': ''}.
+2022-06-15 16:22:42,525:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:22:42,526:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619028F0>
+2022-06-15 16:22:42,526:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C61A33C70>.
+2022-06-15 16:22:42,528:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:22:42,528:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:22:42,528:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: TransNET_144.S28.
+2022-06-15 16:22:42,529:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:22:42,529:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: TransNET_144.S28.
+2022-06-15 16:22:42,529:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:22:42,529:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:22:42,529:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2009-11-27.
+2022-06-15 16:22:42,529:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:22:42,529:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:22:42,529:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:22:42,530:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:22:42,530:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:22:42,530:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/TransNET_144.S28.
+2022-06-15 16:22:42,530:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:22:42,530:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:22:42,532:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_17','TransNET_144.S28','GE','TransNET_144.S28','','','2009-11-27','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/TransNET_144.S28','').
+2022-06-15 16:22:42,544:INFO:database: The db commited is with data {'Fwfileid': 'FILE_17', 'Fwfilename': 'TransNET_144.S28', 'Manufacturer': 'GE', 'Modelname': 'TransNET_144.S28', 'Version': '', 'Type': '', 'Releasedate': '2009-11-27', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/TransNET_144.S28', 'Fwadddata': ''}.
+2022-06-15 16:24:02,824:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:24:02,825:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619029D0>
+2022-06-15 16:24:02,826:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C61A33C70>.
+2022-06-15 16:24:02,828:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:24:02,828:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:24:02,829:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: TransNET_200.S28.
+2022-06-15 16:24:02,829:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:24:02,829:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: TransNET_200.S28.
+2022-06-15 16:24:02,829:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:24:02,829:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:24:02,829:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2009-11-27.
+2022-06-15 16:24:02,830:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:24:02,830:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:24:02,830:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:24:02,830:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:24:02,830:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:24:02,830:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/TransNET_200.S28.
+2022-06-15 16:24:02,830:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:24:02,831:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:24:02,832:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_18','TransNET_200.S28','GE','TransNET_200.S28','','','2009-11-27','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/TransNET_200.S28','').
+2022-06-15 16:24:02,851:INFO:database: The db commited is with data {'Fwfileid': 'FILE_18', 'Fwfilename': 'TransNET_200.S28', 'Manufacturer': 'GE', 'Modelname': 'TransNET_200.S28', 'Version': '', 'Type': '', 'Releasedate': '2009-11-27', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/TransNET_200.S28', 'Fwadddata': ''}.
+2022-06-15 16:25:26,145:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:25:26,146:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619028F0>
+2022-06-15 16:25:26,147:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C61A33C70>.
+2022-06-15 16:25:26,148:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:25:26,149:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:25:26,149:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: TransNET_210.S28.
+2022-06-15 16:25:26,150:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:25:26,150:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: TransNET_210.S28.
+2022-06-15 16:25:26,150:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:25:26,150:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:25:26,150:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2009-11-27.
+2022-06-15 16:25:26,150:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:25:26,150:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:25:26,150:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:25:26,150:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:25:26,151:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:25:26,151:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/TransNET_210.S28.
+2022-06-15 16:25:26,151:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:25:26,151:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:25:26,155:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_19','TransNET_210.S28','GE','TransNET_210.S28','','','2009-11-27','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/TransNET_210.S28','').
+2022-06-15 16:25:26,178:INFO:database: The db commited is with data {'Fwfileid': 'FILE_19', 'Fwfilename': 'TransNET_210.S28', 'Manufacturer': 'GE', 'Modelname': 'TransNET_210.S28', 'Version': '', 'Type': '', 'Releasedate': '2009-11-27', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/TransNET_210.S28', 'Fwadddata': ''}.
+2022-06-15 16:26:58,612:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:26:58,613:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619029D0>
+2022-06-15 16:26:58,614:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C61A33C70>.
+2022-06-15 16:26:58,615:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:26:58,615:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:26:58,616:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: TransNET_220.S28.
+2022-06-15 16:26:58,616:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:26:58,617:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: TransNET_220.S28.
+2022-06-15 16:26:58,617:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:26:58,617:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:26:58,617:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2009-11-27.
+2022-06-15 16:26:58,617:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:26:58,618:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:26:58,618:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:26:58,618:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:26:58,618:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:26:58,618:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/TransNET_220.S28.
+2022-06-15 16:26:58,618:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:26:58,618:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:26:58,621:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_20','TransNET_220.S28','GE','TransNET_220.S28','','','2009-11-27','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/TransNET_220.S28','').
+2022-06-15 16:26:58,632:INFO:database: The db commited is with data {'Fwfileid': 'FILE_20', 'Fwfilename': 'TransNET_220.S28', 'Manufacturer': 'GE', 'Modelname': 'TransNET_220.S28', 'Version': '', 'Type': '', 'Releasedate': '2009-11-27', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/TransNET_220.S28', 'Fwadddata': ''}.
+2022-06-15 16:28:41,110:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:28:41,112:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619028F0>
+2022-06-15 16:28:41,112:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C61A33C70>.
+2022-06-15 16:28:41,115:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:28:41,115:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:28:41,115:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: TransNET_230.S28.
+2022-06-15 16:28:41,115:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:28:41,116:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: TransNET_230.S28.
+2022-06-15 16:28:41,116:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:28:41,116:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:28:41,116:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2009-11-27.
+2022-06-15 16:28:41,116:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:28:41,116:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:28:41,117:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:28:41,117:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:28:41,117:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:28:41,118:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/TransNET_230.S28.
+2022-06-15 16:28:41,118:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:28:41,118:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:28:41,120:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_21','TransNET_230.S28','GE','TransNET_230.S28','','','2009-11-27','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/TransNET_230.S28','').
+2022-06-15 16:28:41,133:INFO:database: The db commited is with data {'Fwfileid': 'FILE_21', 'Fwfilename': 'TransNET_230.S28', 'Manufacturer': 'GE', 'Modelname': 'TransNET_230.S28', 'Version': '', 'Type': '', 'Releasedate': '2009-11-27', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/TransNET_230.S28', 'Fwadddata': ''}.
+2022-06-15 16:30:10,450:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:30:10,452:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619029D0>
+2022-06-15 16:30:10,453:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C61A33C70>.
+2022-06-15 16:30:10,458:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:30:10,458:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:30:10,458:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: TransNET_302.S28.
+2022-06-15 16:30:10,458:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:30:10,458:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: TransNET_302.S28.
+2022-06-15 16:30:10,459:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:30:10,459:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:30:10,459:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2009-11-27.
+2022-06-15 16:30:10,459:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:30:10,459:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:30:10,459:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:30:10,459:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:30:10,460:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:30:10,460:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/TransNET_302.S28.
+2022-06-15 16:30:10,460:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:30:10,460:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:30:10,462:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_22','TransNET_302.S28','GE','TransNET_302.S28','','','2009-11-27','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/TransNET_302.S28','').
+2022-06-15 16:30:10,482:INFO:database: The db commited is with data {'Fwfileid': 'FILE_22', 'Fwfilename': 'TransNET_302.S28', 'Manufacturer': 'GE', 'Modelname': 'TransNET_302.S28', 'Version': '', 'Type': '', 'Releasedate': '2009-11-27', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/TransNET_302.S28', 'Fwadddata': ''}.
+2022-06-15 16:31:44,071:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:31:44,072:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619028F0>
+2022-06-15 16:31:44,072:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C61A33C70>.
+2022-06-15 16:31:44,075:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:31:44,079:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:31:44,082:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: TransNET_323.S28.
+2022-06-15 16:31:44,082:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:31:44,084:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: TransNET_323.S28.
+2022-06-15 16:31:44,086:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:31:44,087:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:31:44,087:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2009-11-27.
+2022-06-15 16:31:44,088:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:31:44,089:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:31:44,089:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:31:44,089:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:31:44,090:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:31:44,090:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/TransNET_323.S28.
+2022-06-15 16:31:44,090:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:31:44,090:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:31:44,093:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_23','TransNET_323.S28','GE','TransNET_323.S28','','','2009-11-27','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/TransNET_323.S28','').
+2022-06-15 16:31:44,105:INFO:database: The db commited is with data {'Fwfileid': 'FILE_23', 'Fwfilename': 'TransNET_323.S28', 'Manufacturer': 'GE', 'Modelname': 'TransNET_323.S28', 'Version': '', 'Type': '', 'Releasedate': '2009-11-27', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/TransNET_323.S28', 'Fwadddata': ''}.
+2022-06-15 16:33:17,196:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:33:17,197:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619029D0>
+2022-06-15 16:33:17,197:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C61A33C70>.
+2022-06-15 16:33:17,199:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:33:17,199:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:33:17,199:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: TransNET_360.S28.
+2022-06-15 16:33:17,199:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:33:17,199:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: TransNET_360.S28.
+2022-06-15 16:33:17,200:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:33:17,200:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:33:17,200:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2009-11-27.
+2022-06-15 16:33:17,200:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:33:17,200:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:33:17,200:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:33:17,200:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:33:17,200:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:33:17,201:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/TransNET_360.S28.
+2022-06-15 16:33:17,201:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:33:17,201:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:33:17,205:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_24','TransNET_360.S28','GE','TransNET_360.S28','','','2009-11-27','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/TransNET_360.S28','').
+2022-06-15 16:33:17,218:INFO:database: The db commited is with data {'Fwfileid': 'FILE_24', 'Fwfilename': 'TransNET_360.S28', 'Manufacturer': 'GE', 'Modelname': 'TransNET_360.S28', 'Version': '', 'Type': '', 'Releasedate': '2009-11-27', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/TransNET_360.S28', 'Fwadddata': ''}.
+2022-06-15 16:34:42,195:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:34:42,196:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619028F0>
+2022-06-15 16:34:42,197:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C61A33C70>.
+2022-06-15 16:34:42,198:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:34:42,199:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:34:42,199:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: TransNET_361.s28.zip.
+2022-06-15 16:34:42,199:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:34:42,199:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: TransNET_361.s28.zip.
+2022-06-15 16:34:42,199:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:34:42,199:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:34:42,200:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2013-08-29.
+2022-06-15 16:34:42,200:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:34:42,200:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:34:42,200:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:34:42,200:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:34:42,200:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:34:42,200:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/TransNET_361.s28.zip.
+2022-06-15 16:34:42,201:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:34:42,201:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:34:42,206:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_25','TransNET_361.s28.zip','GE','TransNET_361.s28.zip','','','2013-08-29','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/TransNET_361.s28.zip','').
+2022-06-15 16:34:42,225:INFO:database: The db commited is with data {'Fwfileid': 'FILE_25', 'Fwfilename': 'TransNET_361.s28.zip', 'Manufacturer': 'GE', 'Modelname': 'TransNET_361.s28.zip', 'Version': '', 'Type': '', 'Releasedate': '2013-08-29', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/TransNET_361.s28.zip', 'Fwadddata': ''}.
+2022-06-15 16:36:07,332:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:36:07,333:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619029D0>
+2022-06-15 16:36:07,334:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C61A33C70>.
+2022-06-15 16:36:07,335:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:36:07,335:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:36:07,336:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: TransNET_405.s28.zip.
+2022-06-15 16:36:07,336:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:36:07,336:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: TransNET_405.s28.zip.
+2022-06-15 16:36:07,336:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:36:07,336:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:36:07,336:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2013-08-29.
+2022-06-15 16:36:07,337:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:36:07,337:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:36:07,337:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:36:07,337:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:36:07,337:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:36:07,337:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/TransNET_405.s28.zip.
+2022-06-15 16:36:07,337:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:36:07,338:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:36:07,340:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_26','TransNET_405.s28.zip','GE','TransNET_405.s28.zip','','','2013-08-29','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/TransNET_405.s28.zip','').
+2022-06-15 16:36:07,355:INFO:database: The db commited is with data {'Fwfileid': 'FILE_26', 'Fwfilename': 'TransNET_405.s28.zip', 'Manufacturer': 'GE', 'Modelname': 'TransNET_405.s28.zip', 'Version': '', 'Type': '', 'Releasedate': '2013-08-29', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/TransNET_405.s28.zip', 'Fwadddata': ''}.
+2022-06-15 16:37:35,561:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:37:35,563:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619028F0>
+2022-06-15 16:37:35,563:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C652C8030>.
+2022-06-15 16:37:35,565:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:37:35,566:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:37:35,566:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: enet_mibs-5_0_8.zip.
+2022-06-15 16:37:35,566:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:37:35,567:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: enet_mibs-5_0_8.zip.
+2022-06-15 16:37:35,567:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:37:35,567:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:37:35,567:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2015-08-27.
+2022-06-15 16:37:35,567:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:37:35,567:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:37:35,568:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:37:35,568:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:37:35,568:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:37:35,568:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/enet_mibs-5_0_8.zip.
+2022-06-15 16:37:35,568:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:37:35,568:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:37:35,570:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_27','enet_mibs-5_0_8.zip','GE','enet_mibs-5_0_8.zip','','','2015-08-27','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/enet_mibs-5_0_8.zip','').
+2022-06-15 16:37:35,582:INFO:database: The db commited is with data {'Fwfileid': 'FILE_27', 'Fwfilename': 'enet_mibs-5_0_8.zip', 'Manufacturer': 'GE', 'Modelname': 'enet_mibs-5_0_8.zip', 'Version': '', 'Type': '', 'Releasedate': '2015-08-27', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/enet_mibs-5_0_8.zip', 'Fwadddata': ''}.
+2022-06-15 16:39:01,154:INFO:database: As the firmwaredatabase.db is found, a new connection will be established.
+2022-06-15 16:39:01,155:INFO:database: Connection details: <sqlite3.Connection object at 0x0000011C619029D0>
+2022-06-15 16:39:01,155:INFO:database: A cursor is established on firmwaredatabase.db, with the details <sqlite3.Cursor object at 0x0000011C652C8960>.
+2022-06-15 16:39:01,156:INFO:database: The table FWDB is selected in the firmwaredatabase.db with the command: select * from FWDB.
+2022-06-15 16:39:01,157:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfileid and Value: FILE.
+2022-06-15 16:39:01,157:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilename and Value: gw-bkrto-5_0_8.zip.
+2022-06-15 16:39:01,157:INFO:database: The firmwaredatabase.db is updated with the Key: Manufacturer and Value: GE.
+2022-06-15 16:39:01,157:INFO:database: The firmwaredatabase.db is updated with the Key: Modelname and Value: gw-bkrto-5_0_8.zip.
+2022-06-15 16:39:01,157:INFO:database: The firmwaredatabase.db is updated with the Key: Version and Value: .
+2022-06-15 16:39:01,158:INFO:database: The firmwaredatabase.db is updated with the Key: Type and Value: .
+2022-06-15 16:39:01,158:INFO:database: The firmwaredatabase.db is updated with the Key: Releasedate and Value: 2015-08-27.
+2022-06-15 16:39:01,158:INFO:database: The firmwaredatabase.db is updated with the Key: Checksum and Value: None.
+2022-06-15 16:39:01,158:INFO:database: The firmwaredatabase.db is updated with the Key: Embatested and Value: .
+2022-06-15 16:39:01,158:INFO:database: The firmwaredatabase.db is updated with the Key: Embalinktoreport and Value: .
+2022-06-15 16:39:01,158:INFO:database: The firmwaredatabase.db is updated with the Key: Embarklinktoreport and Value: .
+2022-06-15 16:39:01,158:INFO:database: The firmwaredatabase.db is updated with the Key: Fwdownlink and Value: https://www.gegridsolutions.comjavascript:;.
+2022-06-15 16:39:01,159:INFO:database: The firmwaredatabase.db is updated with the Key: Fwfilelinktolocal and Value: ./File_system/gw-bkrto-5_0_8.zip.
+2022-06-15 16:39:01,159:INFO:database: The firmwaredatabase.db is updated with the Key: Fwadddata and Value: .
+2022-06-15 16:39:01,159:INFO:database: The db is updated with the Fwfiledid.
+2022-06-15 16:39:01,160:INFO:database: The db is inserted with the command INSERT INTO FWDB('Fwfileid','Fwfilename','Manufacturer','Modelname','Version','Type','Releasedate','Checksum','Embatested','Embalinktoreport','Embarklinktoreport','Fwdownlink','Fwfilelinktolocal','Fwadddata') 
+									VALUES('FILE_28','gw-bkrto-5_0_8.zip','GE','gw-bkrto-5_0_8.zip','','','2015-08-27','None','','','','https://www.gegridsolutions.comjavascript:;','./File_system/gw-bkrto-5_0_8.zip','').
+2022-06-15 16:39:01,172:INFO:database: The db commited is with data {'Fwfileid': 'FILE_28', 'Fwfilename': 'gw-bkrto-5_0_8.zip', 'Manufacturer': 'GE', 'Modelname': 'gw-bkrto-5_0_8.zip', 'Version': '', 'Type': '', 'Releasedate': '2015-08-27', 'Checksum': 'None', 'Embatested': '', 'Embalinktoreport': '', 'Embarklinktoreport': '', 'Fwdownlink': 'https://www.gegridsolutions.comjavascript:;', 'Fwfilelinktolocal': './File_system/gw-bkrto-5_0_8.zip', 'Fwadddata': ''}.

@@ -39,6 +39,7 @@ def download_file(url, file_path_to_save, data0, data1, folder, filename, link, 
     local_uri = "./" + folder + "/" + filename
     req_data = {
 		'Fwfileid': 'FILE',
+        'Fwfilename': data0,
 		'Manufacturer': 'GE',
 		'Modelname': data0,
 		'Version': '',

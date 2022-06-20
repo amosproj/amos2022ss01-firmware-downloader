@@ -27,7 +27,7 @@ class Unit_Case_Test(unittest.TestCase):
         folder = 'File_system'
         file_name = 'orbit-mib-9_2_2.zip'
         gt_url = "https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip"
-        dest = os.path.join(os.getcwd() ,"test_files")
+        dest = os.path.join(os.getcwd() ,folder)
         try:
             if not os.path.isdir(dest):
                 os.mkdir(dest)
@@ -50,7 +50,7 @@ class Unit_Case_Test(unittest.TestCase):
         folder = 'File_system'
         file_name = 'SDx-6_4_8.mpk'
         gt_url = "https://www.gegridsolutions.com/communications/mds/software.asp?directory=SD_Series"
-        dest = os.path.join(os.getcwd() ,"test_files")
+        dest = os.path.join(os.getcwd() ,folder)
         try:
             if not os.path.isdir(dest):
                 os.mkdir(dest)
