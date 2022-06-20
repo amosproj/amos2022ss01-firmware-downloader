@@ -29,7 +29,7 @@ class Unit_Case_Test(unittest.TestCase):
     def test_case_without_authentication(self):
         files = ["orbit-mib-9_2_2.zip", "2022-05-12"]
         folder = 'Test_File_system'
-        file_name = 'orbit-mib-9_2_2.zip'
+        file_name = 'orbit-mib-9_2_2'
         gt_url = "https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip"
         dest = os.path.join(os.getcwd() ,folder)
         try:
@@ -37,7 +37,7 @@ class Unit_Case_Test(unittest.TestCase):
                 os.mkdir(dest)
         except Exception as e:
             raise ValueError(f"{e}")
-        gt_file_path = os.path.join(dest, file_name)
+        gt_file_path = os.path.join(dest, files[0])
 
         data = {
             'Manufacturer': 'GE',
@@ -58,7 +58,7 @@ class Unit_Case_Test(unittest.TestCase):
     def test_case_with_authentication(self):
         files = ["SDx-6_4_8.mpk", "2022-03-29"]
         folder = 'Test_File_system'
-        file_name = 'SDx-6_4_8.mpk'
+        file_name = 'SDx-6_4_8'
         gt_url = "https://www.gegridsolutions.com/communications/mds/software.asp?directory=SD_Series"
         dest = os.path.join(os.getcwd() ,folder)
         try:
@@ -66,15 +66,15 @@ class Unit_Case_Test(unittest.TestCase):
                 os.mkdir(dest)
         except Exception as e:
             raise ValueError(f"{e}")
-        gt_file_path = os.path.join(dest, file_name)
+        gt_file_path = os.path.join(dest, files[0])
 
         data = {
             'Manufacturer': 'GE',
             'Modelname': file_name,
             'Version': '',
 	    }
-        gt_ex_file_path = os.path.join(gt_file_path, file_name) 
-        # print(if not os.path.isdir(gt_ex_file_path))
+        gt_ex_file_path = os.path.join(gt_file_path, files[0]) 
+       
         if (os.path.isfile(gt_ex_file_path) == False and check_duplicates(data, db_name) == True):
             download_file(gt_url, gt_file_path, files[0], files[1], folder, file_name, 'javascript:;', gt_url, "Passport_DownloadFile('SDSeries',7,70);return false", db_name, True)
         else:

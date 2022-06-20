@@ -9,8 +9,9 @@ import requests
 from bs4 import BeautifulSoup
 import os
 from urllib.parse import parse_qs, urlparse
-
-from database import Database
+import sys
+sys.path.append(os.path.abspath(os.path.join('.', '')))  
+from utils.database import Database
 
 
 def download_single_file(file_metadata):

@@ -20,8 +20,10 @@ def scanner():
     os.system("python vendors/" + file)
 
   for file in os.listdir(vendors_path):
-    if file.endswith(".py") and "test":
-      schedule.every(data[file.split('.')[0]]['interval']).minutes.do(job, file)
+    if file.endswith(".py") and file.split('.')[0] in data:
+        schedule.every(data[file.split('.')[0]]['interval']).minutes.do(job, file)
+    else:
+        schedule.every(data['default']['interval']).minutes.do(job, file)
 
   while True:
       schedule.run_pending()
