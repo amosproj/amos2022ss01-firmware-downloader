@@ -36,12 +36,13 @@ def insert_into_db(data, db_name):
 
 #download firmware image
 def download_file(url, file_path_to_save, data0, data1, folder, filename, link, main_url, click, db_name, is_file_download):
+    
     local_uri = "./" + folder + "/" + filename
     req_data = {
 		'Fwfileid': 'FILE',
         'Fwfilename': data0,
 		'Manufacturer': 'GE',
-		'Modelname': data0,
+		'Modelname': os.path.splitext(data0)[0],
 		'Version': '',
 		'Type': '',
 		'Releasedate': data1,
