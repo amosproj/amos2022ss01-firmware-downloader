@@ -10,8 +10,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from database import Database
-from chromium_downloader import ChromiumDownloader
+from utils.database import Database
+from utils.chromium_downloader import ChromiumDownloader
 
 
 class Honeywell:
