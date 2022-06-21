@@ -1,4 +1,3 @@
-from tkinter.filedialog import Open
 import requests
 from bs4 import BeautifulSoup
 import os
