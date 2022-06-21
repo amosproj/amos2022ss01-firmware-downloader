@@ -1,14 +1,11 @@
 import json
 import os
 import math
-import re
-import sqlite3
 import uuid
 
 import requests
-from bs4 import BeautifulSoup
 import os
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import urlparse
 import sys
 sys.path.append(os.path.abspath(os.path.join('.', '')))  
 from utils.database import Database
