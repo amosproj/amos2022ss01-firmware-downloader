@@ -29,7 +29,7 @@ jobs:
       run: |
         python3 -m pip install --upgrade pip
         python3 -m pip install pylint
-# The requirements file is mandatory to be present the parent repository
+        # The requirements file is mandatory to be present the parent repository
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Analysing the code with pylint
       run: |
