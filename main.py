@@ -1,4 +1,4 @@
-from scanner import *
+from utils.scanner import *
 from vendors.ge import *
 from vendors.honeywell import *
 from vendors.schneider_electric import *

@@ -6,8 +6,8 @@ import sys
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 sys.path.append(os.path.abspath(os.path.join('.', '')))  
-from database import Database
-from check_duplicates import check_duplicates
+from utils.database import Database
+from utils.check_duplicates import check_duplicates
 import requests
 from webdriver_manager.chrome import ChromeDriverManager
 import time
@@ -17,17 +17,17 @@ import json
 
 directories_link = ["/communications/mds/software.asp?directory=Orbit_MCR", "/communications/mds/software.asp?directory=Master_Station", "/communications/mds/software.asp?directory=TD-Series", "/communications/mds/software.asp?directory=TD-Series/Support+Items", "/communications/mds/software.asp?directory=SD_Series", "/communications/mds/software.asp?directory=TransNET/Previous", "/communications/mds/software.asp?directory=SD_Series", "/communications/mds/software.asp?directory=entraNET"]
 
-db_name = 'firmwaredatabase.db'
+
 user = ''
 passw = ''
 
-with open('config.json', 'r') as f:
+with open('config/config.json', 'r') as f:
     data = json.load(f)
     user = data['ge']['user']
     passw = data['ge']['password']
 
 #inserting meta data into database
-def insert_into_db(data):
+def insert_into_db(data, db_name):
     db = Database(dbname=db_name)
     if db_name not in os.listdir('.'):
         db.create_table()
@@ -35,12 +35,14 @@ def insert_into_db(data):
     print("data inserted")
 
 #download firmware image
-def download_file(url, file_path_to_save, data0, data1, folder, filename, link, main_url, click):
+def download_file(url, file_path_to_save, data0, data1, folder, filename, link, main_url, click, db_name, is_file_download):
+    
     local_uri = "./" + folder + "/" + filename
     req_data = {
 		'Fwfileid': 'FILE',
+        'Fwfilename': data0,
 		'Manufacturer': 'GE',
-		'Modelname': data0,
+		'Modelname': os.path.splitext(data0)[0],
 		'Version': '',
 		'Type': '',
 		'Releasedate': data1,
@@ -53,7 +55,7 @@ def download_file(url, file_path_to_save, data0, data1, folder, filename, link, 
 		'Fwadddata': ''
 	}
 
-    if(check_duplicates(req_data, db_name) == False):
+    if(check_duplicates(req_data, db_name) == False or is_file_download == True):
         if(link != "javascript:;"):
             print(f"Downloading {url} and saving as {file_path_to_save}")
             resp = requests.get(url, allow_redirects=True)
@@ -61,7 +63,8 @@ def download_file(url, file_path_to_save, data0, data1, folder, filename, link, 
                 raise ValueError("Invalid Url or file not found")
             with open(file_path_to_save, "wb") as f:
                 f.write(resp.content)
-            insert_into_db(req_data)
+            if(is_file_download == False):
+                insert_into_db(req_data, db_name)
         else:
             options = webdriver.ChromeOptions()
             prefs = {"download.default_directory" : file_path_to_save}
@@ -81,7 +84,8 @@ def download_file(url, file_path_to_save, data0, data1, folder, filename, link, 
                 driver.execute_script(click)
                 time.sleep(60)
                 driver.close()
-                insert_into_db(req_data)
+                if(is_file_download == False):
+                    insert_into_db(req_data, db_name)
             except:
                 print("Error in downloading")
 
@@ -113,7 +117,7 @@ def scraper_parse(url, folder, base_url):
                             click = item_temp.findChild("a").get("onclick")
                             print(click)
                         file_path = os.path.join(dest, item_temp.get_text())
-                        download_file(base_url + link, file_path, items_temp[0].get_text(), items_temp[1].get_text(), folder, item_temp.get_text(), link, url, click)
+                        download_file(base_url + link, file_path, items_temp[0].get_text(), items_temp[1].get_text(), folder, item_temp.get_text(), link, url, click, 'firmwaredatabase.db', False)
                     sub_data.append(item_temp.get_text())
                 data.append(sub_data)
 
