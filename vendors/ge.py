@@ -122,8 +122,11 @@ def scraper_parse(url, folder, base_url):
                 data.append(sub_data)
 
 def ge_main():
+    data = {}
+    with open('config/test_config.json', 'r') as f:
+        data = json.load(f)
     paths = directories_link
-    base_url = "https://www.gegridsolutions.com"
+    base_url = data['ge']['url']
 
     folder = 'File_system'
 
