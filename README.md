@@ -34,4 +34,4 @@ The software will only be applied to websites that do not object to automated do
   
 **Steps:**
   Run following command in root folder
-> python main.py
+	` python3 main.py --num-threads 4`

@@ -1,70 +1,70 @@
 {
   "foscam": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "ubiquiti": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "dd_wrt": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "swisscom": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "tp_link": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "openwrt": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "gigaset": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "belkin": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "engenius": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "netgear": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
@@ -74,56 +74,56 @@
   },
   "dlink": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "zyxel": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "synology": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "trendnet": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "qnap": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "linksys": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "cisco": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "rockwell": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
@@ -158,21 +158,21 @@
   },
   "siemens": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "avm": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "default": {
     "interval": 1,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
