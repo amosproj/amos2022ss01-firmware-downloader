@@ -17,7 +17,7 @@ from utils.database import Database
 logger = get_logger("schneider_electric")
 
 def download_single_file(url, file_path_to_save):
-    logger.info(f"Donwloading {url} and saving as {file_path_to_save}")
+    logger.info(f"Downloading {url} and saving as {file_path_to_save}")
     resp = requests.get(url, allow_redirects=True)
     if resp.status_code != 200:
         raise ValueError("Invalid Url or file not found")
