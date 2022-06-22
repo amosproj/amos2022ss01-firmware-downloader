@@ -1,18 +1,18 @@
 import sys, os, time, inspect
-current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parent_dir = os.path.dirname(current_dir)
-sys.path.insert(0, parent_dir)
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import Select
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from utils.database import Database
 from utils.chromium_downloader import ChromiumDownloader
+from utils.Logs import get_logger
 
+name = "honeywell"
+logger = get_logger("vendors.honeywell")
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
 
 class Honeywell:
     """ Honeywell class is used to run each module like in the page:
@@ -80,13 +80,13 @@ class Honeywell:
             download_link = rows[rows.index(row)].find_element(By.XPATH, "//div[@class='table__cell table__cell--icons ml-md-auto']//*[contains(@data-analytics-asset-name, '{}')]".format(str(web_file_name))).get_attribute('href')
             download_element = row.find_element(By.XPATH, "//div[@class='table__cell table__cell--icons ml-md-auto']//*[contains(@data-analytics-asset-name, '{}')]".format(str(web_file_name)))
             file_name = row.find_element(By.XPATH, "//div[@class='table__cell table__cell--icons ml-md-auto']//*[contains(@data-analytics-asset-name, '{}')]".format(str(web_file_name))).get_attribute('download')
-            print(data, download_link, file_name)
+            logger.info(data, download_link, file_name)
             actions = ActionChains(driver)
             actions.move_to_element(download_element).perform()
             local_file_location = r"{}\downloads\honeywell\{}".format(self.path, file_name)
             # Duplication Check for not to download the files if files exist in local machine
             self.down_ele_click(local_file_location, download_element)
-            print(local_file_location)
+            logger.info(local_file_location)
             dbdict_carrier = dict()
             db = Database(dbname=self.db_name)
             for key in self.dbdict.keys():
@@ -148,11 +148,14 @@ class Honeywell:
         time.sleep(10)
         driver.quit()
 
-
-if __name__ == '__main__':
+def main():
     ChromiumDownloader().executor()
     hw = Honeywell()
     hw.homepage()
     hw.Advanced_Sensing_Tech()
     hw.Gas()
     hw.Close_browser()
+
+if __name__ == '__main__':
+    main()
+

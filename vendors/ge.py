@@ -1,4 +1,3 @@
-from tkinter.filedialog import Open
 import requests
 from bs4 import BeautifulSoup
 import os
@@ -8,13 +7,15 @@ from selenium.webdriver.common.by import By
 sys.path.append(os.path.abspath(os.path.join('.', '')))  
 from utils.database import Database
 from utils.check_duplicates import check_duplicates
+from utils.Logs import get_logger
 import requests
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 import json
 
 
-
+name = "ge"
+logger = get_logger("vendors.ge")
 directories_link = ["/communications/mds/software.asp?directory=Orbit_MCR", "/communications/mds/software.asp?directory=Master_Station", "/communications/mds/software.asp?directory=TD-Series", "/communications/mds/software.asp?directory=TD-Series/Support+Items", "/communications/mds/software.asp?directory=SD_Series", "/communications/mds/software.asp?directory=TransNET/Previous", "/communications/mds/software.asp?directory=SD_Series", "/communications/mds/software.asp?directory=entraNET"]
 
 
@@ -32,7 +33,7 @@ def insert_into_db(data, db_name):
     if db_name not in os.listdir('.'):
         db.create_table()
     db.insert_data(dbdictcarrier=data)
-    print("data inserted")
+    logger.info("data inserted")
 
 #download firmware image
 def download_file(url, file_path_to_save, data0, data1, folder, filename, link, main_url, click, db_name, is_file_download):
@@ -57,7 +58,7 @@ def download_file(url, file_path_to_save, data0, data1, folder, filename, link, 
 
     if(check_duplicates(req_data, db_name) == False or is_file_download == True):
         if(link != "javascript:;"):
-            print(f"Downloading {url} and saving as {file_path_to_save}")
+            logger.info(f"Downloading {url} and saving as {file_path_to_save}")
             resp = requests.get(url, allow_redirects=True)
             if resp.status_code != 200:
                 raise ValueError("Invalid Url or file not found")
@@ -71,7 +72,6 @@ def download_file(url, file_path_to_save, data0, data1, folder, filename, link, 
             options.add_argument("headless")
             options.add_experimental_option("prefs",prefs)
             driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
-            print(click)
             # Go to your page url
             try:
                 URL = "https://www.gegridsolutions.com/Passport/Login.aspx"
@@ -87,10 +87,10 @@ def download_file(url, file_path_to_save, data0, data1, folder, filename, link, 
                 if(is_file_download == False):
                     insert_into_db(req_data, db_name)
             except:
-                print("Error in downloading")
+                logger.error("Error in downloading")
 
     else:
-        print("Data already exist!")
+        logger.info("Data already exist!")
 
 #parse html and start clean according to our need
 def scraper_parse(url, folder, base_url):
@@ -115,15 +115,17 @@ def scraper_parse(url, folder, base_url):
                         link = item_temp.findChild("a").get("href")
                         if(link == "javascript:;"):
                             click = item_temp.findChild("a").get("onclick")
-                            print(click)
                         file_path = os.path.join(dest, item_temp.get_text())
                         download_file(base_url + link, file_path, items_temp[0].get_text(), items_temp[1].get_text(), folder, item_temp.get_text(), link, url, click, 'firmwaredatabase.db', False)
                     sub_data.append(item_temp.get_text())
                 data.append(sub_data)
 
-def ge_main():
+def main():
+    data = {}
+    with open('config/test_config.json', 'r') as f:
+        data = json.load(f)
     paths = directories_link
-    base_url = "https://www.gegridsolutions.com"
+    base_url = data['ge']['url']
 
     folder = 'File_system'
 
@@ -132,4 +134,4 @@ def ge_main():
         scraper_parse(url, folder, base_url)
 
 if __name__ == "__main__":
-    ge_main()
+    main()

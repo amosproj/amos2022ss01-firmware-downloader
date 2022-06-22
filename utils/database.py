@@ -2,7 +2,7 @@ import sqlite3
 
 from utils.Logs import get_logger
 
-logger = get_logger("database")
+logger = get_logger("utils.database")
 
 
 # The Database class is defined to maintain the db functionalities like create_table, insert_table
@@ -59,26 +59,26 @@ class Database:
 	def insert_data(self, dbdictcarrier):
             try:
                 # The insert_data function is used to update the new data in the db with dbdictcarrier as an dictionary input
-                logger.info('As the {} is found, a new connection will be established.'.format(self.dbname))
+                logger.debug('As the {} is found, a new connection will be established.'.format(self.dbname))
                 conn = sqlite3.connect(self.dbname)
-                logger.info('Connection details: {}'.format(conn))
+                logger.debug('Connection details: {}'.format(conn))
                 curs = conn.cursor()
-                logger.info('A cursor is established on {}, with the details {}.'.format(self.dbname, curs))
+                logger.debug('A cursor is established on {}, with the details {}.'.format(self.dbname, curs))
                 select_command = "select * from FWDB"
                 curs.execute(select_command)
-                logger.info('The table FWDB is selected in the {} with the command: {}.'.format(self.dbname, select_command))
+                logger.debug('The table FWDB is selected in the {} with the command: {}.'.format(self.dbname, select_command))
                 records = len(curs.fetchall())
                 dbdict = self.dbdict
                 for key in dbdict:
                     dbdict[key] = dbdictcarrier[key]
                     logger.debug('The {} is updated with the Key: {} and Value: {}.'.format(self.dbname, key, dbdict[key]))
                 dbdict['Fwfileid'] = f'FILE_{records + 1}'
-                logger.info('The db is updated with the Fwfiledid.')
+                logger.debug('The db is updated with the Fwfiledid.')
                 # Currently, the local firmware id is represented as file extended by _ in increase by 1
                 insert_command = f'''INSERT INTO FWDB('{"','".join(map(str, dbdict.keys()))}') 
 									VALUES('{"','".join(map(str, dbdict.values()))}')'''
                 curs.execute(insert_command)
-                logger.info('The db is inserted with the command {}.'.format(insert_command))
+                logger.debug('The db is inserted with the command {}.'.format(insert_command))
                 conn.commit()
                 logger.debug('The db commited is with data {}.'.format(dbdict))
                 # Prints the data in db

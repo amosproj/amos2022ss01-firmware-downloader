@@ -1,8 +1,6 @@
-import logging
 import os
 import math
 import re
-import sqlite3
 import uuid
 from utils.Logs import get_logger
 
@@ -14,7 +12,8 @@ from urllib.parse import parse_qs, urlparse
 from utils.database import Database
 #from vendors import download_list_files
 
-logger = get_logger("schneider_electric")
+name = "schneider_electric"
+logger = get_logger("vendors.schneider_electric")
 
 def download_single_file(url, file_path_to_save):
     logger.info(f"Downloading {url} and saving as {file_path_to_save}")
@@ -67,10 +66,10 @@ def get_firmware_data_using_api(url, fw_count, fw_per_page):
         }
         response = requests.post(url, data=req_body, headers=headers)
         if response.status_code != 200:
-            logging.info(f"Invalid API response with status_code = {response.status_code}")
+            logger.info(f"Invalid API response with status_code = {response.status_code}")
             raise ValueError(f"Invalid API response with status_code = {response.status_code}")
         if page != total_pages:
-            logging.info(f"Received metadata for {page*fw_per_page}/{fw_count}")
+            logger.info(f"Received metadata for {page*fw_per_page}/{fw_count}")
         else:
             logger.info(f"Received metadata for all {fw_count}/{fw_count} firmwares")
         fw_list += response.json()["docList"]
@@ -118,7 +117,7 @@ def se_firmaware_parser(url, folder):
         file_path = os.path.join(dest, file_name)
         download_list_files(url, file_path)
 
-if __name__ == "__main__":
+def main():
     try:
         url = "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/?docType=1555893-Firmware&language=en_GB-English&sortByField=Popularity"
         folder = 'File_system'
@@ -130,3 +129,6 @@ if __name__ == "__main__":
         download_list_files(metadata, 10) # download max 10 files
     except Exception as general_exception:
         logger.error(f"{general_exception}")
+
+if __name__ == "__main__":
+    main()

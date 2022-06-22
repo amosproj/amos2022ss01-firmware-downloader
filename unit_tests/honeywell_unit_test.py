@@ -1,19 +1,19 @@
+from utils.database import Database
 import unittest
-
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
 import time,os
-from database import Database
-import honeywell
+from utils.chromium_downloader import ChromiumDownloader
 
 
 class WebCode(unittest.TestCase):
 
     def setUp(self):
         opt = Options()
+        ChromiumDownloader().executor()
         opt.headless = True
         self.driver = webdriver.Chrome(options=opt)
         self.path = os.getcwd()
@@ -48,6 +48,15 @@ class WebCode(unittest.TestCase):
         driver.maximize_window()
         self.assertEqual("Software and Downloads | Honeywell", driver.title, msg="Homepage testcase passed")
 
+    def down_ele_click(self, loc_loc,  element, f_name):
+        # A fn for duplication Check for not to download the files if files exist in local machine
+        if not os.path.isfile(loc_loc.replace("\\", "/")):
+            print(f"The file is not found in local repository, now {f_name} will be downloaded into local")
+            time.sleep(10)
+            element.click()
+        else:
+            print(f"The file is found in local repository, now {f_name} will not be downloaded into local")
+
     def test_Advanced_Sensing_Tech(self):
         # 1. the function responsible to drive Advanced Sensing Technologies
         driver = self.driver
@@ -71,10 +80,10 @@ class WebCode(unittest.TestCase):
             actions.move_to_element(download_element).perform()
             local_file_location = r"{}\downloads\honeywell\{}".format(self.path, file_name)
             # Duplication Check for not to download the files if files exist in local machine
-            honeywell.Honeywell().down_ele_click(local_file_location, download_element)
+            self.down_ele_click(local_file_location, download_element, file_name)
             self.assertTrue(local_file_location, msg="Location exists")
             self.assertTrue(download_element, msg="download element found")
-            print(local_file_location)
+            # print(local_file_location)
             dbdict_carrier = dict()
             db = Database(dbname=self.db_name)
             for key in self.dbdict.keys():
@@ -86,7 +95,7 @@ class WebCode(unittest.TestCase):
                 if key not in dbdict_carrier.keys(): dbdict_carrier[key] = ''
                 if self.db_name not in os.listdir('.'):
                     db.create_table()
-            # db.insert_data(dbdict_carrier)
+            db.insert_data(dbdict_carrier)
             self.assertTrue(dbdict_carrier, msg="data inserted")
 
         driver.back()
@@ -119,7 +128,7 @@ class WebCode(unittest.TestCase):
                 actions = ActionChains(driver)
                 actions.move_to_element(download_element).perform()
                 local_file_location = r"{}\downloads\honeywell\{}".format(self.path, download_link.split('/')[-1])
-                honeywell.Honeywell().down_ele_click(local_file_location, download_element)
+                self.down_ele_click(local_file_location, download_element, web_file_name)
                 self.assertTrue(local_file_location, msg="Location exists")
                 self.assertTrue(download_element, msg="download element found")
                 dbdict_carrier = dict()
@@ -132,7 +141,7 @@ class WebCode(unittest.TestCase):
                     if key not in dbdict_carrier.keys(): dbdict_carrier[key] = ''
                     if self.db_name not in os.listdir('.'):
                         db.create_table()
-                # db.insert_data(dbdict_carrier)
+                db.insert_data(dbdict_carrier)
                 self.assertTrue(dbdict_carrier, msg="data inserted")
             time.sleep(10)
             if driver.find_element(By.XPATH, "//*[text()='Next']").tag_name == "span": break
@@ -144,4 +153,5 @@ class WebCode(unittest.TestCase):
 
 
 if __name__ == "__main__":
+
     unittest.main()
