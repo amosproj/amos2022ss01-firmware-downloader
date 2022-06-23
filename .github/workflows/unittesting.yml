@@ -44,4 +44,4 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a Test module for Ge
         run: |
-          ./unit_tests/testscript.sh
+          python unit_tests/ge_test.py
