@@ -31,9 +31,10 @@ jobs:
         run: |
             python3 -m pip install --upgrade pip
             python3 -m pip install pylint
+            python3 -m pip install pytest
             # The requirements file is mandatory to be present the parent repository
             if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       # Runs a single command using the runners shell
       - name: Run a Test module for Ge
         run: |
-          python unit_tests/test_ge.py
+          py.test
