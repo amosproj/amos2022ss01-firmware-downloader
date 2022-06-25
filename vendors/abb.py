@@ -45,7 +45,8 @@ def write_metadata_to_db(metadata):
     logger.info("Going to write metadata in db")
     db_name = 'firmwaredatabase.db'
     db = Database(dbname=db_name)
-    if db_name not in os.listdir('../'):
+    print(os.listdir('./'))
+    if db_name not in os.listdir('./'):
         db.create_table()
     for fw in metadata:
         db.insert_data(dbdictcarrier=fw)
@@ -105,9 +106,9 @@ def transform_metadata_format_ours(raw_data, local_storage_dir="."):
 	    'Embatested': '',
 	    'Embalinktoreport': '',
 	    'Embarklinktoreport': '',
-            'Fwdownlink': fw["metadata"]["currentRevisionUrl"],
-            'Fwfilelinktolocal': os.path.join(local_storage_dir, str(uuid.uuid4()) + "." + fw["metadata"]["fileSuffix"]), #setting temp filename as of now
-            'Fwadddata': json.dumps({"summary": fw["metadata"]["summary"].replace("'","")})
+        'Fwdownlink': fw["metadata"]["currentRevisionUrl"],
+        'Fwfilelinktolocal': os.path.join(local_storage_dir, str(uuid.uuid4()) + "." + fw["metadata"]["fileSuffix"]), #setting temp filename as of now
+        'Fwadddata': json.dumps({"summary": fw["metadata"]["summary"].replace("'","")})
 	}
         fw_mod_list.append(fw_mod)
     return fw_mod_list

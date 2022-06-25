@@ -70,7 +70,11 @@
     "password": ""
   },
   "asus": {
-    "interval": 0.05
+    "interval": 0.05,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
   },
   "dlink": {
     "interval": 0.01,
