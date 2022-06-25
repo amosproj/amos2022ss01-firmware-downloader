@@ -16,8 +16,7 @@ import json
 
 name = "ge"
 logger = get_logger("vendors.ge")
-directories_link = ["/communications/mds/software.asp?directory=Orbit_MCR", "/communications/mds/software.asp?directory=Master_Station", "/communications/mds/software.asp?directory=TD-Series", "/communications/mds/software.asp?directory=TD-Series/Support+Items", "/communications/mds/software.asp?directory=SD_Series", "/communications/mds/software.asp?directory=TransNET/Previous", "/communications/mds/software.asp?directory=SD_Series", "/communications/mds/software.asp?directory=entraNET"]
-
+links=[]
 
 user = ''
 passw = ''
@@ -120,17 +119,34 @@ def scraper_parse(url, folder, base_url):
                     sub_data.append(item_temp.get_text())
                 data.append(sub_data)
 
+def directories_link(url, base_url):
+    cont = requests.get(url)
+    soup = BeautifulSoup(cont.text, 'html.parser')
+    items = soup.find_all("p", style="MARGIN-TOP: 0px; PADDING-LEFT: 15px")
+    for item in items:
+        items_temp = item.find_all("a")
+        for item_temp in items_temp:
+            link = item_temp.get("href")
+            if(str(link).find("software.asp?directory=") != -1):
+                links.append(base_url + "/communications/mds/" + link)
+            elif(str(link).find("/Communications/MDS/PulseNET_Download.aspx")):
+                links.append(base_url + "/Communications/MDS/PulseNET_Download.aspx")
+            elif(str(link).find("/app/resources.aspx?prod=vistanet&type=7")):
+                links.append(base_url + "/app/resources.aspx?prod=vistanet&type=7")
+
 def main():
+   
     data = {}
     with open('config/test_config.json', 'r') as f:
         data = json.load(f)
-    paths = directories_link
+    
     base_url = data['ge']['url']
-
+    directories_link(base_url + '/communications/mds/software.asp', base_url)
     folder = 'File_system'
-
+    
+    paths = links
     for path in paths:
-        url = base_url + path
+        url = path
         scraper_parse(url, folder, base_url)
 
 if __name__ == "__main__":
