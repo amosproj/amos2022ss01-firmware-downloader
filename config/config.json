@@ -176,7 +176,7 @@
   },
   "default": {
     "interval": 1,
-    "ignore": true,
+    "ignore": false,
     "url": "",
     "user": "",
     "password": ""
