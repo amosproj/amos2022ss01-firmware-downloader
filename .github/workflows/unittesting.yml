@@ -37,4 +37,4 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a Test module for Ge
         run: |
-          py.test
+          python -m unit_tests
