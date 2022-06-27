@@ -1,6 +1,8 @@
-from object_detection.utils.database import Database
 import os
+import sys
+from utils.database import Database
 
+sys.path.append(os.path.abspath(os.path.join('.', '')))
 db_name = 'firmwaredatabase.db'
 db = Database(dbname=db_name)
 if db_name not in os.listdir('.'):
