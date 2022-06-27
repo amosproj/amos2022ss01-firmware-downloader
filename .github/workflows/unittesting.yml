@@ -37,4 +37,4 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a Test module for Ge
         run: |
-          python unit_tests/honeywell_unit_test.py
+          python unit_tests/test_ge.py
