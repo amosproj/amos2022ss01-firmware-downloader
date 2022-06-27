@@ -1,7 +1,8 @@
 import argparse
 import json
 import os
-
+import schedule
+import time
 from vendors import runner
 from utils.Logs import get_logger
 
@@ -17,10 +18,27 @@ vendors_path = 'vendors'
 def get_skipped_modules(config):
     mods = list()
     for mod in os.listdir(vendors_path):
-        if mod.endswith(".py") and mod.split('.')[0] in config and mod != "__init__.py":
-            if config[mod.split('.')[0]].get("ignore", False):
+        if mod.split('.')[0] in config:
+            if mod.endswith(".py") and mod != "__init__.py":
+                if config[mod.split('.')[0]]["ignore"] == True:
+                    mods.append(mod.split('.')[0])
+        else:
+            if config['default']['ignore'] == True:
                 mods.append(mod.split('.')[0])
+               
     return mods
+
+def scanner(num_threads, skip_modules):
+    for mod in whitelisted_modules:
+        if mod in config:
+            logger.info(f"Starting {mod} downloader ...")
+            schedule.every(config[mod]['interval']).minutes.do(runner, num_threads, skip_modules, [mod])
+        else:
+            schedule.every(config['default']['interval']).minutes.do(runner, num_threads, skip_modules, [mod])
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
 
 if __name__ == "__main__":
     logger.info("Starting runner...")
@@ -28,4 +46,13 @@ if __name__ == "__main__":
     skip_modules = get_skipped_modules(config)
     print("Following modules are skipped")
     print(skip_modules)
-    runner(num_threads=num_threads, skip_modules=skip_modules)
+
+    whitelisted_modules = []
+    for file in os.listdir(vendors_path):
+        if file.endswith(".py") and file.split('.')[0] in config and file != "__init__.py":
+            if file.split('.')[0] in skip_modules:
+                logger.info(f"Skipping {file.split('.')[0]}")
+                continue
+            whitelisted_modules.append(file.split('.')[0])
+
+    scanner(num_threads, skip_modules)

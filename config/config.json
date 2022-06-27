@@ -106,7 +106,7 @@
   },
   "qnap": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
@@ -134,49 +134,49 @@
   },
   "honeywell": {
     "interval": 0.01,
-    "ignore": true,
+    "ignore": false,
     "url": "",
     "user": "",
     "password": ""
   },
   "ge": {
     "interval": 0.01,
-    "ignore": true,
+    "ignore": false,
     "url": "https://www.gegridsolutions.com",
     "user": "tariqmagsi125@gmail.com",
     "password": "Cs!-56478"
   },
   "abb": {
     "interval": 0.01,
-    "ignore": true,
+    "ignore": false,
     "url": "",
     "user": "",
     "password": ""
   },
   "schneider_electric": {
     "interval": 0.01,
-    "ignore": true,
+    "ignore": false,
     "url": "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/?docType=1555893-Firmware&language=en_GB-English&sortByField=Popularityy",
     "user": "",
     "password": ""
   },
   "siemens": {
-    "interval": 0.01,
-    "ignore": false,
+    "interval": 0.02,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "avm": {
     "interval": 0.01,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
   },
   "default": {
     "interval": 1,
-    "ignore": false,
+    "ignore": true,
     "url": "",
     "user": "",
     "password": ""
