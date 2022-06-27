@@ -1,4 +1,4 @@
-from utils.database import Database
+from object_detection.utils.database import Database
 import os
 
 db_name = 'firmwaredatabase.db'
