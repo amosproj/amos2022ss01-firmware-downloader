@@ -1,11 +1,9 @@
-import json
 import sys, os, time, inspect, wget, zipfile, re
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import Select
-from pywinauto.application import Application
 from utils.database import Database
 from utils.chromium_downloader import ChromiumDownloader
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -13,6 +11,7 @@ parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
 # os.system('cmd /k "taskkill /F /IM chromedriver.exe /T"')
 # os.system('cmd /k "taskkill /F /IM chrome.exe /T"')
+from utils.Logs import get_logger
 
 
 class Honeywell:
@@ -114,7 +113,6 @@ class Honeywell:
             local_file_location = r"{}\downloads\honeywell\{}".format(self.path, file_name)
             # Duplication Check for not to download the files if files exist in local machine
             self.down_ele_click(local_file_location, download_element)
-            print(local_file_location)
             dbdict_carrier = dict()
             db = Database(dbname=self.db_name)
             for key in self.dbdict.keys():
@@ -323,8 +321,7 @@ class Honeywell:
         time.sleep(10)
         driver.quit()
 
-
-if __name__ == '__main__':
+def main():
     ChromiumDownloader().executor()
     hw = Honeywell()
     hw.homepage()
@@ -332,3 +329,6 @@ if __name__ == '__main__':
     hw.Productivity()
     hw.Gas()
     hw.Close_browser()
+
+if __name__ == '__main__':
+    main()

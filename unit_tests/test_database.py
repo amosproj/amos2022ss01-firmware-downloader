@@ -1,5 +1,9 @@
-from utils.database import Database
 import os
+import sys
+
+sys.path.append(os.path.abspath(os.path.join('.', '')))
+from utils.database import Database
+
 
 db_name = 'firmwaredatabase.db'
 db = Database(dbname=db_name)

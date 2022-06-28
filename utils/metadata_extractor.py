@@ -12,7 +12,7 @@ def get_file_metadata(path, filename):
 def meshvalue(filename):
     f= open(filename, "rb")
     file_hash = hashlib.md5()
-    while chunk := f.read(8192):
+    while chunk == f.read(8192):
         file_hash.update(chunk)
     f.close()
     print("Hash Value: ",file_hash.hexdigest())

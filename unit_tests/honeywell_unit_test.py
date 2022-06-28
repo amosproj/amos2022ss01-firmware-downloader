@@ -1,3 +1,7 @@
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join('.', '')))
+
 from utils.database import Database
 import unittest
 from selenium import webdriver
@@ -5,7 +9,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
-import time,os
+import time
 from utils.chromium_downloader import ChromiumDownloader
 
 
