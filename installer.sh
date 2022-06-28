@@ -16,6 +16,6 @@ PASSWORD=$RANDOM_PW
 
 echo "{username:\"${USER_NAME}\", password:\"${PASSWORD}\"}" > config/auth_config.json
 
-echo "DB Username="$USER_NAME
-echo "DB Password="$PASSWORD
+echo "DB Username=$USER_NAME"
+echo "DB Password=$PASSWORD"
 echo "Config File Created Successfully For DB Username and Password"
