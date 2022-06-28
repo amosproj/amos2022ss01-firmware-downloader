@@ -21,7 +21,8 @@ class ChromiumDownloader:
 
     def executor(self):
         # Checksum for chromedriver
-        if os.path.exists("chromedriver.exe"): os.remove("chromedriver.exe")
+        if os.path.exists("chromedriver.exe"):
+            os.remove("chromedriver.exe")
         if "chromedriver.exe" not in os.listdir(os.getcwd()):
             print("chromedriver.exe is not present in local path, so installing chromedriver")
             self.load_and_extract()
