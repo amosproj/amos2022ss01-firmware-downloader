@@ -11,7 +11,6 @@ parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
 # os.system('cmd /k "taskkill /F /IM chromedriver.exe /T"')
 # os.system('cmd /k "taskkill /F /IM chrome.exe /T"')
-from utils.Logs import get_logger
 
 
 class Honeywell:
