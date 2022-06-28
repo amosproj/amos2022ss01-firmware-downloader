@@ -1,5 +1,7 @@
 import os
+import sys
 
+sys.path.append(os.path.abspath(os.path.join('.', '')))
 import sqlite3
 
 from vendors.schneider_electric import download_single_file
