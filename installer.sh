@@ -14,7 +14,7 @@ echo "Packages Installed Successfully"
 USER_NAME="firmware.downloader"
 PASSWORD=$RANDOM_PW
 
-echo "{username:\"${USER_NAME}\", password:\"${PASSWORD}\"}" > config/auth_config.json
+echo "{\"username\":\"${USER_NAME}\", \"password\":\"${PASSWORD}\"}" > config/auth_config.json
 
 echo "DB Username=$USER_NAME"
 echo "DB Password=$PASSWORD"

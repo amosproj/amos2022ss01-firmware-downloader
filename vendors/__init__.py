@@ -1,8 +1,6 @@
 from multiprocessing import Pool
 import os
 import json
-import schedule
-import time
 from utils.Logs import get_logger
 
 logger = get_logger("vendors.__init__")
