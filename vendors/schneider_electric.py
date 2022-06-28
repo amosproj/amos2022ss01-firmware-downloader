@@ -12,6 +12,7 @@ from urllib.parse import parse_qs, urlparse
 from utils.database import Database
 #from vendors import download_list_files
 
+#Logger 
 name = "schneider_electric"
 logger = get_logger("vendors.schneider_electric")
 
@@ -116,7 +117,7 @@ def se_firmaware_parser(url, folder):
         file_name = p_url["p_File_Name"][0]
         file_path = os.path.join(dest, file_name)
         download_list_files(url, file_path)
-
+#Try and Catch impelementation
 def main():
     try:
         url = "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/?docType=1555893-Firmware&language=en_GB-English&sortByField=Popularity"
