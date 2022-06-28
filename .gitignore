@@ -47,3 +47,6 @@ bin/
 
 # ignore downloads
 **/downloads/honeywell/
+
+# ignore temp files
+**/*.tmp
