@@ -78,11 +78,9 @@ class Honeywell:
             version = in_file_name[ind.start():ind.end()] if in_file_name[ind.start():ind.end()][-1] != '.' \
                 else in_file_name[ind.start():ind.end()][:-1]
             in_file_name = str(in_file_name).replace(version, '')
-            print(version, '----------', in_file_name)
             return version, in_file_name
         else:
             print(None, '----------', in_file_name)
-            return None, in_file_name
 
     def Advanced_Sensing_Tech(self):
         # 1. the function responsible to drive Advanced Sensing Technologies
@@ -310,7 +308,8 @@ class Honeywell:
                         db.create_table()
                 db.insert_data(dbdict_carrier)
             time.sleep(10)
-            if driver.find_element(By.XPATH, "//*[text()='Next']").tag_name == "span": break
+            if driver.find_element(By.XPATH, "//*[text()='Next']").tag_name == "span":
+                break
             driver.find_element(By.XPATH, "//a[text()='Next']").click()
         driver.back()
 
@@ -320,7 +319,8 @@ class Honeywell:
         time.sleep(10)
         driver.quit()
 
-def main():
+
+if __name__ == '__main__':
     ChromiumDownloader().executor()
     hw = Honeywell()
     hw.homepage()
@@ -328,6 +328,3 @@ def main():
     hw.Productivity()
     hw.Gas()
     hw.Close_browser()
-
-if __name__ == '__main__':
-    main()
