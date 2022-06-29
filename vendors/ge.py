@@ -137,7 +137,7 @@ def directories_link(url, base_url):
 def main():
    
     data = {}
-    with open('config/test_config.json', 'r') as f:
+    with open('config/config.json', 'r') as f:
         data = json.load(f)
     
     base_url = data['ge']['url']
