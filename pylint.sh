@@ -21,6 +21,7 @@ pylinter(){
   mapfile -t PY_SCRIPTS < <(find . -type d -name migrations -prune -false -o -iname "*.py")
   for PY_SCRIPT in "${PY_SCRIPTS[@]}"; do
     echo -e "\\n""$GREEN""Run pylint on $PY_SCRIPT:""$NC""\\n"
+    echo pwd
     mapfile -t PY_RESULT < <(pipenv run pylint --rcfile=.pylintrc "$PY_SCRIPT" 2> >(grep -v "Courtesy Notice\|Loading .env" >&2) )
     local RATING_10=0
     if [[ "${#PY_RESULT[@]}" -gt 0 ]]; then
