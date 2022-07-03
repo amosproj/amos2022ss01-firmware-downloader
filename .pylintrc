@@ -20,7 +20,7 @@ persistent=no
 
 # List of plugins (as comma separated values of python modules names) to load,
 # usually to register additional checkers.
-load-plugins=[]
+load-plugins=
 
 # Use multiple processes to speed up Pylint.
 jobs=4  #Set to 4 bc of github workflows
@@ -39,7 +39,7 @@ extension-pkg-whitelist=
 
 # Only show warnings with the listed confidence levels. Leave empty to show
 # all. Valid levels: HIGH, INFERENCE, INFERENCE_FAILURE, UNDEFINED
-confidence=
+confidence = ["HIGH", "CONTROL_FLOW", "INFERENCE", "INFERENCE_FAILURE", "UNDEFINED"]
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
@@ -59,7 +59,7 @@ confidence=
 #
 # Kubeflow disables string-interpolation because we are starting to use f
 # style strings
-disable=C0115,C0114,C0116,W0703,W0603,R1705#,W0511
+disable=C0115,C0114,C0116,W0703,W0603,R1705,W0511
 #import-star-module-level,old-octal-literal,oct-method,print-statement,unpacking-in-except,
 #parameter-unpacking,backtick,old-raise-syntax,old-ne-operator,long-suffix,dict-view-method,dict-iter-method,
 #metaclass-assignment,next-method-called,raising-string,indexing-exception,raw_input-builtin,long-builtin,file-builtin,
@@ -83,7 +83,7 @@ output-format=text
 # command line instead of printing them on stdout. Reports (if any) will be
 # written in a file name "pylint_global.[txt|html]". This option is deprecated
 # and it will be removed in Pylint 2.0.
-files-output=no
+# files-output=no
 
 # Tells whether to display a full report or only the messages
 reports=no
@@ -112,7 +112,7 @@ bad-names=foo,bar,baz,toto,tutu,tata
 # the name regexes allow several styles.
 name-group=
 
-# Include a hint for the correct naming format with invalid-name
+# Include a style for the correct naming format with invalid-name
 include-naming-hint=yes
 
 # List of decorators that produce properties, such as abc.abstractproperty. Add
@@ -122,62 +122,62 @@ property-classes=
 # Regular expression matching correct function names
 function-rgx=[a-z_][a-z0-9_]{2,32}$
 
-# Naming hint for function names
-function-name-hint=[a-z_][a-z0-9_]{2,32}$
+# Naming style for function names
+function-naming-style=[a-z_][a-z0-9_]{2,32}$
 
 # Regular expression matching correct variable names
 variable-rgx=[a-z_][a-z0-9_]{2,32}$
 
-# Naming hint for variable names
-variable-name-hint=[a-z_][a-z0-9_]{2,32}$
+# Naming style for variable names
+variable-naming-style=[a-z_][a-z0-9_]{2,32}$
 
 # Regular expression matching correct constant names
 const-rgx=(([A-Z_][A-Z0-9_]*)|(__.*__))$
 
-# Naming hint for constant names
-const-name-hint=(([A-Z_][A-Z0-9_]*)|(__.*__))$
+# Naming style for constant names
+const-naming-style=(([A-Z_][A-Z0-9_]*)|(__.*__))$
 
 # Regular expression matching correct attribute names
 attr-rgx=[a-z_][a-z0-9_]{2,32}$
 
-# Naming hint for attribute names
-attr-name-hint=[a-z_][a-z0-9_]{2,32}$
+# Naming style for attribute names
+attr-naming-style=[a-z_][a-z0-9_]{2,32}$
 
 # Regular expression matching correct argument names
 argument-rgx=[a-z_][a-z0-9_]{2,32}$
 
-# Naming hint for argument names
-argument-name-hint=[a-z_][a-z0-9_]{2,32}$
+# Naming style for argument names
+argument-naming-style=[a-z_][a-z0-9_]{2,32}$
 
 # Regular expression matching correct class attribute names
 class-attribute-rgx=([A-Za-z_][A-Za-z0-9_]{2,32}|(__.*__))$
 
-# Naming hint for class attribute names
-class-attribute-name-hint=([A-Za-z_][A-Za-z0-9_]{2,32}|(__.*__))$
+# Naming style for class attribute names
+class-attribute-naming-style=([A-Za-z_][A-Za-z0-9_]{2,32}|(__.*__))$
 
 # Regular expression matching correct inline iteration names
 inlinevar-rgx=[A-Za-z_][A-Za-z0-9_]*$
 
-# Naming hint for inline iteration names
-inlinevar-name-hint=[A-Za-z_][A-Za-z0-9_]*$
+# Naming style for inline iteration names
+inlinevar-naming-style=[A-Za-z_][A-Za-z0-9_]*$
 
 # Regular expression matching correct class names
 class-rgx=[A-Z_][a-zA-Z0-9]+$
 
-# Naming hint for class names
-class-name-hint=[A-Z_][a-zA-Z0-9]+$
+# Naming style for class names
+class-naming-style=[A-Z_][a-zA-Z0-9]+$
 
 # Regular expression matching correct module names
 module-rgx=(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$
 
-# Naming hint for module names
-module-name-hint=(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$
+# Naming style for module names
+module-naming-style=(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$
 
 # Regular expression matching correct method names
 method-rgx=[a-z_][a-z0-9_]{2,32}$
 
-# Naming hint for method names
-method-name-hint=[a-z_][a-z0-9_]{2,32}$
+# Naming style for method names
+method-naming-style=[a-z_][a-z0-9_]{2,32}$
 
 # Regular expression which should only match function or class names that do
 # not require a docstring.
@@ -233,12 +233,6 @@ ignore-long-lines=^\s*(# )?<?https?://\S+>?$
 # Allow the body of an if to be on the same line as the test if there is no
 # else.
 single-line-if-stmt=no
-
-# List of optional constructs for which whitespace checking is disabled. `dict-
-# separator` is used to allow tabulation in dicts, etc.: {1  : 1,\n222: 2}.
-# `trailing-comma` allows a space between comma and closing bracket: (a, ).
-# `empty-line` allows space-only lines.
-no-space-check=trailing-comma,dict-separator
 
 # Maximum number of lines in a module
 max-module-lines=1000
