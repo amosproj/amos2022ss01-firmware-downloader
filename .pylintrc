@@ -171,7 +171,7 @@ class-naming-style=PascalCase
 module-rgx=(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$
 
 # Naming style for module names
-module-naming-style=(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$
+module-naming-style=snake_case
 
 # Regular expression matching correct method names
 method-rgx=[a-z_][a-z0-9_]{2,32}$
