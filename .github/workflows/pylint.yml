@@ -28,9 +28,12 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
+        python3 -m pip install pipenv
         python3 -m pip install pylint
         # The requirements file is mandatory to be present the parent repository
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Analysing the code with pylint
       run: |
-        pylint --enable=all $(git ls-files '*.py')
+        pipenv install --dev
+        chmod u+r+x pylint.sh
+        ./pylint.sh

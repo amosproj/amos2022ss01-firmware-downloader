@@ -76,9 +76,18 @@ class WebCode(unittest.TestCase):
             web_file_name, last_updated, file_size, file_type, download_text = "", "", "", "", ""
             data = rows[rows.index(row)].text
             web_file_name, last_updated, file_size, file_type, download_text = data.split("\n")
-            download_link = rows[rows.index(row)].find_element(By.XPATH, "//div[@class='table__cell table__cell--icons ml-md-auto']//*[contains(@data-analytics-asset-name, '{}')]".format(str(web_file_name))).get_attribute('href')
-            download_element = row.find_element(By.XPATH,"//div[@class='table__cell table__cell--icons ml-md-auto']//*[contains(@data-analytics-asset-name, '{}')]".format(str(web_file_name)))
-            file_name = row.find_element(By.XPATH,"//div[@class='table__cell table__cell--icons ml-md-auto']//*[contains(@data-analytics-asset-name, '{}')]".format(str(web_file_name))).get_attribute('download')
+            download_link = rows[rows.index(row)].find_element(
+                By.XPATH, "//div[@class='table__cell table__cell--icons ml-md-auto']//"
+                          "*[contains(@data-analytics-asset-name, '{}')]"
+                .format(str(web_file_name))).get_attribute('href')
+            download_element = row.find_element(
+                By.XPATH,"//div[@class='table__cell table__cell--icons ml-md-auto']//"
+                         "*[contains(@data-analytics-asset-name, '{}')]"
+                .format(str(web_file_name)))
+            file_name = row.find_element(
+                By.XPATH,"//div[@class='table__cell table__cell--icons ml-md-auto']//"
+                         "*[contains(@data-analytics-asset-name, '{}')]"
+                .format(str(web_file_name))).get_attribute('download')
             # print(data, download_link, file_name)
             actions = ActionChains(driver)
             actions.move_to_element(download_element).perform()
@@ -119,7 +128,6 @@ class WebCode(unittest.TestCase):
         select = Select(driver.find_element(By.XPATH, '//select[@data-filter-label="Type"]'))
         select.select_by_visible_text("Firmware")
         time.sleep(5)
-        # Next_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//a[text()='Next']")))
 
         while driver.find_element(By.XPATH, "//div[@class='table__row']"):
             rows = driver.find_elements(By.XPATH, "//div[@class='table__row']")
@@ -127,8 +135,16 @@ class WebCode(unittest.TestCase):
                 web_file_name, temp_add_web_data = "", ""
                 data = rows[rows.index(row)].text
                 web_file_name, temp_add_web_data = data.split("\n")
-                download_link = rows[rows.index(row)].find_element(By.XPATH,"//div[@class='table__row'][{}]//div[@class='table__cell table__cell--icons ml-md-auto']//a[@class='table__link table__link--download js-download-trigger  document-download']".format(rows.index(row) + 1)).get_attribute('href')
-                download_element = rows[rows.index(row)].find_element(By.XPATH, "//div[@class='table__row'][{}]//div[@class='table__cell table__cell--icons ml-md-auto']//a[@class='table__link table__link--download js-download-trigger  document-download']".format(rows.index(row) + 1))
+                download_link = rows[rows.index(row)].find_element(
+                    By.XPATH,"//div[@class='table__row'][{}]//"
+                             "div[@class='table__cell table__cell--icons ml-md-auto']"
+                             "//a[@class='table__link table__link--download js-download-trigger  document-download']"
+                    .format(rows.index(row) + 1)).get_attribute('href')
+                download_element = rows[rows.index(row)].find_element(
+                    By.XPATH, "//div[@class='table__row'][{}]//"
+                              "div[@class='table__cell table__cell--icons ml-md-auto']//"
+                              "a[@class='table__link table__link--download js-download-trigger  document-download']"
+                    .format(rows.index(row) + 1))
                 actions = ActionChains(driver)
                 actions.move_to_element(download_element).perform()
                 local_file_location = r"{}\downloads\honeywell\{}".format(self.path, download_link.split('/')[-1])
@@ -138,11 +154,16 @@ class WebCode(unittest.TestCase):
                 dbdict_carrier = dict()
                 db = Database(dbname=self.db_name)
                 for key in self.dbdict.keys():
-                    if key == "Fwfilename": dbdict_carrier[key] = web_file_name
-                    if key == "Manufacturer": dbdict_carrier[key] = "Honeywell"
-                    if key == "Fwdownlink": dbdict_carrier[key] = download_link
-                    if key == "Fwfilelinktolocal": dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
-                    if key not in dbdict_carrier.keys(): dbdict_carrier[key] = ''
+                    if key == "Fwfilename":
+                        dbdict_carrier[key] = web_file_name
+                    if key == "Manufacturer":
+                        dbdict_carrier[key] = "Honeywell"
+                    if key == "Fwdownlink":
+                        dbdict_carrier[key] = download_link
+                    if key == "Fwfilelinktolocal":
+                        dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
+                    if key not in dbdict_carrier.keys():
+                        dbdict_carrier[key] = ''
                     if self.db_name not in os.listdir('.'):
                         db.create_table()
                 db.insert_data(dbdict_carrier)
@@ -157,5 +178,4 @@ class WebCode(unittest.TestCase):
 
 
 if __name__ == "__main__":
-
     unittest.main()
