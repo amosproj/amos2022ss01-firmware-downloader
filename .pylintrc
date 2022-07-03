@@ -129,25 +129,25 @@ function-naming-style=snake_case
 variable-rgx=[a-z_][a-z0-9_]{2,32}$
 
 # Naming style for variable names
-variable-naming-style=
+variable-naming-style=snake_case
 
 # Regular expression matching correct constant names
 const-rgx=(([A-Z_][A-Z0-9_]*)|(__.*__))$
 
 # Naming style for constant names
-const-naming-style=
+const-naming-style=UPPER_CASE
 
 # Regular expression matching correct attribute names
 attr-rgx=[a-z_][a-z0-9_]{2,32}$
 
 # Naming style for attribute names
-attr-naming-style=
+attr-naming-style=snake_case
 
 # Regular expression matching correct argument names
 argument-rgx=[a-z_][a-z0-9_]{2,32}$
 
 # Naming style for argument names
-argument-naming-style=
+argument-naming-style=snake_case
 
 # Regular expression matching correct class attribute names
 class-attribute-rgx=([A-Za-z_][A-Za-z0-9_]{2,32}|(__.*__))$
