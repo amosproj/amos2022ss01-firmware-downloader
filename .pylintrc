@@ -123,7 +123,7 @@ property-classes=
 function-rgx=[a-z_][a-z0-9_]{2,32}$
 
 # Naming style for function names
-function-naming-style=
+function-naming-style=snake_case
 
 # Regular expression matching correct variable names
 variable-rgx=[a-z_][a-z0-9_]{2,32}$
