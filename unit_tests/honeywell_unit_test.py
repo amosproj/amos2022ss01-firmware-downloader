@@ -1,15 +1,11 @@
-import os
-import sys
+import os, sys, unittest, time
 sys.path.append(os.path.abspath(os.path.join('.', '')))
-
 from utils.database import Database
-import unittest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
-import time
 from utils.chromium_downloader import ChromiumDownloader
 
 
@@ -81,12 +77,12 @@ class WebCode(unittest.TestCase):
                           "*[contains(@data-analytics-asset-name, '{}')]"
                 .format(str(web_file_name))).get_attribute('href')
             download_element = row.find_element(
-                By.XPATH,"//div[@class='table__cell table__cell--icons ml-md-auto']//"
-                         "*[contains(@data-analytics-asset-name, '{}')]"
+                By.XPATH, "//div[@class='table__cell table__cell--icons ml-md-auto']//"
+                          "*[contains(@data-analytics-asset-name, '{}')]"
                 .format(str(web_file_name)))
             file_name = row.find_element(
-                By.XPATH,"//div[@class='table__cell table__cell--icons ml-md-auto']//"
-                         "*[contains(@data-analytics-asset-name, '{}')]"
+                By.XPATH, "//div[@class='table__cell table__cell--icons ml-md-auto']//"
+                          "*[contains(@data-analytics-asset-name, '{}')]"
                 .format(str(web_file_name))).get_attribute('download')
             # print(data, download_link, file_name)
             actions = ActionChains(driver)
@@ -100,12 +96,18 @@ class WebCode(unittest.TestCase):
             dbdict_carrier = dict()
             db = Database(dbname=self.db_name)
             for key in self.dbdict.keys():
-                if key == "Manufacturer": dbdict_carrier[key] = "Honeywell"
-                if key == "Fwfilename": dbdict_carrier[key] = web_file_name
-                if key == "Releasedate": dbdict_carrier[key] = last_updated
-                if key == "Fwdownlink": dbdict_carrier[key] = download_link
-                if key == "Fwfilelinktolocal": dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
-                if key not in dbdict_carrier.keys(): dbdict_carrier[key] = ''
+                if key == "Manufacturer":
+                    dbdict_carrier[key] = "Honeywell"
+                if key == "Fwfilename":
+                    dbdict_carrier[key] = web_file_name
+                if key == "Releasedate":
+                    dbdict_carrier[key] = last_updated
+                if key == "Fwdownlink":
+                    dbdict_carrier[key] = download_link
+                if key == "Fwfilelinktolocal":
+                    dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
+                if key not in dbdict_carrier.keys():
+                    dbdict_carrier[key] = ''
                 if self.db_name not in os.listdir('.'):
                     db.create_table()
             db.insert_data(dbdict_carrier)
@@ -136,9 +138,9 @@ class WebCode(unittest.TestCase):
                 data = rows[rows.index(row)].text
                 web_file_name, temp_add_web_data = data.split("\n")
                 download_link = rows[rows.index(row)].find_element(
-                    By.XPATH,"//div[@class='table__row'][{}]//"
-                             "div[@class='table__cell table__cell--icons ml-md-auto']"
-                             "//a[@class='table__link table__link--download js-download-trigger  document-download']"
+                    By.XPATH, "//div[@class='table__row'][{}]//"
+                              "div[@class='table__cell table__cell--icons ml-md-auto']"
+                              "//a[@class='table__link table__link--download js-download-trigger  document-download']"
                     .format(rows.index(row) + 1)).get_attribute('href')
                 download_element = rows[rows.index(row)].find_element(
                     By.XPATH, "//div[@class='table__row'][{}]//"
@@ -169,7 +171,8 @@ class WebCode(unittest.TestCase):
                 db.insert_data(dbdict_carrier)
                 self.assertTrue(dbdict_carrier, msg="data inserted")
             time.sleep(10)
-            if driver.find_element(By.XPATH, "//*[text()='Next']").tag_name == "span": break
+            if driver.find_element(By.XPATH, "//*[text()='Next']").tag_name == "span":
+                break
             driver.find_element(By.XPATH, "//a[text()='Next']").click()
         driver.back()
 
