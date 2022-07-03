@@ -153,7 +153,7 @@ argument-naming-style=snake_case
 class-attribute-rgx=([A-Za-z_][A-Za-z0-9_]{2,32}|(__.*__))$
 
 # Naming style for class attribute names
-class-attribute-naming-style=([A-Za-z_][A-Za-z0-9_]{2,32}|(__.*__))$
+class-attribute-naming-style=any
 
 # Regular expression matching correct inline iteration names
 inlinevar-rgx=[A-Za-z_][A-Za-z0-9_]*$
