@@ -1,4 +1,5 @@
-export PYTHONPATH="$PYTHONPATH:${PWD}"
+#!/bin/bash
+export PYTHONPATH="$PYTHONPATH: ${PWD}"
 export PIPENV_VENV_IN_PROJECT="True"
 
 cd "$(dirname "$0")" || exit 1
