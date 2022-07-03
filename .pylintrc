@@ -123,13 +123,13 @@ property-classes=
 function-rgx=[a-z_][a-z0-9_]{2,32}$
 
 # Naming style for function names
-function-naming-style = "snake_case"
+function-naming-style = 'any'
 
 # Regular expression matching correct variable names
 variable-rgx=[a-z_][a-z0-9_]{2,32}$
 
 # Naming style for variable names
-variable-naming-style="snake_case"
+variable-naming-style='any'
 
 # Regular expression matching correct constant names
 const-rgx=(([A-Z_][A-Z0-9_]*)|(__.*__))$
@@ -141,13 +141,13 @@ const-naming-style="UPPER_CASE"
 attr-rgx=[a-z_][a-z0-9_]{2,32}$
 
 # Naming style for attribute names
-attr-naming-style="snake_case"
+attr-naming-style='any'
 
 # Regular expression matching correct argument names
 argument-rgx=[a-z_][a-z0-9_]{2,32}$
 
 # Naming style for argument names
-argument-naming-style="snake_case"
+argument-naming-style='any'
 
 # Regular expression matching correct class attribute names
 class-attribute-rgx=([A-Za-z_][A-Za-z0-9_]{2,32}|(__.*__))$
