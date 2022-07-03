@@ -21,7 +21,7 @@ pylinter(){
   mapfile -t PY_SCRIPTS < <(find . -type d -name migrations -prune -false -o -iname "*.py")
   for PY_SCRIPT in "${PY_SCRIPTS[@]}"; do
     echo -e "\\n""$GREEN""Run pylint on $PY_SCRIPT:""$NC""\\n"
-    mapfile -t PY_RESULT < <(pipenv run pylint --rcfile=.config/pylintrc "$PY_SCRIPT" 2> >(grep -v "Courtesy Notice\|Loading .env" >&2) )
+    mapfile -t PY_RESULT < <(pipenv run pylint --rcfile=../.config/.pylintrc "$PY_SCRIPT" 2> >(grep -v "Courtesy Notice\|Loading .env" >&2) )
     local RATING_10=0
     if [[ "${#PY_RESULT[@]}" -gt 0 ]]; then
       if ! printf '%s\n' "${PY_RESULT[@]}" | grep -q -P '^Your code has been rated at 10'; then
@@ -31,7 +31,7 @@ pylinter(){
       else
         RATING_10=1
       fi
-      if [[ "$RATING_10" -ne 1 ]]; then
+        if [[ "$RATING_10" -ne 1 ]]; then
         echo -e "\\n""$ORANGE$BOLD==> FIX ERRORS""$NC""\\n"
         ((MODULES_TO_CHECK=MODULES_TO_CHECK+1))
         MODULES_TO_CHECK_ARR+=( "$PY_SCRIPT" )
@@ -44,7 +44,7 @@ pylinter(){
   done
 
   echo -e "\\n""$GREEN""Run pylint on all scripts:""$NC""\\n"
-  pipenv run pylint --rcfile=.config/pylintrc ./*  2> >(grep -v "Courtesy Notice\|Loading .env" >&2) | grep "Your code has been rated"
+  pipenv run pylint --rcfile=../.config/.pylintrc ./*  2> >(grep -v "Courtesy Notice\|Loading .env" >&2) | grep "Your code has been rated"
   cd .. || exit 1
 }
 
