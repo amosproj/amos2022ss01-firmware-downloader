@@ -2,6 +2,8 @@ import os
 import math
 import re
 import uuid
+import sys
+sys.path.append(os.path.abspath(os.path.join('.', '')))  
 from utils.Logs import get_logger
 
 import requests

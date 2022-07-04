@@ -5,6 +5,7 @@ import schedule
 import time
 from vendors import runner
 from utils.Logs import get_logger
+from concurrent.futures import ThreadPoolExecutor
 
 config_path = os.path.join("config", "config.json")
 with open(config_path, "rb") as fp:
@@ -28,17 +29,8 @@ def get_skipped_modules(config):
                
     return mods
 
-def scanner(num_threads, skip_modules):
-    # for mod in whitelisted_modules:
-        # if mod in config:
-    # logger.info(f"Starting {mod} downloader ...")
-    schedule.every(config[mod]['interval']).minutes.do(runner, num_threads, skip_modules, whitelisted_modules)
-        # else:
-        #     schedule.every(config['default']['interval']).minutes.do(runner, num_threads, skip_modules, [mod])
-
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+def executor_job(mod):
+    _ = executor.submit(runner, mod) 
 
 if __name__ == "__main__":
     logger.info("Starting runner...")
@@ -55,5 +47,14 @@ if __name__ == "__main__":
                 continue
             whitelisted_modules.append(file.split('.')[0])
 
-    runner(num_threads, skip_modules, whitelisted_modules)
-    # scanner(num_threads, skip_modules)
+    # runner(num_threads, skip_modules, whitelisted_modules)
+    with ThreadPoolExecutor(num_threads) as executor:
+        for mod in whitelisted_modules:
+            if mod in config:
+                logger.info(f"Starting {mod} downloader ...")
+                schedule.every(config[mod]['interval']).minutes.do(executor_job, mod)
+            else:
+                schedule.every(config['default']['interval']).minutes.do(executor_job, mod)
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
