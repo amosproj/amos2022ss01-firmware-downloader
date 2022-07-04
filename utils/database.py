@@ -67,7 +67,7 @@ class Database:
 			logger.debug('A cursor is established on {}, with the details {}.'.format(self.dbname, curs))
 			select_command = "select * from FWDB"
 			curs.execute(select_command)
-			logger.debug('The table FWDB is selected in the {} with the command:'
+			logger.debug('The table FWDB is selected in the {} with the command:'\
 			             ' {}.'.format(self.dbname, select_command))
 			records = len(curs.fetchall())
 			dbdict = self.dbdict
@@ -75,18 +75,19 @@ class Database:
 				dbdict[key] = dbdictcarrier[key]
 				logger.debug('The {} is updated with the Key: {} and Value: {}.'
 				             .format(self.dbname, key, dbdict[key]))
-				dbdict['Fwfileid'] = f'FILE_{records + 1}'
-				logger.debug('The db is updated with the Fwfiledid.')
+			dbdict['Fwfileid'] = f'FILE_{records + 1}'
+			logger.debug('The db is updated with the Fwfileid.')
 			# Currently, the local firmware id is represented as file extended by _ in increase by 1
-				insert_command = f'''INSERT INTO FWDB('{"','".join(map(str, dbdict.keys()))}') 
-				VALUES('{"','".join(map(str, dbdict.values()))}')'''
-				curs.execute(insert_command)
-				logger.debug('The db is inserted with the command {}.'.format(insert_command))
-				conn.commit()
-				logger.debug('The db commited is with data {}.'.format(dbdict))
+			insert_command = f'''INSERT INTO FWDB('{"','".join(map(str, dbdict.keys()))}') 
+			VALUES('{"','".join(map(str, dbdict.values()))}')'''
+			curs.execute(insert_command)
+			logger.debug('The db is inserted with the command {}.'.format(insert_command))
+			conn.commit()
+			logger.debug('The db commited is with data {}.'.format(dbdict))
 			# Prints the data in db
 			curs.execute('SELECT * FROM FWDB')
 			print(curs.fetchall())
 			curs.close()
 		except Exception as e:
 			logger.error(f"Error writing to db {dbdictcarrier}")
+			print(e)

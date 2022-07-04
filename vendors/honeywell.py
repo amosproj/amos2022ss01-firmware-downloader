@@ -63,7 +63,8 @@ class Honeywell:
         driver.implicitly_wait(10)  # seconds
         driver.maximize_window()
 
-    def down_ele_click(self, loc_loc,  element):
+    @staticmethod
+    def down_ele_click(loc_loc,  element):
         # A fn for duplication Check for not to download the files if files exist in local machine
         if not os.path.isfile(loc_loc.replace("\\", "/")):
             time.sleep(10)
@@ -80,9 +81,11 @@ class Honeywell:
             in_file_name = str(in_file_name).replace(version, '')
             return version, in_file_name
         else:
+            version = None
             print(None, '----------', in_file_name)
+            return version, in_file_name
 
-    def Advanced_Sensing_Tech(self):
+    def advanced_sensing_tech(self):
         # 1. the function responsible to drive Advanced Sensing Technologies
         driver = self.driver
         click_here_options = driver.find_element(By.XPATH, "(//a[contains(text(),'CLICK HERE')])[1]")
@@ -140,7 +143,7 @@ class Honeywell:
         actions.move_to_element(in_click_here_options).perform()
         in_click_here_options.click()
 
-    def Productivity(self):
+    def productivity(self):
         # 2. the function responsible to run the productivity
         driver = self.driver
         driver.refresh()
@@ -254,7 +257,7 @@ class Honeywell:
                                                        rows2.index(row2) + 1)).click()
         driver.switch_to.window(windows[0])
 
-    def Gas(self):
+    def gas(self):
         # 3. The function responsible to run the Safety
         driver = self.driver
         driver.refresh()
@@ -313,7 +316,7 @@ class Honeywell:
             driver.find_element(By.XPATH, "//a[text()='Next']").click()
         driver.back()
 
-    def Close_browser(self):
+    def close_browser(self):
         # At the end of the program, the function will close the Chrome browser
         driver = self.driver
         time.sleep(10)
@@ -324,7 +327,7 @@ if __name__ == '__main__':
     ChromiumDownloader().executor()
     hw = Honeywell()
     hw.homepage()
-    hw.Advanced_Sensing_Tech()
-    hw.Productivity()
-    hw.Gas()
-    hw.Close_browser()
+    hw.advanced_sensing_tech()
+    # hw.productivity()
+    hw.gas()
+    hw.close_browser()
