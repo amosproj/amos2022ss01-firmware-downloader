@@ -3,18 +3,18 @@ import math
 import re
 import uuid
 import sys
-sys.path.append(os.path.abspath(os.path.join('.', '')))  
+sys.path.append(os.path.abspath(os.path.join('.', '')))
 from utils.Logs import get_logger
 
 import requests
 from bs4 import BeautifulSoup
-import os
-from urllib.parse import parse_qs, urlparse
 
+from urllib.parse import parse_qs, urlparse
+from utils.check_duplicates import *
 from utils.database import Database
 #from vendors import download_list_files
 
-#Logger 
+#Logger
 name = "schneider_electric"
 logger = get_logger("vendors.schneider_electric")
 
@@ -41,6 +41,7 @@ def write_metadata_to_db(metadata):
     if db_name not in os.listdir('../'):
         db.create_table()
     for fw in metadata:
+        print(fw)
         db.insert_data(dbdictcarrier=fw)
 
 def se_get_total_firmware_count(url):
@@ -81,8 +82,10 @@ def get_firmware_data_using_api(url, fw_count, fw_per_page):
 def transform_metadata_format_ours(raw_data, local_storage_dir="."):
     fw_mod_list = list()
     for fw in raw_data:
+
         fw_mod = {
-	    'Fwfileid': fw.get("reference", str(uuid.uuid4())),
+        'Fwfileid': fw.get("reference", str(uuid.uuid4())),
+        'Fwfilename': fw.get("title", "").replace("'", ""),
 	    'Manufacturer': 'schneider_electric',
 	    'Modelname': fw.get("title", "").replace("'", ""),
 	    'Version': fw.get("version", ""),
@@ -92,11 +95,13 @@ def transform_metadata_format_ours(raw_data, local_storage_dir="."):
 	    'Embatested': '',
 	    'Embalinktoreport': '',
 	    'Embarklinktoreport': '',
-            'Fwdownlink': "https:" + fw.get("downloadUrl", ""),
+        'Fwdownlink': "https:" + fw.get("downloadUrl", ""),
 	    'Fwfilelinktolocal': os.path.join(local_storage_dir, parse_qs(urlparse(fw.get("downloadUrl")).query, keep_blank_values=True).get("p_File_Name", list(str(uuid.uuid4())))[0]),
 	    'Fwadddata': ''
 	}
-        fw_mod_list.append(fw_mod)
+        db_name = 'firmwaredatabase.db'
+        if (check_duplicates(fw_mod, db_name) == False):
+            fw_mod_list.append(fw_mod)
     return fw_mod_list
 
 # This method is outdated as of now.

@@ -1,6 +1,11 @@
 import os
+import sys
+sys.path.append(os.path.abspath(os.path.join('.', '')))
+
+from multiprocessing import Pool
 import json
 from utils.Logs import get_logger
+
 
 logger = get_logger("vendors.__init__")
 
