@@ -47,7 +47,6 @@ if __name__ == "__main__":
                 continue
             whitelisted_modules.append(file.split('.')[0])
 
-    # runner(num_threads, skip_modules, whitelisted_modules)
     with ThreadPoolExecutor(num_threads) as executor:
         for mod in whitelisted_modules:
             if mod in config:
