@@ -1,20 +1,20 @@
 import os
 import sqlite3
 import sys
-sys.path.append(os.path.abspath(os.path.join('.', ''))) 
+sys.path.append(os.path.abspath(os.path.join('.', '')))
 from vendors.ge import *
 from utils.database import Database
 import unittest
 from utils.check_duplicates import check_duplicates
 
-db_name = "test_firmwaredatabase.db"
+DB_NAME = "test_firmwaredatabase.db"
 
 def fetch_data():
-    db = Database(dbname=db_name)
-    if db_name not in os.listdir('.'):
-        db.create_table()
-    #db connection
-    conn = sqlite3.connect(db_name)
+    DB = Database(dbname=DB_NAME)
+    if DB_NAME not in os.listdir('.'):
+        DB.create_table()
+    #DB connection
+    conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
     try:
         cursor.execute("select * from FWDB WHERE Manufacturer='GE'")
@@ -45,15 +45,13 @@ class Unit_Case_Test(unittest.TestCase):
             'Version': '',
 	    }
 
-        if os.path.isfile(gt_file_path) == False and check_duplicates(data, db_name) == True:
-            download_file(gt_url, gt_file_path, files[0], files[1], folder, file_name, '', '', '', db_name, True)
+        if os.path.isfile(gt_file_path) is False and check_duplicates(data, DB_NAME) is True:
+            download_file(gt_url, gt_file_path, files[0], files[1], folder, file_name, '', '', '', DB_NAME, True)
         else:
-            download_file(gt_url, gt_file_path, files[0], files[1], folder, file_name, '', '', '', db_name, False)
-       
-        
-        self.assertTrue(check_duplicates(data, db_name), msg="Image didn't downloaded")
+            download_file(gt_url, gt_file_path, files[0], files[1], folder, file_name, '', '', '', DB_NAME, False)
+
+        self.assertTrue(check_duplicates(data, DB_NAME), msg="Image didn't downloaded")
         fetch_data()
-        
 
     def test_case_with_authentication(self):
         files = ["SDx-6_4_8.mpk", "2022-03-29"]
@@ -65,7 +63,7 @@ class Unit_Case_Test(unittest.TestCase):
             if not os.path.isdir(dest):
                 os.mkdir(dest)
         except Exception as e:
-            raise ValueError(f"{e}")
+            raise ValueError("%s", e)
         gt_file_path = os.path.join(dest, files[0])
 
         data = {
@@ -73,17 +71,15 @@ class Unit_Case_Test(unittest.TestCase):
             'Modelname': file_name,
             'Version': '',
 	    }
-        gt_ex_file_path = os.path.join(gt_file_path, files[0]) 
-       
-        if (os.path.isfile(gt_ex_file_path) == False and check_duplicates(data, db_name) == True):
-            download_file(gt_url, gt_file_path, files[0], files[1], folder, file_name, 'javascript:;', gt_url, "Passport_DownloadFile('SDSeries',7,70);return false", db_name, True)
+        gt_ex_file_path = os.path.join(gt_file_path, files[0])
+
+        if (os.path.isfile(gt_ex_file_path) == False and check_duplicates(data, DB_NAME) == True):
+            download_file(gt_url, gt_file_path, files[0], files[1], folder, file_name, 'javascript:;', gt_url, "Passport_DownloadFile('SDSeries',7,70);return false", DB_NAME, True)
         else:
-            download_file(gt_url, gt_file_path, files[0], files[1], folder, file_name, 'javascript:;', gt_url, "Passport_DownloadFile('SDSeries',7,70);return false", db_name, False)
-        
-        
-        self.assertTrue(check_duplicates(data, db_name), msg="Image didn't downloaded")
+            download_file(gt_url, gt_file_path, files[0], files[1], folder, file_name, 'javascript:;', gt_url, "Passport_DownloadFile('SDSeries',7,70);return false", DB_NAME, False)
+
+        self.assertTrue(check_duplicates(data, DB_NAME), msg="Image didn't downloaded")
         fetch_data()
-        
 
 if __name__=="__main__":
     unittest.main()
