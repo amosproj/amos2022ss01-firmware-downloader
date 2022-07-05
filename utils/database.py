@@ -56,8 +56,8 @@ class Database:
 
 	def insert_data(self, dbdictcarrier):
 		try:
-			"""The insert_data function is used to update the new data in the db with 
-			dbdictcarrier as an dictionary input"""
+			"""The insert_data function is used to update the new data in the db with
+			dbdictcarrier as an dictionary input."""
 			logger.debug(f'As the {self.dbname} is found, a new connection will be established.')
 			conn = sqlite3.connect(self.dbname)
 			logger.debug('Connection details: {}'.format(conn))
@@ -74,7 +74,7 @@ class Database:
 			dbdict['Fwfileid'] = f'FILE_{records + 1}'
 			logger.debug(f"The db is updated with the Fwfileid. as {dbdict['Fwfileid']}.")
 			# Currently, the local firmware id is represented as file extended by _ in increase by 1
-			insert_command = f'''INSERT INTO FWDB('{"','".join(map(str, dbdict.keys()))}') 
+			insert_command = f'''INSERT INTO FWDB('{"','".join(map(str, dbdict.keys()))}')
 			VALUES('{"','".join(map(str, dbdict.values()))}')'''
 			curs.execute(insert_command)
 			logger.debug(f'The db is inserted with the command {insert_command}.')
