@@ -112,9 +112,9 @@ class Honeywell:
             local_file_location = r"{}\downloads\honeywell\{}".format(self.path, file_name)
             # Duplication Check for not to download the files if files exist in local machine
             self.down_ele_click(local_file_location, download_element)
-            dbdict_carrier = dict()
+            dbdict_carrier = {}
             db = Database(dbname=self.db_name)
-            for key in self.dbdict.keys():
+            for key in self.dbdict:
                 if key == "Manufacturer":
                     dbdict_carrier[key] = "Honeywell"
                 if key == "Modelname":
@@ -129,7 +129,7 @@ class Honeywell:
                     dbdict_carrier[key] = download_link
                 if key == "Fwfilelinktolocal":
                     dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
-                if key not in dbdict_carrier.keys():
+                if key not in dbdict_carrier:
                     dbdict_carrier[key] = ''
                 if self.db_name not in os.listdir('.'):
                     db.create_table()
@@ -287,9 +287,9 @@ class Honeywell:
                 actions.move_to_element(download_element).perform()
                 local_file_location = r"{}\downloads\honeywell\{}".format(self.path, download_link.split('/')[-1])
                 self.down_ele_click(local_file_location, download_element)
-                dbdict_carrier = dict()
+                dbdict_carrier = {}
                 db = Database(dbname=self.db_name)
-                for key in self.dbdict.keys():
+                for key in self.dbdict:
                     if key == "Fwfilename":
                         dbdict_carrier[key] = r'{}'.format(web_file_name)
                     if key == "Manufacturer":
@@ -302,7 +302,7 @@ class Honeywell:
                         dbdict_carrier[key] = download_link
                     if key == "Fwfilelinktolocal":
                         dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
-                    if key not in dbdict_carrier.keys():
+                    if key not in dbdict_carrier:
                         dbdict_carrier[key] = ''
                     if self.db_name not in os.listdir('.'):
                         db.create_table()

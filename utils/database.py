@@ -55,9 +55,9 @@ class Database:
 		curs.close()
 
 	def insert_data(self, dbdictcarrier):
+		"""The insert_data function is used to update the new data in the db with
+		"dbdictcarrier" as a dictionary input."""
 		try:
-			"""The insert_data function is used to update the new data in the db with
-			dbdictcarrier as an dictionary input."""
 			logger.debug(f'As the {self.dbname} is found, a new connection will be established.')
 			conn = sqlite3.connect(self.dbname)
 			logger.debug('Connection details: {}'.format(conn))
