@@ -73,7 +73,7 @@ class Unit_Case_Test(unittest.TestCase):
 	    }
         gt_ex_file_path = os.path.join(gt_file_path, files[0])
 
-        if (os.path.isfile(gt_ex_file_path) == False and check_duplicates(data, DB_NAME) == True):
+        if os.path.isfile(gt_ex_file_path) is False and check_duplicates(data, DB_NAME) is True:
             download_file(gt_url, gt_file_path, files[0], files[1], folder, file_name, 'javascript:;', gt_url, "Passport_DownloadFile('SDSeries',7,70);return false", DB_NAME, True)
         else:
             download_file(gt_url, gt_file_path, files[0], files[1], folder, file_name, 'javascript:;', gt_url, "Passport_DownloadFile('SDSeries',7,70);return false", DB_NAME, False)
