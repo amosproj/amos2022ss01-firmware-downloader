@@ -113,7 +113,7 @@ class Honeywell:
             # Duplication Check for not to download the files if files exist in local machine
             self.down_ele_click(local_file_location, download_element)
             dbdict_carrier = {}
-            db = Database(dbname=self.db_name)
+            db_used = Database(dbname=self.db_name)
             for key in self.dbdict:
                 if key == "Manufacturer":
                     dbdict_carrier[key] = "Honeywell"
@@ -132,8 +132,8 @@ class Honeywell:
                 if key not in dbdict_carrier:
                     dbdict_carrier[key] = ''
                 if self.db_name not in os.listdir('.'):
-                    db.create_table()
-            db.insert_data(dbdict_carrier)
+                    db_used.create_table()
+            db_used.insert_data(dbdict_carrier)
         driver.back()
 
     @staticmethod
@@ -288,7 +288,7 @@ class Honeywell:
                 local_file_location = r"{}\downloads\honeywell\{}".format(self.path, download_link.split('/')[-1])
                 self.down_ele_click(local_file_location, download_element)
                 dbdict_carrier = {}
-                db = Database(dbname=self.db_name)
+                db_used = Database(dbname=self.db_name)
                 for key in self.dbdict:
                     if key == "Fwfilename":
                         dbdict_carrier[key] = r'{}'.format(web_file_name)
@@ -305,8 +305,8 @@ class Honeywell:
                     if key not in dbdict_carrier:
                         dbdict_carrier[key] = ''
                     if self.db_name not in os.listdir('.'):
-                        db.create_table()
-                db.insert_data(dbdict_carrier)
+                        db_used.create_table()
+                db_used.insert_data(dbdict_carrier)
             time.sleep(10)
             if driver.find_element(By.XPATH, "//*[text()='Next']").tag_name == "span":
                 break
@@ -325,6 +325,6 @@ if __name__ == '__main__':
     hw = Honeywell()
     hw.homepage()
     hw.advanced_sensing_tech()
-    hw.productivity()
+    # hw.productivity()
     hw.gas()
     hw.close_browser()
