@@ -21,16 +21,15 @@ def get_skipped_modules(config):
     for mod in os.listdir(vendors_path):
         if mod.endswith(".py") and mod != "__init__.py":
             if mod.split('.')[0] in config:
-                if config[mod.split('.')[0]]["ignore"] == True:
+                if config[mod.split('.')[0]]["ignore"] is True:
                     mods.append(mod.split('.')[0])
             else:
-                if config['default']['ignore'] == True:
-                    mods.append(mod.split('.')[0])
-               
+                if config['default']['ignore'] is True:
+                    mods.append(mod.split('.')[0])       
     return mods
 
-def executor_job(mod):
-    _ = executor.submit(runner, mod) 
+def executor_job(mod_):
+    _ = executor.submit(runner, mod_) 
 
 if __name__ == "__main__":
     logger.info("Starting runner...")
