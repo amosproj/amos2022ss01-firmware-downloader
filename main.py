@@ -5,6 +5,7 @@ import schedule
 import time
 from vendors import runner
 from utils.Logs import get_logger
+from concurrent.futures import ThreadPoolExecutor
 
 config_path = os.path.join("config", "config.json")
 with open(config_path, "rb") as fp:
@@ -16,29 +17,19 @@ args = parser.parse_args()
 vendors_path = 'vendors'
 
 def get_skipped_modules(config):
-    mods = list()
+    mods = []
     for mod in os.listdir(vendors_path):
-        if mod.split('.')[0] in config:
-            if mod.endswith(".py") and mod != "__init__.py":
-                if config[mod.split('.')[0]]["ignore"] == True:
+        if mod.endswith(".py") and mod != "__init__.py":
+            if mod.split('.')[0] in config:
+                if config[mod.split('.')[0]]["ignore"] is True:
                     mods.append(mod.split('.')[0])
-        else:
-            if config['default']['ignore'] == True:
-                mods.append(mod.split('.')[0])
-               
+            else:
+                if config['default']['ignore'] is True:
+                    mods.append(mod.split('.')[0])       
     return mods
 
-def scanner(num_threads, skip_modules):
-    for mod in whitelisted_modules:
-        if mod in config:
-            logger.info(f"Starting {mod} downloader ...")
-            schedule.every(config[mod]['interval']).minutes.do(runner, num_threads, skip_modules, [mod])
-        else:
-            schedule.every(config['default']['interval']).minutes.do(runner, num_threads, skip_modules, [mod])
-
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+def executor_job(mod_):
+    _ = executor.submit(runner, mod_) 
 
 if __name__ == "__main__":
     logger.info("Starting runner...")
@@ -55,4 +46,13 @@ if __name__ == "__main__":
                 continue
             whitelisted_modules.append(file.split('.')[0])
 
-    scanner(num_threads, skip_modules)
+    with ThreadPoolExecutor(num_threads) as executor:
+        for module in whitelisted_modules:
+            if module in config:
+                logger.info(f"Starting {module} downloader ...")
+                schedule.every(config[module]['interval']).minutes.do(executor_job, module)
+            else:
+                schedule.every(config['default']['interval']).minutes.do(executor_job, module)
+        while True:
+            schedule.run_pending()
+            time.sleep(1)

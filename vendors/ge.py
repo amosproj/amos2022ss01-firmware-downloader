@@ -8,23 +8,20 @@ sys.path.append(os.path.abspath(os.path.join('.', '')))
 from utils.database import Database
 from utils.check_duplicates import check_duplicates
 from utils.Logs import get_logger
-import requests
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 import json
 
-
-name = "ge"
 logger = get_logger("vendors.ge")
 links=[]
 
-user = ''
-passw = ''
+username = ''
+password = ''
 
 with open('config/config.json', 'r') as f:
     data = json.load(f)
-    user = data['ge']['user']
-    passw = data['ge']['password']
+    username = data['ge']['user']
+    password = data['ge']['password']
 
 #inserting meta data into database
 def insert_into_db(data, db_name):
@@ -36,7 +33,6 @@ def insert_into_db(data, db_name):
 
 #download firmware image
 def download_file(url, file_path_to_save, data0, data1, folder, filename, link, main_url, click, db_name, is_file_download):
-    
     local_uri = "./" + folder + "/" + filename
     req_data = {
 		'Fwfileid': 'FILE',
@@ -55,15 +51,15 @@ def download_file(url, file_path_to_save, data0, data1, folder, filename, link, 
 		'Fwadddata': ''
 	}
 
-    if(check_duplicates(req_data, db_name) == False or is_file_download == True):
-        if(link != "javascript:;"):
+    if check_duplicates(req_data, db_name) == False or is_file_download == True:
+        if link != "javascript:;":
             logger.info(f"Downloading {url} and saving as {file_path_to_save}")
             resp = requests.get(url, allow_redirects=True)
             if resp.status_code != 200:
                 raise ValueError("Invalid Url or file not found")
             with open(file_path_to_save, "wb") as f:
                 f.write(resp.content)
-            if(is_file_download == False):
+            if is_file_download == False:
                 insert_into_db(req_data, db_name)
         else:
             options = webdriver.ChromeOptions()
@@ -75,15 +71,15 @@ def download_file(url, file_path_to_save, data0, data1, folder, filename, link, 
             try:
                 URL = "https://www.gegridsolutions.com/Passport/Login.aspx"
                 driver.get(URL)
-                driver.find_element(By.ID, "ctl00_BodyContent_Login1_UserName").send_keys(user)
-                driver.find_element(By.ID, "ctl00_BodyContent_Login1_Password").send_keys(passw)
+                driver.find_element(By.ID, "ctl00_BodyContent_Login1_UserName").send_keys(username)
+                driver.find_element(By.ID, "ctl00_BodyContent_Login1_Password").send_keys(password)
                 driver.find_element(By.ID, "ctl00_BodyContent_Login1_LoginButton").click()
                 # Get button you are going to click by its id ( also you could us find_element_by_css_selector to get element by css selector)
                 driver.get(main_url)
                 driver.execute_script(click)
                 time.sleep(60)
                 driver.close()
-                if(is_file_download == False):
+                if is_file_download == False:
                     insert_into_db(req_data, db_name)
             except:
                 logger.error("Error in downloading")
@@ -107,12 +103,12 @@ def scraper_parse(url, folder, base_url):
     for item in items:
         sub_data = []
         items_temp = item.find_all("td")
-        if(len(items_temp)):
-            if(items_temp[0].get_text().find(".zip") != -1 or items_temp[0].get_text().find(".mpk") != -1 or items_temp[0].get_text().find(".S28") != -1):
+        if len(items_temp):
+            if items_temp[0].get_text().find(".zip") != -1 or items_temp[0].get_text().find(".mpk") != -1 or items_temp[0].get_text().find(".S28") != -1:
                 for item_temp in items_temp:
-                    if(items_temp.index(item_temp) == 0):
+                    if items_temp.index(item_temp) == 0:
                         link = item_temp.findChild("a").get("href")
-                        if(link == "javascript:;"):
+                        if link == "javascript:;":
                             click = item_temp.findChild("a").get("onclick")
                         file_path = os.path.join(dest, item_temp.get_text())
                         download_file(base_url + link, file_path, items_temp[0].get_text(), items_temp[1].get_text(), folder, item_temp.get_text(), link, url, click, 'firmwaredatabase.db', False)
@@ -127,19 +123,17 @@ def directories_link(url, base_url):
         items_temp = item.find_all("a")
         for item_temp in items_temp:
             link = item_temp.get("href")
-            if(str(link).find("software.asp?directory=") != -1):
+            if str(link).find("software.asp?directory=") != -1:
                 links.append(base_url + "/communications/mds/" + link)
-            elif(str(link).find("/Communications/MDS/PulseNET_Download.aspx")):
+            elif str(link).find("/Communications/MDS/PulseNET_Download.aspx"):
                 links.append(base_url + "/Communications/MDS/PulseNET_Download.aspx")
-            elif(str(link).find("/app/resources.aspx?prod=vistanet&type=7")):
+            elif str(link).find("/app/resources.aspx?prod=vistanet&type=7"):
                 links.append(base_url + "/app/resources.aspx?prod=vistanet&type=7")
 
 def main():
-   
     data = {}
     with open('config/config.json', 'r') as f:
         data = json.load(f)
-    
     base_url = data['ge']['url']
     directories_link(base_url + '/communications/mds/software.asp', base_url)
     folder = 'File_system'

@@ -33,8 +33,7 @@ class Database:
 		The execute command in create_table fn will be used if table FWDB is not present in the file"""
 		conn = sqlite3.connect(self.dbname)
 		curs = conn.cursor()
-		logger.info(
-			'As there is no db local file, a new {} will be created in the file directory.'.format(self.dbname))
+		logger.info(f'As there is no db local file, a new {self.dbname} will be created in the file directory.')
 		create_command = """CREATE TABLE IF NOT EXISTS FWDB(
 						Fwfileid VARCHAR PRIMARY KEY,
 						Fwfilename VARCHAR NOT NULL,
@@ -51,43 +50,40 @@ class Database:
 						Fwfilelinktolocal TEXT NOT NULL,
 						Fwadddata BLOB)"""
 		curs.execute(create_command)
-		logger.info(
-			'The database is created successfully in the code repository with the command {}.'.format(create_command))
+		logger.info(f'The database is created successfully in the code repository with the command {create_command}.')
 		conn.commit()
 		curs.close()
 
 	def insert_data(self, dbdictcarrier):
+		"""The insert_data function is used to update the new data in the db with
+		"dbdictcarrier" as a dictionary input."""
 		try:
-			""" The insert_data function is used to update the new data in the db with 
-			dbdictcarrier as an dictionary input"""
-			logger.debug('As the {} is found, a new connection will be established.'.format(self.dbname))
+			logger.debug(f'As the {self.dbname} is found, a new connection will be established.')
 			conn = sqlite3.connect(self.dbname)
 			logger.debug('Connection details: {}'.format(conn))
 			curs = conn.cursor()
-			logger.debug('A cursor is established on {}, with the details {}.'.format(self.dbname, curs))
+			logger.debug(f'A cursor is established on {self.dbname}, with the details {curs}.')
 			select_command = "select * from FWDB"
 			curs.execute(select_command)
-			logger.debug('The table FWDB is selected in the {} with the command:'\
-			             ' {}.'.format(self.dbname, select_command))
+			logger.debug(f'The table FWDB is selected in the {self.dbname} with the command: {select_command}.')
 			records = len(curs.fetchall())
 			dbdict = self.dbdict
 			for key in dbdict:
 				dbdict[key] = dbdictcarrier[key]
-				logger.debug('The {} is updated with the Key: {} and Value: {}.'
-				             .format(self.dbname, key, dbdict[key]))
+				logger.debug(f'The {self.dbname} is updated with the Key: {key} and Value: {dbdict[key]}.')
 			dbdict['Fwfileid'] = f'FILE_{records + 1}'
-			logger.debug('The db is updated with the Fwfileid.')
+			logger.debug(f"The db is updated with the Fwfileid. as {dbdict['Fwfileid']}.")
 			# Currently, the local firmware id is represented as file extended by _ in increase by 1
-			insert_command = f'''INSERT INTO FWDB('{"','".join(map(str, dbdict.keys()))}') 
+			insert_command = f'''INSERT INTO FWDB('{"','".join(map(str, dbdict.keys()))}')
 			VALUES('{"','".join(map(str, dbdict.values()))}')'''
 			curs.execute(insert_command)
-			logger.debug('The db is inserted with the command {}.'.format(insert_command))
+			logger.debug(f'The db is inserted with the command {insert_command}.')
 			conn.commit()
-			logger.debug('The db commited is with data {}.'.format(dbdict))
+			logger.debug(f'The db commited is with data {dbdict}.')
 			# Prints the data in db
 			curs.execute('SELECT * FROM FWDB')
 			print(curs.fetchall())
 			curs.close()
-		except Exception as e:
+		except Exception as error:
 			logger.error(f"Error writing to db {dbdictcarrier}")
-			print(e)
+			print(error)
