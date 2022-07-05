@@ -17,7 +17,7 @@ args = parser.parse_args()
 vendors_path = 'vendors'
 
 def get_skipped_modules(config):
-    mods = list()
+    mods = []
     for mod in os.listdir(vendors_path):
         if mod.endswith(".py") and mod != "__init__.py":
             if mod.split('.')[0] in config:
@@ -47,12 +47,12 @@ if __name__ == "__main__":
             whitelisted_modules.append(file.split('.')[0])
 
     with ThreadPoolExecutor(num_threads) as executor:
-        for mod in whitelisted_modules:
-            if mod in config:
-                logger.info(f"Starting {mod} downloader ...")
-                schedule.every(config[mod]['interval']).minutes.do(executor_job, mod)
+        for module in whitelisted_modules:
+            if module in config:
+                logger.info(f"Starting {module} downloader ...")
+                schedule.every(config[module]['interval']).minutes.do(executor_job, module)
             else:
-                schedule.every(config['default']['interval']).minutes.do(executor_job, mod)
+                schedule.every(config['default']['interval']).minutes.do(executor_job, module)
         while True:
             schedule.run_pending()
             time.sleep(1)

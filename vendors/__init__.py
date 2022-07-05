@@ -10,8 +10,9 @@ from utils.Logs import get_logger
 logger = get_logger("vendors.__init__")
 
 data = {}
-with open('config/config.json', 'r') as f:
-    data = json.load(f)
+config_path = os.path.join("config", "config.json")
+with open(config_path, "rb") as fp:
+    config = json.load(fp)
 
 vendors_path = 'vendors'
 
