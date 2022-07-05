@@ -14,8 +14,6 @@ config_path = os.path.join("config", "config.json")
 with open(config_path, "rb") as fp:
     config = json.load(fp)
 
-vendors_path = 'vendors'
-
 def job(file):
     os.system("python vendors/" + file)
 
@@ -24,4 +22,3 @@ def mod_runner(mod_name):
 
 def runner(mod):
     mod_runner(mod)
-    

@@ -14,11 +14,11 @@ logger = get_logger("main")
 parser = argparse.ArgumentParser()
 parser.add_argument("--num-threads", type=int, default=2, help="Number of parallel executing modules")
 args = parser.parse_args()
-vendors_file = 'vendors'
+VENDORS_FILE = 'vendors'
 
 def get_skipped_modules():
     mods = []
-    for mod in os.listdir(vendors_file):
+    for mod in os.listdir(VENDORS_FILE):
         if mod.endswith(".py") and mod != "__init__.py":
             if mod.split('.')[0] in config:
                 if config[mod.split('.')[0]]["ignore"] is True:
@@ -39,7 +39,7 @@ if __name__ == "__main__":
     print(skip_modules)
 
     whitelisted_modules = []
-    for file in os.listdir(vendors_file):
+    for file in os.listdir(VENDORS_FILE):
         if file.endswith(".py") and file.split('.')[0] in config and file != "__init__.py":
             if file.split('.')[0] in skip_modules:
                 logger.info("Skipping %s", file.split('.')[0])
