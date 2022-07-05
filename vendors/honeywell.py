@@ -1,4 +1,4 @@
-import sys, os, time, inspect, wget, zipfile, re
+import sys, os, time, inspect, wget, zipfile, re, json
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
@@ -82,7 +82,6 @@ class Honeywell:
             return version, in_file_name
         else:
             version = None
-            print(None, '----------', in_file_name)
             return version, in_file_name
 
     def advanced_sensing_tech(self):
@@ -263,9 +262,7 @@ class Honeywell:
         driver.refresh()
         time.sleep(10)
         click_here_options = driver.find_element(By.XPATH, "(//a[contains(text(),'CLICK HERE')])[3]")
-        actions = ActionChains(driver)
-        actions.move_to_element(click_here_options).perform()
-        click_here_options.click()
+        self.action_download(driver, click_here_options)
         select = Select(driver.find_element(By.XPATH, '//select[@data-filter-label="Type"]'))
         select.select_by_visible_text("Firmware")
         time.sleep(5)
@@ -328,6 +325,6 @@ if __name__ == '__main__':
     hw = Honeywell()
     hw.homepage()
     hw.advanced_sensing_tech()
-    # hw.productivity()
+    hw.productivity()
     hw.gas()
     hw.close_browser()
