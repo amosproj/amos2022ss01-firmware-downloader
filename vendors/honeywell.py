@@ -82,7 +82,6 @@ class Honeywell:
             return version, in_file_name
         else:
             version = None
-            print(None, '----------', in_file_name)
             return version, in_file_name
 
     def advanced_sensing_tech(self):
@@ -113,9 +112,9 @@ class Honeywell:
             local_file_location = r"{}\downloads\honeywell\{}".format(self.path, file_name)
             # Duplication Check for not to download the files if files exist in local machine
             self.down_ele_click(local_file_location, download_element)
-            dbdict_carrier = dict()
-            db = Database(dbname=self.db_name)
-            for key in self.dbdict.keys():
+            dbdict_carrier = {}
+            db_used = Database(dbname=self.db_name)
+            for key in self.dbdict:
                 if key == "Manufacturer":
                     dbdict_carrier[key] = "Honeywell"
                 if key == "Modelname":
@@ -130,11 +129,11 @@ class Honeywell:
                     dbdict_carrier[key] = download_link
                 if key == "Fwfilelinktolocal":
                     dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
-                if key not in dbdict_carrier.keys():
+                if key not in dbdict_carrier:
                     dbdict_carrier[key] = ''
                 if self.db_name not in os.listdir('.'):
-                    db.create_table()
-            db.insert_data(dbdict_carrier)
+                    db_used.create_table()
+            db_used.insert_data(dbdict_carrier)
         driver.back()
 
     @staticmethod
@@ -263,9 +262,7 @@ class Honeywell:
         driver.refresh()
         time.sleep(10)
         click_here_options = driver.find_element(By.XPATH, "(//a[contains(text(),'CLICK HERE')])[3]")
-        actions = ActionChains(driver)
-        actions.move_to_element(click_here_options).perform()
-        click_here_options.click()
+        self.action_download(driver, click_here_options)
         select = Select(driver.find_element(By.XPATH, '//select[@data-filter-label="Type"]'))
         select.select_by_visible_text("Firmware")
         time.sleep(5)
@@ -290,9 +287,9 @@ class Honeywell:
                 actions.move_to_element(download_element).perform()
                 local_file_location = r"{}\downloads\honeywell\{}".format(self.path, download_link.split('/')[-1])
                 self.down_ele_click(local_file_location, download_element)
-                dbdict_carrier = dict()
-                db = Database(dbname=self.db_name)
-                for key in self.dbdict.keys():
+                dbdict_carrier = {}
+                db_used = Database(dbname=self.db_name)
+                for key in self.dbdict:
                     if key == "Fwfilename":
                         dbdict_carrier[key] = r'{}'.format(web_file_name)
                     if key == "Manufacturer":
@@ -305,11 +302,11 @@ class Honeywell:
                         dbdict_carrier[key] = download_link
                     if key == "Fwfilelinktolocal":
                         dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
-                    if key not in dbdict_carrier.keys():
+                    if key not in dbdict_carrier:
                         dbdict_carrier[key] = ''
                     if self.db_name not in os.listdir('.'):
-                        db.create_table()
-                db.insert_data(dbdict_carrier)
+                        db_used.create_table()
+                db_used.insert_data(dbdict_carrier)
             time.sleep(10)
             if driver.find_element(By.XPATH, "//*[text()='Next']").tag_name == "span":
                 break
