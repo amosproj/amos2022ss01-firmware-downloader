@@ -27,10 +27,10 @@ with open(CONFIG_PATH, "rb") as fp:
 
 #inserting meta data into database
 def insert_into_db(fwdata, db_name):
-    db = Database(dbname=db_name)
+    db_ = Database(dbname=db_name)
     if db_name not in os.listdir('.'):
-        db.create_table()
-    db.insert_data(dbdictcarrier=fwdata)
+        db_.create_table()
+    db_.insert_data(dbdictcarrier=fwdata)
     logger.info("data inserted")
 
 #download firmware image
@@ -59,8 +59,8 @@ def download_file(url, file_path_to_save, data0, data1, folder, filename, link, 
             resp = requests.get(url, allow_redirects=True)
             if resp.status_code != 200:
                 raise ValueError("Invalid Url or file not found")
-            with open(file_path_to_save, "wb") as f:
-                f.write(resp.content)
+            with open(file_path_to_save, "wb") as f_:
+                f_.write(resp.content)
             if is_file_download is False:
                 insert_into_db(req_data, db_name)
         else:
@@ -71,8 +71,8 @@ def download_file(url, file_path_to_save, data0, data1, folder, filename, link, 
             driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
             # Go to your page url
             try:
-                URL = "https://www.gegridsolutions.com/Passport/Login.aspx"
-                driver.get(URL)
+                url_ = "https://www.gegridsolutions.com/Passport/Login.aspx"
+                driver.get(url_)
                 driver.find_element(By.ID, "ctl00_BodyContent_Login1_UserName").send_keys(USERNAME)
                 driver.find_element(By.ID, "ctl00_BodyContent_Login1_Password").send_keys(PASSWORD)
                 driver.find_element(By.ID, "ctl00_BodyContent_Login1_LoginButton").click()
@@ -95,8 +95,8 @@ def scraper_parse(url, folder, base_url):
     try:
         if not os.path.isdir(dest):
             os.mkdir(dest)
-    except Exception as e:
-        raise ValueError(f"{e}")
+    except Exception as e_:
+        raise ValueError("%s" % e_) from e_
     cont = requests.get(url)
     soup = BeautifulSoup(cont.text, 'html.parser')
     items = soup.find_all("tr", valign="top")
