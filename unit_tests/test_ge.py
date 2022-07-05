@@ -10,9 +10,9 @@ from utils.check_duplicates import check_duplicates
 DB_NAME = "test_firmwaredatabase.db"
 
 def fetch_data():
-    DB = Database(dbname=DB_NAME)
+    db_ = Database(dbname=DB_NAME)
     if DB_NAME not in os.listdir('.'):
-        DB.create_table()
+        db_.create_table()
     #DB connection
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
@@ -35,8 +35,8 @@ class Unit_Case_Test(unittest.TestCase):
         try:
             if not os.path.isdir(dest):
                 os.mkdir(dest)
-        except Exception as e:
-            raise ValueError(f"{e}")
+        except Exception as er_:
+            raise ValueError("%s", er_)
         gt_file_path = os.path.join(dest, files[0])
 
         data = {
@@ -62,8 +62,8 @@ class Unit_Case_Test(unittest.TestCase):
         try:
             if not os.path.isdir(dest):
                 os.mkdir(dest)
-        except Exception as e:
-            raise ValueError("%s", e)
+        except Exception as er_:
+            raise ValueError("%s", er_)
         gt_file_path = os.path.join(dest, files[0])
 
         data = {
