@@ -36,7 +36,7 @@ class GEUnitTest(unittest.TestCase):
             if not os.path.isdir(dest):
                 os.mkdir(dest)
         except Exception as er_:
-            raise ValueError("%s" % er_)
+            raise ValueError("%s" % er_) from er_
         gt_file_path = os.path.join(dest, files[0])
 
         data = {
@@ -63,7 +63,7 @@ class GEUnitTest(unittest.TestCase):
             if not os.path.isdir(dest):
                 os.mkdir(dest)
         except Exception as er_:
-            raise ValueError("%s" % er_)
+            raise ValueError("%s" % er_) from er_
         gt_file_path = os.path.join(dest, files[0])
 
         data = {
