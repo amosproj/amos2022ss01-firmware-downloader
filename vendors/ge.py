@@ -59,8 +59,8 @@ def download_file(url, file_path_to_save, data0, data1, folder, filename, link, 
             resp = requests.get(url, allow_redirects=True)
             if resp.status_code != 200:
                 raise ValueError("Invalid Url or file not found")
-            with open(file_path_to_save, "wb") as f_:
-                f_.write(resp.content)
+            with open(file_path_to_save, "wb") as fp_:
+                fp_.write(resp.content)
             if is_file_download is False:
                 insert_into_db(req_data, db_name)
         else:
@@ -95,8 +95,8 @@ def scraper_parse(url, folder, base_url):
     try:
         if not os.path.isdir(dest):
             os.mkdir(dest)
-    except Exception as e_:
-        raise ValueError("%s" % e_) from e_
+    except Exception as er_:
+        raise ValueError("%s" % er_) from er_
     cont = requests.get(url)
     soup = BeautifulSoup(cont.text, 'html.parser')
     items = soup.find_all("tr", valign="top")
