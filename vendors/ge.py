@@ -4,7 +4,7 @@ import os
 import sys
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-sys.path.append(os.path.abspath(os.path.join('.', '')))  
+sys.path.append(os.path.abspath(os.path.join('.', '')))
 from utils.database import Database
 from utils.check_duplicates import check_duplicates
 from utils.Logs import get_logger
@@ -15,20 +15,22 @@ import json
 logger = get_logger("vendors.ge")
 links=[]
 
-username = ''
-password = ''
+USERNAME = ''
+PASSWORD = ''
 
-with open('config/config.json', 'r') as f:
-    data = json.load(f)
-    username = data['ge']['user']
-    password = data['ge']['password']
+CONFIG_PATH = os.path.join("config", "config.json")
+DATA={}
+with open(CONFIG_PATH, "rb") as fp:
+    DATA = json.load(fp)
+    USERNAME = DATA['ge']['user']
+    PASSWORD = DATA['ge']['password']
 
 #inserting meta data into database
-def insert_into_db(data, db_name):
+def insert_into_db(fwdata, db_name):
     db = Database(dbname=db_name)
     if db_name not in os.listdir('.'):
         db.create_table()
-    db.insert_data(dbdictcarrier=data)
+    db.insert_data(dbdictcarrier=fwdata)
     logger.info("data inserted")
 
 #download firmware image
@@ -51,15 +53,15 @@ def download_file(url, file_path_to_save, data0, data1, folder, filename, link, 
 		'Fwadddata': ''
 	}
 
-    if check_duplicates(req_data, db_name) == False or is_file_download == True:
+    if check_duplicates(req_data, db_name) is False or is_file_download is True:
         if link != "javascript:;":
-            logger.info(f"Downloading {url} and saving as {file_path_to_save}")
+            logger.info("Downloading %s and saving as %s", url, file_path_to_save)
             resp = requests.get(url, allow_redirects=True)
             if resp.status_code != 200:
                 raise ValueError("Invalid Url or file not found")
             with open(file_path_to_save, "wb") as f:
                 f.write(resp.content)
-            if is_file_download == False:
+            if is_file_download is False:
                 insert_into_db(req_data, db_name)
         else:
             options = webdriver.ChromeOptions()
@@ -71,15 +73,15 @@ def download_file(url, file_path_to_save, data0, data1, folder, filename, link, 
             try:
                 URL = "https://www.gegridsolutions.com/Passport/Login.aspx"
                 driver.get(URL)
-                driver.find_element(By.ID, "ctl00_BodyContent_Login1_UserName").send_keys(username)
-                driver.find_element(By.ID, "ctl00_BodyContent_Login1_Password").send_keys(password)
+                driver.find_element(By.ID, "ctl00_BodyContent_Login1_UserName").send_keys(USERNAME)
+                driver.find_element(By.ID, "ctl00_BodyContent_Login1_Password").send_keys(PASSWORD)
                 driver.find_element(By.ID, "ctl00_BodyContent_Login1_LoginButton").click()
                 # Get button you are going to click by its id ( also you could us find_element_by_css_selector to get element by css selector)
                 driver.get(main_url)
                 driver.execute_script(click)
                 time.sleep(60)
                 driver.close()
-                if is_file_download == False:
+                if is_file_download is False:
                     insert_into_db(req_data, db_name)
             except:
                 logger.error("Error in downloading")
@@ -131,13 +133,9 @@ def directories_link(url, base_url):
                 links.append(base_url + "/app/resources.aspx?prod=vistanet&type=7")
 
 def main():
-    data = {}
-    with open('config/config.json', 'r') as f:
-        data = json.load(f)
-    base_url = data['ge']['url']
+    base_url = DATA['ge']['url']
     directories_link(base_url + '/communications/mds/software.asp', base_url)
     folder = 'File_system'
-    
     paths = links
     for path in paths:
         url = path
