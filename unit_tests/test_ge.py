@@ -25,7 +25,7 @@ def fetch_data():
     print(data_list)
     conn.close()
 
-class GE_UNIT_TEST(unittest.TestCase):
+class GEUnitTest(unittest.TestCase):
     def test_case_without_authentication(self):
         files = ["orbit-mib-9_2_2.zip", "2022-05-12"]
         folder = 'Test_File_system'
@@ -36,7 +36,7 @@ class GE_UNIT_TEST(unittest.TestCase):
             if not os.path.isdir(dest):
                 os.mkdir(dest)
         except Exception as er_:
-            raise ValueError("%s", er_)
+            raise ValueError("%s" % er_)
         gt_file_path = os.path.join(dest, files[0])
 
         data = {
@@ -63,7 +63,7 @@ class GE_UNIT_TEST(unittest.TestCase):
             if not os.path.isdir(dest):
                 os.mkdir(dest)
         except Exception as er_:
-            raise ValueError("%s", er_)
+            raise ValueError("%s" % er_)
         gt_file_path = os.path.join(dest, files[0])
 
         data = {
