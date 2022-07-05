@@ -18,14 +18,14 @@ def fetch_data():
     cursor = conn.cursor()
     try:
         cursor.execute("select * from FWDB WHERE Manufacturer='GE'")
-    except sqlite3.Error as er:
-        print('SQLite error:%s' % (' '.join(er.args)))
+    except sqlite3.Error as er_:
+        print('SQLite error:%s' % (' '.join(er_.args)))
 
     data_list = cursor.fetchall()
     print(data_list)
     conn.close()
 
-class Unit_Case_Test(unittest.TestCase):
+class GE_UNIT_TEST(unittest.TestCase):
     def test_case_without_authentication(self):
         files = ["orbit-mib-9_2_2.zip", "2022-05-12"]
         folder = 'Test_File_system'
