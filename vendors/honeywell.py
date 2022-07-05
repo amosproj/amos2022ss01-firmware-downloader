@@ -325,6 +325,6 @@ if __name__ == '__main__':
     hw = Honeywell()
     hw.homepage()
     hw.advanced_sensing_tech()
-    # hw.productivity()
+    hw.productivity()
     hw.gas()
     hw.close_browser()
