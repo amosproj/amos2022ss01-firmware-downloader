@@ -3,6 +3,7 @@ import math
 import re
 import uuid
 import sys
+import traceback
 sys.path.append(os.path.abspath(os.path.join('.', '')))
 from utils.Logs import get_logger
 
@@ -32,7 +33,7 @@ def download_list_files(metadata, max_files=-1): #max_files -1 means download al
     if max_files > len(metadata):
         max_files = len(metadata)
     for file_ in range(max_files):
-        download_list_files(metadata[file_]["Fwdownlink"], metadata[file_]["Fwfilelinktolocal"])
+        download_single_file(metadata[file_]["Fwdownlink"], metadata[file_]["Fwfilelinktolocal"])
 
 def write_metadata_to_db(metadata):
     logger.info("Going to write metadata in db")
@@ -41,7 +42,6 @@ def write_metadata_to_db(metadata):
     if db_name not in os.listdir('../'):
         db.create_table()
     for fw in metadata:
-        print(fw)
         db.insert_data(dbdictcarrier=fw)
 
 def se_get_total_firmware_count(url):
@@ -84,19 +84,19 @@ def transform_metadata_format_ours(raw_data, local_storage_dir="."):
     for fw in raw_data:
 
         fw_mod = {
-        'Fwfileid': fw.get("reference", str(uuid.uuid4())),
-        'Fwfilename': fw.get("title", "").replace("'", ""),
+        'Fwfileid': str(fw.get("reference", str(uuid.uuid4()))),
+        'Fwfilename': str(fw.get("title", "").replace("'", "").replace(" ", "_")),
 	    'Manufacturer': 'schneider_electric',
-	    'Modelname': fw.get("title", "").replace("'", ""),
-	    'Version': fw.get("version", ""),
-	    'Type': fw.get("documentTypeEnglishLabel", ""),
+	    'Modelname': str(fw.get("title", "").replace("'", "").replace(" ", "_")),
+	    'Version': str(fw.get("version", "").replace(" ", "_")),
+	    'Type': str(fw.get("documentTypeEnglishLabel", "").replace(" ", "_")),
 	    'Releasedate': fw.get("docDate", ""),
 	    'Checksum': '',
 	    'Embatested': '',
 	    'Embalinktoreport': '',
 	    'Embarklinktoreport': '',
         'Fwdownlink': "https:" + fw.get("downloadUrl", ""),
-	    'Fwfilelinktolocal': os.path.join(local_storage_dir, parse_qs(urlparse(fw.get("downloadUrl")).query, keep_blank_values=True).get("p_File_Name", list(str(uuid.uuid4())))[0]),
+	    'Fwfilelinktolocal': os.path.join(local_storage_dir, parse_qs(urlparse(fw.get("downloadUrl")).query, keep_blank_values=True).get("p_File_Name", list(str(uuid.uuid4())))[0].replace(" ", "_").replace("'", "") ),
 	    'Fwadddata': ''
 	}
         db_name = 'firmwaredatabase.db'
@@ -128,7 +128,7 @@ def se_firmaware_parser(url, folder):
 def main():
     try:
         url = "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/?docType=1555893-Firmware&language=en_GB-English&sortByField=Popularity"
-        folder = 'File_system'
+        folder = '../File_system'
         total_fw = se_get_total_firmware_count(url)
         api_url = "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/resultViewCahnge/resultListAjax"
         raw_fw_list = get_firmware_data_using_api(api_url, total_fw, 50) #50 is max fw_per_page
@@ -137,6 +137,7 @@ def main():
         download_list_files(metadata, 10) # download max 10 files
     except Exception as general_exception:
         logger.error(f"{general_exception}")
+        traceback.print_exc(file=sys.stdout)
 
 if __name__ == "__main__":
     main()

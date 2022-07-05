@@ -1,14 +1,13 @@
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join('.', '')))
-from vendors.schneider_electric import *
 from utils.database import Database
 import sqlite3
 import unittest
-#from vendors.schneider_electric import download_single_file
+from vendors.schneider_electric import download_single_file
 #from utils.check_duplicates import check_duplicates
 
-db_name = "test_firmwaredatabase.db"
+db_name = "../firmwaredatabase.db"
 
 
 def fetch_data():
@@ -19,7 +18,7 @@ def fetch_data():
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
     try:
-        cursor.execute("select * from FWDB WHERE Manufacturer='GE'")
+        cursor.execute("select * from FWDB WHERE Manufacturer='schneider_electric'")
     except sqlite3.Error as er:
         print('SQLite error:%s' % (' '.join(er.args)))
 
@@ -52,4 +51,5 @@ class Unit_Case_Test(unittest.TestCase):
 
 
 if __name__ == "__main__":
+    fetch_data()
     unittest.main()
