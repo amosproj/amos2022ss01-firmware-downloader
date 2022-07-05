@@ -16,7 +16,7 @@ parser.add_argument("--num-threads", type=int, default=2, help="Number of parall
 args = parser.parse_args()
 vendors_path = 'vendors'
 
-def get_skipped_modules(config):
+def get_skipped_modules():
     mods = []
     for mod in os.listdir(vendors_path):
         if mod.endswith(".py") and mod != "__init__.py":
@@ -25,16 +25,16 @@ def get_skipped_modules(config):
                     mods.append(mod.split('.')[0])
             else:
                 if config['default']['ignore'] is True:
-                    mods.append(mod.split('.')[0])       
+                    mods.append(mod.split('.')[0])
     return mods
 
 def executor_job(mod_):
-    _ = executor.submit(runner, mod_) 
+    _ = executor.submit(runner, mod_)
 
 if __name__ == "__main__":
     logger.info("Starting runner...")
     num_threads = args.num_threads
-    skip_modules = get_skipped_modules(config)
+    skip_modules = get_skipped_modules()
     print("Following modules are skipped")
     print(skip_modules)
 
