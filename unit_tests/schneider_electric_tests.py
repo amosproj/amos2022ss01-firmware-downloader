@@ -5,7 +5,7 @@ from utils.database import Database
 import sqlite3
 import unittest
 from vendors.schneider_electric import download_single_file
-#from utils.check_duplicates import check_duplicates
+from utils.check_duplicates import check_duplicates
 
 db_name = "../firmwaredatabase.db"
 
@@ -33,7 +33,7 @@ class Unit_Case_Test(unittest.TestCase):
             dest = "test_files"
             if not os.path.isdir(dest):
                 os.mkdir(dest)
-            gt_file = "PM5560_PM5563_V2.7.4_Release.zip"
+            gt_file = "PM5560_PM5563_V2.7.4_Release.zip"  #Firmware_1.10.0_5500AC2.zip
             gt_file_path = os.path.join(dest, gt_file)
             if os.path.exists(gt_file_path):
                 os.remove(gt_file_path)
@@ -46,8 +46,17 @@ class Unit_Case_Test(unittest.TestCase):
             select_command = "select * from FWDB WHERE Manufacturer='schneider_electric'"
             curs.execute(select_command)
             records = len(curs.fetchall())
-            self.assertTrue(records, msg="Record not exists")
+            self.assertFalse(records, msg="Record not exists")
             print(f"Database contains {records} firmwares for schneider_electric")
+
+    def test_for_check_dublicates(self):
+        file_name = 'EPDU_SP1_HC_V2010'
+        data = {
+            'Manufacturer': 'schneider_electric',
+            'Modelname': file_name,
+            'Version': '',
+        }
+        self.assertFalse(check_duplicates(data, db_name), msg="Image didn't downloaded")
 
 
 if __name__ == "__main__":
