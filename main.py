@@ -3,9 +3,17 @@ import json
 import os
 import schedule
 import time
-from vendors import runner
 from utils.Logs import get_logger
 from concurrent.futures import ThreadPoolExecutor
+
+def job(file):
+    os.system("python vendors/" + file)
+
+def mod_runner(mod_name):
+    job(mod_name+".py")
+
+def runner(mod):
+    mod_runner(mod)
 
 config_path = os.path.join("config", "config.json")
 with open(config_path, "rb") as fp:
@@ -19,7 +27,7 @@ VENDORS_FILE = 'vendors'
 def get_skipped_modules():
     mods = []
     for mod in os.listdir(VENDORS_FILE):
-        if mod.endswith(".py") and mod != "__init__.py":
+        if mod.endswith(".py"):
             if mod.split('.')[0] in config:
                 if config[mod.split('.')[0]]["ignore"] is True:
                     mods.append(mod.split('.')[0])
@@ -40,7 +48,7 @@ if __name__ == "__main__":
 
     whitelisted_modules = []
     for file in os.listdir(VENDORS_FILE):
-        if file.endswith(".py") and file.split('.')[0] in config and file != "__init__.py":
+        if file.endswith(".py") and file.split('.')[0] in config:
             if file.split('.')[0] in skip_modules:
                 logger.info("Skipping %s", file.split('.')[0])
                 continue
