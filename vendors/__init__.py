@@ -11,8 +11,9 @@ logger = get_logger("vendors.__init__")
 
 data = {}
 config_path = os.path.join("config", "config.json")
+
 with open(config_path, "rb") as fp:
-    config = json.load(fp)
+    data = json.load(fp)
 
 def job(file):
     os.system("python vendors/" + file)

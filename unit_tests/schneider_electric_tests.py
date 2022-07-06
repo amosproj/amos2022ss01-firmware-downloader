@@ -1,14 +1,13 @@
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join('.', '')))
-from vendors.schneider_electric import *
 from utils.database import Database
 import sqlite3
 import unittest
-#from vendors.schneider_electric import download_single_file
-#from utils.check_duplicates import check_duplicates
+from vendors.schneider_electric import download_single_file
+from utils.check_duplicates import check_duplicates
 
-db_name = "test_firmwaredatabase.db"
+db_name = "../firmwaredatabase.db"
 
 
 def fetch_data():
@@ -19,7 +18,7 @@ def fetch_data():
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
     try:
-        cursor.execute("select * from FWDB WHERE Manufacturer='GE'")
+        cursor.execute("select * from FWDB WHERE Manufacturer='schneider_electric'")
     except sqlite3.Error as er:
         print('SQLite error:%s' % (' '.join(er.args)))
 
@@ -34,7 +33,7 @@ class Unit_Case_Test(unittest.TestCase):
             dest = "test_files"
             if not os.path.isdir(dest):
                 os.mkdir(dest)
-            gt_file = "PM5560_PM5563_V2.7.4_Release.zip"
+            gt_file = "PM5560_PM5563_V2.7.4_Release.zip"  #Firmware_1.10.0_5500AC2.zip
             gt_file_path = os.path.join(dest, gt_file)
             if os.path.exists(gt_file_path):
                 os.remove(gt_file_path)
@@ -47,9 +46,19 @@ class Unit_Case_Test(unittest.TestCase):
             select_command = "select * from FWDB WHERE Manufacturer='schneider_electric'"
             curs.execute(select_command)
             records = len(curs.fetchall())
-            self.assertTrue(records, msg="Record not exists")
+            self.assertFalse(records, msg="Record not exists")
             print(f"Database contains {records} firmwares for schneider_electric")
+
+    def test_for_check_dublicates(self):
+        file_name = 'EPDU_SP1_HC_V2010'
+        data = {
+            'Manufacturer': 'schneider_electric',
+            'Modelname': file_name,
+            'Version': '',
+        }
+        self.assertFalse(check_duplicates(data, db_name), msg="Image didn't downloaded")
 
 
 if __name__ == "__main__":
+    fetch_data()
     unittest.main()
