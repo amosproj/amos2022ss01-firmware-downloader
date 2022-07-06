@@ -1,3 +1,4 @@
+import os
 import sqlite3
 from utils.Logs import get_logger
 logger = get_logger("utils.database")
@@ -6,9 +7,9 @@ logger = get_logger("utils.database")
 # The Database class is defined to maintain the db functionalities like create_table, insert_table
 class Database:
 
-	def __init__(self, dbname):
-		# The initialization function is available for all the methods with the db name
-		self.dbname = dbname
+	def __init__(self):
+		# The initialization function is available for all the methods with the db class
+		self.dbname = 'firmwaredatabase.db'
 		self.dbdict = {
 			'Fwfileid': '',
 			'Fwfilename': '',
@@ -54,32 +55,39 @@ class Database:
 		conn.commit()
 		curs.close()
 
+	def db_check(self):
+		# The function checks the db file, if not present it will create a db in the repo where database is used
+		if self.dbname not in os.listdir('.'):
+			logger.info(f'the db is not found so a new {self.dbname} will be created')
+			self.create_table()
+
 	def insert_data(self, dbdictcarrier):
+		self.db_check()
 		"""The insert_data function is used to update the new data in the db with
 		"dbdictcarrier" as a dictionary input."""
 		try:
-			logger.debug(f'As the {self.dbname} is found, a new connection will be established.')
+			logger.info(f'As the {self.dbname} is found, a new connection will be established.')
 			conn = sqlite3.connect(self.dbname)
-			logger.debug('Connection details: {}'.format(conn))
+			logger.info('Connection details: {}'.format(conn))
 			curs = conn.cursor()
-			logger.debug(f'A cursor is established on {self.dbname}, with the details {curs}.')
+			logger.info(f'A cursor is established on {self.dbname}, with the details {curs}.')
 			select_command = "select * from FWDB"
 			curs.execute(select_command)
-			logger.debug(f'The table FWDB is selected in the {self.dbname} with the command: {select_command}.')
+			logger.info(f'The table FWDB is selected in the {self.dbname} with the command: {select_command}.')
 			records = len(curs.fetchall())
 			dbdict = self.dbdict
 			for key in dbdict:
 				dbdict[key] = dbdictcarrier[key]
-				logger.debug(f'The {self.dbname} is updated with the Key: {key} and Value: {dbdict[key]}.')
+				logger.info(f'The {self.dbname} is updated with the Key: {key} and Value: {dbdict[key]}.')
 			dbdict['Fwfileid'] = f'FILE_{records + 1}'
-			logger.debug(f"The db is updated with the Fwfileid. as {dbdict['Fwfileid']}.")
+			logger.info(f"The db is updated with the Fwfileid. as {dbdict['Fwfileid']}.")
 			# Currently, the local firmware id is represented as file extended by _ in increase by 1
 			insert_command = f'''INSERT INTO FWDB('{"','".join(map(str, dbdict.keys()))}')
 			VALUES('{"','".join(map(str, dbdict.values()))}')'''
 			curs.execute(insert_command)
-			logger.debug(f'The db is inserted with the command {insert_command}.')
+			logger.info(f'The db is inserted with the command {insert_command}.')
 			conn.commit()
-			logger.debug(f'The db commited is with data {dbdict}.')
+			logger.info(f'The db commited is with data {dbdict}.')
 			# Prints the data in db
 			curs.execute('SELECT * FROM FWDB')
 			print(curs.fetchall())

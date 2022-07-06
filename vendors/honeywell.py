@@ -1,4 +1,4 @@
-import sys, os, time, inspect, wget, zipfile, re
+import sys, os, time, inspect, wget, zipfile, re, json
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
@@ -23,14 +23,13 @@ class Honeywell:
      Each function is created to run the download module separately and update the data into database
      """
 
-    def __init__(self, email="firmwaredownloader1@gmail.com", password="Firmware@123"):
-        # with open('config/config.json', 'r') as f:
-        #     self.email = json.load(f)['honeywell']['user']
-        #     self.password = json.load(f)['honeywell']['password']
-        self.email = email
-        self.password = password
+    def __init__(self):
+        with open(os.path.join(parent_dir, 'config', 'config.json'), 'rb') as json_file:
+            honeywell_data = json.loads(json_file.read())['honeywell']
+            self.email = honeywell_data['user']
+            self.password = honeywell_data['password']
+            self.url = honeywell_data['url']
         self.path = os.getcwd()
-        self.db_name = 'firmwaredatabase.db'
         opt = Options()
         opt.add_experimental_option("prefs", {
             "download.default_directory": r"{}\downloads\honeywell".format(self.path),
@@ -59,7 +58,7 @@ class Honeywell:
     def homepage(self):
         # The homepage is used to navigate to the main page of downloads
         driver = self.driver
-        driver.get("https://sps.honeywell.com/us/en/support/software-downloads")
+        driver.get(self.url)
         driver.implicitly_wait(10)  # seconds
         driver.maximize_window()
 
@@ -113,7 +112,7 @@ class Honeywell:
             # Duplication Check for not to download the files if files exist in local machine
             self.down_ele_click(local_file_location, download_element)
             dbdict_carrier = {}
-            db_used = Database(dbname=self.db_name)
+            db_used = Database()
             for key in self.dbdict:
                 if key == "Manufacturer":
                     dbdict_carrier[key] = "Honeywell"
@@ -131,8 +130,6 @@ class Honeywell:
                     dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
                 if key not in dbdict_carrier:
                     dbdict_carrier[key] = ''
-                if self.db_name not in os.listdir('.'):
-                    db_used.create_table()
             db_used.insert_data(dbdict_carrier)
         driver.back()
 
@@ -167,6 +164,7 @@ class Honeywell:
         hny_down_tool_file = str([name for name in os.listdir(os.getcwd())
                                   if '.msi' in name]).replace('[', '').replace(']', '').replace("'", '')
         hny_down_tool_file_path = r"{}\{}".format(self.path, hny_down_tool_file)
+        print(hny_down_tool_file_path)
         driver.find_element(By.XPATH, ".//li[@aria-level='1']//i[@class='jstree-icon jstree-ocl']").click()
         rows0 = driver.find_elements(
             By.XPATH, ".//li[@aria-level='1']//li[@aria-level='2']//i[@class='jstree-icon jstree-ocl']")
@@ -288,7 +286,7 @@ class Honeywell:
                 local_file_location = r"{}\downloads\honeywell\{}".format(self.path, download_link.split('/')[-1])
                 self.down_ele_click(local_file_location, download_element)
                 dbdict_carrier = {}
-                db_used = Database(dbname=self.db_name)
+                db_used = Database()
                 for key in self.dbdict:
                     if key == "Fwfilename":
                         dbdict_carrier[key] = r'{}'.format(web_file_name)
@@ -304,8 +302,6 @@ class Honeywell:
                         dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
                     if key not in dbdict_carrier:
                         dbdict_carrier[key] = ''
-                    if self.db_name not in os.listdir('.'):
-                        db_used.create_table()
                 db_used.insert_data(dbdict_carrier)
             time.sleep(10)
             if driver.find_element(By.XPATH, "//*[text()='Next']").tag_name == "span":
