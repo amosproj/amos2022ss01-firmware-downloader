@@ -6,15 +6,6 @@ import time
 from utils.Logs import get_logger
 from concurrent.futures import ThreadPoolExecutor
 
-def job(file):
-    os.system("python vendors/" + file)
-
-def mod_runner(mod_name):
-    job(mod_name+".py")
-
-def runner(mod):
-    mod_runner(mod)
-
 config_path = os.path.join("config", "config.json")
 with open(config_path, "rb") as fp:
     config = json.load(fp)
@@ -24,43 +15,51 @@ parser.add_argument("--num-threads", type=int, default=2, help="Number of parall
 args = parser.parse_args()
 VENDORS_FILE = 'vendors'
 
-def get_skipped_modules():
-    mods = []
-    for mod in os.listdir(VENDORS_FILE):
-        if mod.endswith(".py"):
-            if mod.split('.')[0] in config:
-                if config[mod.split('.')[0]]["ignore"] is True:
-                    mods.append(mod.split('.')[0])
-            else:
-                if config['default']['ignore'] is True:
-                    mods.append(mod.split('.')[0])
-    return mods
+def runner(mod):
+    os.system("python vendors/" + mod + ".py")
 
-def executor_job(mod_):
+def executor_job(mod_, executor):
     _ = executor.submit(runner, mod_)
 
-if __name__ == "__main__":
-    logger.info("Starting runner...")
-    num_threads = args.num_threads
-    skip_modules = get_skipped_modules()
-    print("Following modules are skipped")
-    print(skip_modules)
-
-    whitelisted_modules = []
-    for file in os.listdir(VENDORS_FILE):
-        if file.endswith(".py") and file.split('.')[0] in config:
-            if file.split('.')[0] in skip_modules:
-                logger.info("Skipping %s", file.split('.')[0])
-                continue
-            whitelisted_modules.append(file.split('.')[0])
-
+def thread_pool(num_threads, whitelisted_modules):
     with ThreadPoolExecutor(num_threads) as executor:
         for module in whitelisted_modules:
             if module in config:
                 logger.info("Starting %s downloader ...", module)
-                schedule.every(config[module]['interval']).minutes.do(executor_job, module)
+                schedule.every(config[module]['interval']).minutes.do(executor_job, module, executor)
             else:
-                schedule.every(config['default']['interval']).minutes.do(executor_job, module)
+                schedule.every(config['default']['interval']).minutes.do(executor_job, module, executor)
         while True:
             schedule.run_pending()
             time.sleep(1)
+
+def get_modules(skip):
+    mods = []
+    for mod in os.listdir(VENDORS_FILE):
+        if mod.endswith(".py"):
+            if mod.split('.')[0] in config:
+                if config[mod.split('.')[0]]["ignore"] is True and skip is True:
+                    mods.append(mod.split('.')[0])
+                elif config[mod.split('.')[0]]["ignore"] is False and skip is False:
+                    mods.append(mod.split('.')[0])
+            else:
+                if config['default']['ignore'] is True and skip is True:
+                    mods.append(mod.split('.')[0])
+                elif config['default']['ignore'] is False and skip is False:
+                    mods.append(mod.split('.')[0])
+    return mods
+
+if __name__ == "__main__":
+    logger.info("Starting runner...")
+    num_threads = args.num_threads
+    whitelisted_modules = []
+    skip_modules = []
+    skip_modules = get_modules(True)
+    whitelisted_modules = get_modules(False)
+    print("Following modules are skipped")
+    print(skip_modules)
+
+    print("Following modules are enabled")
+    print(whitelisted_modules)
+
+    thread_pool(num_threads, whitelisted_modules)
