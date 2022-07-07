@@ -9,7 +9,7 @@ from utils.Logs import get_logger
 
 import requests
 from bs4 import BeautifulSoup
-
+import json
 from urllib.parse import parse_qs, urlparse
 from utils.check_duplicates import *
 from utils.database import Database
@@ -18,6 +18,10 @@ from utils.database import Database
 #Logger
 name = "schneider_electric"
 logger = get_logger("vendors.schneider_electric")
+CONFIG_PATH = os.path.join("config", "config.json")
+DATA={}
+with open(CONFIG_PATH, "rb") as fp:
+    DATA = json.load(fp)
 
 def download_single_file(url, file_path_to_save):
     logger.info(f"Downloading {url} and saving as {file_path_to_save}")
@@ -37,10 +41,7 @@ def download_list_files(metadata, max_files=-1): #max_files -1 means download al
 
 def write_metadata_to_db(metadata):
     logger.info("Going to write metadata in db")
-    db_name = 'firmwaredatabase.db'
-    db = Database(dbname=db_name)
-    if db_name not in os.listdir('../'):
-        db.create_table()
+    db = Database()
     for fw in metadata:
         db.insert_data(dbdictcarrier=fw)
 
@@ -82,23 +83,22 @@ def get_firmware_data_using_api(url, fw_count, fw_per_page):
 def transform_metadata_format_ours(raw_data, local_storage_dir="."):
     fw_mod_list = list()
     for fw in raw_data:
-
         fw_mod = {
-        'Fwfileid': str(fw.get("reference", str(uuid.uuid4()))),
-        'Fwfilename': str(fw.get("title", "").replace("'", "").replace(" ", "_")),
-	    'Manufacturer': 'schneider_electric',
-	    'Modelname': str(fw.get("title", "").replace("'", "").replace(" ", "_")),
-	    'Version': str(fw.get("version", "").replace(" ", "_")),
-	    'Type': str(fw.get("documentTypeEnglishLabel", "").replace(" ", "_")),
-	    'Releasedate': fw.get("docDate", ""),
-	    'Checksum': '',
-	    'Embatested': '',
-	    'Embalinktoreport': '',
-	    'Embarklinktoreport': '',
-        'Fwdownlink': "https:" + fw.get("downloadUrl", ""),
-	    'Fwfilelinktolocal': os.path.join(local_storage_dir, parse_qs(urlparse(fw.get("downloadUrl")).query, keep_blank_values=True).get("p_File_Name", list(str(uuid.uuid4())))[0].replace(" ", "_").replace("'", "") ),
-	    'Fwadddata': ''
-	}
+            'Fwfileid': 'FILE',
+            'Fwfilename': str(fw.get("title", "").replace("'", "").replace(" ", "_")),
+            'Manufacturer': 'schneider_electric',
+            'Modelname': str(fw.get("title", "").replace("'", "").replace(" ", "_")),
+            'Version': str(fw.get("version", "").replace(" ", "_")),
+            'Type': str(fw.get("documentTypeEnglishLabel", "").replace(" ", "_")),
+            'Releasedate': fw.get("docDate", ""),
+            'Checksum': '',
+            'Embatested': '',
+            'Embalinktoreport': '',
+            'Embarklinktoreport': '',
+            'Fwdownlink': "https:" + fw.get("downloadUrl", ""),
+            'Fwfilelinktolocal': os.path.join(local_storage_dir, parse_qs(urlparse(fw.get("downloadUrl")).query, keep_blank_values=True).get("p_File_Name", list(str(uuid.uuid4())))[0].replace(" ", "_").replace("'", "") ),
+            'Fwadddata': ''
+	    }
         db_name = 'firmwaredatabase.db'
         if (check_duplicates(fw_mod, db_name) == False):
             fw_mod_list.append(fw_mod)
@@ -128,7 +128,13 @@ def se_firmaware_parser(url, folder):
 def main():
     try:
         url = "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/?docType=1555893-Firmware&language=en_GB-English&sortByField=Popularity"
-        folder = '../File_system'
+        folder = DATA['file_paths']['download_files_path']
+        dest = os.path.join(os.getcwd(), folder)
+        try:
+            if not os.path.isdir(dest):
+                os.mkdir(dest)
+        except Exception as e:
+            raise ValueError(f"{e}")
         total_fw = se_get_total_firmware_count(url)
         api_url = "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/resultViewCahnge/resultListAjax"
         raw_fw_list = get_firmware_data_using_api(api_url, total_fw, 50) #50 is max fw_per_page

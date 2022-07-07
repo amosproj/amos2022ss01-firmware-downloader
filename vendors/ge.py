@@ -32,10 +32,10 @@ def insert_into_db(fwdata):
     logger.info("data inserted")
 
 #download firmware image
-def download_file(url, file_path_to_save, data0, data1, folder, filename, link, main_url, click, db_name, is_file_download):
-    local_uri = os.path.abspath(folder + "/" + filename)
+def download_file(url, file_path_to_save, data0, data1, filename, link, main_url, click, db_name, is_file_download):
+    local_uri = os.path.abspath(DATA['file_paths']['download_files_path'] + "/" + filename)
     req_data = {
-        'Fwfileid': '',
+        'Fwfileid': 'FILE',
         'Fwfilename': data0,
 		'Manufacturer': 'GE',
 		'Modelname': os.path.splitext(data0)[0],
@@ -81,15 +81,15 @@ def download_file(url, file_path_to_save, data0, data1, folder, filename, link, 
                 driver.close()
                 if is_file_download is False:
                     insert_into_db(req_data)
-            except:
-                logger.error("Error in downloading")
+            except Exception as er_:
+                logger.error("Error in downloading: "+ er_)
 
     else:
         logger.info("Data already exist!")
 
 #parse html and start clean according to our need
-def scraper_parse(url, folder, base_url):
-    dest = os.path.join(os.getcwd(), folder)
+def scraper_parse(url, base_url):
+    dest = os.path.join(os.getcwd(), DATA['file_paths']['download_files_path'])
     try:
         if not os.path.isdir(dest):
             os.mkdir(dest)
@@ -111,7 +111,7 @@ def scraper_parse(url, folder, base_url):
                         if link == "javascript:;":
                             click = item_temp.findChild("a").get("onclick")
                         file_path = os.path.join(dest, item_temp.get_text())
-                        download_file(base_url + link, file_path, items_temp[0].get_text(), items_temp[1].get_text(), folder, item_temp.get_text(), link, url, click, 'firmwaredatabase.db', False)
+                        download_file(base_url + link, file_path, items_temp[0].get_text(), items_temp[1].get_text(), item_temp.get_text(), link, url, click, 'firmwaredatabase.db', False)
                     sub_data.append(item_temp.get_text())
                 data.append(sub_data)
 
@@ -133,11 +133,10 @@ def directories_link(url, base_url):
 def main():
     base_url = DATA['ge']['url']
     directories_link(base_url + '/communications/mds/software.asp', base_url)
-    folder = 'File_system'
     paths = links
     for path in paths:
         url = path
-        scraper_parse(url, folder, base_url)
+        scraper_parse(url, base_url)
 
 if __name__ == "__main__":
     main()
