@@ -8,11 +8,8 @@ from utils.database import Database
 
 
 def fetch_data():
-    db_name = "../firmwaredatabase.db"
-    db = Database(dbname=db_name)
-    if db_name not in os.listdir('.'):
-        db.create_table()
-    # db connection
+    db_name = "firmwaredatabase.db"
+    
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
     try:
@@ -27,8 +24,8 @@ def fetch_data():
 class Unit_Case_Test(unittest.TestCase):
     def test_if_check_duplicates_working_correctly(self):
         temp_data = {
-            'Fwfileid': 'FILE',
             'Manufacturer': 'GE',
+            'Fwfilename': 'orbit-bkrc-9_2_2.mpk',
             'Modelname': 'orbit-bkrc-9_2_2.mpk',
             'Version': '',
             'Type': '',
@@ -45,8 +42,8 @@ class Unit_Case_Test(unittest.TestCase):
 
     def test_if_check_duplicates_working_correctly_with_data_inserted(self):
         temp_data = {
-            'Fwfileid': 'FILE',
             'Manufacturer': 'GE',
+            'Fwfilename': 'orbit-bkrc-9_2_2.mpk',
             'Modelname': 'orbit-bkrc-9_2_2.mpk',
             'Version': '',
             'Type': '',
@@ -60,13 +57,11 @@ class Unit_Case_Test(unittest.TestCase):
             'Fwadddata': 'some long sentence'
         }
         db_name = 'firmwaredatabase.db'
-        db = Database(dbname=db_name)
-        if db_name not in os.listdir('.'):
-            db.create_table()
+        db = Database()
         # Create a function for selenium output in dict format and return the dict. Pass it in the next line to insert the data
         db.insert_data(dbdictcarrier=temp_data)
         
-        self.assertTrue(check_duplicates(temp_data, 'firmwaredatabase.db'), msg="Data not exist")
+        self.assertTrue(check_duplicates(temp_data, db_name), msg="Data not exist")
 
 
 if __name__ == "__main__":

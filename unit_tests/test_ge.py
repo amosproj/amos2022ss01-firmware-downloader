@@ -3,16 +3,12 @@ import sqlite3
 import sys
 sys.path.append(os.path.abspath(os.path.join('.', '')))
 from vendors.ge import *
-from utils.database import Database
 import unittest
 from utils.check_duplicates import check_duplicates
 
-DB_NAME = "test_firmwaredatabase.db"
+DB_NAME = "firmwaredatabase.db"
 
 def fetch_data():
-    db_ = Database(dbname=DB_NAME)
-    if DB_NAME not in os.listdir('.'):
-        db_.create_table()
     #DB connection
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()

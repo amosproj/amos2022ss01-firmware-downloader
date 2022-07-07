@@ -26,18 +26,16 @@ with open(CONFIG_PATH, "rb") as fp:
     PASSWORD = DATA['ge']['password']
 
 #inserting meta data into database
-def insert_into_db(fwdata, db_name):
-    db_ = Database(dbname=db_name)
-    if db_name not in os.listdir('.'):
-        db_.create_table()
+def insert_into_db(fwdata):
+    db_ = Database()
     db_.insert_data(dbdictcarrier=fwdata)
     logger.info("data inserted")
 
 #download firmware image
 def download_file(url, file_path_to_save, data0, data1, folder, filename, link, main_url, click, db_name, is_file_download):
-    local_uri = "./" + folder + "/" + filename
+    local_uri = os.path.abspath(folder + "/" + filename)
     req_data = {
-		'Fwfileid': 'FILE',
+        'Fwfileid': '',
         'Fwfilename': data0,
 		'Manufacturer': 'GE',
 		'Modelname': os.path.splitext(data0)[0],
@@ -62,7 +60,7 @@ def download_file(url, file_path_to_save, data0, data1, folder, filename, link, 
             with open(file_path_to_save, "wb") as fp_:
                 fp_.write(resp.content)
             if is_file_download is False:
-                insert_into_db(req_data, db_name)
+                insert_into_db(req_data)
         else:
             options = webdriver.ChromeOptions()
             prefs = {"download.default_directory" : file_path_to_save}
@@ -79,10 +77,10 @@ def download_file(url, file_path_to_save, data0, data1, folder, filename, link, 
                 # Get button you are going to click by its id ( also you could us find_element_by_css_selector to get element by css selector)
                 driver.get(main_url)
                 driver.execute_script(click)
-                time.sleep(60)
+                time.sleep(10)
                 driver.close()
                 if is_file_download is False:
-                    insert_into_db(req_data, db_name)
+                    insert_into_db(req_data)
             except:
                 logger.error("Error in downloading")
 

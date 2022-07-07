@@ -6,9 +6,9 @@ from utils.database import Database
 
 
 db_name = 'firmwaredatabase.db'
-db = Database(dbname=db_name)
-if db_name not in os.listdir('.'):
-	db.create_table()
+db = Database()
+# if db_name not in os.listdir('.'):
+# 	db.create_table()
 # Create a function for selenium output in dict format and return the dict. Pass it in the next line to insert the data
 db.insert_data(dbdictcarrier={
 		'Fwfileid': 'FILE',
