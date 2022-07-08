@@ -19,7 +19,7 @@ sys.path.insert(0, parent_dir)
 class WebCode(unittest.TestCase):
 
 	def __init__(self):
-		super(WebCode, self).__init__()
+		super().__init__()
 		opt = Options()
 		with open(os.path.join(parent_dir, 'config', 'config.json'), 'rb') as json_file:
 			honeywell_data = json.loads(json_file.read())['honeywell']
