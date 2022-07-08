@@ -34,7 +34,7 @@ class Database:
 		The execute command in create_table fn will be used if table FWDB is not present in the file"""
 		conn = sqlite3.connect(self.dbname)
 		curs = conn.cursor()
-		logger.info(f'As there is no db local file, a new {self.dbname} will be created in the file directory.')
+		logger.info('As there is no db local file, a new %s will be created in the file directory.', self.dbname)
 		create_command = """CREATE TABLE IF NOT EXISTS FWDB(
 						Fwfileid VARCHAR PRIMARY KEY,
 						Fwfilename VARCHAR NOT NULL,
@@ -51,14 +51,14 @@ class Database:
 						Fwfilelinktolocal TEXT NOT NULL,
 						Fwadddata BLOB)"""
 		curs.execute(create_command)
-		logger.info(f'The database is created successfully in the code repository with the command {create_command}.')
+		logger.info('The database is created successfully in the code repository with the command: %s.', create_command)
 		conn.commit()
 		curs.close()
 
 	def db_check(self):
 		# The function checks the db file, if not present it will create a db in the repo where database is used
 		if self.dbname not in os.listdir('.'):
-			logger.info(f'the db is not found so a new {self.dbname} will be created')
+			logger.info('the db is not found so a new %s will be created', self.dbname)
 			self.create_table()
 
 	def insert_data(self, dbdictcarrier):
@@ -66,32 +66,32 @@ class Database:
 		"""The insert_data function is used to update the new data in the db with
 		"dbdictcarrier" as a dictionary input."""
 		try:
-			logger.info(f'As the {self.dbname} is found, a new connection will be established.')
+			logger.info('As the %s is found, a new connection will be established.', self.dbname)
 			conn = sqlite3.connect(self.dbname)
-			logger.info('Connection details: {}'.format(conn))
+			logger.info('Connection details: %s.', conn)
 			curs = conn.cursor()
-			logger.info(f'A cursor is established on {self.dbname}, with the details {curs}.')
+			logger.info('A cursor is established on %s, with the details: %s.', self.dbname, curs)
 			select_command = "select * from FWDB"
 			curs.execute(select_command)
-			logger.info(f'The table FWDB is selected in the {self.dbname} with the command: {select_command}.')
+			logger.info('The table FWDB is selected in the %s with the command: %s.', self.dbname, select_command)
 			records = len(curs.fetchall())
 			dbdict = self.dbdict
 			for key in dbdict:
 				dbdict[key] = dbdictcarrier[key]
-				logger.info(f'The {self.dbname} is updated with the Key: {key} and Value: {dbdict[key]}.')
+				logger.info('The %s is updated with the Key: %s and Value: %s.', self.dbname, key, dbdict[key])
 			dbdict['Fwfileid'] = f'FILE_{records + 1}'
-			logger.info(f"The db is updated with the Fwfileid. as {dbdict['Fwfileid']}.")
+			logger.info("The db is updated with the Fwfileid. as %s.", dbdict['Fwfileid'])
 			# Currently, the local firmware id is represented as file extended by _ in increase by 1
 			insert_command = f'''INSERT INTO FWDB('{"','".join(map(str, dbdict.keys()))}')
 			VALUES('{"','".join(map(str, dbdict.values()))}')'''
 			curs.execute(insert_command)
-			logger.info(f'The db is inserted with the command {insert_command}.')
+			logger.info('The db is inserted with the command %s.', insert_command)
 			conn.commit()
-			logger.info(f'The db commited is with data {dbdict}.')
+			logger.info('The db commited is with data %s.', dbdict)
 			# Prints the data in db
 			curs.execute('SELECT * FROM FWDB')
 			print(curs.fetchall())
 			curs.close()
 		except Exception as error:
-			logger.error(f"Error writing to db {dbdictcarrier}")
+			logger.error("Error writing to db %s", dbdictcarrier)
 			print(error)

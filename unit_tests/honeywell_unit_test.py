@@ -18,8 +18,8 @@ sys.path.insert(0, parent_dir)
 
 class WebCode(unittest.TestCase):
 
-	def __init__(self, *args, **kwargs):
-		super(WebCode, self).__init__(*args, **kwargs)
+	def __init__(self):
+		super(WebCode, self).__init__()
 		opt = Options()
 		with open(os.path.join(parent_dir, 'config', 'config.json'), 'rb') as json_file:
 			honeywell_data = json.loads(json_file.read())['honeywell']
@@ -121,7 +121,7 @@ class WebCode(unittest.TestCase):
 					dbdict_carrier[key] = download_link
 				if key == "Fwfilelinktolocal":
 					dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
-				if key not in dbdict_carrier.keys():
+				if key not in dbdict_carrier:
 					dbdict_carrier[key] = ''
 			db_used.insert_data(dbdict_carrier)
 			self.assertTrue(dbdict_carrier, msg="data inserted")
@@ -175,7 +175,7 @@ class WebCode(unittest.TestCase):
 						dbdict_carrier[key] = download_link
 					if key == "Fwfilelinktolocal":
 						dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
-					if key not in dbdict_carrier.keys():
+					if key not in dbdict_carrier:
 						dbdict_carrier[key] = ''
 				db_used.insert_data(dbdict_carrier)
 				self.assertTrue(dbdict_carrier, msg="data inserted")
