@@ -1,4 +1,7 @@
-import requests, wget, zipfile, os
+import os
+import requests
+import wget
+import zipfile
 
 
 class ChromiumDownloader:

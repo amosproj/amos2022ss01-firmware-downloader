@@ -1,11 +1,18 @@
-import sys, os, time, inspect, wget, zipfile, re, json
+import inspect
+import json
+import os
+import re
+import sys
+import time
+import wget
+import zipfile
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
-from utils.database import Database
 from utils.chromium_downloader import ChromiumDownloader
+from utils.database import Database
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
@@ -71,7 +78,7 @@ class Honeywell:
 
     @staticmethod
     def regex_sep(in_file_name):
-        version_regex = 've?r?s?i?o?n?\.?.?[a-zA-Z0-9]+\.[a-zA-Z0-9]+\.?\d?\d?\d?\.?\d?\d?\d?'
+        version_regex = "ve?r?s?i?o?n?\.?.?[a-zA-Z0-9]+\.[a-zA-Z0-9]+\.?\d?\d?\d?\.?\d?\d?\d?"
         model_name, version = '', ''
         ind = re.search(version_regex, in_file_name, re.IGNORECASE)
         if ind:
