@@ -63,8 +63,7 @@ class Database:
 
 	def insert_data(self, dbdictcarrier):
 		self.db_check()
-		"""The insert_data function is used to update the new data in the db with
-		dbdictcarrier as a dictionary input."""
+		# The insert_data function is used to update the new data in the db with dbdictcarrier as a dictionary input
 		try:
 			logger.info('As the %s is found, a new connection will be established.', self.dbname)
 			conn = sqlite3.connect(self.dbname)
