@@ -1,6 +1,6 @@
 import requests
 
-class FirmwareUploader(object):
+class FirmwareUploader:
     def __init__(self):
         self.auth_url = "http://embark.local"
         self.upload_fw_url = "http://embark.local/uploader/save/"
