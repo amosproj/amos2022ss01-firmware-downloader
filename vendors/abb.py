@@ -13,7 +13,10 @@ from utils.Logs import get_logger
 
 name = "abb"
 logger = get_logger("vendors.abb")
-
+CONFIG_PATH = os.path.join("config", "config.json")
+DATA={}
+with open(CONFIG_PATH, "rb") as fp:
+    DATA = json.load(fp)
 
 def download_single_file(file_metadata):
     url = file_metadata["Fwdownlink"]
@@ -27,6 +30,7 @@ def download_single_file(file_metadata):
     old_file_name_list[-1] = file_name # updated filename
     file_metadata["Fwfilelinktolocal"] = "/".join(old_file_name_list)
     file_path_to_save = file_metadata["Fwfilelinktolocal"]
+    print(file_path_to_save)
     logger.info(f"File saved at {file_path_to_save}")
     with open(file_path_to_save, "wb") as f:
         f.write(resp.content)
@@ -43,11 +47,8 @@ def download_list_files(metadata, max_files=-1): #max_files -1 means download al
 
 def write_metadata_to_db(metadata):
     logger.info("Going to write metadata in db")
-    db_name = 'firmwaredatabase.db'
-    db = Database(dbname=db_name)
+    db = Database()
     print(os.listdir('./'))
-    if db_name not in os.listdir('./'):
-        db.create_table()
     for fw in metadata:
         db.insert_data(dbdictcarrier=fw)
 
@@ -96,7 +97,8 @@ def transform_metadata_format_ours(raw_data, local_storage_dir="."):
     fw_mod_list = list()
     for fw in raw_data:
         fw_mod = {
-	    'Fwfileid': str(uuid.uuid4()),
+	    'Fwfileid': '',
+        'Fwfilename': fw["metadata"]["identification"]["documentNumber"],
 	    'Manufacturer': 'abb',
 	    'Modelname': fw["metadata"]["identification"]["documentNumber"],
 	    'Version': fw["metadata"]["identification"]["revision"],
@@ -115,7 +117,7 @@ def transform_metadata_format_ours(raw_data, local_storage_dir="."):
 
 def main():
     url = "https://discoveryapi.library.abb.com/api/public/documents"
-    folder = 'File_system'
+    folder = DATA['file_paths']['download_files_path']
     if not os.path.isdir(folder):
         os.mkdir(folder)
     total_fw = se_get_total_firmware_count(url)

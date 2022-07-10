@@ -1,19 +1,20 @@
 import os
 import sys
-sys.path.append(os.path.abspath(os.path.join('.', '')))
-from utils.database import Database
 import sqlite3
 import unittest
+import json
+sys.path.append(os.path.abspath(os.path.join('.', '')))
+from utils.database import Database
 from vendors.schneider_electric import download_single_file
 from utils.check_duplicates import check_duplicates
 
-db_name = "../firmwaredatabase.db"
-
+db_name = "firmwaredatabase.db"
+CONFIG_PATH = os.path.join("config", "config.json")
+DATA={}
+with open(CONFIG_PATH, "rb") as fp:
+    DATA = json.load(fp)
 
 def fetch_data():
-    db = Database(dbname=db_name)
-    if db_name not in os.listdir('.'):
-        db.create_table()
     # db connection
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
@@ -30,7 +31,7 @@ def fetch_data():
 class Unit_Case_Test(unittest.TestCase):
     def test_if_download_working_correctly(self):
             gt_url = "https://download.schneider-electric.com/files?p_enDocType=Firmware&p_File_Name=PM5560_PM5563_V2.7.4_Release.zip&p_Doc_Ref=PM5560_PM5563_V2.7.4_Release"
-            dest = "test_files"
+            dest = DATA['file_paths']['dowload_test_files_path']
             if not os.path.isdir(dest):
                 os.mkdir(dest)
             gt_file = "PM5560_PM5563_V2.7.4_Release.zip"  #Firmware_1.10.0_5500AC2.zip

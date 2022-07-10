@@ -5,13 +5,14 @@ import os
 #check duplicate data for firmware web scrapping
 def check_duplicates(firmware_data, db_name):
     db = Database()
-    # db.db_check()
+    db.db_check()
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
     try:
         cursor.execute("select * from FWDB WHERE Manufacturer='" + firmware_data["Manufacturer"] + "' AND Modelname='" + firmware_data["Modelname"] + "' AND Version = '" + firmware_data["Version"] + "'")
     except sqlite3.Error as er:
         print('SQLite error: %s' % (' '.join(er.args)))
+        return False
 
     data_list = cursor.fetchall()
     conn.close()
