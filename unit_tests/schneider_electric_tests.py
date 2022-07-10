@@ -5,7 +5,7 @@ import unittest
 import json
 sys.path.append(os.path.abspath(os.path.join('.', '')))
 from vendors.schneider_electric import download_single_file
-from utils.check_duplicates import check_duplicates
+from utils.check_duplicates import check_duplicates, Database
 
 DB_NAME = "firmwaredatabase.db"
 CONFIG_PATH = os.path.join("config", "config.json")
@@ -14,6 +14,8 @@ with open(CONFIG_PATH, "rb") as fp:
     DATA = json.load(fp)
 
 def fetch_data():
+    db_ = Database()
+    db_.db_check()
     # db connection
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()

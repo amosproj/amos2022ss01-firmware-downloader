@@ -69,9 +69,9 @@ def get_firmware_data_using_api(url, fw_count, fw_per_page):
             logger.info("Invalid API response with status_code = %d", response.status_code)
             raise ValueError("Invalid API response with status_code = %d" % response.status_code)
         if page != total_pages:
-            logger.info("Received metadata for %f", page*fw_per_page/fw_count)
+            logger.info("Received metadata for %d/%d", page*fw_per_page, fw_count)
         else:
-            logger.info("Received metadata for all %f firmwares", fw_count/fw_count)
+            logger.info("Received metadata for all %d/%d firmwares", fw_count, fw_count)
         fw_list += response.json()["docList"]
     return fw_list
 
