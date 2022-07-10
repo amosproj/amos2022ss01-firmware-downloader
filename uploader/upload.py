@@ -6,7 +6,7 @@ class FirmwareUploader(object):
         self.auth_url = "http://embark.local"
         self.upload_fw_url = "http://embark.local/uploader/save/"
         self.start_analysis_url = "http://embark.local/uploader/start"
-        self.cookies = dict()
+        self.cookies = {}
 
     def authenticate(self, username, password):
         resp = requests.get(self.auth_url)
@@ -27,10 +27,10 @@ class FirmwareUploader(object):
             print("authentication failed")
         print(self.cookies)
 
-    def start_fw_analysis(self, fw):
+    def start_fw_analysis(self, fw_):
         data = {
             "csrfmiddlewaretoken": self.cookies.get("csrftoken", None),
-            "firmware": fw["id"],
+            "firmware": fw_["id"],
             "version": "",
             "vendor": "",
             "device": "",
@@ -47,8 +47,8 @@ class FirmwareUploader(object):
         }
         resp = requests.post(self.start_analysis_url, data=data, cookies=self.cookies)
 
-    def upload_fw(self, fw):
-        files = [('file', open(fw, 'rb'))]
+    def upload_fw(self, fw_):
+        files = [('file', open(fw_, 'rb'))]
         headers = {
         "X-CSRFToken": self.cookies.get('csrftoken', "")
         }
