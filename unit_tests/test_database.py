@@ -6,13 +6,11 @@ sys.path.append(os.path.abspath(os.path.join('.', '')))
 from utils.database import Database
 import unittest
 
-db_name = "firmwaredatabase.db"
-
-class Unit_Case_Test(unittest.TestCase):
+class DatabaseUnitTest(unittest.TestCase):
 	def test_case_db(self):
-		db = Database()
-		if db_name not in os.listdir('.'):
-			db.create_table()
+		db_name = "firmwaredatabase.db"
+		db_ = Database()
+		db_.db_check()
 		# Create a function for selenium output in dict format and return the dict. Pass it in the next line to insert the data
 
 		# db connection
@@ -34,14 +32,14 @@ class Unit_Case_Test(unittest.TestCase):
 				'Fwfilelinktolocal': './xyz/abc.tar',
 				'Fwadddata': 'some long sentence'
 		}
-		db.insert_data(dbdictcarrier=firmware_data)
+		db_.insert_data(dbdictcarrier=firmware_data)
 		data = 'x'
 		try:
 			cursor.execute(
 					"select * from FWDB WHERE Manufacturer='" + firmware_data["Manufacturer"] + "' AND Modelname='" +
 					firmware_data["Modelname"] + "' AND Version = '" + firmware_data["Version"] + "'")
-		except sqlite3.Error as er:
-				print('SQLite error: %s' % (' '.join(er.args)))
+		except sqlite3.Error as er_:
+				print('SQLite error: %s' % (' '.join(er_.args)))
 
 		data_list = cursor.fetchall()
 		conn.close()
