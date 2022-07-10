@@ -1,6 +1,5 @@
 import requests
 
-
 class FirmwareUploader(object):
     def __init__(self):
         self.auth_url = "http://embark.local"
@@ -48,13 +47,14 @@ class FirmwareUploader(object):
         resp = requests.post(self.start_analysis_url, data=data, cookies=self.cookies)
 
     def upload_fw(self, fw_):
-        files = [('file', open(fw_, 'rb'))]
-        headers = {
-        "X-CSRFToken": self.cookies.get('csrftoken', "")
-        }
-        resp = requests.post(self.upload_fw_url, files=files, headers=headers, cookies=self.cookies, allow_redirects=False)
-        if resp.content == b'successful upload':
-            print("File is uploaded successfully")
+        with open(fw_, 'rb') as firmware_file:
+            files = [('file', firmware_file)]
+            headers = {
+                "X-CSRFToken": self.cookies.get('csrftoken', "")
+            }
+            resp = requests.post(self.upload_fw_url, files=files, headers=headers, cookies=self.cookies, allow_redirects=False)
+            if resp.content == b'successful upload':
+                print("File is uploaded successfully")
 
 if __name__=="__main__":
     fwu = FirmwareUploader()

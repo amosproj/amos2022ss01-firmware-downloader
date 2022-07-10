@@ -66,7 +66,7 @@ def download_file(data):
             prefs = {"download.default_directory" : data['file_path_to_save']}
             options.add_argument("headless")
             options.add_experimental_option("prefs",prefs)
-            driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
+            driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
             # Go to your page url
             try:
                 url_ = "https://www.gegridsolutions.com/Passport/Login.aspx"
