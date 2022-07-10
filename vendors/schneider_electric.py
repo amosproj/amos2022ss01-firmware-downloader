@@ -53,6 +53,7 @@ def se_get_total_firmware_count(url):
             count = int(numbers[0])
             logger.info("Found total %d firmwares", count)
             return count
+    return int(numbers[0])
 
 def get_firmware_data_using_api(url, fw_count, fw_per_page):
     headers = {'Content-Type': 'application/x-www-form-urlencoded'}
