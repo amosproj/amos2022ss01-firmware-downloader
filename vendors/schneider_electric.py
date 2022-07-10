@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 import os
 import math
 import re
@@ -6,13 +5,12 @@ import uuid
 import sys
 import traceback
 sys.path.append(os.path.abspath(os.path.join('.', '')))
-from utils.Logs import get_logger
-
 import requests
 from bs4 import BeautifulSoup
 import json
 from urllib.parse import parse_qs, urlparse
 from utils.check_duplicates import check_duplicates, Database
+from utils.Logs import get_logger
 
 #Logger
 MOD_NAME = "schneider_electric"
