@@ -1,8 +1,9 @@
 import os
 import sqlite3
 import sys
+import json
 sys.path.append(os.path.abspath(os.path.join('.', '')))
-from vendors.ge import *
+from vendors.ge import download_file
 import unittest
 from utils.check_duplicates import check_duplicates
 
@@ -98,7 +99,6 @@ class GEUnitTest(unittest.TestCase):
             'Version': '',
 	    }
         gt_ex_file_path = os.path.join(gt_file_path, files[0])
-        
 
         if os.path.isfile(gt_ex_file_path) is False and check_duplicates(data, DB_NAME) is True:
             arg_data = {
