@@ -68,7 +68,7 @@ def get_firmware_data_using_api(url, fw_count, fw_per_page):
         response = requests.post(url, data=req_body, headers=headers)
         if response.status_code != 200:
             logger.info("Invalid API response with status_code = %d", response.status_code)
-            raise ValueError("Invalid API response with status_code = %d", response.status_code)
+            raise ValueError("Invalid API response with status_code = %d" % response.status_code)
         if page != total_pages:
             logger.info("Received metadata for %f", page*fw_per_page/fw_count)
         else:
@@ -107,7 +107,7 @@ def se_firmaware_parser(url, folder):
         if not os.path.isdir(dest):
             os.mkdir(dest)
     except Exception as er_:
-        raise ValueError('%s', er_) from er_
+        raise ValueError('%s' % er_) from er_
     links = set()
     req = requests.get(url)
     soup = BeautifulSoup(req.text, 'html.parser')
@@ -130,7 +130,7 @@ def main():
             if not os.path.isdir(dest):
                 os.mkdir(dest)
         except Exception as er_:
-            raise ValueError('%s', er_) from er_
+            raise ValueError('%s' % er_) from er_
         total_fw = se_get_total_firmware_count(url)
         api_url = "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/resultViewCahnge/resultListAjax"
         raw_fw_list = get_firmware_data_using_api(api_url, total_fw, 50) #50 is max fw_per_page
