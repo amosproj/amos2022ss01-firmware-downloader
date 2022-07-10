@@ -2,13 +2,12 @@ import os
 import sys
 import unittest
 sys.path.append(os.path.abspath(os.path.join('.', '')))
-#import sqlite3
 from utils.check_duplicates import check_duplicates
 from utils.database import Database
 
 #https://sqliteviewer.flowsoft7.com/
-class Unit_Case_Test(unittest.TestCase):
-    def test_if_check_duplicates_working_correctly(self):
+class CheckDuplicatesUnitTest(unittest.TestCase):
+    def test_check_duplicates(self):
         temp_data = {
             'Fwfileid': 'c',
             'Fwfilename': 'x',
@@ -27,13 +26,11 @@ class Unit_Case_Test(unittest.TestCase):
         }
         self.assertFalse(check_duplicates(temp_data, 'firmwaredatabase.db'), msg="Data not exist")
 
-    def test_if_check_duplicates_working_correctly_with_data_inserted(self):
-        db_name = 'firmwaredatabase.db'
-        db = Database()
-        if db_name not in os.listdir('.'):
-            db.create_table()
+    def test_check_duplicates_with_data(self):
+        db_ = Database()
+        db_.db_check()
         # Create a function for selenium output in dict format and return the dict. Pass it in the next line to insert the data
-        db.insert_data(dbdictcarrier={
+        db_.insert_data(dbdictcarrier={
             'Fwfileid': 'FILE',
             'Fwfilename': 'Siemens ABC firmware',
             'Manufacturer': 'Siemens',
