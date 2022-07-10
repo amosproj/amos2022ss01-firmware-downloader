@@ -28,7 +28,7 @@ def fetch_data():
 
 
 class SchneiderUnitTest(unittest.TestCase):
-    def test_if_download_working_correctly(self):
+    def test_download(self):
             gt_url = "https://download.schneider-electric.com/files?p_enDocType=Firmware&p_File_Name=PM5560_PM5563_V2.7.4_Release.zip&p_Doc_Ref=PM5560_PM5563_V2.7.4_Release"
             dest = DATA['file_paths']['dowload_test_files_path']
             if not os.path.isdir(dest):
