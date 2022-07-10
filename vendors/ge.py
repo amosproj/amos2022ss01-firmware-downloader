@@ -82,7 +82,7 @@ def download_file(data):
                 if data['is_file_download'] is False:
                     insert_into_db(req_data)
             except Exception as er_:
-                logger.error("Error in downloading: " % er_)
+                logger.error("Error in downloading: %s" % er_)
 
     else:
         logger.info("Data already exist!")
