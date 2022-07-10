@@ -43,7 +43,7 @@ class DatabaseUnitTest(unittest.TestCase):
 
 		data_list = cursor.fetchall()
 		conn.close()
-		if (len(data_list) > 0):
+		if len(data_list) > 0:
 			print('good')
 		else:
 			print('Fail')
