@@ -32,38 +32,38 @@ def insert_into_db(fwdata):
     logger.info("data inserted")
 
 #download firmware image
-def download_file(url, file_path_to_save, data0, data1, filename, link, main_url, click, db_name, is_file_download):
-    local_uri = os.path.abspath(DATA['file_paths']['download_files_path'] + "/" + filename)
+def download_file(data):
+    local_uri = os.path.abspath(DATA['file_paths']['download_files_path'] + "/" + data['filename'])
     req_data = {
         'Fwfileid': 'FILE',
-        'Fwfilename': data0,
+        'Fwfilename': data['data0'],
 		'Manufacturer': 'GE',
-		'Modelname': os.path.splitext(data0)[0],
+		'Modelname': os.path.splitext(data['data0'])[0],
 		'Version': '',
 		'Type': '',
-		'Releasedate': data1,
+		'Releasedate': data['data1'],
 		'Checksum': 'None',
 		'Embatested': '',
 		'Embalinktoreport': '',
 		'Embarklinktoreport': '',
-		'Fwdownlink': url,
+		'Fwdownlink': data['url'],
 		'Fwfilelinktolocal': local_uri,
 		'Fwadddata': ''
 	}
 
-    if check_duplicates(req_data, db_name) is False or is_file_download is True:
-        if link != "javascript:;":
-            logger.info("Downloading %s and saving as %s", url, file_path_to_save)
-            resp = requests.get(url, allow_redirects=True)
+    if check_duplicates(req_data, data['db_name']) is False or data['is_file_download'] is True:
+        if data['link'] != "javascript:;":
+            logger.info("Downloading %s and saving as %s", data['url'], data['file_path_to_save'])
+            resp = requests.get(data['url'], allow_redirects=True)
             if resp.status_code != 200:
                 raise ValueError("Invalid Url or file not found")
-            with open(file_path_to_save, "wb") as fp_:
+            with open(data['file_path_to_save'], "wb") as fp_:
                 fp_.write(resp.content)
-            if is_file_download is False:
+            if data['is_file_download'] is False:
                 insert_into_db(req_data)
         else:
             options = webdriver.ChromeOptions()
-            prefs = {"download.default_directory" : file_path_to_save}
+            prefs = {"download.default_directory" : data['file_path_to_save']}
             options.add_argument("headless")
             options.add_experimental_option("prefs",prefs)
             driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
@@ -75,11 +75,11 @@ def download_file(url, file_path_to_save, data0, data1, filename, link, main_url
                 driver.find_element(By.ID, "ctl00_BodyContent_Login1_Password").send_keys(PASSWORD)
                 driver.find_element(By.ID, "ctl00_BodyContent_Login1_LoginButton").click()
                 # Get button you are going to click by its id ( also you could us find_element_by_css_selector to get element by css selector)
-                driver.get(main_url)
-                driver.execute_script(click)
+                driver.get(data['main_url'])
+                driver.execute_script(data['click'])
                 time.sleep(10)
                 driver.close()
-                if is_file_download is False:
+                if data['is_file_download'] is False:
                     insert_into_db(req_data)
             except Exception as er_:
                 logger.error("Error in downloading: "+ er_)
@@ -111,7 +111,20 @@ def scraper_parse(url, base_url):
                         if link == "javascript:;":
                             click = item_temp.findChild("a").get("onclick")
                         file_path = os.path.join(dest, item_temp.get_text())
-                        download_file(base_url + link, file_path, items_temp[0].get_text(), items_temp[1].get_text(), item_temp.get_text(), link, url, click, 'firmwaredatabase.db', False)
+                        arg_data = {
+                            'url': base_url + link, 
+                            'file_path_to_save': file_path, 
+                            'data0': items_temp[0].get_text(), 
+                            'data1': items_temp[1].get_text(), 
+                            'filename': item_temp.get_text(), 
+                            'link': link, 
+                            'main_url': url, 
+                            'click': click, 
+                            'db_name': 'firmwaredatabase.db', 
+                            'is_file_download': False,
+                            'folder': DATA['file_paths']['download_files_path']
+                        }
+                        download_file(arg_data)
                     sub_data.append(item_temp.get_text())
                 data.append(sub_data)
 
