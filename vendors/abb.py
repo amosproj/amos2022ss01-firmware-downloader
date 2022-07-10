@@ -5,7 +5,7 @@ import uuid
 import requests
 from urllib.parse import urlparse
 import sys
-sys.path.append(os.path.abspath(os.path.join('.', '')))  
+sys.path.append(os.path.abspath(os.path.join('.', '')))
 from utils.database import Database
 from utils.Logs import get_logger
 
@@ -30,8 +30,8 @@ def download_single_file(file_metadata):
     file_path_to_save = file_metadata["Fwfilelinktolocal"]
     print(file_path_to_save)
     logger.info("File saved at %s", file_path_to_save)
-    with open(file_path_to_save, "wb") as f:
-        f.write(resp.content)
+    with open(file_path_to_save, "wb") as fp_:
+        fp_.write(resp.content)
     write_metadata_to_db([file_metadata])
     logger.info("File metadata added in DB")
 
@@ -65,7 +65,7 @@ def se_get_total_firmware_count(url):
     count = json_resp["numberOfAllHits"]
     logger.info("Found total %d Firmware files", count)
     return count
-    
+
 def get_firmware_data_using_api(url, fw_count, fw_per_page):
     total_pages = math.ceil(fw_count/fw_per_page)
     fw_list = []
@@ -125,7 +125,5 @@ def main():
     logger.info(json.dumps(metadata[0], indent=4))
     download_list_files(metadata)
 
-
 if __name__ == "__main__":
     main()
-
