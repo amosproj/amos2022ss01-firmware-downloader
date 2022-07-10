@@ -82,7 +82,7 @@ def download_file(data):
                 if data['is_file_download'] is False:
                     insert_into_db(req_data)
             except Exception as er_:
-                logger.error("Error in downloading: "+ er_)
+                logger.error("Error in downloading: " % er_)
 
     else:
         logger.info("Data already exist!")
@@ -112,15 +112,15 @@ def scraper_parse(url, base_url):
                             click = item_temp.findChild("a").get("onclick")
                         file_path = os.path.join(dest, item_temp.get_text())
                         arg_data = {
-                            'url': base_url + link, 
-                            'file_path_to_save': file_path, 
-                            'data0': items_temp[0].get_text(), 
-                            'data1': items_temp[1].get_text(), 
-                            'filename': item_temp.get_text(), 
-                            'link': link, 
-                            'main_url': url, 
-                            'click': click, 
-                            'db_name': 'firmwaredatabase.db', 
+                            'url': base_url + link,
+                            'file_path_to_save': file_path,
+                            'data0': items_temp[0].get_text(),
+                            'data1': items_temp[1].get_text(),
+                            'filename': item_temp.get_text(),
+                            'link': link,
+                            'main_url': url,
+                            'click': click,
+                            'db_name': 'firmwaredatabase.db',
                             'is_file_download': False,
                             'folder': DATA['file_paths']['download_files_path']
                         }

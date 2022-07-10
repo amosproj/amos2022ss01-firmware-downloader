@@ -47,30 +47,30 @@ class GEUnitTest(unittest.TestCase):
 
         if os.path.isfile(gt_file_path) is False and check_duplicates(data, DB_NAME) is True:
             arg_data = {
-                'url': gt_url, 
-                'file_path_to_save': gt_file_path, 
-                'data0': files[0], 
-                'data1': files[1], 
-                'filename': file_name, 
-                'link': '', 
-                'main_url': '', 
-                'click': '', 
-                'db_name': DB_NAME, 
+                'url': gt_url,
+                'file_path_to_save': gt_file_path,
+                'data0': files[0],
+                'data1': files[1],
+                'filename': file_name,
+                'link': '',
+                'main_url': '',
+                'click': '',
+                'db_name': DB_NAME,
                 'is_file_download': True,
                 'folder': folder
             }
             download_file(arg_data)
         else:
             arg_data = {
-                'url': gt_url, 
-                'file_path_to_save': gt_file_path, 
-                'data0': files[0], 
-                'data1': files[1], 
-                'filename': file_name, 
-                'link': '', 
-                'main_url': '', 
-                'click': '', 
-                'db_name': DB_NAME, 
+                'url': gt_url,
+                'file_path_to_save': gt_file_path,
+                'data0': files[0],
+                'data1': files[1],
+                'filename': file_name,
+                'link': '',
+                'main_url': '',
+                'click': '',
+                'db_name': DB_NAME,
                 'is_file_download': False,
                 'folder': folder
             }
@@ -102,30 +102,30 @@ class GEUnitTest(unittest.TestCase):
 
         if os.path.isfile(gt_ex_file_path) is False and check_duplicates(data, DB_NAME) is True:
             arg_data = {
-                'url': gt_url, 
-                'file_path_to_save': gt_file_path, 
-                'data0': files[0], 
-                'data1': files[1], 
-                'filename': file_name, 
-                'link': 'javascript:;', 
-                'main_url': gt_url, 
-                'click': "Passport_DownloadFile('SDSeries',7,70);return false", 
-                'db_name': DB_NAME, 
+                'url': gt_url,
+                'file_path_to_save': gt_file_path,
+                'data0': files[0],
+                'data1': files[1],
+                'filename': file_name,
+                'link': 'javascript:;',
+                'main_url': gt_url,
+                'click': "Passport_DownloadFile('SDSeries',7,70);return false",
+                'db_name': DB_NAME,
                 'is_file_download': True,
                 'folder': folder
             }
             download_file(arg_data)
         else:
             arg_data = {
-                'url': gt_url, 
-                'file_path_to_save': gt_file_path, 
-                'data0': files[0], 
-                'data1': files[1], 
-                'filename': file_name, 
-                'link': 'javascript:;', 
-                'main_url': gt_url, 
-                'click': "Passport_DownloadFile('SDSeries',7,70);return false", 
-                'db_name': DB_NAME, 
+                'url': gt_url,
+                'file_path_to_save': gt_file_path,
+                'data0': files[0],
+                'data1': files[1],
+                'filename': file_name,
+                'link': 'javascript:;',
+                'main_url': gt_url,
+                'click': "Passport_DownloadFile('SDSeries',7,70);return false",
+                'db_name': DB_NAME,
                 'is_file_download': False,
                 'folder': folder
             }
