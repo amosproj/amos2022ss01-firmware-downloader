@@ -21,9 +21,9 @@ def runner(mod):
 def executor_job(mod_, executor):
     _ = executor.submit(runner, mod_)
 
-def thread_pool(num_threads, whitelisted_modules):
-    with ThreadPoolExecutor(num_threads) as executor:
-        for module in whitelisted_modules:
+def thread_pool(num_threads_, whitelisted_modules_):
+    with ThreadPoolExecutor(num_threads_) as executor:
+        for module in whitelisted_modules_:
             if module in config:
                 logger.info("Starting %s downloader ...", module)
                 schedule.every(config[module]['interval']).minutes.do(executor_job, module, executor)
