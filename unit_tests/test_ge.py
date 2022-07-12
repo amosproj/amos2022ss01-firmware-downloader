@@ -29,7 +29,7 @@ def fetch_data():
 class GEUnitTest(unittest.TestCase):
     def test_case_without_authentication(self):
         files = ["orbit-mib-9_2_2.zip", "2022-05-12"]
-        folder = DATA['file_paths']['dowload_test_files_path']
+        folder = DATA['file_paths']['download_test_files_path']
         file_name = 'orbit-mib-9_2_2'
         gt_url = "https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip"
         dest = os.path.join(os.getcwd() ,folder)
