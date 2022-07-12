@@ -2,22 +2,23 @@ import json
 import os
 import math
 import uuid
-
 import requests
-import os
 from urllib.parse import urlparse
 import sys
-sys.path.append(os.path.abspath(os.path.join('.', '')))  
+sys.path.append(os.path.abspath(os.path.join('.', '')))
 from utils.database import Database
 from utils.Logs import get_logger
 
-name = "abb"
+MOD_NAME = "abb"
 logger = get_logger("vendors.abb")
-
+CONFIG_PATH = os.path.join("config", "config.json")
+DATA={}
+with open(CONFIG_PATH, "rb") as fp:
+    DATA = json.load(fp)
 
 def download_single_file(file_metadata):
     url = file_metadata["Fwdownlink"]
-    logger.info(f"Donwloading {url} ")
+    logger.info("Donwloading %s ", url)
     resp = requests.get(url, allow_redirects=True)
     if resp.status_code != 200:
         raise ValueError("Invalid Url or file not found")
@@ -27,9 +28,10 @@ def download_single_file(file_metadata):
     old_file_name_list[-1] = file_name # updated filename
     file_metadata["Fwfilelinktolocal"] = "/".join(old_file_name_list)
     file_path_to_save = file_metadata["Fwfilelinktolocal"]
-    logger.info(f"File saved at {file_path_to_save}")
-    with open(file_path_to_save, "wb") as f:
-        f.write(resp.content)
+    print(file_path_to_save)
+    logger.info("File saved at %s", file_path_to_save)
+    with open(file_path_to_save, "wb") as fp_:
+        fp_.write(resp.content)
     write_metadata_to_db([file_metadata])
     logger.info("File metadata added in DB")
 
@@ -43,13 +45,10 @@ def download_list_files(metadata, max_files=-1): #max_files -1 means download al
 
 def write_metadata_to_db(metadata):
     logger.info("Going to write metadata in db")
-    db_name = 'firmwaredatabase.db'
-    db = Database(dbname=db_name)
+    db_ = Database()
     print(os.listdir('./'))
-    if db_name not in os.listdir('./'):
-        db.create_table()
-    for fw in metadata:
-        db.insert_data(dbdictcarrier=fw)
+    for fw_ in metadata:
+        db_.insert_data(dbdictcarrier=fw_)
 
 def se_get_total_firmware_count(url):
     req_body = {
@@ -61,17 +60,15 @@ def se_get_total_firmware_count(url):
         },
         "Display":{"IncludeAllRevisions":False,"ResultsTranslationLanguage":"en"}
     }
-    r = requests.post(url, json=req_body)
-    json_resp = r.json()
+    req = requests.post(url, json=req_body)
+    json_resp = req.json()
     count = json_resp["numberOfAllHits"]
-    logger.info(f"Found total {count} Firmware files")
+    logger.info("Found total %d Firmware files", count)
     return count
-    
+
 def get_firmware_data_using_api(url, fw_count, fw_per_page):
-    if fw_count < fw_per_page:
-        fw_pr_page = fw_count
     total_pages = math.ceil(fw_count/fw_per_page)
-    fw_list = list()
+    fw_list = []
     for page in range(1, total_pages+1):
         req_body = {
             "Filters":[{"Criteria":0,"Origin":0,"Values":["Root"]},{"Criteria":1,"Origin":1,"Values":["Software"]}],
@@ -84,38 +81,39 @@ def get_firmware_data_using_api(url, fw_count, fw_per_page):
         }
         response = requests.post(url, json=req_body)
         if response.status_code != 200:
-            raise ValueError(f"Invalid API response with status_code = {response.status_code}")
+            raise ValueError("Invalid API response with status_code = %d" % response.status_code)
         if page != total_pages:
-            logger.info(f"Received metadata for {page*fw_per_page}/{fw_count}")
+            logger.info("Received metadata for %d/%d", page*fw_per_page, fw_count)
         else:
-            logger.info(f"Received metadata for all {fw_count}/{fw_count} firmwares")
+            logger.info("Received metadata for all %d/%d firmwares", fw_count, fw_count)
         fw_list += response.json()["documents"]
     return fw_list
 
 def transform_metadata_format_ours(raw_data, local_storage_dir="."):
-    fw_mod_list = list()
-    for fw in raw_data:
+    fw_mod_list = []
+    for fw_ in raw_data:
         fw_mod = {
-	    'Fwfileid': str(uuid.uuid4()),
+	    'Fwfileid': '',
+        'Fwfilename': fw_["metadata"]["identification"]["documentNumber"],
 	    'Manufacturer': 'abb',
-	    'Modelname': fw["metadata"]["identification"]["documentNumber"],
-	    'Version': fw["metadata"]["identification"]["revision"],
-	    'Type': fw["metadata"]["documentKind"],
-	    'Releasedate': fw["metadata"]["publishedDate"],
+	    'Modelname': fw_["metadata"]["identification"]["documentNumber"],
+	    'Version': fw_["metadata"]["identification"]["revision"],
+	    'Type': fw_["metadata"]["documentKind"],
+	    'Releasedate': fw_["metadata"]["publishedDate"],
 	    'Checksum': '',
 	    'Embatested': '',
 	    'Embalinktoreport': '',
 	    'Embarklinktoreport': '',
-        'Fwdownlink': fw["metadata"]["currentRevisionUrl"],
-        'Fwfilelinktolocal': os.path.join(local_storage_dir, str(uuid.uuid4()) + "." + fw["metadata"]["fileSuffix"]), #setting temp filename as of now
-        'Fwadddata': json.dumps({"summary": fw["metadata"]["summary"].replace("'","")})
+        'Fwdownlink': fw_["metadata"]["currentRevisionUrl"],
+        'Fwfilelinktolocal': os.path.join(local_storage_dir, str(uuid.uuid4()) + "." + fw_["metadata"]["fileSuffix"]), #setting temp filename as of now
+        'Fwadddata': json.dumps({"summary": fw_["metadata"]["summary"].replace("'","")})
 	}
         fw_mod_list.append(fw_mod)
     return fw_mod_list
 
 def main():
     url = "https://discoveryapi.library.abb.com/api/public/documents"
-    folder = 'File_system'
+    folder = DATA['file_paths']['download_files_path']
     if not os.path.isdir(folder):
         os.mkdir(folder)
     total_fw = se_get_total_firmware_count(url)
@@ -127,7 +125,5 @@ def main():
     logger.info(json.dumps(metadata[0], indent=4))
     download_list_files(metadata)
 
-
 if __name__ == "__main__":
     main()
-
