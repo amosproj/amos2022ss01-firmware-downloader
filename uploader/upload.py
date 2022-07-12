@@ -1,6 +1,6 @@
 import requests
 
-from bs4 import BeautifulSoup, NavigableString
+from bs4 import BeautifulSoup
 
 class FirmwareUploader:
     def __init__(self):
@@ -74,9 +74,9 @@ class FirmwareUploader:
             if "selected" in item.attrs.keys():
                 if scrapped_filename == filename:
                     print("Found id of uploaded file %s", scrapped_id)
-
                     return scrapped_id
-           
+        print("Id not found for filename %s", filename)
+        return None
 
 if __name__=="__main__":
     fwu = FirmwareUploader()
@@ -86,4 +86,3 @@ if __name__=="__main__":
     fwu.upload_fw(fw_metadata["file_path"])
     fw_metadata["id"] = fwu.get_id_of_uploaded_file(fw_metadata["file_path"])
     fwu.start_fw_analysis(fw_metadata)
-
