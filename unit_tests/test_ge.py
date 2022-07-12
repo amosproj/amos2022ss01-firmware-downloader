@@ -32,7 +32,7 @@ class GEUnitTest(unittest.TestCase):
         folder = DATA['file_paths']['download_test_files_path']
         file_name = 'orbit-mib-9_2_2'
         gt_url = "https://www.gegridsolutions.com/communications/mds/software.asp?directory=Orbit_MCR&file=orbit%2Dmib%2D9%5F2%5F2%2Ezip"
-        dest = os.path.join(os.getcwd() ,folder)
+        dest = os.path.join(os.getcwd(), folder)
         try:
             if not os.path.isdir(dest):
                 os.mkdir(dest)
