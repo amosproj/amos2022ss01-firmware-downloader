@@ -1,7 +1,7 @@
 {
   "file_paths": {
     "download_files_path": "Downloads",
-    "dowload_test_files_path": "Test_Downloads"
+    "download_test_files_path": "Test_Downloads"
   },
   "foscam": {
     "interval": 0.01,

@@ -41,12 +41,13 @@ bin/
 # db logs 
 .db
 
-# ignore chromedriver.exe file and .msi files
+# ignore chromedriver.exe file, .msi files and .zip files
 **/*chromedriver.exe
 **/*.msi
+**/*.zip
 
 # ignore downloads
-**/downloads/honeywell/
+**/Downloads/
 
 # ignore temp files
 **/*.tmp

@@ -20,22 +20,24 @@ class WebCode(unittest.TestCase):
 
 	def __init__(self):
 		super().__init__()
-		opt = Options()
 		with open(os.path.join(parent_dir, 'config', 'config.json'), 'rb') as json_file:
-			honeywell_data = json.loads(json_file.read())['honeywell']
+			json_data = json.loads(json_file.read())
+			honeywell_data = json_data['honeywell']
 			self.email = honeywell_data['user']
 			self.password = honeywell_data['password']
 			self.url = honeywell_data['url']
-		self.driver = webdriver.Chrome(options=opt)
+			self.down_file_path = json_data['file_paths']['download_test_files_path']
 		self.path = os.getcwd()
-		self.db_name = 'firmwaredatabase.db'
+		self.db_name = 'test_firmwaredatabase.db'
+		opt = Options()
 		opt.headless = True
 		opt.add_experimental_option("prefs", {
-			"download.default_directory": r"{}\downloads\honeywell".format(self.path),
+			"download.default_directory": r"{}\{}\Honeywell".format(self.path, self.down_file_path),
 			"download.prompt_for_download": False,
 			"download.directory_upgrade": True,
 			"safebrowsing.enabled": True
 		})
+		self.driver = webdriver.Chrome(options=opt)
 		self.dbdict = {
 			'Fwfileid': '',
 			'Fwfilename': '',
@@ -102,7 +104,7 @@ class WebCode(unittest.TestCase):
 			print(data, download_link, file_name)
 			actions = ActionChains(driver)
 			actions.move_to_element(download_element).perform()
-			local_file_location = r"{}\downloads\honeywell\{}".format(self.path, file_name)
+			local_file_location = r"{}\{}\Honeywell\{}".format(self.path, self.down_file_path, file_name)
 			# Duplication Check for not to download the files if files exist in local machine
 			self.down_ele_click(local_file_location, download_element, file_name)
 			self.assertTrue(local_file_location, msg="Location exists")
@@ -160,7 +162,8 @@ class WebCode(unittest.TestCase):
 					.format(rows.index(row) + 1))
 				actions = ActionChains(driver)
 				actions.move_to_element(download_element).perform()
-				local_file_location = r"{}\downloads\honeywell\{}".format(self.path, download_link.split('/')[-1])
+				local_file_location = r"{}\{}\Honeywell\{}".format(self.path,self.down_file_path,
+				                                                   download_link.split('/')[-1])
 				self.down_ele_click(local_file_location, download_element, web_file_name)
 				self.assertTrue(local_file_location, msg="Location exists")
 				self.assertTrue(download_element, msg="download element found")
