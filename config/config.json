@@ -1,4 +1,8 @@
 {
+  "file_paths": {
+    "download_files_path": "Downloads",
+    "download_test_files_path": "Test_Downloads"
+  },
   "foscam": {
     "interval": 0.01,
     "ignore": true,
