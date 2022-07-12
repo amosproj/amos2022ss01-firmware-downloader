@@ -261,9 +261,9 @@ class Honeywell:
             print(driver.find_element(
                 By.XPATH, ".//li[@aria-level='1']//li[@aria-level='2'][{}]//"
                           "i[@class='jstree-icon jstree-themeicon']".format(rows0.index(row0)+1)).text)
-            rows1 = driver.find_elements(
-                By.XPATH, ".//li[@aria-level='1']//li[@aria-level='2'][{}]//"
-                          "li[@aria-level='3']//i[@class='jstree-icon jstree-ocl']".format(rows0.index(row0)+1))
+            rows1 = driver.find_elements(By.XPATH, ".//li[@aria-level='1']//li[@aria-level='2'][{}]//"
+                                                   "li[@aria-level='3']//i[@class='jstree-icon jstree-ocl']"
+                                         .format(rows0.index(row0)+1))
             time.sleep(10)
             for row1 in rows1:
                 print(rows0.index(row0) + 1, rows1.index(row1) + 1)
