@@ -204,7 +204,8 @@ class Honeywell:
             local_file_location = r"{}\{}\Honeywell\{}".format(self.path, self.down_file_path, cfile_name)
             if not os.path.isfile(local_file_location.replace("\\", "/")):
                 response = requests.get(crow_down_link)
-                open(local_file_location, 'wb').write(response.content)
+                with open(local_file_location, 'wb') as zip_file:
+                    zip_file.write(response.content)
             print(cfile_name, crow_down_link, crow_add_desc, sep='\n')
             dbdict_carrier = {}
             db_used = Database()
@@ -250,8 +251,8 @@ class Honeywell:
         hny_down_tool_file_path = r"{}\{}".format(self.path, hny_down_tool_file)
         print(hny_down_tool_file_path)
         driver.find_element(By.XPATH, ".//li[@aria-level='1']//i[@class='jstree-icon jstree-ocl']").click()
-        rows0 = driver.find_elements(
-            By.XPATH, ".//li[@aria-level='1']//li[@aria-level='2']//i[@class='jstree-icon jstree-ocl']")
+        rows0 = driver.find_elements(By.XPATH,
+                                     ".//li[@aria-level='1']//li[@aria-level='2']//i[@class='jstree-icon jstree-ocl']")
         for row0 in rows0:
             print(rows0.index(row0) + 1)
             driver.find_element(
@@ -260,9 +261,9 @@ class Honeywell:
             print(driver.find_element(
                 By.XPATH, ".//li[@aria-level='1']//li[@aria-level='2'][{}]//"
                           "i[@class='jstree-icon jstree-themeicon']".format(rows0.index(row0)+1)).text)
-            rows1 = driver.find_elements(
-                By.XPATH, ".//li[@aria-level='1']//li[@aria-level='2'][{}]//"
-                          "li[@aria-level='3']//i[@class='jstree-icon jstree-ocl']".format(rows0.index(row0)+1))
+            rows1 = driver.find_elements(By.XPATH, ".//li[@aria-level='1']//li[@aria-level='2'][{}]//"
+                                                   "li[@aria-level='3']//i[@class='jstree-icon jstree-ocl']"
+                                         .format(rows0.index(row0)+1))
             time.sleep(10)
             for row1 in rows1:
                 print(rows0.index(row0) + 1, rows1.index(row1) + 1)
