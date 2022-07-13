@@ -1,26 +1,29 @@
-#!/usr/bin/env python3
-import os
+import os, hashlib
 from datetime import datetime
-import hashlib
-def get_file_metadata(path, filename):
 
-    CreationDate=datetime.fromtimestamp(os.path.getctime(filename))
-    LastEditDate=datetime.fromtimestamp(os.path.getmtime(filename))
-    FileSize=os.path.getsize(filename)
 
-    return filename,CreationDate,LastEditDate,FileSize
-def meshvalue(filename):
-    f= open(filename, "rb")
-    file_hash = hashlib.md5()
-    while chunk := f.read(8192):
-        file_hash.update(chunk)
-    f.close()
-    print("Hash Value: ",file_hash.hexdigest())
+def get_file_metadata(file_name):
+    creation_date = datetime.fromtimestamp(os.path.getctime(file_name))
+    last_edit_date = datetime.fromtimestamp(os.path.getmtime(file_name))
+    file_size = os.path.getsize(file_name)
+    return file_name, creation_date, last_edit_date, file_size
+
+
+def mesh_value(file_name):
+    with open(file_name, "rb") as file:
+        file_hash = hashlib.md5()
+        if file.read(8192):
+            chunk = file.read(8192)
+            file_hash.update(chunk)
+        file.close()
+        print("Hash Value: ", file_hash.hexdigest())
+
+
 if __name__ == '__main__':
-    #Replace path to required directory
-    path="/home/uday/AMOS"
+    # Replace path to required directory in filenames, currently using current directory
     filenames = os.listdir('.')
     for filename in filenames:
-        metadata=get_file_metadata(path, filename)
-        print("File Name: ",metadata[0],"\nCreation Date: ",metadata[1],"\nLast Edit Date: ",metadata[2],"\nFile Size: ",metadata[3])
-        meshvalue(filename)
+        metadata = get_file_metadata(filename)
+        print("File Name: ", metadata[0], "\nCreation Date: ", metadata[1],
+              "\nLast Edit Date: ", metadata[2], "\nFile Size: ", metadata[3])
+        mesh_value(filename)
