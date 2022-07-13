@@ -39,15 +39,16 @@ bin/
 **/*.log
 
 # db logs 
-.db
+**/*.db
 
 # ignore chromedriver.exe file, .msi files and .zip files
 **/*chromedriver.exe
 **/*.msi
 **/*.zip
 
-# ignore downloads
+# ignore download folders
 **/Downloads/
+**/Test_Downloads/
 
 # ignore temp files
 **/*.tmp

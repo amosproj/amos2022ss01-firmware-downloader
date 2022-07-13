@@ -9,8 +9,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
-sys.path.append(os.path.abspath(os.path.join('.', '')))
 from utils.database import Database
+sys.path.append(os.path.abspath(os.path.join('.', '')))
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
@@ -57,6 +57,7 @@ class WebCode(unittest.TestCase):
 
 	def setUp(self):
 		driver = self.driver
+		driver.refresh()
 
 	def test_homepage(self):
 		driver = self.driver
@@ -66,7 +67,7 @@ class WebCode(unittest.TestCase):
 		self.assertEqual("Software and Downloads | Honeywell", driver.title, msg="Homepage testcase passed")
 
 	@staticmethod
-	def down_ele_click(loc_loc,  element, f_name):
+	def down_ele_click(loc_loc, element, f_name):
 		# A fn for duplication Check for not to download the files if files exist in local machine
 		if not os.path.isfile(loc_loc.replace("\\", "/")):
 			print(f"The file is not found in local repository, now {f_name} will be downloaded into local")
@@ -162,7 +163,7 @@ class WebCode(unittest.TestCase):
 					.format(rows.index(row) + 1))
 				actions = ActionChains(driver)
 				actions.move_to_element(download_element).perform()
-				local_file_location = r"{}\{}\Honeywell\{}".format(self.path,self.down_file_path,
+				local_file_location = r"{}\{}\Honeywell\{}".format(self.path, self.down_file_path,
 				                                                   download_link.split('/')[-1])
 				self.down_ele_click(local_file_location, download_element, web_file_name)
 				self.assertTrue(local_file_location, msg="Location exists")
