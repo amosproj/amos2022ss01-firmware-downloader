@@ -33,7 +33,7 @@ def insert_into_db(fwdata):
 
 #download firmware image
 def download_file(data):
-    local_uri = os.path.abspath(DATA['file_paths']['download_files_path'] + "/" + data['filename'])
+    local_uri = os.path.abspath(DATA['file_paths']['download_files_path'] + "/" + data['data0'])
     req_data = {
         'Fwfileid': 'FILE',
         'Fwfilename': data['data0'],

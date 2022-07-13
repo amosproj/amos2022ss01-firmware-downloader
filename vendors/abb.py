@@ -27,7 +27,7 @@ def download_single_file(file_metadata):
     old_file_name_list = file_metadata["Fwfilelinktolocal"].split("/")
     old_file_name_list[-1] = file_name # updated filename
     file_metadata["Fwfilelinktolocal"] = "/".join(old_file_name_list)
-    file_path_to_save = file_metadata["Fwfilelinktolocal"]
+    file_path_to_save = os.path.abspath(DATA['file_paths']['download_files_path'] + "/" + file_metadata["Fwfilelinktolocal"])
     print(file_path_to_save)
     logger.info("File saved at %s", file_path_to_save)
     with open(file_path_to_save, "wb") as fp_:

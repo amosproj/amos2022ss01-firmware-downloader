@@ -1,10 +1,12 @@
 import requests
 
+from bs4 import BeautifulSoup
+
 class FirmwareUploader:
     def __init__(self):
         self.auth_url = "http://embark.local"
         self.upload_fw_url = "http://embark.local/uploader/save/"
-        self.start_analysis_url = "http://embark.local/uploader/start"
+        self.start_analysis_url = "http://embark.local/uploader/start/"
         self.cookies = {}
 
     def authenticate(self, username, password):
@@ -45,6 +47,10 @@ class FirmwareUploader:
             "firmware_remove": "on"
         }
         resp = requests.post(self.start_analysis_url, data=data, cookies=self.cookies)
+        if resp.status_code == 200:
+            print("Started firmware analysis successfully")
+        else:
+            print("Failed to start firmware analysis")
 
     def upload_fw(self, fw_):
         with open(fw_, 'rb') as firmware_file:
@@ -56,7 +62,27 @@ class FirmwareUploader:
             if resp.content == b'successful upload':
                 print("File is uploaded successfully")
 
+    def get_id_of_uploaded_file(self, filename):
+        req = requests.get(self.start_analysis_url, cookies=self.cookies)
+        soup = BeautifulSoup(req.text, 'html.parser')
+        items = soup.find_all("select", id="id_firmware")
+        options = items[0].find_all("option")
+        selected_option = None
+        for item in options:
+            scrapped_filename = item.decode_contents().split("-")[-1].strip()
+            scrapped_id = item.get("value")
+            if "selected" in item.attrs.keys():
+                if scrapped_filename == filename:
+                    print("Found id of uploaded file %s", scrapped_id)
+                    return scrapped_id
+        print("Id not found for filename %s", filename)
+        return None
+
 if __name__=="__main__":
     fwu = FirmwareUploader()
     fwu.authenticate("apiuser", "GpY8V3d25G3gaZg")
-    fwu.upload_fw("firmware_path.sh")
+    fw_metadata = {}
+    fw_metadata["file_path"] = "MPS4010_sys.zip"
+    fwu.upload_fw(fw_metadata["file_path"])
+    fw_metadata["id"] = fwu.get_id_of_uploaded_file(fw_metadata["file_path"])
+    fwu.start_fw_analysis(fw_metadata)
