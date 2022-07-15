@@ -6,7 +6,7 @@ import unittest
 class MetadataExtractor(unittest.TestCase):
     def test_metadata_extractor(self):
         path = os.getcwd()
-        properties = metadata_extractor(r"{}/test_ge.py".format(path))
+        properties = metadata_extractor(r"{}/unit_tests/test_ge.py".format(path))
         self.assertIn("File Name", properties.keys())
         self.assertIn("Creation Date", properties.keys())
         self.assertIn("Last Edit Date", properties.keys())
