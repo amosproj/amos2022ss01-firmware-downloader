@@ -153,7 +153,10 @@ class FoscamHomeSecurity:
 							elif key == "Fwfilelinktolocal":
 								dbdict_carrier[key] = local_file_location
 							elif key == "Checksum":
-								dbdict_carrier[key] = get_hash_value(str(local_file_location.replace("\\", "/")))
+								if local_file_location.split("\\")[-1] is not None and file_name is not None:
+									dbdict_carrier[key] = get_hash_value(str(local_file_location.replace("\\", "/")))
+								else:
+									dbdict_carrier[key] = ''
 							elif key not in dbdict_carrier:
 								dbdict_carrier[key] = ''
 						db_used.insert_data(dbdict_carrier)

@@ -88,7 +88,7 @@ class Database:
 			logger.info("The db is updated with the Fwfileid. as %s.", dbdict['Fwfileid'])
 			# Currently, the local firmware id is represented as file extended by _ in increase by 1
 			insert_command = f'''INSERT INTO FWDB('{"','".join(map(str, dbdict.keys()))}')
-			VALUES('{"','".join(map(str, dbdict.values()))}')'''
+									VALUES('{"','".join(map(str, dbdict.values()))}')'''
 			curs.execute(insert_command)
 			logger.info('The db is inserted with the command %s.', insert_command)
 			conn.commit()
