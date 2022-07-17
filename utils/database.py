@@ -50,9 +50,9 @@ class Database:
 						Fwdownlink TEXT NOT NULL,
 						Fwfilelinktolocal TEXT NOT NULL,
 						Fwadddata BLOB,
-                                                Uploadedonembark BOOLEAN DEFAULT false,
-                                                Embarkfileid VARCHAR DEFAULT NULL, 
-                                                Startedanalysisonembark BOOLEAN DEFAULT false)"""
+                        Uploadedonembark BOOLEAN DEFAULT false,
+                        Embarkfileid VARCHAR DEFAULT NULL, 
+                        Startedanalysisonembark BOOLEAN DEFAULT false)"""
 		curs.execute(create_command)
 		logger.info('The database is created successfully in the code repository with the command: %s.', create_command)
 		conn.commit()

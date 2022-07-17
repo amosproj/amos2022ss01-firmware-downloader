@@ -1,12 +1,20 @@
 import requests
-
+import json
+import os
+import sqlite3
 from bs4 import BeautifulSoup
+from utils.database import Database
+
+CONFIG_PATH = os.path.join("config", "config.json")
+DATA={}
+with open(CONFIG_PATH, "rb") as fp:
+    DATA = json.load(fp)
 
 class FirmwareUploader:
     def __init__(self):
-        self.auth_url = "http://embark.local"
-        self.upload_fw_url = "http://embark.local/uploader/save/"
-        self.start_analysis_url = "http://embark.local/uploader/start/"
+        self.auth_url = DATA['uploader']['auth_url']
+        self.upload_fw_url = DATA['uploader']['upload_fw_url']
+        self.start_analysis_url = DATA['uploader']['start_analysis_url']
         self.cookies = {}
 
     def authenticate(self, username, password):
@@ -77,12 +85,27 @@ class FirmwareUploader:
                     return scrapped_id
         print("Id not found for filename %s", filename)
         return None
+    
+    def anaylise_data_file_path():
+        db_name = "firmwaredatabase.db"
+        conn = sqlite3.connect(db_name)
+        cursor = conn.cursor()
+        try:
+            cursor.execute("select * from FWDB")
+            data_list = cursor.fetchall()
+            fwu = FirmwareUploader()
+            fwu.authenticate(DATA['uploader']['username'], DATA['uploader']['password'])
+            fw_metadata = {}
+            for file_path in data_list:
+                fw_metadata["file_path"] = file_path
+                fwu.upload_fw(fw_metadata["file_path"])
+                fw_metadata["id"] = fwu.get_id_of_uploaded_file(fw_metadata["file_path"])
+                fwu.start_fw_analysis(fw_metadata)
+        except sqlite3.Error as er_:
+            print('SQLite error: %s' % (' '.join(er_.args)))
+            return False
 
-if __name__=="__main__":
-    fwu = FirmwareUploader()
-    fwu.authenticate("apiuser", "GpY8V3d25G3gaZg")
-    fw_metadata = {}
-    fw_metadata["file_path"] = "MPS4010_sys.zip"
-    fwu.upload_fw(fw_metadata["file_path"])
-    fw_metadata["id"] = fwu.get_id_of_uploaded_file(fw_metadata["file_path"])
-    fwu.start_fw_analysis(fw_metadata)
+        
+        conn.close()
+        
+    
