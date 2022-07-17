@@ -92,7 +92,7 @@ class Database:
 			curs.execute(insert_command)
 			logger.info('The db is inserted with the command %s.', insert_command)
 			conn.commit()
-			logger.info('The db commited is with data %s.', dbdict)
+			logger.info(f'The db commited is with data %s.', str(dbdict))
 			# Prints the data in db
 			curs.execute('SELECT * FROM FWDB')
 			print(curs.fetchall())

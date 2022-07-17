@@ -67,7 +67,10 @@ class Honeywell:
             'Embarklinktoreport': '',
             'Fwdownlink': '',
             'Fwfilelinktolocal': '',
-            'Fwadddata': ''
+            'Fwadddata': '',
+            'Uploadedonembark': '',
+            'Embarkfileid': '',
+            'Startedanalysisonembark': ''
         }
 
     def homepage(self):
