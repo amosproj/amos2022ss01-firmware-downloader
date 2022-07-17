@@ -84,7 +84,7 @@ class FirmwareUploader:
                     return scrapped_id
         print("Id not found for filename %s", filename)
         return None
-    
+
     def anaylise_data_file(self, db_name):
         conn = sqlite3.connect(db_name)
         cursor = conn.cursor()
@@ -102,10 +102,4 @@ class FirmwareUploader:
                     fwu.start_fw_analysis(fw_metadata)
         except sqlite3.Error as er_:
             print('SQLite error: %s' % (' '.join(er_.args)))
-            return False
         conn.close()
-        
-    
-# if __name__ == "__main__":
-#     fwu = FirmwareUploader()
-#     fwu.anaylise_data_file("firmwaredatabase.db")

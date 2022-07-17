@@ -18,8 +18,8 @@ VENDORS_FILE = 'vendors'
 
 def runner(mod):
     os.system("python vendors/" + mod + ".py")
-    fw = FirmwareUploader()
-    fw.anaylise_data_file("firmwaredatabase.db")
+    fw_ = FirmwareUploader()
+    fw_.anaylise_data_file("firmwaredatabase.db")
 
 def executor_job(mod_, executor):
     _ = executor.submit(runner, mod_)
