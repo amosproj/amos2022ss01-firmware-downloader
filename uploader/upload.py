@@ -3,7 +3,6 @@ import json
 import os
 import sqlite3
 from bs4 import BeautifulSoup
-from utils.database import Database
 
 CONFIG_PATH = os.path.join("config", "config.json")
 DATA={}
@@ -86,8 +85,7 @@ class FirmwareUploader:
         print("Id not found for filename %s", filename)
         return None
     
-    def anaylise_data_file_path():
-        db_name = "firmwaredatabase.db"
+    def anaylise_data_file(self, db_name):
         conn = sqlite3.connect(db_name)
         cursor = conn.cursor()
         try:
@@ -96,16 +94,18 @@ class FirmwareUploader:
             fwu = FirmwareUploader()
             fwu.authenticate(DATA['uploader']['username'], DATA['uploader']['password'])
             fw_metadata = {}
-            for file_path in data_list:
-                fw_metadata["file_path"] = file_path
-                fwu.upload_fw(fw_metadata["file_path"])
-                fw_metadata["id"] = fwu.get_id_of_uploaded_file(fw_metadata["file_path"])
-                fwu.start_fw_analysis(fw_metadata)
+            for file in data_list:
+                if file[12]:
+                    fw_metadata["file_path"] = file[12]
+                    fwu.upload_fw(fw_metadata["file_path"])
+                    fw_metadata["id"] = fwu.get_id_of_uploaded_file(fw_metadata["file_path"])
+                    fwu.start_fw_analysis(fw_metadata)
         except sqlite3.Error as er_:
             print('SQLite error: %s' % (' '.join(er_.args)))
             return False
-
-        
         conn.close()
         
     
+# if __name__ == "__main__":
+#     fwu = FirmwareUploader()
+#     fwu.anaylise_data_file("firmwaredatabase.db")
