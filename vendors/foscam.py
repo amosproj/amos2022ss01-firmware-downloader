@@ -101,11 +101,11 @@ class FoscamHomeSecurity:
 	def firmware_downloader(self):
 		driver = self.driver
 		fw_coll_data = list(set(self.firmware_collector()))
-		for i in range(2, 8):
+		for iter_num in range(2, 8):
 			driver.find_element(
 				By.XPATH,
 				".//a[contains(@onclick,'gotopage({})')]//"
-				"img[contains(@src, '/Public/Home/images/faq/02.png')]".format(i)).click()
+				"img[contains(@src, '/Public/Home/images/faq/02.png')]".format(iter_num)).click()
 			fw_coll_data.extend(list(set(self.firmware_collector())))
 		print(len(fw_coll_data), fw_coll_data)
 		for href_url in fw_coll_data:
