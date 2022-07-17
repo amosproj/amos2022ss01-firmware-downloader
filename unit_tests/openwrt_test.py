@@ -6,8 +6,6 @@ import time
 import unittest
 import requests
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from vendors import openwrt
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from utils.database import Database
