@@ -41,7 +41,7 @@
   "openwrt": {
     "interval": 0.01,
     "ignore": true,
-    "url": "",
+    "url": "https://openwrt.org/",
     "user": "",
     "password": ""
   },
