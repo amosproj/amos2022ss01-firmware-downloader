@@ -78,9 +78,7 @@ class Openwrt:
     def down_ele_click(self, release_date, download_link, sha256sum):
         # A fn for duplication Check for not to download the files if files exist in local machine
         filename = download_link.split('/')[-1].replace(" ", "_")
-        path_to_download = r"{}\{}\OpenWRT\{}".format(self.path, self.down_file_path, self.driver.find_element(By.XPATH,
-                                                                                                               "(//h1/a)[last()]").get_attribute(
-            "href")[30:].replace("/", "\\"))
+        path_to_download = r"{}\{}\OpenWRT\{}".format(self.path, self.down_file_path, self.driver.find_element(By.XPATH,"(//h1/a)[last()]").get_attribute("href")[30:].replace("/", "\\"))
         local_file_path = os.path.join(path_to_download, filename)
         if not os.path.isfile(local_file_path):
             if not os.path.exists(path_to_download):
@@ -100,29 +98,29 @@ class Openwrt:
         # A fn used to navigate to the folders and sub folders of the download page and download them
         driver = self.driver
         files = driver.find_elements(By.XPATH, "//td[@class='n']/a[not(contains(text(),'packages'))]")
-        for i in range(len(files)):
+        for file in range(len(files)):
             driver.find_element(By.XPATH,
-                                r"(//td[@class='n']/a[not(contains(text(),'packages'))])[{}]".format(i + 1)).click()
+                                r"(//td[@class='n']/a[not(contains(text(),'packages'))])[{}]".format(file + 1)).click()
             try:
                 if driver.find_element(By.XPATH, "//th[text()='Image for your Device']").is_displayed():
                     image_files = driver.find_elements(By.XPATH,
                                                        "//th[text()='Image for your Device']/ancestor::tbody//td/a")
-                    for j in range(len(image_files)):
+                    for image_file in range(len(image_files)):
                         file_name = driver.find_element(By.XPATH,
                                                         "(//th[text()='Image for your Device']/ancestor::tbody//td/a)[{}]".format(
-                                                            j + 1))
+                                                            image_file + 1))
                         sha256sum = driver.find_element(By.XPATH,
                                                         "(//th[text()='Image for your Device']/ancestor::tbody//td[@class='sh'])[{}]".format(
-                                                            j + 1)).text
+                                                            image_file + 1)).text
                         # file_size = driver.find_element(By.XPATH,
                         #                                 "(//th[text()='Image for your Device']/ancestor::tbody//td[@class='s'])[{}]".format(
-                        #                                     j + 1)).text
+                        #                                     image_file + 1)).text
                         release_date = driver.find_element(By.XPATH,
                                                            "(//th[text()='Image for your Device']/ancestor::tbody//td[@class='d'])[{}]".format(
-                                                               j + 1)).text
+                                                               image_file + 1)).text
                         download_link = driver.find_element(By.XPATH,
                                                             "(//th[text()='Image for your Device']/ancestor::tbody//td/a)[{}]".format(
-                                                                j + 1)).get_attribute("href")
+                                                                image_file + 1)).get_attribute("href")
                         self.down_ele_click(release_date, download_link, sha256sum)
             except NoSuchElementException:
                 self.crawl_table()
