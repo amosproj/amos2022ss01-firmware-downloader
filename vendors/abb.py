@@ -3,11 +3,11 @@ import sys
 import json
 import math
 import uuid
-import requests
 from urllib.parse import urlparse
+import requests
 from utils.database import Database
 from utils.Logs import get_logger
-from utils.modules_check import *
+from utils.modules_check import vendor_field
 
 sys.path.append(os.path.abspath(os.path.join('.', '')))
 
