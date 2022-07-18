@@ -15,9 +15,11 @@ def get_file_metadata(file_path):
 def get_hash_value(file_path):
     # Returns the hash value of the file using file path
     with open(file_path, "rb") as file:
-        file_hash = hashlib.md5()
-        if file.read(8192):
-            chunk = file.read(8192)
+        file_hash = hashlib.sha512()
+        # file_hash read as sha512 encryption format
+        if file.read(file_hash.block_size):
+            chunk = file.read(file_hash.block_size)
+            # file is read at a speed of file_hash.block_size and updates the new value in file_hash
             file_hash.update(chunk)
         file.close()
         return file_hash.hexdigest()

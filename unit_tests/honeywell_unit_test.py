@@ -10,6 +10,8 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from utils.database import Database
+from utils.metadata_extractor import get_hash_value
+
 sys.path.append(os.path.abspath(os.path.join('.', '')))
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
@@ -18,8 +20,7 @@ sys.path.insert(0, parent_dir)
 
 class WebCode(unittest.TestCase):
 
-	def __init__(self):
-		super().__init__()
+	def setUp(self):
 		with open(os.path.join(parent_dir, 'config', 'config.json'), 'rb') as json_file:
 			json_data = json.loads(json_file.read())
 			honeywell_data = json_data['honeywell']
@@ -52,10 +53,11 @@ class WebCode(unittest.TestCase):
 			'Embarklinktoreport': '',
 			'Fwdownlink': '',
 			'Fwfilelinktolocal': '',
-			'Fwadddata': ''
+			'Fwadddata': '',
+			'Uploadedonembark': '',
+			'Embarkfileid': '',
+			'Startedanalysisonembark': ''
 		}
-
-	def setUp(self):
 		driver = self.driver
 		driver.refresh()
 
@@ -116,15 +118,17 @@ class WebCode(unittest.TestCase):
 			for key in self.dbdict:
 				if key == "Manufacturer":
 					dbdict_carrier[key] = "Honeywell"
-				if key == "Fwfilename":
+				elif key == "Fwfilename":
 					dbdict_carrier[key] = web_file_name
-				if key == "Releasedate":
+				elif key == "Releasedate":
 					dbdict_carrier[key] = last_updated
-				if key == "Fwdownlink":
+				elif key == "Fwdownlink":
 					dbdict_carrier[key] = download_link
-				if key == "Fwfilelinktolocal":
+				elif key == "Fwfilelinktolocal":
 					dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
-				if key not in dbdict_carrier:
+				elif key == "Checksum":
+					dbdict_carrier[key] = get_hash_value(str(local_file_location.replace("\\", "/")))
+				elif key not in dbdict_carrier:
 					dbdict_carrier[key] = ''
 			db_used.insert_data(dbdict_carrier)
 			self.assertTrue(dbdict_carrier, msg="data inserted")
@@ -173,13 +177,15 @@ class WebCode(unittest.TestCase):
 				for key in self.dbdict:
 					if key == "Fwfilename":
 						dbdict_carrier[key] = web_file_name
-					if key == "Manufacturer":
+					elif key == "Manufacturer":
 						dbdict_carrier[key] = "Honeywell"
-					if key == "Fwdownlink":
+					elif key == "Fwdownlink":
 						dbdict_carrier[key] = download_link
-					if key == "Fwfilelinktolocal":
+					elif key == "Fwfilelinktolocal":
 						dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
-					if key not in dbdict_carrier:
+					elif key == "Checksum":
+						dbdict_carrier[key] = get_hash_value(str(local_file_location.replace("\\", "/")))
+					elif key not in dbdict_carrier:
 						dbdict_carrier[key] = ''
 				db_used.insert_data(dbdict_carrier)
 				self.assertTrue(dbdict_carrier, msg="data inserted")

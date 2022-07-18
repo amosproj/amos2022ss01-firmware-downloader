@@ -17,6 +17,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from utils.chromium_downloader import ChromiumDownloader
 from utils.database import Database
+from utils.metadata_extractor import get_hash_value
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
@@ -66,7 +67,10 @@ class Honeywell:
             'Embarklinktoreport': '',
             'Fwdownlink': '',
             'Fwfilelinktolocal': '',
-            'Fwadddata': ''
+            'Fwadddata': '',
+            'Uploadedonembark': '',
+            'Embarkfileid': '',
+            'Startedanalysisonembark': ''
         }
 
     def homepage(self):
@@ -129,19 +133,21 @@ class Honeywell:
             for key in self.dbdict:
                 if key == "Manufacturer":
                     dbdict_carrier[key] = "Honeywell"
-                if key == "Modelname":
+                elif key == "Modelname":
                     dbdict_carrier[key] = r'{}'.format(model_name)
-                if key == "Version":
+                elif key == "Version":
                     dbdict_carrier[key] = r'{}'.format(version)
-                if key == "Fwfilename":
+                elif key == "Fwfilename":
                     dbdict_carrier[key] = r'{}'.format(web_file_name)
-                if key == "Releasedate":
+                elif key == "Releasedate":
                     dbdict_carrier[key] = last_updated
-                if key == "Fwdownlink":
+                elif key == "Fwdownlink":
                     dbdict_carrier[key] = download_link
-                if key == "Fwfilelinktolocal":
+                elif key == "Fwfilelinktolocal":
                     dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
-                if key not in dbdict_carrier:
+                elif key == "Checksum":
+                    dbdict_carrier[key] = get_hash_value(str(local_file_location.replace("\\", "/")))
+                elif key not in dbdict_carrier:
                     dbdict_carrier[key] = ''
             db_used.insert_data(dbdict_carrier)
         driver.back()
@@ -212,15 +218,17 @@ class Honeywell:
             for key in self.dbdict:
                 if key == "Fwfilename":
                     dbdict_carrier[key] = r'{}'.format(cfile_name)
-                if key == "Manufacturer":
+                elif key == "Manufacturer":
                     dbdict_carrier[key] = "Honeywell"
-                if key == "Fwdownlink":
+                elif key == "Fwdownlink":
                     dbdict_carrier[key] = r'{}'.format(crow_down_link)
-                if key == "Fwfilelinktolocal":
+                elif key == "Fwfilelinktolocal":
                     dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
-                if key == "Fwadddata":
+                elif key == "Fwadddata":
                     dbdict_carrier[key] = r'{}'.format(crow_add_desc)
-                if key not in dbdict_carrier:
+                elif key == "Checksum":
+                    dbdict_carrier[key] = get_hash_value(str(local_file_location.replace("\\", "/")))
+                elif key not in dbdict_carrier:
                     dbdict_carrier[key] = ''
             db_used.insert_data(dbdict_carrier)
 
@@ -446,17 +454,19 @@ class Honeywell:
                 for key in self.dbdict:
                     if key == "Fwfilename":
                         dbdict_carrier[key] = r'{}'.format(web_file_name)
-                    if key == "Manufacturer":
+                    elif key == "Manufacturer":
                         dbdict_carrier[key] = "Honeywell"
-                    if key == "Modelname":
+                    elif key == "Modelname":
                         dbdict_carrier[key] = r'{}'.format(model_name)
-                    if key == "Version":
+                    elif key == "Version":
                         dbdict_carrier[key] = r'{}'.format(version)
-                    if key == "Fwdownlink":
+                    elif key == "Fwdownlink":
                         dbdict_carrier[key] = download_link
-                    if key == "Fwfilelinktolocal":
+                    elif key == "Fwfilelinktolocal":
                         dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
-                    if key not in dbdict_carrier:
+                    elif key == "Checksum":
+                        dbdict_carrier[key] = get_hash_value(str(local_file_location.replace("\\", "/")))
+                    elif key not in dbdict_carrier:
                         dbdict_carrier[key] = ''
                 db_used.insert_data(dbdict_carrier)
             time.sleep(10)
