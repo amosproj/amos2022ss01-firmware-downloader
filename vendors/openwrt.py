@@ -52,7 +52,7 @@ class Openwrt:
         driver.implicitly_wait(10)  # seconds
         driver.maximize_window()
 
-    def write_database(self, file_name, release_date, download_link, local_file_location, sha256sum):
+    def write_database(self, filename, release_date, download_link, local_file_location, sha256sum):
         # The data extracted is writing into the database file
         dbdict_carrier = {}
         db_used = Database()
@@ -60,7 +60,7 @@ class Openwrt:
             if key == "Manufacturer":
                 dbdict_carrier[key] = "OpenWRT"
             elif key == "Fwfilename":
-                dbdict_carrier[key] = file_name
+                dbdict_carrier[key] = filename
             elif key == "Releasedate":
                 dbdict_carrier[key] = release_date
             elif key == "Fwdownlink":
@@ -106,9 +106,7 @@ class Openwrt:
                     image_files = driver.find_elements(By.XPATH,
                                                        "//th[text()='Image for your Device']/ancestor::tbody//td/a")
                     for image_file in range(len(image_files)):
-                        file_name = driver.find_element(By.XPATH,
-                                                        "(//th[text()='Image for your Device']/ancestor::tbody//td/a)[{}]".format(
-                                                            image_file + 1))
+                        #file_name = driver.find_element(By.XPATH,"(//th[text()='Image for your Device']/ancestor::tbody//td/a)[{}]".format(image_file + 1))
                         sha256sum = driver.find_element(By.XPATH,
                                                         "(//th[text()='Image for your Device']/ancestor::tbody//td[@class='sh'])[{}]".format(
                                                             image_file + 1)).text
