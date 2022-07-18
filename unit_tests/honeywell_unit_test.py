@@ -10,6 +10,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from utils.database import Database
+
 sys.path.append(os.path.abspath(os.path.join('.', '')))
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
@@ -18,8 +19,7 @@ sys.path.insert(0, parent_dir)
 
 class WebCode(unittest.TestCase):
 
-	def __init__(self):
-		super().__init__()
+	def setUp(self):
 		with open(os.path.join(parent_dir, 'config', 'config.json'), 'rb') as json_file:
 			json_data = json.loads(json_file.read())
 			honeywell_data = json_data['honeywell']
@@ -52,10 +52,11 @@ class WebCode(unittest.TestCase):
 			'Embarklinktoreport': '',
 			'Fwdownlink': '',
 			'Fwfilelinktolocal': '',
-			'Fwadddata': ''
+			'Fwadddata': '',
+			'Uploadedonembark': '',
+			'Embarkfileid': '',
+			'Startedanalysisonembark': ''
 		}
-
-	def setUp(self):
 		driver = self.driver
 		driver.refresh()
 

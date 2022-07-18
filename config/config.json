@@ -6,7 +6,7 @@
   "foscam": {
     "interval": 120,
     "ignore": true,
-    "url": "",
+    "url": "https://www.foscam.com/downloads/index.html",
     "user": "",
     "password": ""
   },
