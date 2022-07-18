@@ -131,7 +131,10 @@ def transform_metadata_format_ours(raw_data, local_storage_dir="."):
 	    'Embarklinktoreport': '',
         'Fwdownlink': fw_["metadata"]["currentRevisionUrl"],
         'Fwfilelinktolocal': os.path.join(local_storage_dir, str(uuid.uuid4()) + "." + fw_["metadata"]["fileSuffix"]), #setting temp filename as of now
-        'Fwadddata': json.dumps({"summary": fw_["metadata"]["summary"].replace("'","")})
+        'Fwadddata': json.dumps({"summary": fw_["metadata"]["summary"].replace("'","")}),
+        'Uploadedonembark': '',
+        'Embarkfileid': '',
+        'Startedanalysisonembark': ''
 	}
         fw_mod_list.append(fw_mod)
     return fw_mod_list

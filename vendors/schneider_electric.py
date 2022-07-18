@@ -126,7 +126,10 @@ def transform_metadata_format_ours(raw_data, local_storage_dir="."):
             'Embarklinktoreport': '',
             'Fwdownlink': "https:" + fw_.get("downloadUrl", ""),
             'Fwfilelinktolocal': os.path.join(local_storage_dir, parse_qs(urlparse(fw_.get("downloadUrl")).query, keep_blank_values=True).get("p_File_Name", list(str(uuid.uuid4())))[0].replace(" ", "_").replace("'", "") ),
-            'Fwadddata': ''
+            'Fwadddata': '',
+            'Uploadedonembark': '',
+            'Embarkfileid': '',
+            'Startedanalysisonembark': ''
 	    }
         db_name = 'firmwaredatabase.db'
         if check_duplicates(fw_mod, db_name) is False:
