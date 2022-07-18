@@ -1,7 +1,7 @@
 import os
+import zipfile
 import requests
 import wget
-import zipfile
 
 
 class ChromiumDownloader:

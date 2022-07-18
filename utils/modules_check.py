@@ -2,11 +2,14 @@ import argparse
 import json
 import logging
 import os
-
+import inspect
+import sys
 from utils.Logs import get_logger
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
 
-
-config_path = os.path.join("config", "config.json")
+config_path = os.path.join(parent_dir, "config", "config.json")
 with open(config_path, "rb") as fp:
     config = json.load(fp)
 logger = get_logger("main")
@@ -14,7 +17,6 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--num-threads", type=int, default=2, help="Number of parallel executing modules")
 args = parser.parse_args()
 VENDORS_FILE = 'vendors'
-
 
 
 def config_check(mod, var1):
@@ -67,4 +69,3 @@ def vendor_field(mod,field):
             return config['default'][field]
         else:
             return False
-
