@@ -11,19 +11,50 @@ from utils.Logs import get_logger
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 import json
-
+from utils.modules_check import config_check
 logger = get_logger("vendors.ge")
 links=[]
 
 USERNAME = ''
 PASSWORD = ''
-
+URL = ''
 CONFIG_PATH = os.path.join("config", "config.json")
 DATA={}
 with open(CONFIG_PATH, "rb") as fp:
     DATA = json.load(fp)
-    USERNAME = DATA['ge']['user']
-    PASSWORD = DATA['ge']['password']
+    # user check
+    if config_check('ge', 'user'):
+        USERNAME = DATA['ge']['user']
+    else:
+        if config_check('default', 'user'):
+            USERNAME = DATA['default']['user']
+        else:
+            print('error')
+            logger.error('<module : Ge> -> user not present')
+            # using hardcode user for GE
+    # password check
+    if config_check('ge', 'password'):
+        PASSWORD = DATA['ge']['password']
+    else:
+        if config_check('default', 'password'):
+            PASSWORD = DATA['default']['password']
+        else:
+            print('error')
+            logger.error('<module : Ge> -> password not present')
+            # using hardcode user for GE
+
+    # Url check
+    if config_check('ge', 'url'):
+        URL = DATA['ge']['url']
+    else:
+        if config_check('default', 'url'):
+            URL = DATA['default']['url']
+        else:
+            print('error')
+            logger.error('<module : Ge> -> url not present')
+            # using hardcode user for GE
+            logger.info('<module : Ge> -> using hardcode url')
+            URL = 'https://www.gegridsolutions.com'
 
 #inserting meta data into database
 def insert_into_db(fwdata):
@@ -69,7 +100,7 @@ def download_file(data):
             driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
             # Go to your page url
             try:
-                url_ = "https://www.gegridsolutions.com/Passport/Login.aspx"
+                url_ = URL
                 driver.get(url_)
                 driver.find_element(By.ID, "ctl00_BodyContent_Login1_UserName").send_keys(USERNAME)
                 driver.find_element(By.ID, "ctl00_BodyContent_Login1_Password").send_keys(PASSWORD)

@@ -8,13 +8,38 @@ import sys
 sys.path.append(os.path.abspath(os.path.join('.', '')))
 from utils.database import Database
 from utils.Logs import get_logger
+from utils.modules_check import *
 
 MOD_NAME = "abb"
 logger = get_logger("vendors.abb")
 CONFIG_PATH = os.path.join("config", "config.json")
 DATA={}
+USERNAME = ''
+PASSWORD = ''
+URL = ''
 with open(CONFIG_PATH, "rb") as fp:
     DATA = json.load(fp)
+    if vendor_field('abb','user') is False:
+        # print('error user')
+        logger.error('<module : abb > -> user not present')
+    else:
+        # print(' user')
+        USERNAME = vendor_field('abb','user')
+
+    if vendor_field('abb', 'password') is False:
+        # print('error password')
+        logger.error('<module : abb > -> password not present')
+    else:
+        # print(' password')
+        PASSWORD = vendor_field('abb', 'password')
+
+    if vendor_field('abb', 'url') is False:
+        print('error url')
+        logger.error('<module : abb > -> url not present')
+        URL = "https://discoveryapi.library.abb.com/api/public/documents"
+    else:
+        # print(' url')
+        URL = vendor_field('abb', 'url')
 
 def download_single_file(file_metadata):
     url = file_metadata["Fwdownlink"]
@@ -112,7 +137,7 @@ def transform_metadata_format_ours(raw_data, local_storage_dir="."):
     return fw_mod_list
 
 def main():
-    url = "https://discoveryapi.library.abb.com/api/public/documents"
+    url = URL
     folder = DATA['file_paths']['download_files_path']
     if not os.path.isdir(folder):
         os.mkdir(folder)
