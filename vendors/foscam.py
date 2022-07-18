@@ -12,6 +12,7 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from utils.chromium_downloader import ChromiumDownloader
 from utils.database import Database
+from utils.metadata_extractor import get_hash_value
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -151,6 +152,11 @@ class FoscamHomeSecurity:
 								dbdict_carrier[key] = down_link
 							elif key == "Fwfilelinktolocal":
 								dbdict_carrier[key] = local_file_location
+							elif key == "Checksum":
+								if local_file_location.split("\\")[-1] is not None and file_name is not None:
+									dbdict_carrier[key] = get_hash_value(str(local_file_location.replace("\\", "/")))
+								else:
+									dbdict_carrier[key] = ''
 							elif key not in dbdict_carrier:
 								dbdict_carrier[key] = ''
 						db_used.insert_data(dbdict_carrier)

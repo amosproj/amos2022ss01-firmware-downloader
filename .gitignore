@@ -38,7 +38,7 @@ bin/
 # all logs file 
 **/*.log
 
-# db logs 
+# db log file from all the folders would be ignored
 **/*.db
 
 # ignore chromedriver.exe file, .msi files and .zip files
