@@ -1,8 +1,9 @@
 import os
+import sys
 import time
 import json
-import requests
 from datetime import datetime
+import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -11,6 +12,8 @@ from utils.database import Database
 from utils.check_duplicates import check_duplicates
 from utils.Logs import get_logger
 from utils.modules_check import config_check
+
+sys.path.append(os.path.abspath(os.path.join('.', '')))
 
 logger = get_logger("vendors.ge")
 links=[]
@@ -187,8 +190,8 @@ def directories_link(url, base_url):
                 elif str(link).find("/app/resources.aspx?prod=vistanet&type=7"):
                     links.append(base_url + "/app/resources.aspx?prod=vistanet&type=7")
     except Exception as er_:
+        logger('%s' % er_)
         logger.error('<%s> is invalid', url)
-        raise ValueError("%s" % er_) from er_
 
 def main():
     logger.info('<module GE> -> Download Module started at <%s>', datetime.now())
