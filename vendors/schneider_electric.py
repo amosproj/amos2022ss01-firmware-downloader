@@ -44,7 +44,7 @@ with open(CONFIG_PATH, "rb") as fp:
         URL = vendor_field('schneider_electric', 'url')
 
     if vendor_field('schneider_electric', 'apiurl') is False:
-        print('error url')
+        # print('error url')
         logger.error('<module : schneider_electric > -> url not present')
         API_URL = "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/resultViewCahnge/resultListAjax"
     else:
