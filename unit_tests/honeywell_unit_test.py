@@ -9,10 +9,10 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
-sys.path.append(os.path.abspath(os.path.join('.', '')))
 from utils.database import Database
 from utils.metadata_extractor import get_hash_value
 
+sys.path.append(os.path.abspath(os.path.join('.', '')))
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)

@@ -8,10 +8,10 @@ import requests
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
-sys.path.append(os.path.abspath(os.path.join('.', '')))
 from utils.database import Database
 from utils.metadata_extractor import get_hash_value
 
+sys.path.append(os.path.abspath(os.path.join('.', '')))
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)

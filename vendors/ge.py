@@ -1,5 +1,4 @@
 import os
-import sys
 import time
 import json
 import requests
@@ -8,7 +7,6 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
-sys.path.append(os.path.abspath(os.path.join('.', '')))
 from utils.database import Database
 from utils.check_duplicates import check_duplicates
 from utils.Logs import get_logger
@@ -124,7 +122,8 @@ def download_file(data):
                 if data['is_file_download'] is False:
                     insert_into_db(req_data)
             except Exception as er_:
-                logger.error("<%s> Error in downloading: %s", data['url'], er_)
+                logger.error("<module GE> Error in downloading: %s", data['url'])
+                print(er_)
 
     else:
         logger.error("<module GE>: <%s> Firmware already exist!", data['data0'])
