@@ -4,10 +4,10 @@ import re
 import uuid
 import sys
 import traceback
-import requests
-from bs4 import BeautifulSoup
 import json
 from urllib.parse import parse_qs, urlparse
+import requests
+from bs4 import BeautifulSoup
 from utils.check_duplicates import check_duplicates, Database
 from utils.Logs import get_logger
 from utils.modules_check import vendor_field
