@@ -1,9 +1,7 @@
 import os
-import sys
 import sqlite3
 import unittest
 import json
-sys.path.append(os.path.abspath(os.path.join('.', '')))
 from vendors.schneider_electric import download_single_file
 from utils.check_duplicates import check_duplicates, Database
 

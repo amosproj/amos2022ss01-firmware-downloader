@@ -56,8 +56,10 @@ class FirmwareUploader:
         resp = requests.post(self.start_analysis_url, data=data, cookies=self.cookies)
         if resp.status_code == 200:
             print("Started firmware analysis successfully")
+            return True
         else:
             print("Failed to start firmware analysis")
+            return False
 
     def upload_fw(self, fw_):
         with open(fw_, 'rb') as firmware_file:
@@ -68,6 +70,9 @@ class FirmwareUploader:
             resp = requests.post(self.upload_fw_url, files=files, headers=headers, cookies=self.cookies, allow_redirects=False)
             if resp.content == b'successful upload':
                 print("File is uploaded successfully")
+                return True
+            else:
+                return False
 
     def get_id_of_uploaded_file(self, filename):
         req = requests.get(self.start_analysis_url, cookies=self.cookies)
@@ -103,3 +108,6 @@ class FirmwareUploader:
         except sqlite3.Error as er_:
             print('SQLite error: %s' % (' '.join(er_.args)))
         conn.close()
+
+    def update_db(self, id):
+        update_

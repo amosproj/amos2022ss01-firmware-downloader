@@ -17,6 +17,7 @@ args = parser.parse_args()
 VENDORS_FILE = 'vendors'
 
 def runner(mod):
+    print(mod)
     os.system("python vendors/" + mod + ".py")
     fw_ = FirmwareUploader()
     fw_.anaylise_data_file("firmwaredatabase.db")
