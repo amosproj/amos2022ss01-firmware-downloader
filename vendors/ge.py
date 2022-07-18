@@ -124,9 +124,8 @@ def download_file(data):
                 driver.close()
                 if data['is_file_download'] is False:
                     insert_into_db(req_data)
-            except Exception as er_:
+            except Exception:
                 logger.error("<module GE> Error in downloading: %s", data['url'])
-                print(er_)
 
     else:
         logger.error("<module GE>: <%s> Firmware already exist!", data['data0'])
@@ -189,8 +188,7 @@ def directories_link(url, base_url):
                     links.append(base_url + "/Communications/MDS/PulseNET_Download.aspx")
                 elif str(link).find("/app/resources.aspx?prod=vistanet&type=7"):
                     links.append(base_url + "/app/resources.aspx?prod=vistanet&type=7")
-    except Exception as er_:
-        logger('%s' % er_)
+    except Exception:
         logger.error('<%s> is invalid', url)
 
 def main():

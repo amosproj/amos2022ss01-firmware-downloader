@@ -1,14 +1,15 @@
-import json
 import os
+import sys
+import json
 import math
 import uuid
 import requests
 from urllib.parse import urlparse
-import sys
-sys.path.append(os.path.abspath(os.path.join('.', '')))
 from utils.database import Database
 from utils.Logs import get_logger
 from utils.modules_check import *
+
+sys.path.append(os.path.abspath(os.path.join('.', '')))
 
 MOD_NAME = "abb"
 logger = get_logger("vendors.abb")
