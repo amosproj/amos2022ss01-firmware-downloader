@@ -1,18 +1,19 @@
 import os
 import sys
+import time
+import json
+import requests
+from datetime import datetime
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
 sys.path.append(os.path.abspath(os.path.join('.', '')))
 from utils.database import Database
 from utils.check_duplicates import check_duplicates
 from utils.Logs import get_logger
 from utils.modules_check import config_check
-from webdriver_manager.chrome import ChromeDriverManager
-from datetime import datetime
-import time
-import json
-import requests
-from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.common.by import By
+
 logger = get_logger("vendors.ge")
 links=[]
 
