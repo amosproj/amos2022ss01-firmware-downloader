@@ -124,8 +124,9 @@ def download_file(data):
                 driver.close()
                 if data['is_file_download'] is False:
                     insert_into_db(req_data)
-            except Exception:
+            except Exception as er_:
                 logger.error("<module GE> Error in downloading: %s", data['url'])
+                raise ValueError('%s' % er_)
 
     else:
         logger.error("<module GE>: <%s> Firmware already exist!", data['data0'])
