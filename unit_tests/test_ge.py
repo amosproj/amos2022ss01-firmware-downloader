@@ -1,11 +1,11 @@
+import os
+import sys
 import unittest
+import sqlite3
+import json
 sys.path.append(os.path.abspath(os.path.join('.', '')))
 from vendors.ge import download_file
 from utils.check_duplicates import check_duplicates
-import os
-import sqlite3
-import sys
-import json
 
 DB_NAME = "firmwaredatabase.db"
 CONFIG_PATH = os.path.join("config", "config.json")

@@ -1,11 +1,11 @@
+import os
+import sys
 sys.path.append(os.path.abspath(os.path.join('.', '')))
 from utils.database import Database
 from utils.check_duplicates import check_duplicates
 from utils.Logs import get_logger
 from utils.modules_check import config_check
 from webdriver_manager.chrome import ChromeDriverManager
-import os
-import sys
 from datetime import datetime
 import time
 import json
