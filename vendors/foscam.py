@@ -13,12 +13,12 @@ from selenium.common.exceptions import NoSuchElementException
 from utils.chromium_downloader import ChromiumDownloader
 from utils.database import Database
 from utils.metadata_extractor import get_hash_value
+from utils.modules_check import *
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
-
 
 class FoscamHomeSecurity:
 
@@ -26,9 +26,28 @@ class FoscamHomeSecurity:
 		with open(os.path.join(parent_dir, 'config', 'config.json'), 'rb') as json_file:
 			json_data = json.loads(json_file.read())
 			foscam_data = json_data['foscam']
-			self.email = foscam_data['user']
-			self.password = foscam_data['password']
-			self.url = foscam_data['url']
+			if vendor_field('foscam', 'user') is False:
+				# print('error user')
+				logger.error('<module : foscam > -> user not present')
+			else:
+				# print(' user')
+				self.email = vendor_field('foscam', 'user')
+
+			if vendor_field('foscam', 'password') is False:
+				# print('error password')
+				logger.error('<module : foscam > -> password not present')
+			else:
+				# print(' password')
+				self.password  = vendor_field('foscam', 'password')
+
+			if vendor_field('foscam', 'url') is False:
+				print('error url')
+				logger.error('<module : foscam > -> url not present')
+				self.url = "https://www.foscam.com/downloads/index.html"
+			else:
+				# print(' url')
+				self.url = vendor_field('foscam', 'url')
+
 			self.down_file_path = json_data['file_paths']['download_files_path']
 		self.path = os.getcwd()
 		opt = Options()

@@ -18,6 +18,7 @@ from selenium.webdriver.support.ui import Select
 from utils.chromium_downloader import ChromiumDownloader
 from utils.database import Database
 from utils.metadata_extractor import get_hash_value
+from utils.modules_check import *
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
@@ -40,9 +41,29 @@ class Honeywell:
         with open(os.path.join(parent_dir, 'config', 'config.json'), 'rb') as json_file:
             json_data = json.loads(json_file.read())
             honeywell_data = json_data['honeywell']
-            self.email = honeywell_data['user']
-            self.password = honeywell_data['password']
-            self.url = honeywell_data['url']
+
+            if vendor_field('honeywell', 'user') is False:
+                # print('error user')
+                logger.error('<module : honeywell > -> user not present')
+            else:
+                # print(' user')
+                self.email = vendor_field('honeywell', 'user')
+
+            if vendor_field('honeywell', 'password') is False:
+                # print('error password')
+                logger.error('<module : honeywell > -> password not present')
+            else:
+                # print(' password')
+                self.password = vendor_field('honeywell', 'password')
+
+            if vendor_field('honeywell', 'url') is False:
+                print('error url')
+                logger.error('<module : honeywell > -> url not present')
+                self.url = "https://sps.honeywell.com/us/en/support/software-downloads"
+            else:
+                # print(' url')
+                self.url = vendor_field('honeywell', 'url')
+
             self.down_file_path = json_data['file_paths']['download_files_path']
         self.path = os.getcwd()
         opt = Options()

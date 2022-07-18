@@ -7,8 +7,8 @@
     "interval": 120,
     "ignore": false,
     "url": "https://www.foscam.com/downloads/index.html",
-    "user": "",
-    "password": ""
+    "user": "none",
+    "password": "none"
   },
   "ubiquiti": {
     "interval": 120,
@@ -153,16 +153,17 @@
   "abb": {
     "interval": 120,
     "ignore": false,
-    "url": "",
-    "user": "",
-    "password": ""
+    "url": "none",
+    "user": "none",
+    "password": "https://discoveryapi.library.abb.com/api/public/documents"
   },
   "schneider_electric": {
     "interval": 120,
     "ignore": false,
+    "apiurl": "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/resultViewCahnge/resultListAjax",
     "url": "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/?docType=1555893-Firmware&language=en_GB-English&sortByField=Popularityy",
-    "user": "",
-    "password": ""
+    "user": "none",
+    "password": "none"
   },
   "siemens": {
     "interval": 120,
