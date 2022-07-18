@@ -18,26 +18,21 @@ VENDORS_FILE = 'vendors'
 
 
 def config_check(mod, var1):
-    if mod in config:
+    if mod in config: # ge
         if config[mod][var1]:
             # present
-            print('-> %s present %s', var1, config[mod][var1])
+            # print('-> %s present %s', var1, config[mod][var1])
             return 1
         else:
             # none
             # print('none')
-            print('-> %s present %s', var1, config[mod][var1])
+            # print('-> %s present %s', var1, config[mod][var1])
             return 0
-    else:
+    else: #gee
         if config['default'][var1]:
             # through fallback error
             # print('fallback')
-            return 1
-
-        else:
-            # through fallback available
-            # print('fallback not available')
-            return 0
+            return 2
 
 
 def config_check_all():
@@ -64,5 +59,12 @@ def config_check_all():
             logging.error('module : %s -> password not present', mod.split('.')[0])
 
 
-if __name__ == '__main__':
-    config_check_all()
+def vendor_field(mod,field):
+    if config_check(mod,field):
+        return config[mod][field]
+    else:
+        if config_check('default' ,field):
+            return config['default'][field]
+        else:
+            return False
+
