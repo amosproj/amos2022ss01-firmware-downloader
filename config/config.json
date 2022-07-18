@@ -42,8 +42,13 @@
     "interval": 120,
     "ignore": false,
     "url": "https://openwrt.org/",
+<<<<<<< HEAD
     "user": "none",
     "password": "none"
+=======
+    "user": "",
+    "password": ""
+>>>>>>> 0b2130f8836dbfb6cbd70a079933c7b22c171386
   },
   "gigaset": {
     "interval": 120,

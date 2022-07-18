@@ -17,7 +17,6 @@ from utils.chromium_downloader import ChromiumDownloader
 from utils.database import Database
 from utils.metadata_extractor import get_hash_value
 from utils.modules_check import *
-
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
@@ -39,7 +38,7 @@ class Honeywell:
     def __init__(self):
         with open(os.path.join(parent_dir, 'config', 'config.json'), 'rb') as json_file:
             json_data = json.loads(json_file.read())
-            honeywell_data = json_data['honeywell']
+            dummy_honeywell_data = json_data['honeywell']
             if vendor_field('honeywell', 'user') is False:
                 logger.error('<module : honeywell > -> user not present')
             else:

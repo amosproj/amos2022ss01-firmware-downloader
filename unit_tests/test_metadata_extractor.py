@@ -1,6 +1,6 @@
-from utils.metadata_extractor import metadata_extractor
 import os
 import unittest
+from utils.metadata_extractor import metadata_extractor
 
 
 class MetadataExtractor(unittest.TestCase):

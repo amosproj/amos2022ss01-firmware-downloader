@@ -19,7 +19,6 @@ args = parser.parse_args()
 VENDORS_FILE = 'vendors'
 
 
-
 def config_check(mod, var1):
     if mod in config: # ge
         if config[mod][var1]:
