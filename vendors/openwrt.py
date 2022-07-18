@@ -1,9 +1,9 @@
 import inspect
-import requests
 import json
 import os
 import sys
 import time
+import requests
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
