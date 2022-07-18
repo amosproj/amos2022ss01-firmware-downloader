@@ -1,10 +1,10 @@
 import argparse
 import json
 import os
-import schedule
 import time
-from utils.Logs import get_logger
 from concurrent.futures import ThreadPoolExecutor
+import schedule
+from utils.Logs import get_logger
 from uploader.upload import FirmwareUploader
 
 config_path = os.path.join("config", "config.json")
