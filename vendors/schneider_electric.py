@@ -4,14 +4,13 @@ import re
 import uuid
 import sys
 import traceback
-sys.path.append(os.path.abspath(os.path.join('.', '')))
-import requests
-from bs4 import BeautifulSoup
 import json
 from urllib.parse import parse_qs, urlparse
+import requests
+from bs4 import BeautifulSoup
 from utils.check_duplicates import check_duplicates, Database
 from utils.Logs import get_logger
-from utils.modules_check import *
+from utils.modules_check import vendor_field
 
 #Logger
 MOD_NAME = "schneider_electric"
@@ -32,12 +31,10 @@ with open(CONFIG_PATH, "rb") as fp:
         USERNAME = vendor_field('schneider_electric','user')
 
     if vendor_field('schneider_electric', 'password') is False:
-        # print('error password')
         logger.error('<module : schneider_electric > -> password not present')
     else:
-        # print(' password')
         PASSWORD = vendor_field('schneider_electric', 'password')
-
+    
     if vendor_field('schneider_electric', 'url') is False:
         print('error url')
         logger.error('<module : schneider_electric > -> url not present')
@@ -47,7 +44,7 @@ with open(CONFIG_PATH, "rb") as fp:
         URL = vendor_field('schneider_electric', 'url')
 
     if vendor_field('schneider_electric', 'apiurl') is False:
-        print('error url')
+        # print('error url')
         logger.error('<module : schneider_electric > -> url not present')
         API_URL = "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/resultViewCahnge/resultListAjax"
     else:
