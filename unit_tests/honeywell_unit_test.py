@@ -75,6 +75,7 @@ class WebCode(unittest.TestCase):
 			print(f"The file is not found in local repository, now {f_name} will be downloaded into local")
 			time.sleep(10)
 			element.click()
+			time.sleep(5)
 		else:
 			print(f"The file is found in local repository, now {f_name} will not be downloaded into local")
 
