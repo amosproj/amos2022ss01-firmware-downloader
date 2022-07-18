@@ -21,7 +21,7 @@ links=[]
 USERNAME = ''
 PASSWORD = ''
 URL = ''
-CONFIG_PATH = os.path.join("config", "config.json")
+CONFIG_PATH = os.path.join("../config", "config.json")
 DATA={}
 with open(CONFIG_PATH, "rb") as fp:
     DATA = json.load(fp)
@@ -102,7 +102,27 @@ def download_file(data):
             with open(data['file_path_to_save'], "wb") as fp_:
                 fp_.write(resp.content)
             if data['is_file_download'] is False:
-                insert_into_db(req_data)
+                local_uri_ = os.path.abspath(DATA['file_paths']['download_files_path'] + "/" + data['data0'])
+                req_data_ = {
+                    'Fwfileid': 'FILE',
+                    'Fwfilename': data['data0'],
+                    'Manufacturer': 'GE',
+                    'Modelname': os.path.splitext(data['data0'])[0],
+                    'Version': '',
+                    'Type': '',
+                    'Releasedate': data['data1'],
+                    'Checksum': 'None',
+                    'Embatested': '',
+                    'Embalinktoreport': '',
+                    'Embarklinktoreport': '',
+                    'Fwdownlink': data['url'],
+                    'Fwfilelinktolocal': local_uri_,
+                    'Fwadddata': '',
+                    'Uploadedonembark': '',
+                    'Embarkfileid': '',
+                    'Startedanalysisonembark': ''
+                }
+                insert_into_db(req_data_)
         else:
             logger.info("<%s> -> Downloading Firmware <%s>", data['url'], data['file_path_to_save'])
             options = webdriver.ChromeOptions()
@@ -112,7 +132,7 @@ def download_file(data):
             driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
             # Go to your page url
             try:
-                url_ = URL
+                url_ = "https://www.gegridsolutions.com/Passport/Login.aspx"
                 driver.get(url_)
                 driver.find_element(By.ID, "ctl00_BodyContent_Login1_UserName").send_keys(USERNAME)
                 driver.find_element(By.ID, "ctl00_BodyContent_Login1_Password").send_keys(PASSWORD)
@@ -120,10 +140,30 @@ def download_file(data):
                 # Get button you are going to click by its id ( also you could us find_element_by_css_selector to get element by css selector)
                 driver.get(data['main_url'])
                 driver.execute_script(data['click'])
-                time.sleep(10)
+                time.sleep(60)
                 driver.close()
                 if data['is_file_download'] is False:
-                    insert_into_db(req_data)
+                    local_uri_ = os.path.abspath(DATA['file_paths']['download_files_path'] + "/" + data['data0'] + "/" + data['data0'])
+                    req_data_ = {
+                        'Fwfileid': 'FILE',
+                        'Fwfilename': data['data0'],
+                        'Manufacturer': 'GE',
+                        'Modelname': os.path.splitext(data['data0'])[0],
+                        'Version': '',
+                        'Type': '',
+                        'Releasedate': data['data1'],
+                        'Checksum': 'None',
+                        'Embatested': '',
+                        'Embalinktoreport': '',
+                        'Embarklinktoreport': '',
+                        'Fwdownlink': data['url'],
+                        'Fwfilelinktolocal': local_uri_,
+                        'Fwadddata': '',
+                        'Uploadedonembark': '',
+                        'Embarkfileid': '',
+                        'Startedanalysisonembark': ''
+                    }
+                    insert_into_db(req_data_)
             except Exception as er_:
                 logger.error("<module GE> Error in downloading: %s", data['url'])
                 raise ValueError('%s' % er_) from er_

@@ -65,7 +65,7 @@ def vendor_field(mod,field):
     if config_check(mod,field):
         return config[mod][field]
     else:
-        if config_check('default' ,field):
+        if config_check('default', field):
             return config['default'][field]
         else:
             return False
