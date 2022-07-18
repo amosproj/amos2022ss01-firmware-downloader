@@ -9,7 +9,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from utils.chromium_downloader import ChromiumDownloader
 from utils.database import Database
-
+from utils.metadata_extractor import get_hash_value
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
@@ -17,6 +17,7 @@ sys.path.insert(0, parent_dir)
 
 class Openwrt:
     def __init__(self):
+        # All the required data is initialized in this function
         with open(os.path.join(parent_dir, 'config', 'config.json'), 'rb') as json_file:
             json_data = json.loads(json_file.read())
             openwrt_data = json_data['openwrt']
@@ -38,7 +39,10 @@ class Openwrt:
             'Embarklinktoreport': '',
             'Fwdownlink': '',
             'Fwfilelinktolocal': '',
-            'Fwadddata': ''
+            'Fwadddata': '',
+            'Uploadedonembark': '',
+            'Embarkfileid': '',
+            'Startedanalysisonembark': ''
         }
 
     def homepage(self):
@@ -49,22 +53,25 @@ class Openwrt:
         driver.maximize_window()
 
     def write_database(self, file_name, release_date, download_link, local_file_location, sha256sum):
+        # The data extracted is writing into the database file
         dbdict_carrier = {}
         db_used = Database()
         for key in self.dbdict:
             if key == "Manufacturer":
                 dbdict_carrier[key] = "OpenWRT"
-            if key == "Fwfilename":
+            elif key == "Fwfilename":
                 dbdict_carrier[key] = file_name
-            if key == "Releasedate":
+            elif key == "Releasedate":
                 dbdict_carrier[key] = release_date
-            if key == "Fwdownlink":
+            elif key == "Fwdownlink":
                 dbdict_carrier[key] = download_link
-            if key == "Fwfilelinktolocal":
+            elif key == "Fwfilelinktolocal":
                 dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
-            if key == "Checksum":
-                dbdict_carrier[key] = sha256sum
-            if key not in dbdict_carrier:
+            elif key =="Checksum":
+                dbdict_carrier[key] = get_hash_value(str(local_file_location.replace("\\", "/")))
+            elif key == "Fwadddata":
+                dbdict_carrier[key] = "sha256sum = " + sha256sum
+            else:
                 dbdict_carrier[key] = ''
         db_used.insert_data(dbdict_carrier)
 
@@ -76,20 +83,21 @@ class Openwrt:
             "href")[30:].replace("/", "\\"))
         local_file_path = os.path.join(path_to_download, filename)
         if not os.path.isfile(local_file_path):
-            self.write_database(filename, release_date, download_link, local_file_path, sha256sum)
             if not os.path.exists(path_to_download):
                 os.makedirs(path_to_download)
-            r = requests.get(download_link, stream=True)
-            if r.ok:
-                with open(local_file_path, 'wb') as f:
-                    for chunk in r.iter_content(chunk_size=1024 * 8):
+            req = requests.get(download_link, stream=True)
+            if req.ok:
+                with open(local_file_path, 'wb') as file:
+                    for chunk in req.iter_content(chunk_size=1024 * 8):
                         if chunk:
-                            f.write(chunk)
-                            f.flush()
-                            os.fsync(f.fileno())
+                            file.write(chunk)
+                            file.flush()
+                            os.fsync(file.fileno())
+            self.write_database(filename, release_date, download_link, local_file_path, sha256sum)
         return local_file_path
 
     def crawl_table(self):
+        # A fn used to navigate to the folders and sub folders of the download page and download them
         driver = self.driver
         files = driver.find_elements(By.XPATH, "//td[@class='n']/a[not(contains(text(),'packages'))]")
         for i in range(len(files)):
@@ -122,6 +130,7 @@ class Openwrt:
             time.sleep(1)
 
     def stable_release(self):
+        # A fn used to navigate to the downloads page
         driver = self.driver
         driver.find_element(By.XPATH, '//button[text()="OK"]').click()
         driver.find_element(By.LINK_TEXT, 'Downloads').click()

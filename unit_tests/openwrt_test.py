@@ -9,6 +9,7 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from utils.database import Database
+from utils.metadata_extractor import get_hash_value
 
 sys.path.append(os.path.abspath(os.path.join('.', '')))
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -19,6 +20,7 @@ sys.path.insert(0, parent_dir)
 class WebCode(unittest.TestCase):
 
     def setUp(self):
+        # All the required data is initialized in this function
         with open(os.path.join(parent_dir, 'config', 'config.json'), 'rb') as json_file:
             json_data = json.loads(json_file.read())
             openwrt_data = json_data['openwrt']
@@ -40,7 +42,10 @@ class WebCode(unittest.TestCase):
             'Embarklinktoreport': '',
             'Fwdownlink': '',
             'Fwfilelinktolocal': '',
-            'Fwadddata': ''
+            'Fwadddata': '',
+            'Uploadedonembark': '',
+            'Embarkfileid': '',
+            'Startedanalysisonembark': ''
         }
 
     def test_homepage(self):
@@ -51,22 +56,25 @@ class WebCode(unittest.TestCase):
         self.assertEqual("[OpenWrt Wiki] Welcome to the OpenWrt Project", driver.title, msg="Homepage testcase passed")
 
     def write_database(self, file_name, release_date, download_link, local_file_location, sha256sum):
+        # The data extracted is writing into the database file
         dbdict_carrier = {}
         db_used = Database()
         for key in self.dbdict:
             if key == "Manufacturer":
                 dbdict_carrier[key] = "OpenWRT"
-            if key == "Fwfilename":
+            elif key == "Fwfilename":
                 dbdict_carrier[key] = file_name
-            if key == "Releasedate":
+            elif key == "Releasedate":
                 dbdict_carrier[key] = release_date
-            if key == "Fwdownlink":
+            elif key == "Fwdownlink":
                 dbdict_carrier[key] = download_link
-            if key == "Fwfilelinktolocal":
+            elif key == "Fwfilelinktolocal":
                 dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
-            if key == "Checksum":
-                dbdict_carrier[key] = sha256sum
-            if key not in dbdict_carrier:
+            elif key == "Checksum":
+                dbdict_carrier[key] = get_hash_value(str(local_file_location.replace("\\", "/")))
+            elif key == "Fwadddata":
+                dbdict_carrier[key] = "sha256sum = " + sha256sum
+            else:
                 dbdict_carrier[key] = ''
             db_used.insert_data(dbdict_carrier)
             self.assertTrue(dbdict_carrier, msg="data inserted")
@@ -83,19 +91,20 @@ class WebCode(unittest.TestCase):
             print(f"The file is not found in local repository, now {filename} will be downloaded into local")
             if not os.path.exists(path_to_download):
                 os.makedirs(path_to_download)
-            r = requests.get(download_link, stream=True)
-            if r.ok:
-                with open(local_file_path, 'wb') as f:
-                    for chunk in r.iter_content(chunk_size=1024 * 8):
+            req = requests.get(download_link, stream=True)
+            if req.ok:
+                with open(local_file_path, 'wb') as file:
+                    for chunk in req.iter_content(chunk_size=1024 * 8):
                         if chunk:
-                            f.write(chunk)
-                            f.flush()
-                            os.fsync(f.fileno())
+                            file.write(chunk)
+                            file.flush()
+                            os.fsync(file.fileno())
         else:
             print(f"The file is found in local repository, now {filename} will not be downloaded into local")
         return local_file_path
 
     def crawl_table(self):
+        # A fn used to navigate to the folders and sub folders of the download page and download them
         driver = self.driver
         files = driver.find_elements(By.XPATH, "//td[@class='n']/a[not(contains(text(),'packages'))]")
         for i in range(len(files)):
@@ -129,9 +138,10 @@ class WebCode(unittest.TestCase):
             return "Passed"
 
     def test_stable_release(self):
+        # A fn used to navigate to the downloads page
         driver = self.driver
         driver.get(self.url)
-        driver.implicitly_wait(10)  # seconds
+        driver.implicitly_wait(10)
         driver.maximize_window()
         driver.find_element(By.XPATH, '//button[text()="OK"]').click()
         driver.find_element(By.LINK_TEXT, 'Downloads').click()

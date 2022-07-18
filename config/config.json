@@ -40,7 +40,7 @@
   },
   "openwrt": {
     "interval": 120,
-    "ignore": true,
+    "ignore": false,
     "url": "https://openwrt.org/",
     "user": "",
     "password": ""
