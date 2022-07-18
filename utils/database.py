@@ -97,6 +97,6 @@ class Database:
             curs.execute('SELECT * FROM FWDB')
             print(curs.fetchall())
             curs.close()
-        except Exception as error:
+        except KeyError as error:
             logger.error("Error writing to db with data dict as: %s and with error as: %s", str(dbdictcarrier), error)
             print(error)
