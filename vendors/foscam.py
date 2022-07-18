@@ -22,7 +22,7 @@ class FoscamHomeSecurity:
     def __init__(self):
         with open(os.path.join(parent_dir, 'config', 'config.json'), 'rb') as json_file:
             json_data = json.loads(json_file.read())
-            foscam_data = json_data['foscam']
+            dummy_foscam_data = json_data['foscam']
             if vendor_field('foscam', 'user') is False:
                 logger.error('<module : foscam > -> user not present')
             else:
