@@ -98,5 +98,5 @@ class Database:
 			print(curs.fetchall())
 			curs.close()
 		except Exception as error:
-			logger.error("Error writing to db with data dict as: %s and with error as: %s", dbdictcarrier, error)
+			logger.error("Error writing to db with data dict as: %s and with error as: %s", str(dbdictcarrier), error)
 			print(error)
