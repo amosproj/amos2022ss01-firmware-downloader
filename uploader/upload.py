@@ -1,7 +1,7 @@
-import requests
-import json
 import os
+import json
 import sqlite3
+import requests
 from bs4 import BeautifulSoup
 
 CONFIG_PATH = os.path.join("config", "config.json")
@@ -18,7 +18,6 @@ class FirmwareUploader:
 
     def authenticate(self, username, password):
         resp = requests.get(self.auth_url)
-        csrf_token = None
         for cookie in resp.cookies:
             self.cookies[cookie.name] = cookie.value
         data =  {
@@ -74,7 +73,6 @@ class FirmwareUploader:
         soup = BeautifulSoup(req.text, 'html.parser')
         items = soup.find_all("select", id="id_firmware")
         options = items[0].find_all("option")
-        selected_option = None
         for item in options:
             scrapped_filename = item.decode_contents().split("-")[-1].strip()
             scrapped_id = item.get("value")
