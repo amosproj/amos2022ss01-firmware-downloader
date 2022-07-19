@@ -5,11 +5,10 @@ import math
 import uuid
 from urllib.parse import urlparse
 import requests
-sys.path.append(os.path.abspath(os.path.join('.', '')))
 from utils.database import Database
 from utils.Logs import get_logger
 from utils.modules_check import vendor_field
-from utils.metadata_extractor import get_hash_value
+# from utils.metadata_extractor import get_hash_value
 
 
 
