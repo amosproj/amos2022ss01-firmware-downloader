@@ -2,6 +2,7 @@ import os
 import sys
 import time
 import json
+import inspect
 from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
@@ -13,7 +14,9 @@ from utils.check_duplicates import check_duplicates
 from utils.Logs import get_logger
 from utils.modules_check import config_check
 from utils.metadata_extractor import get_hash_value
-
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
 sys.path.append(os.path.abspath(os.path.join('.', '')))
 
 logger = get_logger("vendors.ge")
@@ -22,7 +25,7 @@ links=[]
 USERNAME = ''
 PASSWORD = ''
 URL = ''
-CONFIG_PATH = os.path.join("config", "config.json")
+CONFIG_PATH = os.path.join(parent_dir, "config", "config.json")
 DATA={}
 with open(CONFIG_PATH, "rb") as fp:
     DATA = json.load(fp)

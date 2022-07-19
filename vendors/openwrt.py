@@ -79,7 +79,7 @@ class Openwrt:
         # A fn for duplication Check for not to download the files if files exist in local machine
         filename = download_link.split('/')[-1].replace(" ", "_")
         path_to_download = r"{}\{}\OpenWRT\{}".format(self.path, self.down_file_path, self.driver.find_element(By.XPATH,"(//h1/a)[last()]").get_attribute("href")[30:].replace("/", "\\"))
-        local_file_path = os.path.join(path_to_download, filename)
+        local_file_path = os.path.join(path_to_download.replace('\\', '/'), filename)
         if not os.path.isfile(local_file_path):
             if not os.path.exists(path_to_download):
                 os.makedirs(path_to_download)

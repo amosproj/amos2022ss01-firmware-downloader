@@ -21,7 +21,6 @@ def get_hash_value(file_path):
             chunk = file.read(file_hash.block_size)
             # file is read at a speed of file_hash.block_size and updates the new value in file_hash
             file_hash.update(chunk)
-        file.close()
         return file_hash.hexdigest()
 
 

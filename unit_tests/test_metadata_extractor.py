@@ -2,6 +2,7 @@ import os
 import unittest
 from utils.metadata_extractor import metadata_extractor
 
+
 class MetadataExtractor(unittest.TestCase):
     def test_metadata_extractor(self):
         path = os.getcwd()

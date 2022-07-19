@@ -5,6 +5,7 @@ import uuid
 import sys
 import traceback
 import json
+import inspect
 from urllib.parse import parse_qs, urlparse
 import requests
 from bs4 import BeautifulSoup
@@ -12,13 +13,15 @@ from utils.check_duplicates import check_duplicates, Database
 from utils.Logs import get_logger
 from utils.modules_check import vendor_field
 from utils.metadata_extractor import get_hash_value
-
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
 sys.path.append(os.path.abspath(os.path.join('.', '')))
 
 #Logger
 MOD_NAME = "schneider_electric"
 logger = get_logger("vendors.schneider_electric")
-CONFIG_PATH = os.path.join("config", "config.json")
+CONFIG_PATH = os.path.join(parent_dir, "config", "config.json")
 DATA={}
 URL = ''
 API_URL = ''

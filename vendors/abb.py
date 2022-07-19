@@ -5,16 +5,21 @@ import math
 import uuid
 from urllib.parse import urlparse
 import requests
+import inspect
 from utils.database import Database
 from utils.Logs import get_logger
 from utils.modules_check import vendor_field
 from utils.metadata_extractor import get_hash_value
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
+
 
 sys.path.append(os.path.abspath(os.path.join('.', '')))
 
 MOD_NAME = "abb"
 logger = get_logger("vendors.abb")
-CONFIG_PATH = os.path.join("config", "config.json")
+CONFIG_PATH = os.path.join(parent_dir, "config", "config.json")
 DATA={}
 URL = ''
 with open(CONFIG_PATH, "rb") as fp:
@@ -141,6 +146,7 @@ def main():
     logger.info("Printing first transformed document metadata")
     logger.info(json.dumps(metadata[0], indent=4))
     download_list_files(metadata)
+
 
 if __name__ == "__main__":
     main()
