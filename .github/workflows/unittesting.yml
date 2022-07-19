@@ -37,4 +37,4 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a Unit Test modules
         run: |
-          py.test
+          py.test unit_tests/schneider_electric_test.py
