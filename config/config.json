@@ -1,0 +1,196 @@
+{
+  "uploader": {
+    "username": "apiuser",
+    "password": "GpY8V3d25G3gaZg",
+    "auth_url": "http://embark.local",
+    "upload_fw_url": "http://embark.local/uploader/save/",
+    "start_analysis_url": "http://embark.local/uploader/start/"
+  },
+  "file_paths": {
+    "download_files_path": "Downloads",
+    "download_test_files_path": "Test_Downloads"
+  },
+  "foscam": {
+    "interval": 0.1,
+    "ignore": false,
+    "url": "https://www.foscam.com/downloads/index.html",
+    "user": "none",
+    "password": "none"
+  },
+  "ubiquiti": {
+    "interval": 0.1,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "dd_wrt": {
+    "interval": 0.1,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "swisscom": {
+    "interval": 0.1,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "tp_link": {
+    "interval": 0.1,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "openwrt": {
+    "interval": 0.1,
+    "ignore": false,
+    "url": "https://openwrt.org/",
+    "user": "none",
+    "password": "none"
+  },
+  "gigaset": {
+    "interval": 0.1,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "belkin": {
+    "interval": 0.1,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "engenius": {
+    "interval": 0.1,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "netgear": {
+    "interval": 0.1,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "asus": {
+    "interval": 0.1,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "dlink": {
+    "interval": 0.1,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "zyxel": {
+    "interval": 0.1,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "synology": {
+    "interval": 0.1,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "trendnet": {
+    "interval": 0.1,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "qnap": {
+    "interval": 0.1,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "linksys": {
+    "interval": 0.1,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "cisco": {
+    "interval": 0.1,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "rockwell": {
+    "interval": 0.1,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "honeywell": {
+    "interval": 0.1,
+    "ignore": false,
+    "url": "https://sps.honeywell.com/us/en/support/software-downloads",
+    "user": "firmwaredownloader1@gmail.com",
+    "password": "Firmware@123"
+  },
+  "ge": {
+    "interval": 0.1,
+    "ignore": false,
+    "url": "https://www.gegridsolutions.com",
+    "user": "tariqmagsi125@gmail.com",
+    "password": "Cs!-56478"
+  },
+  "abb": {
+    "interval": 0.1,
+    "ignore": false,
+    "url": "https://discoveryapi.library.abb.com/api/public/documents",
+    "user": "none",
+    "password": "none"
+  },
+  "schneider_electric": {
+    "interval": 0.1,
+    "ignore": false,
+    "apiurl": "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/resultViewCahnge/resultListAjax",
+    "url": "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/?docType=1555893-Firmware&language=en_GB-English&sortByField=Popularityy",
+    "user": "",
+    "password": ""
+  },
+  "siemens": {
+    "interval": 0.1,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "avm": {
+    "interval": 0.1,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "default": {
+    "interval": 1440,
+    "ignore": true,
+    "url": "",
+    "user": "",
+    "password": ""
+  }
+}

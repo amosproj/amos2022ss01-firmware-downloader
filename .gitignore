@@ -34,3 +34,21 @@ bin/
 
 # MacOS
 .DS_Store
+
+# all logs file 
+**/*.log
+
+# db log file from all the folders would be ignored
+**/*.db
+
+# ignore chromedriver.exe file, .msi files and .zip files
+**/*chromedriver.exe
+**/*.msi
+**/*.zip
+
+# ignore download folders
+**/Downloads/
+**/Test_Downloads/
+
+# ignore temp files
+**/*.tmp

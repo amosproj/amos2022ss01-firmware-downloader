@@ -1,0 +1,11 @@
+beautifulsoup4==4.11.1
+pipenv==2022.7.4
+pylint==2.14.4
+pytest==7.1.2
+pywinauto
+requests==2.27.1
+schedule==1.1.0
+selenium==4.3.0
+webdriver_manager==3.7.0
+wget==3.2
+urllib3~=1.26.6

@@ -1,0 +1,39 @@
+# This workflow tests the project for proper python linting
+name: Pylint Automated Code Check
+
+on:
+  push:
+    branches:
+      - '**'        # matches every branch
+  pull_request:
+    branches:
+      - '**'
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+        architecture: x64
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        python3 -m pip install pipenv
+        python3 -m pip install pylint
+        # The requirements file is mandatory to be present in the parent repository
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Analysing the code with pylint
+      run: |
+        pipenv install --dev
+        chmod u+r+x pylint.sh
+        ./pylint.sh
