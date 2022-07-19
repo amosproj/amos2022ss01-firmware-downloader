@@ -2,6 +2,7 @@ import inspect
 import json
 import os
 import sys
+sys.path.append(os.path.abspath(os.path.join('.', '')))
 import time
 import unittest
 

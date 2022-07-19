@@ -2,6 +2,7 @@ import inspect
 import json
 import os
 import sys
+sys.path.append(os.path.abspath(os.path.join('.', '')))
 import time
 import unittest
 from selenium import webdriver
@@ -12,7 +13,6 @@ from selenium.webdriver.support.ui import Select
 from utils.database import Database
 from utils.metadata_extractor import get_hash_value
 
-sys.path.append(os.path.abspath(os.path.join('.', '')))
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
