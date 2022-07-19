@@ -105,7 +105,6 @@ def get_firmware_data_using_api(url, fw_count, fw_per_page):
 
 def transform_metadata_format_ours(raw_data, local_storage_dir="."):
     fw_mod_list = []
-    
     for fw_ in raw_data:
         fw_mod = {
             'Fwfileid': '',
@@ -126,7 +125,6 @@ def transform_metadata_format_ours(raw_data, local_storage_dir="."):
             'Embarkfileid': '',
             'Startedanalysisonembark': ''
 	    }
-        
         fw_mod_list.append(fw_mod)
     return fw_mod_list
 

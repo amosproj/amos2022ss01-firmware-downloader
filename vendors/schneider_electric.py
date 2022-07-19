@@ -47,7 +47,8 @@ def download_single_file(url, file_path_to_save, fw_metadata):
         raise ValueError("Invalid Url or file not found")
     with open(file_path_to_save, "wb") as fp_:
         fp_.write(resp.content)
-    write_metadata_to_db([fw_metadata])
+    if fw_metadata:
+        write_metadata_to_db([fw_metadata])
 
 def download_list_files(metadata, max_files=-1): #max_files -1 means download all files
     if max_files == -1:

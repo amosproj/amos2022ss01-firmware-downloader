@@ -103,7 +103,7 @@ def download_file(data):
             with open(data['file_path_to_save'], "wb") as fp_:
                 fp_.write(resp.content)
             if data['is_file_download'] is False:
-                req_data['Checksum'] = get_hash_value(local_uri_)
+                req_data['Checksum'] = get_hash_value(local_uri)
                 insert_into_db(req_data)
         else:
             logger.info("<%s> -> Downloading Firmware <%s>", data['url'], data['file_path_to_save'])
