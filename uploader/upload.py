@@ -59,7 +59,7 @@ class FirmwareUploader:
             return True
         else:
             print("Failed to start firmware analysis")
-            return ''
+            return False
 
     def upload_fw(self, fw_):
         with open(fw_, 'rb') as firmware_file:
@@ -72,7 +72,7 @@ class FirmwareUploader:
                 print("File is uploaded successfully")
                 return True
             else:
-                return ''
+                return False
 
     def get_id_of_uploaded_file(self, filename):
         req = requests.get(self.start_analysis_url, cookies=self.cookies)
@@ -105,13 +105,16 @@ class FirmwareUploader:
                 if file[12]:
                     fw_metadata["file_path"] = file[12]
                     is_fw_uploaded = fwu.upload_fw(fw_metadata["file_path"])
-                    cursor.execute('''UPDATE FWDB SET Uploadedonembark = ? WHERE Fwfileid = ?''', (is_fw_uploaded, file[0]))
-                    conn.commit()
+                    if is_fw_uploaded is False:
+                        cursor.execute('''UPDATE FWDB SET Uploadedonembark = ? WHERE Fwfileid = ?''', (is_fw_uploaded, file[0]))
+                        conn.commit()
                     fw_metadata["id"] = fwu.get_id_of_uploaded_file(file[1])
                     cursor.execute('''UPDATE FWDB SET Embarkfileid = ? WHERE Fwfileid = ?''', (fw_metadata["id"], file[0]))
                     conn.commit()
                     is_analysis_start = fwu.start_fw_analysis(fw_metadata)
-                    cursor.execute('''UPDATE FWDB SET Startedanalysisonembark = ? WHERE Fwfileid = ?''', (is_analysis_start, file[0]))
+                    if is_analysis_start is False:
+                        cursor.execute('''UPDATE FWDB SET Startedanalysisonembark = ? WHERE Fwfileid = ?''', (is_analysis_start, file[0]))
+                        conn.commit()
         except sqlite3.Error as er_:
             print('SQLite error: %s' % (' '.join(er_.args)))
 
