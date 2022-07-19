@@ -12,6 +12,7 @@ from utils.database import Database
 from utils.check_duplicates import check_duplicates
 from utils.Logs import get_logger
 from utils.modules_check import config_check
+from utils.metadata_extractor import get_hash_value
 
 sys.path.append(os.path.abspath(os.path.join('.', '')))
 
@@ -102,27 +103,8 @@ def download_file(data):
             with open(data['file_path_to_save'], "wb") as fp_:
                 fp_.write(resp.content)
             if data['is_file_download'] is False:
-                local_uri_ = os.path.abspath(DATA['file_paths']['download_files_path'] + "/" + data['data0'])
-                req_data_ = {
-                    'Fwfileid': 'FILE',
-                    'Fwfilename': data['data0'],
-                    'Manufacturer': 'GE',
-                    'Modelname': os.path.splitext(data['data0'])[0],
-                    'Version': '',
-                    'Type': '',
-                    'Releasedate': data['data1'],
-                    'Checksum': 'None',
-                    'Embatested': '',
-                    'Embalinktoreport': '',
-                    'Embarklinktoreport': '',
-                    'Fwdownlink': data['url'],
-                    'Fwfilelinktolocal': local_uri_,
-                    'Fwadddata': '',
-                    'Uploadedonembark': 0,
-                    'Embarkfileid': '',
-                    'Startedanalysisonembark': 0
-                }
-                insert_into_db(req_data_)
+                req_data['Checksum'] = get_hash_value(local_uri_)
+                insert_into_db(req_data)
         else:
             logger.info("<%s> -> Downloading Firmware <%s>", data['url'], data['file_path_to_save'])
             options = webdriver.ChromeOptions()
@@ -140,30 +122,13 @@ def download_file(data):
                 # Get button you are going to click by its id ( also you could us find_element_by_css_selector to get element by css selector)
                 driver.get(data['main_url'])
                 driver.execute_script(data['click'])
-                time.sleep(60)
+                time.sleep(10)
                 driver.close()
                 if data['is_file_download'] is False:
                     local_uri_ = os.path.abspath(DATA['file_paths']['download_files_path'] + "/" + data['data0'] + "/" + data['data0'])
-                    req_data_ = {
-                        'Fwfileid': 'FILE',
-                        'Fwfilename': data['data0'],
-                        'Manufacturer': 'GE',
-                        'Modelname': os.path.splitext(data['data0'])[0],
-                        'Version': '',
-                        'Type': '',
-                        'Releasedate': data['data1'],
-                        'Checksum': 'None',
-                        'Embatested': '',
-                        'Embalinktoreport': '',
-                        'Embarklinktoreport': '',
-                        'Fwdownlink': data['url'],
-                        'Fwfilelinktolocal': local_uri_,
-                        'Fwadddata': '',
-                        'Uploadedonembark': False,
-                        'Embarkfileid': '',
-                        'Startedanalysisonembark': False
-                    }
-                    insert_into_db(req_data_)
+                    req_data['Fwfilelinktolocal'] = local_uri_
+                    req_data['Checksum'] = get_hash_value(local_uri_)
+                    insert_into_db(req_data)
             except Exception as er_:
                 logger.error("<module GE> Error in downloading: %s", data['url'])
                 raise ValueError('%s' % er_) from er_

@@ -5,11 +5,13 @@ import math
 import uuid
 from urllib.parse import urlparse
 import requests
+sys.path.append(os.path.abspath(os.path.join('.', '')))
 from utils.database import Database
 from utils.Logs import get_logger
 from utils.modules_check import vendor_field
+from utils.metadata_extractor import get_hash_value
 
-sys.path.append(os.path.abspath(os.path.join('.', '')))
+
 
 MOD_NAME = "abb"
 logger = get_logger("vendors.abb")
@@ -26,6 +28,7 @@ with open(CONFIG_PATH, "rb") as fp:
     else:
         # print(' url')
         URL = vendor_field('abb', 'url')
+
 
 def download_single_file(file_metadata):
     url = file_metadata["Fwdownlink"]
@@ -58,7 +61,9 @@ def write_metadata_to_db(metadata):
     logger.info("Going to write metadata in db")
     db_ = Database()
     print(os.listdir('./'))
+    # print(metadata)
     for fw_ in metadata:
+        # fw_["Checksum"] = get_hash_value(fw_["Fwfilelinktolocal"])
         db_.insert_data(dbdictcarrier=fw_)
 
 def se_get_total_firmware_count(url):
@@ -104,24 +109,25 @@ def transform_metadata_format_ours(raw_data, local_storage_dir="."):
     fw_mod_list = []
     for fw_ in raw_data:
         fw_mod = {
-	    'Fwfileid': '',
-        'Fwfilename': fw_["metadata"]["identification"]["documentNumber"],
-	    'Manufacturer': 'abb',
-	    'Modelname': fw_["metadata"]["identification"]["documentNumber"],
-	    'Version': fw_["metadata"]["identification"]["revision"],
-	    'Type': fw_["metadata"]["documentKind"],
-	    'Releasedate': fw_["metadata"]["publishedDate"],
-	    'Checksum': '',
-	    'Embatested': '',
-	    'Embalinktoreport': '',
-	    'Embarklinktoreport': '',
-        'Fwdownlink': fw_["metadata"]["currentRevisionUrl"],
-        'Fwfilelinktolocal': os.path.join(local_storage_dir, str(uuid.uuid4()) + "." + fw_["metadata"]["fileSuffix"]), #setting temp filename as of now
-        'Fwadddata': json.dumps({"summary": fw_["metadata"]["summary"].replace("'","")}),
-        'Uploadedonembark': '',
-        'Embarkfileid': '',
-        'Startedanalysisonembark': ''
-	}
+            'Fwfileid': '',
+            'Fwfilename': fw_["metadata"]["identification"]["documentNumber"],
+            'Manufacturer': 'abb',
+            'Modelname': fw_["metadata"]["identification"]["documentNumber"],
+            'Version': fw_["metadata"]["identification"]["revision"],
+            'Type': fw_["metadata"]["documentKind"],
+            'Releasedate': fw_["metadata"]["publishedDate"],
+            'Checksum': '',
+            'Embatested': '',
+            'Embalinktoreport': '',
+            'Embarklinktoreport': '',
+            'Fwdownlink': fw_["metadata"]["currentRevisionUrl"],
+            'Fwfilelinktolocal': os.path.join(local_storage_dir, str(uuid.uuid4()) + "." + fw_["metadata"]["fileSuffix"]), #setting temp filename as of now
+            'Fwadddata': json.dumps({"summary": fw_["metadata"]["summary"].replace("'","")}),
+            'Uploadedonembark': '',
+            'Embarkfileid': '',
+            'Startedanalysisonembark': ''
+	    }
+        
         fw_mod_list.append(fw_mod)
     return fw_mod_list
 

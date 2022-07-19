@@ -11,11 +11,12 @@ from bs4 import BeautifulSoup
 from utils.check_duplicates import check_duplicates, Database
 from utils.Logs import get_logger
 from utils.modules_check import vendor_field
+from utils.metadata_extractor import get_hash_value
 
 #Logger
 MOD_NAME = "schneider_electric"
 logger = get_logger("vendors.schneider_electric")
-CONFIG_PATH = os.path.join("config", "config.json")
+CONFIG_PATH = os.path.join("../config", "config.json")
 DATA={}
 URL = ''
 API_URL = ''
@@ -114,6 +115,7 @@ def transform_metadata_format_ours(raw_data, local_storage_dir="."):
             'Embarkfileid': '',
             'Startedanalysisonembark': ''
 	    }
+        fw_mod["Checksum"] = get_hash_value(fw_mod["Fwfilelinktolocal"])
         db_name = 'firmwaredatabase.db'
         if check_duplicates(fw_mod, db_name) is False:
             fw_mod_list.append(fw_mod)

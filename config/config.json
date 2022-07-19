@@ -160,9 +160,9 @@
   "abb": {
     "interval": 120,
     "ignore": true,
-    "url": "none",
+    "url": "https://discoveryapi.library.abb.com/api/public/documents",
     "user": "none",
-    "password": "https://discoveryapi.library.abb.com/api/public/documents"
+    "password": "none"
   },
   "schneider_electric": {
     "interval": 120,
