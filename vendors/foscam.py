@@ -1,11 +1,11 @@
+import os
+import sys
 import inspect
 import json
 import time
 import requests
 import urllib3
 import wget
-import os
-import sys
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options

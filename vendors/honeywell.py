@@ -1,3 +1,5 @@
+import os
+import sys
 import base64
 import inspect
 import json
@@ -5,8 +7,6 @@ import re
 import time
 import urllib.parse
 import zipfile
-import os
-import sys
 import requests
 import urllib3
 import wget
