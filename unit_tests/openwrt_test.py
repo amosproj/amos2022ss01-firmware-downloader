@@ -25,7 +25,7 @@ class WebCode(unittest.TestCase):
             json_data = json.loads(json_file.read())
             openwrt_data = json_data['openwrt']
             self.url = openwrt_data['url']
-            self.down_file_path = json_data['file_paths']['download_files_path']
+            self.down_file_path = json_data['file_paths']['download_test_files_path']
         self.driver = webdriver.Chrome()
         self.path = os.getcwd()
         self.dbdict = {
@@ -87,7 +87,6 @@ class WebCode(unittest.TestCase):
             "href")[30:].replace("/", "\\"))
         local_file_path = os.path.join(path_to_download, filename)
         if not os.path.isfile(local_file_path):
-            self.write_database(filename, release_date, download_link, local_file_path, sha256sum)
             print(f"The file is not found in local repository, now {filename} will be downloaded into local")
             if not os.path.exists(path_to_download):
                 os.makedirs(path_to_download)
@@ -99,6 +98,7 @@ class WebCode(unittest.TestCase):
                             file.write(chunk)
                             file.flush()
                             os.fsync(file.fileno())
+            self.write_database(filename, release_date, download_link, local_file_path, sha256sum)
         else:
             print(f"The file is found in local repository, now {filename} will not be downloaded into local")
         return local_file_path
