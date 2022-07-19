@@ -115,7 +115,6 @@ def transform_metadata_format_ours(raw_data, local_storage_dir="."):
             'Embarkfileid': '',
             'Startedanalysisonembark': ''
 	    }
-        fw_mod["Checksum"] = get_hash_value(fw_mod["Fwfilelinktolocal"])
         db_name = 'firmwaredatabase.db'
         if check_duplicates(fw_mod, db_name) is False:
             fw_mod_list.append(fw_mod)

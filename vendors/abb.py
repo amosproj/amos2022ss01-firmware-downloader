@@ -10,8 +10,6 @@ from utils.Logs import get_logger
 from utils.modules_check import vendor_field
 # from utils.metadata_extractor import get_hash_value
 
-
-
 MOD_NAME = "abb"
 logger = get_logger("vendors.abb")
 CONFIG_PATH = os.path.join("config", "config.json")
