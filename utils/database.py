@@ -7,9 +7,9 @@ logger = get_logger("utils.database")
 # The Database class is defined to maintain the db functionalities like create_table, insert_table
 class Database:
 
-    def __init__(self):
+    def __init__(self, db_path="firmwaredatabase.db"):
         # The initialization function is available for all the methods with the db class
-        self.dbname = 'firmwaredatabase.db'
+        self.dbname = db_path
         self.dbdict = {
             'Fwfileid': '',
             'Fwfilename': '',
