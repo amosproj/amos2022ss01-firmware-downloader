@@ -8,7 +8,7 @@ class DatabaseUnitTest(unittest.TestCase):
 		db_ = Database()
 		db_.db_check()
 		# Create a function for selenium output in dict format and return the dict. Pass it in the next line to insert the data
-		
+
 		# db connection
 		conn = sqlite3.connect(db_name)
 		cursor = conn.cursor()
@@ -31,19 +31,18 @@ class DatabaseUnitTest(unittest.TestCase):
 		db_.insert_data(dbdictcarrier=firmware_data)
 		data = 'x'
 		try:
-			cursor.execute(
-					"select * from FWDB WHERE Manufacturer='" + firmware_data["Manufacturer"] + "' AND Modelname='" +
-					firmware_data["Modelname"] + "' AND Version = '" + firmware_data["Version"] + "'")
+			cursor.execute("select * from FWDB WHERE Manufacturer='" + firmware_data["Manufacturer"] + "' AND Modelname='" + firmware_data["Modelname"] + "' AND Version = '" + firmware_data["Version"] + "'")
 		except sqlite3.Error as er_:
-				print('SQLite error: %s' % (' '.join(er_.args)))
-
+			print('SQLite error: %s' % (' '.join(er_.args)))
+		
 		data_list = cursor.fetchall()
 		conn.close()
 		if len(data_list) > 0:
 			print('good')
 		else:
 			print('Fail')
-		print(' data -> %s : ' % data)
+			print(' data -> %s : ' % data)
+		
 		self.assertTrue( len(data_list) , msg="Data not found in database" )
 
 if __name__ == "__main__":
