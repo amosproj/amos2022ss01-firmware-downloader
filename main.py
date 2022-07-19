@@ -16,13 +16,16 @@ parser.add_argument("--num-threads", type=int, default=2, help="Number of parall
 args = parser.parse_args()
 VENDORS_FILE = 'vendors'
 
+
 def runner(mod):
     os.system("python vendors/" + mod + ".py")
     fw_ = FirmwareUploader()
     fw_.anaylise_data_file("firmwaredatabase.db")
 
+
 def executor_job(mod_, executor):
     _ = executor.submit(runner, mod_)
+
 
 def thread_pool(num_threads_, whitelisted_modules_):
     with ThreadPoolExecutor(num_threads_) as executor:
@@ -35,6 +38,7 @@ def thread_pool(num_threads_, whitelisted_modules_):
         while True:
             schedule.run_pending()
             time.sleep(1)
+
 
 def get_modules(skip):
     mods = []
@@ -52,6 +56,7 @@ def get_modules(skip):
                     mods.append(mod.split('.')[0])
     return mods
 
+
 if __name__ == "__main__":
     logger.info("Starting runner...")
     num_threads = args.num_threads
@@ -61,8 +66,6 @@ if __name__ == "__main__":
     whitelisted_modules = get_modules(False)
     print("Following modules are skipped")
     print(skip_modules)
-
     print("Following modules are enabled")
     print(whitelisted_modules)
-
     thread_pool(num_threads, whitelisted_modules)
