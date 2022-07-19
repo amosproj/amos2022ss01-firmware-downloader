@@ -31,11 +31,9 @@ class DatabaseUnitTest(unittest.TestCase):
 		db_.insert_data(dbdictcarrier=firmware_data)
 		data = 'x'
 		try:
-			cursor.execute(
-					"select * from FWDB WHERE Manufacturer='" + firmware_data["Manufacturer"] + "' AND Modelname='" +
-					firmware_data["Modelname"] + "' AND Version = '" + firmware_data["Version"] + "'")
+			cursor.execute("select * from FWDB WHERE Manufacturer='" + firmware_data["Manufacturer"] + "' AND Modelname='" + firmware_data["Modelname"] + "' AND Version = '" + firmware_data["Version"] + "'")
 		except sqlite3.Error as er_:
-				print('SQLite error: %s' % (' '.join(er_.args)))
+			print('SQLite error: %s' % (' '.join(er_.args)))
 
 		data_list = cursor.fetchall()
 		conn.close()
@@ -43,9 +41,9 @@ class DatabaseUnitTest(unittest.TestCase):
 			print('good')
 		else:
 			print('Fail')
-		print(' data -> %s : ' % data)
+			print(' data -> %s : ' % data)
+
 		self.assertTrue( len(data_list) , msg="Data not found in database" )
 
 if __name__ == "__main__":
 	unittest.main()
-	
