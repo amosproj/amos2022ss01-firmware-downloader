@@ -1,10 +1,6 @@
-import os
 import sqlite3
-import sys
-
-sys.path.append(os.path.abspath(os.path.join('.', '')))
-from utils.database import Database
 import unittest
+from utils.database import Database
 
 class DatabaseUnitTest(unittest.TestCase):
 	def test_case_db(self):
@@ -12,25 +8,25 @@ class DatabaseUnitTest(unittest.TestCase):
 		db_ = Database()
 		db_.db_check()
 		# Create a function for selenium output in dict format and return the dict. Pass it in the next line to insert the data
-
+		
 		# db connection
 		conn = sqlite3.connect(db_name)
 		cursor = conn.cursor()
 		firmware_data = {
-				'Fwfileid': 'c1',
-				'Fwfilename': 'Siemens ABC firmware',
-				'Manufacturer': 'Siemens',
-				'Modelname': 'SZ-100',
-				'Version': '1.2.3',
-				'Type': 'Router',
-				'Releasedate': '2022-05-31',
-				'Checksum': 'None',
-				'Embatested': 'Yes',
-				'Embalinktoreport': 'None',
-				'Embarklinktoreport': 'https://xyz.com',
-				'Fwdownlink': 'https://google.com',
-				'Fwfilelinktolocal': './xyz/abc.tar',
-				'Fwadddata': 'some long sentence'
+			'Fwfileid': 'c1',
+			'Fwfilename': 'Siemens ABC firmware',
+			'Manufacturer': 'Siemens',
+			'Modelname': 'SZ-100',
+			'Version': '1.2.3',
+			'Type': 'Router',
+			'Releasedate': '2022-05-31',
+			'Checksum': 'None',
+			'Embatested': 'Yes',
+			'Embalinktoreport': 'None',
+			'Embarklinktoreport': 'https://xyz.com',
+			'Fwdownlink': 'https://google.com',
+			'Fwfilelinktolocal': './xyz/abc.tar',
+			'Fwadddata': 'some long sentence'
 		}
 		db_.insert_data(dbdictcarrier=firmware_data)
 		data = 'x'

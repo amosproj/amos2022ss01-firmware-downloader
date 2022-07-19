@@ -1,7 +1,7 @@
 import os
 import sys
-import unittest
 sys.path.append(os.path.abspath(os.path.join('.', '')))
+import unittest
 from utils.check_duplicates import check_duplicates
 from utils.database import Database
 

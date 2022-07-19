@@ -4,40 +4,24 @@ import re
 import uuid
 import sys
 import traceback
-sys.path.append(os.path.abspath(os.path.join('.', '')))
-import requests
-from bs4 import BeautifulSoup
 import json
 from urllib.parse import parse_qs, urlparse
+import requests
+from bs4 import BeautifulSoup
 from utils.check_duplicates import check_duplicates, Database
 from utils.Logs import get_logger
-from utils.modules_check import *
+from utils.modules_check import vendor_field
 
 #Logger
 MOD_NAME = "schneider_electric"
 logger = get_logger("vendors.schneider_electric")
 CONFIG_PATH = os.path.join("config", "config.json")
 DATA={}
-USERNAME = ''
-PASSWORD = ''
 URL = ''
 API_URL = ''
 with open(CONFIG_PATH, "rb") as fp:
     DATA = json.load(fp)
-    if vendor_field('schneider_electric','user') is False:
-        # print('error user')
-        logger.error('<module : schneider_electric > -> user not present')
-    else:
-        # print(' user')
-        USERNAME = vendor_field('schneider_electric','user')
-
-    if vendor_field('schneider_electric', 'password') is False:
-        # print('error password')
-        logger.error('<module : schneider_electric > -> password not present')
-    else:
-        # print(' password')
-        PASSWORD = vendor_field('schneider_electric', 'password')
-
+    
     if vendor_field('schneider_electric', 'url') is False:
         print('error url')
         logger.error('<module : schneider_electric > -> url not present')
@@ -47,12 +31,12 @@ with open(CONFIG_PATH, "rb") as fp:
         URL = vendor_field('schneider_electric', 'url')
 
     if vendor_field('schneider_electric', 'apiurl') is False:
-        print('error url')
+        # print('error url')
         logger.error('<module : schneider_electric > -> url not present')
         API_URL = "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/resultViewCahnge/resultListAjax"
     else:
         # print('api url')
-        API_URL = vendor_field('abb', 'url')
+        API_URL = vendor_field('schneider_electric', 'url')
 
 def download_single_file(url, file_path_to_save):
     logger.info("Downloading %s and saving as %s", url, file_path_to_save)
@@ -126,7 +110,10 @@ def transform_metadata_format_ours(raw_data, local_storage_dir="."):
             'Embarklinktoreport': '',
             'Fwdownlink': "https:" + fw_.get("downloadUrl", ""),
             'Fwfilelinktolocal': os.path.join(local_storage_dir, parse_qs(urlparse(fw_.get("downloadUrl")).query, keep_blank_values=True).get("p_File_Name", list(str(uuid.uuid4())))[0].replace(" ", "_").replace("'", "") ),
-            'Fwadddata': ''
+            'Fwadddata': '',
+            'Uploadedonembark': '',
+            'Embarkfileid': '',
+            'Startedanalysisonembark': ''
 	    }
         db_name = 'firmwaredatabase.db'
         if check_duplicates(fw_mod, db_name) is False:

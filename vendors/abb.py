@@ -1,37 +1,23 @@
-import json
 import os
+import sys
+import json
 import math
 import uuid
-import requests
 from urllib.parse import urlparse
-import sys
-sys.path.append(os.path.abspath(os.path.join('.', '')))
+import requests
 from utils.database import Database
 from utils.Logs import get_logger
-from utils.modules_check import *
+from utils.modules_check import vendor_field
+
+sys.path.append(os.path.abspath(os.path.join('.', '')))
 
 MOD_NAME = "abb"
 logger = get_logger("vendors.abb")
 CONFIG_PATH = os.path.join("config", "config.json")
 DATA={}
-USERNAME = ''
-PASSWORD = ''
 URL = ''
 with open(CONFIG_PATH, "rb") as fp:
     DATA = json.load(fp)
-    if vendor_field('abb','user') is False:
-        # print('error user')
-        logger.error('<module : abb > -> user not present')
-    else:
-        # print(' user')
-        USERNAME = vendor_field('abb','user')
-
-    if vendor_field('abb', 'password') is False:
-        # print('error password')
-        logger.error('<module : abb > -> password not present')
-    else:
-        # print(' password')
-        PASSWORD = vendor_field('abb', 'password')
 
     if vendor_field('abb', 'url') is False:
         print('error url')
@@ -131,7 +117,10 @@ def transform_metadata_format_ours(raw_data, local_storage_dir="."):
 	    'Embarklinktoreport': '',
         'Fwdownlink': fw_["metadata"]["currentRevisionUrl"],
         'Fwfilelinktolocal': os.path.join(local_storage_dir, str(uuid.uuid4()) + "." + fw_["metadata"]["fileSuffix"]), #setting temp filename as of now
-        'Fwadddata': json.dumps({"summary": fw_["metadata"]["summary"].replace("'","")})
+        'Fwadddata': json.dumps({"summary": fw_["metadata"]["summary"].replace("'","")}),
+        'Uploadedonembark': '',
+        'Embarkfileid': '',
+        'Startedanalysisonembark': ''
 	}
         fw_mod_list.append(fw_mod)
     return fw_mod_list
