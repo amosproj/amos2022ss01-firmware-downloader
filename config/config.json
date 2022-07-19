@@ -1,4 +1,11 @@
 {
+  "uploader": {
+    "username": "apiuser",
+    "password": "GpY8V3d25G3gaZg",
+    "auth_url": "http://embark.local",
+    "upload_fw_url": "http://embark.local/uploader/save/",
+    "start_analysis_url": "http://embark.local/uploader/start/"
+  },
   "file_paths": {
     "download_files_path": "Downloads",
     "download_test_files_path": "Test_Downloads"
@@ -7,8 +14,8 @@
     "interval": 120,
     "ignore": true,
     "url": "https://www.foscam.com/downloads/index.html",
-    "user": "",
-    "password": ""
+    "user": "none",
+    "password": "none"
   },
   "ubiquiti": {
     "interval": 120,
@@ -40,10 +47,10 @@
   },
   "openwrt": {
     "interval": 120,
-    "ignore": false,
+    "ignore": true,
     "url": "https://openwrt.org/",
-    "user": "",
-    "password": ""
+    "user": "none",
+    "password": "none"
   },
   "gigaset": {
     "interval": 120,
@@ -138,7 +145,7 @@
   },
   "honeywell": {
     "interval": 120,
-    "ignore": false,
+    "ignore": true,
     "url": "https://sps.honeywell.com/us/en/support/software-downloads",
     "user": "firmwaredownloader1@gmail.com",
     "password": "Firmware@123"
@@ -152,14 +159,15 @@
   },
   "abb": {
     "interval": 120,
-    "ignore": false,
-    "url": "",
-    "user": "",
-    "password": ""
+    "ignore": true,
+    "url": "none",
+    "user": "none",
+    "password": "https://discoveryapi.library.abb.com/api/public/documents"
   },
   "schneider_electric": {
     "interval": 120,
-    "ignore": false,
+    "ignore": true,
+    "apiurl": "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/resultViewCahnge/resultListAjax",
     "url": "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/?docType=1555893-Firmware&language=en_GB-English&sortByField=Popularityy",
     "user": "",
     "password": ""

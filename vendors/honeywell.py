@@ -1,23 +1,22 @@
 import base64
-import inspect
-import json
-import os
 import re
-import requests
-import sys
 import time
-import urllib3
 import urllib.parse
-import wget
 import zipfile
+
+import requests
+import urllib3
+import wget
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+
 from utils.chromium_downloader import ChromiumDownloader
 from utils.database import Database
 from utils.metadata_extractor import get_hash_value
+from utils.modules_check import *
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
@@ -39,10 +38,21 @@ class Honeywell:
     def __init__(self):
         with open(os.path.join(parent_dir, 'config', 'config.json'), 'rb') as json_file:
             json_data = json.loads(json_file.read())
-            honeywell_data = json_data['honeywell']
-            self.email = honeywell_data['user']
-            self.password = honeywell_data['password']
-            self.url = honeywell_data['url']
+            dummy_honeywell_data = json_data['honeywell']
+            if vendor_field('honeywell', 'user') is False:
+                logger.error('<module : honeywell > -> user not present')
+            else:
+                self.email = vendor_field('honeywell', 'user')
+            if vendor_field('honeywell', 'password') is False:
+                logger.error('<module : honeywell > -> password not present')
+            else:
+                self.password = vendor_field('honeywell', 'password')
+            if vendor_field('honeywell', 'url') is False:
+                print('error url')
+                logger.error('<module : honeywell > -> url not present')
+                self.url = "https://sps.honeywell.com/us/en/support/software-downloads"
+            else:
+                self.url = vendor_field('honeywell', 'url')
             self.down_file_path = json_data['file_paths']['download_files_path']
         self.path = os.getcwd()
         opt = Options()
@@ -107,9 +117,9 @@ class Honeywell:
         click_here_options.click()
         rows = driver.find_elements(By.XPATH, '//*[@class="table__row fe-search-item"]')
         for row in rows:
-            web_file_name, last_updated, file_size, file_type, download_text = "", "", "", "", ""
+            web_file_name, last_updated, dummy_file_size, dummy_file_type, dummy_download_text = "", "", "", "", ""
             data = rows[rows.index(row)].text
-            web_file_name, last_updated, file_size, file_type, download_text = data.split("\n")
+            web_file_name, last_updated, dummy_file_size, dummy_file_type, dummy_download_text = data.split("\n")
             version, model_name = self.regex_sep(web_file_name)
             download_link = rows[rows.index(row)].find_element(
                 By.XPATH, "//div[@class='table__cell table__cell--icons ml-md-auto']//"
@@ -147,7 +157,7 @@ class Honeywell:
                     dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
                 elif key == "Checksum":
                     dbdict_carrier[key] = get_hash_value(str(local_file_location.replace("\\", "/")))
-                elif key not in dbdict_carrier:
+                else:
                     dbdict_carrier[key] = ''
             db_used.insert_data(dbdict_carrier)
         driver.back()
@@ -228,7 +238,7 @@ class Honeywell:
                     dbdict_carrier[key] = r'{}'.format(crow_add_desc)
                 elif key == "Checksum":
                     dbdict_carrier[key] = get_hash_value(str(local_file_location.replace("\\", "/")))
-                elif key not in dbdict_carrier:
+                else:
                     dbdict_carrier[key] = ''
             db_used.insert_data(dbdict_carrier)
 
@@ -430,9 +440,9 @@ class Honeywell:
         while driver.find_element(By.XPATH, "//div[@class='table__row']"):
             rows = driver.find_elements(By.XPATH, "//div[@class='table__row']")
             for row in rows:
-                web_file_name, temp_add_web_data = "", ""
+                web_file_name, dummy_add_web_data = "", ""
                 data = rows[rows.index(row)].text
-                web_file_name, temp_add_web_data = data.split("\n")
+                web_file_name, dummy_add_web_data = data.split("\n")
                 version, model_name = self.regex_sep(web_file_name)
                 download_link = rows[rows.index(row)].find_element(
                     By.XPATH, "//div[@class='table__row'][{}]//"
@@ -466,7 +476,7 @@ class Honeywell:
                         dbdict_carrier[key] = str(local_file_location.replace("\\", "/"))
                     elif key == "Checksum":
                         dbdict_carrier[key] = get_hash_value(str(local_file_location.replace("\\", "/")))
-                    elif key not in dbdict_carrier:
+                    else:
                         dbdict_carrier[key] = ''
                 db_used.insert_data(dbdict_carrier)
             time.sleep(10)

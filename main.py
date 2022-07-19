@@ -1,10 +1,11 @@
 import argparse
 import json
 import os
-import schedule
 import time
-from utils.Logs import get_logger
 from concurrent.futures import ThreadPoolExecutor
+import schedule
+from utils.Logs import get_logger
+from uploader.upload import FirmwareUploader
 
 config_path = os.path.join("config", "config.json")
 with open(config_path, "rb") as fp:
@@ -17,6 +18,8 @@ VENDORS_FILE = 'vendors'
 
 def runner(mod):
     os.system("python vendors/" + mod + ".py")
+    fw_ = FirmwareUploader()
+    fw_.anaylise_data_file("firmwaredatabase.db")
 
 def executor_job(mod_, executor):
     _ = executor.submit(runner, mod_)

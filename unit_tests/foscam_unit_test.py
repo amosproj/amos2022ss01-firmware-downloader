@@ -1,4 +1,10 @@
+import inspect
+import json
+import os
+import sys
 import time
+import unittest
+
 import requests
 import urllib3
 import wget
@@ -7,36 +13,27 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
-from utils.chromium_downloader import ChromiumDownloader
 from utils.database import Database
 from utils.metadata_extractor import get_hash_value
-from utils.modules_check import *
+
+# from vendors.foscam import FoscamHomeSecurity
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
 
-class FoscamHomeSecurity:
 
-    def __init__(self):
+class FoscamHomeSecurityTest(unittest.TestCase):
+
+    def setUp(self):
         with open(os.path.join(parent_dir, 'config', 'config.json'), 'rb') as json_file:
             json_data = json.loads(json_file.read())
-            dummy_foscam_data = json_data['foscam']
-            if vendor_field('foscam', 'user') is False:
-                logger.error('<module : foscam > -> user not present')
-            else:
-                self.email = vendor_field('foscam', 'user')
-            if vendor_field('foscam', 'password') is False:
-                logger.error('<module : foscam > -> password not present')
-            else:
-                self.password = vendor_field('foscam', 'password')
-            if vendor_field('foscam', 'url') is False:
-                logger.error('<module : foscam > -> url not present')
-                self.url = "https://www.foscam.com/downloads/index.html"
-            else:
-                self.url = vendor_field('foscam', 'url')
-            self.down_file_path = json_data['file_paths']['download_files_path']
+            foscam_data = json_data['foscam']
+            self.email = foscam_data['user']
+            self.password = foscam_data['password']
+            self.url = foscam_data['url']
+            self.down_file_path = json_data['file_paths']['download_test_files_path']
         self.path = os.getcwd()
         opt = Options()
         opt.add_experimental_option("prefs", {
@@ -66,12 +63,14 @@ class FoscamHomeSecurity:
             'Startedanalysisonembark': ''
         }
 
-    def homepage(self):
+    def test_homepage(self):
         # The homepage is used to navigate to the main page of downloads
         driver = self.driver
         driver.get(self.url)
         driver.implicitly_wait(10)  # seconds
         driver.maximize_window()
+        print(driver.title)
+        self.assertEqual("Foscam Support - FAQs", driver.title, msg="Homepage testcase passed")
 
     def firmware_collector(self):
         driver = self.driver
@@ -79,7 +78,8 @@ class FoscamHomeSecurity:
             By.XPATH, ".//div[@class='one']//div[contains(@class,'down_product_list_img')]"
                       "//a[contains(@href,'downloads/firmware_details.html?id=')]")]
 
-    def url_call_file_name(self, in_data_soft_id_url, in_brow_cookies):
+    @staticmethod
+    def url_call_file_name(in_data_soft_id_url, in_brow_cookies):
         # This fn is responsible for creating a Post API session and return the base64 decode response from API
         session = requests.session()
         # session.auth = (self.email, self.password)
@@ -106,10 +106,13 @@ class FoscamHomeSecurity:
         print(in_brow_cookies)
         return in_brow_cookies
 
-    def firmware_downloader(self):
+    def test_firmware_downloader(self):
         driver = self.driver
+        driver.get(self.url)
+        driver.maximize_window()
         fw_coll_data = list(set(self.firmware_collector()))
         for iter_num in range(2, 8):
+            time.sleep(5)
             driver.find_element(
                 By.XPATH,
                 ".//a[contains(@onclick,'gotopage({})')]//"
@@ -139,7 +142,10 @@ class FoscamHomeSecurity:
                         file_name = self.url_call_file_name(api_url, brow_cookies)
                         local_file_location = fr"{self.path}\{self.down_file_path}\Foscam\{str(f'{file_name}')}"
                         if not os.path.isfile(local_file_location.replace("\\", "/")) and file_name is not None:
+                            print("The file is not present in the system so the file %s will be downloaded to path %s",
+                                  file_name, local_file_location)
                             wget.download(down_link, local_file_location)
+                            self.assertTrue(local_file_location, msg="Location exists")
                         dbdict_carrier = {}
                         db_used = Database()
                         for key in self.dbdict:
@@ -167,6 +173,7 @@ class FoscamHomeSecurity:
                             else:
                                 dbdict_carrier[key] = ''
                         db_used.insert_data(dbdict_carrier)
+                        self.assertTrue(dbdict_carrier, msg="data inserted")
             except NoSuchElementException:
                 dbdict_carrier = {}
                 db_used = Database()
@@ -180,16 +187,11 @@ class FoscamHomeSecurity:
                         dbdict_carrier[key] = ''
                 db_used.insert_data(dbdict_carrier)
 
-    def close_browser(self):
+    def tearDown(self):
         # At the end of the program, the function will close the Chrome browser
-        driver = self.driver
         time.sleep(10)
-        driver.quit()
+        self.driver.quit()
 
 
-if __name__ == '__main__':
-    ChromiumDownloader().executor()
-    fos = FoscamHomeSecurity()
-    fos.homepage()
-    fos.firmware_downloader()
-    fos.close_browser()
+if __name__ == "__main__":
+    unittest.main()
