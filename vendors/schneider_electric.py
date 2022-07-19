@@ -17,23 +17,10 @@ MOD_NAME = "schneider_electric"
 logger = get_logger("vendors.schneider_electric")
 CONFIG_PATH = os.path.join("config", "config.json")
 DATA={}
-USERNAME = ''
-PASSWORD = ''
 URL = ''
 API_URL = ''
 with open(CONFIG_PATH, "rb") as fp:
     DATA = json.load(fp)
-    if vendor_field('schneider_electric','user') is False:
-        # print('error user')
-        logger.error('<module : schneider_electric > -> user not present')
-    else:
-        # print(' user')
-        USERNAME = vendor_field('schneider_electric','user')
-
-    if vendor_field('schneider_electric', 'password') is False:
-        logger.error('<module : schneider_electric > -> password not present')
-    else:
-        PASSWORD = vendor_field('schneider_electric', 'password')
     
     if vendor_field('schneider_electric', 'url') is False:
         print('error url')
@@ -49,7 +36,7 @@ with open(CONFIG_PATH, "rb") as fp:
         API_URL = "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/resultViewCahnge/resultListAjax"
     else:
         # print('api url')
-        API_URL = vendor_field('abb', 'url')
+        API_URL = vendor_field('schneider_electric', 'url')
 
 def download_single_file(url, file_path_to_save):
     logger.info("Downloading %s and saving as %s", url, file_path_to_save)
