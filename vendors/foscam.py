@@ -24,6 +24,7 @@ current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfra
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
 
+
 class FoscamHomeSecurity:
 
     def __init__(self):
@@ -86,7 +87,8 @@ class FoscamHomeSecurity:
             By.XPATH, ".//div[@class='one']//div[contains(@class,'down_product_list_img')]"
                       "//a[contains(@href,'downloads/firmware_details.html?id=')]")]
 
-    def url_call_file_name(self, in_data_soft_id_url, in_brow_cookies):
+    @staticmethod
+    def url_call_file_name(in_data_soft_id_url, in_brow_cookies):
         # This fn is responsible for creating a Post API session and return the base64 decode response from API
         session = requests.session()
         # session.auth = (self.email, self.password)
