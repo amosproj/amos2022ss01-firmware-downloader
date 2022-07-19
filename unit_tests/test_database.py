@@ -26,7 +26,10 @@ class DatabaseUnitTest(unittest.TestCase):
             'Embarklinktoreport': 'https://xyz.com',
             'Fwdownlink': 'https://google.com',
             'Fwfilelinktolocal': './xyz/abc.tar',
-            'Fwadddata': 'some long sentence'
+            'Fwadddata': 'some long sentence',
+            'Uploadedonembark': False,
+            'Embarkfileid': 'abc',
+            'Startedanalysisonembark': False
         }
         db_.insert_data(dbdictcarrier=firmware_data)
         data = 'x'
