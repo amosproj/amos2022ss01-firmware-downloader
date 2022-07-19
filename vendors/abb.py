@@ -64,7 +64,6 @@ def download_list_files(metadata, max_files=-1): #max_files -1 means download al
 def write_metadata_to_db(metadata):
     logger.info("Going to write metadata in db")
     db_ = Database()
-    print(os.listdir('./'))
     for fw_ in metadata:
         fw_["Checksum"] = get_hash_value(fw_["Fwfilelinktolocal"])
         db_.insert_data(dbdictcarrier=fw_)

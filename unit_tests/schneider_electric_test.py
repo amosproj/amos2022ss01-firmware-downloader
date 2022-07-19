@@ -4,7 +4,7 @@ import sqlite3
 import unittest
 import json
 from vendors.schneider_electric import download_single_file, write_metadata_to_db
-from utils.check_duplicates import check_duplicates, Database
+from utils.check_duplicates import Database
 
 sys.path.append(os.path.abspath(os.path.join('.', '')))
 
@@ -18,9 +18,6 @@ def setup_db():
     db_ = Database(db_path=DB_NAME)
     db_.db_check()
     db_.create_table()
-    # db connection
-    conn = sqlite3.connect(DB_NAME)
-    cursor = conn.cursor()
 
 class SchneiderUnitTest(unittest.TestCase):
     def setUp(self):
@@ -75,9 +72,9 @@ class SchneiderUnitTest(unittest.TestCase):
         # Now test if one record exist for schneider_electric
         curs.execute(select_command)
         records = len(curs.fetchall())
-        self.assertEqual(records, 1 , msg="There should be only one record in db") 
+        self.assertEqual(records, 1 , msg="There should be only one record in db")
         print(f"Database contains {records} firmwares for schneider_electric")
- 
+
     def tearDown(self):
         if os.path.exists(DB_NAME):
             os.remove(DB_NAME)
