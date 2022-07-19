@@ -1,7 +1,11 @@
+import inspect
+import json
 import time
 import requests
 import urllib3
 import wget
+import os
+import sys
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
@@ -10,7 +14,10 @@ from selenium.webdriver.common.by import By
 from utils.chromium_downloader import ChromiumDownloader
 from utils.database import Database
 from utils.metadata_extractor import get_hash_value
-from utils.modules_check import *
+from utils.modules_check import vendor_field
+from utils.Logs import get_logger
+logger = get_logger("vendors.foscam")
+sys.path.append(os.path.abspath(os.path.join('.', '')))
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))

@@ -1,9 +1,12 @@
 import base64
+import inspect
+import json
 import re
 import time
 import urllib.parse
 import zipfile
-
+import os
+import sys
 import requests
 import urllib3
 import wget
@@ -12,11 +15,14 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
-
 from utils.chromium_downloader import ChromiumDownloader
 from utils.database import Database
 from utils.metadata_extractor import get_hash_value
-from utils.modules_check import *
+from utils.modules_check import vendor_field
+from utils.Logs import get_logger
+logger = get_logger("vendors.honeywell")
+sys.path.append(os.path.abspath(os.path.join('.', '')))
+
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)

@@ -15,24 +15,9 @@ MOD_NAME = "abb"
 logger = get_logger("vendors.abb")
 CONFIG_PATH = os.path.join("config", "config.json")
 DATA={}
-USERNAME = ''
-PASSWORD = ''
 URL = ''
 with open(CONFIG_PATH, "rb") as fp:
     DATA = json.load(fp)
-    if vendor_field('abb','user') is False:
-        # print('error user')
-        logger.error('<module : abb > -> user not present')
-    else:
-        # print(' user')
-        USERNAME = vendor_field('abb','user')
-
-    if vendor_field('abb', 'password') is False:
-        # print('error password')
-        logger.error('<module : abb > -> password not present')
-    else:
-        # print(' password')
-        PASSWORD = vendor_field('abb', 'password')
 
     if vendor_field('abb', 'url') is False:
         print('error url')
