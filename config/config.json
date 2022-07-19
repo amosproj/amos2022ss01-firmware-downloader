@@ -49,8 +49,8 @@
     "interval": 120,
     "ignore": true,
     "url": "https://openwrt.org/",
-    "user": "",
-    "password": ""
+    "user": "none",
+    "password": "none"
   },
   "gigaset": {
     "interval": 120,
@@ -151,7 +151,7 @@
     "password": "Firmware@123"
   },
   "ge": {
-    "interval": 0.1,
+    "interval": 120,
     "ignore": false,
     "url": "https://www.gegridsolutions.com",
     "user": "tariqmagsi125@gmail.com",
