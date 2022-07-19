@@ -21,7 +21,6 @@ URL = ''
 API_URL = ''
 with open(CONFIG_PATH, "rb") as fp:
     DATA = json.load(fp)
-    
     if vendor_field('schneider_electric', 'url') is False:
         print('error url')
         logger.error('<module : schneider_electric > -> url not present')
@@ -160,6 +159,7 @@ def main():
     except Exception as general_exception:
         logger.error("%s", general_exception)
         traceback.print_exc(file=sys.stdout)
+        raise ValueError('%s' % general_exception) from general_exception
 
 if __name__ == "__main__":
     main()
