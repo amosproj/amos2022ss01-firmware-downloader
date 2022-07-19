@@ -21,7 +21,7 @@ links=[]
 USERNAME = ''
 PASSWORD = ''
 URL = ''
-CONFIG_PATH = os.path.join("../config", "config.json")
+CONFIG_PATH = os.path.join("config", "config.json")
 DATA={}
 with open(CONFIG_PATH, "rb") as fp:
     DATA = json.load(fp)
@@ -118,9 +118,9 @@ def download_file(data):
                     'Fwdownlink': data['url'],
                     'Fwfilelinktolocal': local_uri_,
                     'Fwadddata': '',
-                    'Uploadedonembark': '',
+                    'Uploadedonembark': 0,
                     'Embarkfileid': '',
-                    'Startedanalysisonembark': ''
+                    'Startedanalysisonembark': 0
                 }
                 insert_into_db(req_data_)
         else:
@@ -159,9 +159,9 @@ def download_file(data):
                         'Fwdownlink': data['url'],
                         'Fwfilelinktolocal': local_uri_,
                         'Fwadddata': '',
-                        'Uploadedonembark': '',
+                        'Uploadedonembark': False,
                         'Embarkfileid': '',
-                        'Startedanalysisonembark': ''
+                        'Startedanalysisonembark': False
                     }
                     insert_into_db(req_data_)
             except Exception as er_:

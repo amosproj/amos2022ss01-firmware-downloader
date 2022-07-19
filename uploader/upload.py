@@ -59,7 +59,7 @@ class FirmwareUploader:
             return True
         else:
             print("Failed to start firmware analysis")
-            return False
+            return ''
 
     def upload_fw(self, fw_):
         with open(fw_, 'rb') as firmware_file:
@@ -72,7 +72,7 @@ class FirmwareUploader:
                 print("File is uploaded successfully")
                 return True
             else:
-                return False
+                return ''
 
     def get_id_of_uploaded_file(self, filename):
         req = requests.get(self.start_analysis_url, cookies=self.cookies)
@@ -80,7 +80,7 @@ class FirmwareUploader:
         items = soup.find_all("select", id="id_firmware")
         options = items[0].find_all("option")
         for item in options:
-            scrapped_filename = item.decode_contents().split("-")[-1].strip()
+            scrapped_filename = item.decode_contents().split("- ")[-1].strip()
             scrapped_id = item.get("value")
             if "selected" in item.attrs.keys():
                 if scrapped_filename == filename:
@@ -97,23 +97,21 @@ class FirmwareUploader:
         try:
             cursor.execute("select * from FWDB WHERE Uploadedonembark=''")
             data_list = cursor.fetchall()
-            print(data_list)
             fwu = FirmwareUploader()
             fwu.authenticate(DATA['uploader']['username'], DATA['uploader']['password'])
             fw_metadata = {}
+
             for file in data_list:
                 if file[12]:
                     fw_metadata["file_path"] = file[12]
                     is_fw_uploaded = fwu.upload_fw(fw_metadata["file_path"])
-                    print(is_fw_uploaded)
-                    cursor.execute(f"UPDATE FWDB SET Uploadedonembark = '{str(is_fw_uploaded)}' WHERE Fwfileid = '{file[0]}'")
-                    print(cursor.fetchall())
-                    fw_metadata["id"] = fwu.get_id_of_uploaded_file(fw_metadata["file_path"])
-                    print(fw_metadata["id"])
-                    cursor.execute('UPDATE FWDB SET Embarkfileid = ? WHERE Fwfileid = ?', (fw_metadata["id"], file[0]))
+                    cursor.execute('''UPDATE FWDB SET Uploadedonembark = ? WHERE Fwfileid = ?''', (is_fw_uploaded, file[0]))
+                    conn.commit()
+                    fw_metadata["id"] = fwu.get_id_of_uploaded_file(file[1])
+                    cursor.execute('''UPDATE FWDB SET Embarkfileid = ? WHERE Fwfileid = ?''', (fw_metadata["id"], file[0]))
+                    conn.commit()
                     is_analysis_start = fwu.start_fw_analysis(fw_metadata)
-                    print(is_analysis_start)
-                    cursor.execute('UPDATE FWDB SET Startedanalysisonembark = ? WHERE Fwfileid = ?', (str(is_analysis_start), file[0]))
+                    cursor.execute('''UPDATE FWDB SET Startedanalysisonembark = ? WHERE Fwfileid = ?''', (is_analysis_start, file[0]))
         except sqlite3.Error as er_:
             print('SQLite error: %s' % (' '.join(er_.args)))
 

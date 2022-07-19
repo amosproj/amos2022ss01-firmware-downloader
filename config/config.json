@@ -165,7 +165,7 @@
     "password": "https://discoveryapi.library.abb.com/api/public/documents"
   },
   "schneider_electric": {
-    "interval": 0.1,
+    "interval": 120,
     "ignore": true,
     "apiurl": "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/resultViewCahnge/resultListAjax",
     "url": "https://www.se.com/ww/en/download/doc-group-type/3541958-Software%20&%20Firmware/?docType=1555893-Firmware&language=en_GB-English&sortByField=Popularityy",
