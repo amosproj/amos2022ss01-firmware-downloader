@@ -8,7 +8,9 @@ import requests
 from utils.database import Database
 from utils.Logs import get_logger
 from utils.modules_check import vendor_field
-# from utils.metadata_extractor import get_hash_value
+from utils.metadata_extractor import get_hash_value
+
+sys.path.append(os.path.abspath(os.path.join('.', '')))
 
 MOD_NAME = "abb"
 logger = get_logger("vendors.abb")
@@ -39,7 +41,7 @@ def download_single_file(file_metadata):
     old_file_name_list[-1] = file_name # updated filename
     file_metadata["Fwfilelinktolocal"] = "/".join(old_file_name_list)
     file_path_to_save = os.path.abspath(DATA['file_paths']['download_files_path'] + "/" + file_metadata["Fwfilelinktolocal"])
-    print(file_path_to_save)
+    file_metadata["Fwfilelinktolocal"] = file_path_to_save
     logger.info("File saved at %s", file_path_to_save)
     with open(file_path_to_save, "wb") as fp_:
         fp_.write(resp.content)
@@ -58,9 +60,8 @@ def write_metadata_to_db(metadata):
     logger.info("Going to write metadata in db")
     db_ = Database()
     print(os.listdir('./'))
-    # print(metadata)
     for fw_ in metadata:
-        # fw_["Checksum"] = get_hash_value(fw_["Fwfilelinktolocal"])
+        fw_["Checksum"] = get_hash_value(fw_["Fwfilelinktolocal"])
         db_.insert_data(dbdictcarrier=fw_)
 
 def se_get_total_firmware_count(url):
@@ -104,6 +105,7 @@ def get_firmware_data_using_api(url, fw_count, fw_per_page):
 
 def transform_metadata_format_ours(raw_data, local_storage_dir="."):
     fw_mod_list = []
+    
     for fw_ in raw_data:
         fw_mod = {
             'Fwfileid': '',
