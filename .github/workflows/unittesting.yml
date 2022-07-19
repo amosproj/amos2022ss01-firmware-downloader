@@ -38,4 +38,4 @@ jobs:
       - name: Run a Unit Test modules
         run: |
           export PYTHONPATH=$PYTHONPATH:$PWD
-          py.test unit_tests/schneider_electric_test.py
+          py.test unit_tests/*
