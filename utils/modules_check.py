@@ -18,6 +18,7 @@ def config_check(mod, var1):
     else:
         if config['default'][var1]:
             return 2
+    return None
 
 def vendor_field(mod,field):
     if config_check(mod,field):
@@ -27,3 +28,4 @@ def vendor_field(mod,field):
             return config['default'][field]
         else:
             return False
+    return False
