@@ -4,8 +4,8 @@ import json
 import math
 import uuid
 from urllib.parse import urlparse
-import requests
 import inspect
+import requests
 from utils.database import Database
 from utils.Logs import get_logger
 from utils.modules_check import vendor_field
