@@ -8,7 +8,7 @@ class DatabaseUnitTest(unittest.TestCase):
 		db_ = Database()
 		db_.db_check()
 		# Create a function for selenium output in dict format and return the dict. Pass it in the next line to insert the data
-
+		
 		# db connection
 		conn = sqlite3.connect(db_name)
 		cursor = conn.cursor()
