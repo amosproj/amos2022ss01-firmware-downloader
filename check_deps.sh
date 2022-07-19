@@ -1,14 +1,12 @@
 #!/bin/bash
 
 is_python_installed=0
-which python;
-if [[ $? == 0 ]] ; then
+if  [[ $(which python) ]] ; then
        echo "Python is installed"
         python --version
         is_python_installed=1
 fi
-which python3;
-if [[ $? == 0 ]] ; then
+if [[ $(which python3) ]] ; then
 	echo "Python is installed"
 	python3 --version
 	is_python_installed=1
