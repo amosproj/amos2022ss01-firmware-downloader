@@ -8,7 +8,7 @@ from utils.check_duplicates import check_duplicates, Database
 
 sys.path.append(os.path.abspath(os.path.join('.', '')))
 
-DB_NAME = "/tmp/schneiderelectric_testfirmwaredatabase.db"
+DB_NAME = os.path.join(os.getcwd(), "schneiderelectrictempfirmware.db")
 CONFIG_PATH = os.path.join("config", "config.json")
 DATA={}
 with open(CONFIG_PATH, "rb") as fp:
